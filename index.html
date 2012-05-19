@@ -1,0 +1,879 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Zen Space</title>
+  <meta name="author" content="reeze">
+
+  
+  <meta name="description" content="很久以前就像离开Wordpress了，不太习惯在线写东西，开始返璞归真了，比较喜欢
+纯文本的内容创作方式，在TIPI中就使用了markdown，
+在终端写也让我更有协作的欲望。 翻了一下以前的博客，原来一共加起来也不足20篇。以此作为起点今后多继续更新博客吧。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://reeze.cn">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/syntax/syntax.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+    h1 {
+      margin-bottom: 15px;
+    }
+    img {
+      max-width: 100%;
+    }
+    .sharing, .meta {
+      margin: 20px 0px 20px 0px;
+    }
+    .pager {
+      margin: 20px 0px 5px 0px;
+    }
+    .page-footer p {
+      text-align: center;
+    }
+  </style>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Zen Space" type="application/atom+xml">
+  
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11029498-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+
+      <a class="brand" href="/">Zen Space</a>
+
+      <div class="nav-collapse">
+        <ul class="nav">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+      </div>
+
+      <ul class="nav pull-right" data-subscription="rss">
+        <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+        
+      </ul>
+
+        
+      <form class="pull-right navbar-search" action="http://google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="q" value="site:reeze.cn" />
+          <input class="search-query" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+        
+    </div>
+  </div>
+</div>
+</nav>
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span9">
+  
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
+      <h1 class="entry-title"><a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-19T23:50:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2012</time>
+        
+         | <a href="/2012/05/19/migrate-to-octopress/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>很久以前就像离开Wordpress了，不太习惯在线写东西，开始返璞归真了，比较喜欢
+纯文本的内容创作方式，在<a href="http://www.php-internal.com">TIPI</a>中就使用了markdown，
+在终端写也让我更有协作的欲望。</p>
+
+<p>翻了一下以前的博客，原来一共加起来也不足20篇。以此作为起点今后多继续更新博客吧。</p>
+
+<p>TIPI的issue里还有很多的待处理工作，计划是在7月份全部写完。这个始终是高优先级的。
+最进给PHP修复了一些bug，也有一些feature被接受了。在这过程中对PHP的实现又有了一些更加深入
+的理解。也有冲动想要写到TIPI里。总之，TIPI会一直更新。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
+      <h1 class="entry-title"><a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-22T18:49:27+08:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2011</time>
+        
+         | <a href="/2011/03/22/duplicate-ssh-session/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>就当时记事吧. 这不是怎样配置ssh密钥避免密码输入的实例,　当然经常ssh登陆的你肯定也配置过了.</p>
+
+<p>我们公司的内网环境比较特殊,　为了安全性做了各种认证,　联入网络需要准入一下,　准入需要使用密码+随即密码的方式认证,　是挺安全的,　可以对于我们来说其实很痛苦,每次都要输入一下密码,因为包含了随即密码,我们无法使用脚本来方便的准入.　我们联入公司的开发机需要通过一台特殊的服务器来将我们的登陆转发,　也就是登陆到中转机,然后通过中转机在ssh.同样登陆中转机也是需要这个随机密码的.　吐槽完毕.</p>
+
+<p>工作中经常需要在多台服务之间ssh登陆,　screen 是一个不错的选择,　不过有时候还是需要打开另一个窗口再次登陆,　这时我又得再次输入那个随机密码,　如果你使用windows并且使用SecureCRT那你可以不用继续往下看了,SecureCRT可以简单的复制回话, 这个功能很贴心. 如果使用Linux&amp;Mac OS那就继续往下看.</p>
+
+<p>在/etc/ssh_config 文件中加入</p>
+
+<pre><code>Host *
+ControlMaster auto
+ControlPath ~/.ssh/master-%r@%h:%p
+</code></pre>
+
+<p>下次登陆同一站点的时候就会自动复用已有的回话. 可以只输入一次密码开N个窗口了. 这个和密钥要解决的不是同一个问题.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
+      <h1 class="entry-title"><a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-20T23:45:12+08:00" pubdate data-updated="true">Mar 20<span>th</span>, 2011</time>
+        
+         | <a href="/2011/03/20/tipi-first-release-and-ers-marriage/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>首先恭喜一下er童鞋的大婚吧.</p>
+
+<p>接着er大婚的喜气,项目决定在今天发布我们的TIPI项目,项目从成立到现在,一直有条不紊的前进. 现在项目也进行的差不多,可以公开给大家了.   项目的第一个tag,其实是在20分钟前才提交完.终于能如期发布.
+下面是我们的发布公告.  欢迎围观:)</p>
+
+<hr />
+
+<p>我们的朋友，TIPI团队成员，博客哥，er<a href="http://www.zhangabc.com/">http://www.zhangabc.com</a>同学在今天这个春光灿烂，春暖花开，春心荡漾，春情澎湃的大好日子里，兴高采烈的走入了婚姻的殿堂。 在这样一个让人激动不已，激情四射的日子，TIPI团队决定发布<a href="http://www.php-internal.com/">深入理解PHP内核项目</a>的第一阶段成果。</p>
+
+<p>大概在半年前，我们在网上相聚，莫名的邂逅，有了我们这样的一个团队。我们有激情，有想法，有行动，也有了我们这个项目。 开始的艰难，没有时间的痛苦，坚持，从而有了今天的发布。一路走来，有辛苦，也有收获，至少记录了我们的青春，至少做了我们想做的！</p>
+
+<p><a href="http://www.php-internal.com/">深入理解PHP内核（TIPI）项目</a>是一个开源的，分析PHP内核的系列文章项目。整个项目是基于PHP5.3版本的源码。 它包括PHP语言中我们常用的变量，函数，类，对象等的实现原理，也包括PHP的虚拟机，内存管理机制，线程安全，错误异常，文件流和PHP5.3新增加的垃圾收集机制，命名空间等。 除了PHP语言本身的特性外，还包括PHP扩展的相关信息。我们希望这个项目可以帮助更多的PHPer可以更加了解PHP语言本身，知其然知其所以然！</p>
+
+<p>第一阶段，我们发布了前四章，从环境的搭建，源码的阅读方式到对于PHP源码的整体把握，再到对于变量和函数的详细解说。随着项目的进展，我们本身对于PHP内核的理解也加深了许多。 后续我们将以章为单位发布后续的章节。现在第5章正在撰写&#8230;</p>
+
+<p><a href="http://www.php-internal.com/">在线阅读入口>>></a></p>
+
+<h2>TIPI团队序</h2>
+
+<p>博客哥三者，今聚首于网络一偶，共谋TIPI大计，与诸君共享技术之事： 向来穷PHP内核之事者或多，却鲜有分享之举。哥三者，常流连于中外博客也，若得一佳作，即欣喜若狂，本乐分享，及有学习总结之心，欲为PHP内核之事穷全身之力。</p>
+
+<ul>
+<li><p><a href="http://reeze.cn/">reeze</a>，博客哥者，好苹果，好开源, 陶醉于Web开发及架构, 为Ruby之美所折服, 甚爱iOS及其开发, 好一切善美之事物.</p></li>
+<li><p><a href="http://www.zhangabc.com/">er</a>，博客哥者，稀饭Linux, Web, 2.0, Ajax, C, PHP, Javascript, CSS等。乃一以代码为乐之码农也。</p></li>
+<li><p><a href="http://www.phppan.com/">phppan</a>，博客哥者，好书，好PHP，亲于PHP，C，Ajax，程序架构等</p></li>
+</ul>
+
+
+<p>是以三人之力行分享之事，转GIT，习markdown，论项目之计于深夜，何怕事之不成？务使PHP内核之事向众人知。 为此特示。</p>
+
+<h2>项目大事记</h2>
+
+<ul>
+<li><p>2010/12/28 14:47 pan向reeze提议写一个PHP内核系列文章,一拍即合.</p></li>
+<li><p>2010/12/28 15:10 er同学加入.组织正式形成.</p></li>
+<li><p>2010/12/30 11:11 pan发出&lt;&lt;深入理解PHP内核>>第一份完整目录草稿.</p></li>
+<li><p>2010/12/31 21:14 举行第一次三方会谈,结合pan和reeze的目录草稿确定了正式目录. 标志着TIPI团队项目的正式确立.. (鼓掌).</p></li>
+<li><p>2011/01/01 05:08 reeze向github版本库提交了完整的项目, TIPI项目开始进入实施阶段</p></li>
+<li><p>2011/01/06 15:22 经过哥三激烈的讨论后做出艰难的决定,我们的项目域名正式确定为php-internal.com.(撒花无数).</p></li>
+<li><p>2011/02/14 23:32 在这个几人欢喜几人愁，充满花香的日子里, 哥三在深夜确定了TIPI项目的第一次整体发布流程，并且定稿了前三章的大纲以及确定了发布前的调整工作。</p></li>
+<li><p>2011/02/25 02:53 虽然我们还没有正式开始推广TIPI, 但已经有人开始关注TIPI了.　恭喜icodeu<a href="http://blog.icodeu.com/">http://blog.icodeu.com</a>同学成为我们第一位留下脚印的同学(看留言时间,也是个夜猫子啊.)</p></li>
+<li><p>2011/03/10 11:22 经过TIPI团队的慎重考虑, TIPI团队新增一员大将:honestqiao同学, 欢迎他的加入!</p></li>
+<li><p>2011/03/20 20:00 今天是TIPI团队成员er同学的大婚之日，团队决定在这个喜庆的日子将我们第一阶段的成果对外发布。让我们恭喜这对新人和我们的TIPI团队。</p></li>
+</ul>
+
+
+<h2>特别鸣谢</h2>
+
+<p>我们需要感谢我们家里的领导，没有有她们的支持，也就没有我们今天的发布，感谢她们的包容，感谢她们的照顾，感谢她们的理解和支持。谢谢！</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
+      <h1 class="entry-title"><a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">[PHP-Internal]定制PHP语法获取PHP变量的变量名</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-26T17:56:53+08:00" pubdate data-updated="true">Dec 26<span>th</span>, 2010</time>
+        
+         | <a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
+      <h1 class="entry-title"><a href="/2010/11/28/doubanshow-for-wordpress/">[Plugin]豆瓣秀 for WordPress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-28T22:10:23+08:00" pubdate data-updated="true">Nov 28<span>th</span>, 2010</time>
+        
+         | <a href="/2010/11/28/doubanshow-for-wordpress/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>我喜欢在博客中显示我在豆瓣上的一些信息，比如想看哪些书哪些电影神马的。刚开始用的是 Robin的 <a href="http://www.robb.com.cn/plugins">http://www.robb.com.cn/plugins/</a> 的 WP-DoubanShow插件，他用的是豆瓣API。这个插件需要手动修改主题模板文件。刚开始用的挺好，修改就修改吧。不过后来换过几次主题后发现每次修改模板文件还挺“脏”的。遂问robin能否修改成widget的方式，他说官方推出了一个豆瓣秀功能<a href="http://www.douban.com/service/badgemaker">http://www.douban.com/service/badgemaker</a>， 所以不继续维护了。看过官方的说明。发现要在Wordpress中用也只能手动修改模板，不过官方提供了一个生成js的设置项，可以根据需要生成相应的脚本，选项也还算简单。 在网上搜了一番，没有给wordpress用的插件，所以自己写了一个，设置项和官方的一样。下面简单的说明一下：</p>
+
+<ol>
+<li><p>第一步：下载插件文件： <a href="/uploads/2010/11/DoubanShow.zip">DoubanShow.zip</a>, 或者在管理界面中添加插件, 搜索douban即可看到&#8221;豆瓣秀For Wordpress&#8221; 选择安装, 如果这样的话,下面的上传步骤就不需要了</p></li>
+<li><p>第二步：上传安装。 后台管理的  插件 -> 添加插件 -> 上传中上传下载的文件。<a href="/uploads/2010/11/upload.png"><img src="/uploads/2010/11/upload.png" alt="" /></a></p></li>
+</ol>
+
+
+<p><a href="/uploads/2010/11/active.png"><img src="/uploads/2010/11/active2.png" alt="" /></a>
+上传完后记得“启用插件&#8221;</p>
+
+<ol>
+<li></li>
+</ol>
+
+
+<p>第三步：在后台管理的 外观 -> 小工具 中选择”豆瓣秀“ 拖到右侧你想放置的位置。 然后点击拖过去的豆瓣秀箭头。出现如下设置：</p>
+
+<p><a href="/uploads/2010/11/settings.png"><img src="/uploads/2010/11/settings.png" alt="" /></a></p>
+
+<p>标题默认为空，就是不显示标题。也可以设置成你想要的标题。然后要设置好你的豆瓣ID，记住不是豆瓣的登录用户名。 设置好以后。去你的页面看看效果吧，也可以看我博客页面右下角。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
+      <h1 class="entry-title"><a href="/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/">PHP Puzzle(一): 有趣的变量作用域-PHP中global和Javascript中的var关键字</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-14T15:38:32+08:00" pubdate data-updated="true">Nov 14<span>th</span>, 2010</time>
+        
+         | <a href="/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>昨天在网上看到几道有意思的PHP题, 下面这道题让我想起了对应的Javascript版本.
+`</p>
+
+<p>这段代码运行结果是什么呢? 别急着执行这段代码,先想想你的结果.然后再对比一下吧.</p>
+
+<p>我们看先看看global的定义 http://www.php.net/manual/en/language.variables.scope.php 这里也没有太为规范的解释.只是说可以通过global关键字来访问全局变量. 这里还涉及到一个类型转换的问题.</p>
+
+<p>大家都知道PHP脚本是编译为opcode逐语句执行的. 那么现在要一句语句解释就很容易了.
+`</p>
+
+<p>这里可能比较困惑的的是现在变量$a到底是局部变量还是全局变量了.因为global在定义局部变量之后.所以$a变为了全局变量,而在最后输出结果的时候$a并没有值.所以最后在相乘的时候是 NULL * 100; 也就是0了;可能会有人有疑问, 后面只是把$a变为了全局变量, 他的值应该不变的啊. 让我通过下面的例子来看把:
+`</p>
+
+<p>  int(0)
+  [&#8220;a&#8221;]=>
+  &NULL;
+}
+<code>
+变量a是NULL的一个引用,因为全局作用域内没有a这个变量. 所以即使在函数前面定义了一个a变量,但是它的值已经指向了全局作用域了.
+实际上 global关键字首先从全局符号表中查找变量名叫做a的变量,并把这个变量值设置为当前作用域的符号表中的a变量(更新了当前变量的值). 如果全局作用域内没有这个变量则会在全局作用域内增加这个变量, 实现代码见: $PHP_SRC/Zend/zend_vm_execute.h
+</code>
+static int ZEND_FASTCALL zend_fetch_var_address_helper_SPEC_CONST(int type, ZEND_OPCODE_HANDLER_ARGS) {</p>
+
+<pre><code>    // ...
+    if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;retval;) == FAILURE) {
+        switch (type) {
+            case BP_VAR_R:
+            case BP_VAR_UNSET:
+                zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));
+                /* break missing intentionally */
+            case BP_VAR_IS:
+                retval = &amp;EG;(uninitialized_zval_ptr);
+                break;
+            case BP_VAR_RW:
+                zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));
+                /* break missing intentionally */
+            case BP_VAR_W: {
+                    zval *new_zval = &amp;EG;(uninitialized_zval);
+
+                    Z_ADDREF_P(new_zval);
+                    zend_hash_update(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, &amp;new;_zval, sizeof(zval *), (void **) &amp;retval;);
+                }
+                break;
+            EMPTY_SWITCH_DEFAULT_CASE()
+        }
+    }
+
+ //...
+</code></pre>
+
+<p>}
+<code>
+看了这个解释大家可能觉得理所当然.一句一句执行的嘛. 看完了PHP中全局作用域的例子,咱们再看看类似的Javascript中的局部变量的版本吧
+</code>
+var a = 1;
+function multiply(b)
+{</p>
+
+<pre><code> a = 100;
+ var a;
+
+ return a * b;
+</code></pre>
+
+<p>}
+alert(a);
+alert(multiply(100));
+`
+那这段代码的输出将会是多少呢?
+如果还是同样的思路,结果可能是你的期望完全不一样的结果. <strong>这里的var定义变量和php中global不是一样的东西, php中的global是会在运行时执行的.而Javascript中的var在运行之前就已经&#8221;处理&#8221;好了</strong>.在运行之前的&#8221;语法分析&#8221;(没有看过Javascript引擎的实现.姑且这么分把)过程中,multiply函数中出现了var a;则把变量a加到函数体内的&#8221;局部变量表&#8221;中了.在运行过程中并不会执行var a;这一句.  这也是Javascript&#8221;怪异&#8221;的地方.定义变量的位置并没有关系.所以在函数内定义局部变量最好放在函数体的前面.</p>
+
+<p>所以第一个alert输出的1, 函数的执行并没有改版全局范围内的a变量; 第二就没有什么问题了, 是10000;</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
+      <h1 class="entry-title"><a href="/2010/11/04/php-get-variables-name-a-php-impliment/">怎样获取PHP变量的变量名之PHP实现</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-04T11:07:37+08:00" pubdate data-updated="true">Nov 4<span>th</span>, 2010</time>
+        
+         | <a href="/2010/11/04/php-get-variables-name-a-php-impliment/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://reeze.cn/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">上一篇文章</a>里提到是用PHP扩展实现获取变量的变量名的方法. 今天发现有一个PHP实现的版本 . 实现方法来自:http://mach13.com/how-to-get-a-variable-name-as-a-string-in-php</p>
+
+<p><strong>刚开始以为这个方法好使, 仔细想想其实也是有问题的.</strong>
+<del>
+这个解决方法是用的PHP里的get_defined_vars()方法,该方法返回当前作用域内的所有变量信息.也是和$GLOBALS一样,以变量名 => 值的方式返回.
+他的代码很简单:</p>
+
+<p>`
+$v)</p>
+
+<pre><code>    $aDefinedVars_0[$k] = $v;
+
+$iVarSave = $iVar;
+$iVar     =!$iVar;   // 将当前变量的值取反
+
+$aDiffKeys = array_keys (array_diff_assoc ($aDefinedVars_0, $aDefinedVars));  // 对比取反前后的变量
+$iVar      = $iVarSave; // 恢复当前变量的值
+
+return $aDiffKeys[0];
+}
+</code></pre>
+
+<p>?></p>
+
+<p>`</p>
+
+<p>它通过引用的方式改变当前变量的值, 然后通过对比前后两个数组的差异来获取值被改变了的变量.然后返回其名字.经过测试这的确是一个方法.相对我实现的方法. 它提供的方法移植性较好, 不需要赖以扩展. 而这个php版本的实现, 必须传递一个get_defined_vars()的参数, 我实现的那个扩展,则不需要. 对于类似 var_name($a=10,get_defined_vars()); 的调用,该方法无法正常获得变量名.
+</del></p>
+
+<p>这个今天又仔细想了想,下面提供的方法是有问题的.. 他解决问题的方法是通过修改变量的值, 并对比前后所有的变量来找出值发生变化的变量. 而实际上.修改了其中一个变量另一个变量的值也会发生变化: 这就是引用, 如下
+`</p>
+
+<p>PS: 如果你真的需要这种方法. 请重新思考一下你的需要真的需要这样的方法么?</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
+      <h1 class="entry-title"><a href="/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">Php Internal How to Get Variables Name an Extension Implement</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-30T00:00:00+08:00" pubdate data-updated="true">Oct 30<span>th</span>, 2010</time>
+        
+         | <a href="/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>[?25l[J[J[J[J[J[J[?12l[?25h[?1049h[?1h=[1;37r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[37;1H&#8221;2010-10-30-php-internal-how-to-get-variables-name-an-extension-implement.markdown&#8221; 301L, 12377C[1;1H&#8212;
+date: &#8216;2010-10-30 00:39:01&#8217;
+layout: post
+slug: php-internal-how-to-get-variables-name-an-extension-implement
+status: publish
+title: &#8216;[PHP-Internal]鎬庝箞鏍疯幏鍙朠HP鍙橀噺鐨勫彉閲忓悕涔嬫墿灞曞疄鐜</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
+      <h1 class="entry-title"><a href="/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/">解决Mac下终端中使用screen管理回话但看不到滚动条等问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-07-02T15:16:33+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2010</time>
+        
+         | <a href="/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>工作中开发基本都是ssh到远程服务器上vim开发，有时候因为网络原因或者不小心把终端给关了或者网络出现问题以后就痛苦了，因为vim默认会用swp文件保存修改，我又不想关掉这个功能，一不小心真丢数据就划不来了，非法关闭vim之后再次打开就会提示是否恢复文件，自从发现screen这个绝佳的绘画管理工具，就深深的爱上了它，IBM的这篇文章有详细的介绍  “<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-screen/">linux 技巧：使用screen 管理你的远程会话</a>”。在使用过程中发现一些问题，默认快捷键是Ctrl + A, 用惯了命令行的人肯定会用Ctrl +A , Ctrl + E来定位当前输入的命令吧. 在~/.screenrc中修改一下就可以了，下面是我的.screenrc
+<code>
+vbell_msg "" # 比如在tab自动提示的时候，默认总是会出现一个Wuff,觉得很烦，关掉
+escape ``  # instead of Control-a  使用 反引号当快捷键，因为用的相对较少
+termcapinfo xterm* ti@:te@  # 这个就是解决mac下看不到滚动条的问题了
+</code>
+解决方法来源见：<a href="http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command">http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
+      <h1 class="entry-title"><a href="/2010/04/25/make-your-site-drop-uploadable-with-html5s-file-api-like-gmail-does/">让你的网站也像Gmail一样支持文件拖放上传-HTML5之File API</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-25T00:14:29+08:00" pubdate data-updated="true">Apr 25<span>th</span>, 2010</time>
+        
+         | <a href="/2010/04/25/make-your-site-drop-uploadable-with-html5s-file-api-like-gmail-does/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>如果你比较好奇，可以先从<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/FileAPI_Test.zip">这里下载所有代码</a>，也可以点击这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/chrome_drop_upload.html">查看chrome下上传的demo</a>，点这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/firefox36_drop_upload.html">查看firefox下的demo</a></p></blockquote>
+
+<p>前不久<a href="http://net.chinabyte.com/395/11221395.shtml">Gmail推出了支持拖拽的附件上传功能</a>，试用了下还真不错，其实很久以前就在想能有直接拖拽附件的功能，多亏有了HTML5，Web应用越来越像客户端的应用了。</p>
+
+<p>在好奇心驱使下，想了解一下Gmail到底是怎么做到的，了解了一下最新的<a href="http://www.w3.org/TR/FileAPI">HTML5 File API草案</a>，这个接口主要提供的就是提供对文件对象的访问，别想歪了，这个接口是无法随意的访问系统里的文件的。他能做的就是访问<input type="file" />标签里所选择的文件，这些文件可以通过用户手动选择，或者是HTML5的拖放接口选中的文件。有兴趣的童鞋可以看看这个规范，还算比较简单。</p>
+
+<p>下面简单看看接口定义几个对象。</p>
+
+<p>FileList、File对象。</p>
+
+<p>在HTML5中的<input type="file"  />标签中增加了mutilple属性，允许进行多文件选择。大家应该都知道一般上传标签中是不允许选择多个文件的。 新增的这个属性就是允许进行多个文件的选择（这个在桌面应用中也很常见）。<input type="file" **multiple="multiple"** id="file" /></p>
+
+<p>下面是在Firebug中的输出
+`</p>
+
+<blockquote><blockquote><blockquote><p>var f = document.getElementById(&#8220;file&#8221;)
+f.files
+FileList0=File length=1 // 选中的文件数量
+f.files[0]
+FilefileName=es.dll fileSize=271360
+`</p></blockquote></blockquote></blockquote>
+
+<p>FileList对象就是用户选择的所有文件的对象表示，如果是通过input标签选择的，就可以通过上面代码所示的方法进行访问，File对象就可以刚才选择的某个文件的信息，如上面的代码所示，主要可以得到所选中的文件名以及文件大小信息。</p>
+
+<p>你可能在想只能得到这些信息到底有什么用呢？都没有办法读取文件内容，这就得提到规范中的FileReader接口了，这个接口就是用来读取File对象文件的。</p>
+
+<p>在<a href="http://www.w3.org/TR/FileAPI">File API规范</a>中提到File API主要是和其他的接口协同合作。比如XMLHttpRequest (这个新接口支持通过xhr的send()方法发送File对象)， DataTransfer(也就是HTML5中的拖拽接口 )， 以及<a href="http://dev.w3.org/html5/workers">Web Worksers</a>(这个主要是异步脚本执行，相当于给JS提供了“多线程”脚本执行能力，并且支持通过postMessage()进行“线程间通信”)，感兴趣的，可以看看<a href="http://www.v-ec.com/dh20156/article.asp?id=242">这篇日志</a>，以及<a href="http://feedproxy.google.com/~r/webbang/~3/_usD4yheDqI">这篇</a>。</p>
+
+<p>目前能实现这样的效果的方式主要有如下几种：</p>
+
+<ul>
+<li><p>Gmail中提到的这两个浏览器都支持拖放接口，托放以后可以直接通过托放事件的DataTransfer属性访问到本次托放是关联的文件对象列表FileList,然后通过XMLHttpRequest的send方法将File对象发送到服务器</p></li>
+<li><p>在Chrome下支持直接将文件拖放到文件选择控件上，就相当于直接选择了文件。这时可以通过<input type="file" />DOM对象的files属性访问到被托放进来的文件列表对象，然后也可以通过Ajax将文件对象发送到服务器，通过将文件选择控件透明度降低也可以实现Gmail类似的效果。 在Chrome因为可以直接通过托拽的方式让文件选择控件“赋值”，此时也可以通过一个iframe加表单的方式将数据发送到服务器。</p></li>
+<li><p>在Firefox3.6下可以通过FileReader直接读取到文件的内容，然后直接将文件内容发送到服务器端(可以参考<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/index.html">这个例子</a>，这是个不完整的例子，直接浏览是看不到效果的，查看源代码你就会懂的。）</p></li>
+</ul>
+
+
+<p>下面就来看看Gmail到底是怎么做到的吧。</p>
+
+<p>本来想通过Firebug的概况功能来捕捉到在托拽期间的脚本执行情况，比如：</p>
+
+<p><a href="/uploads/2010/04/screenshot1.png"><img src="/uploads/2010/04/screenshot1.png" alt="" /></a><a href="/uploads/2010/04/screenshot.png">
+</a></p>
+
+<p>但是脚本执行里压根没有找到ajax相关的函数调用，可能是因为firebug还不支持监控页面里嵌入的iframe中的脚本执行跟踪，这也说明本次上传肯定是在某个iframe中完成的。，那就直接监听网络吧，托拽上传一个附件时查看网络情况，发现附件是通过下面的ajax post过去的：</p>
+
+<p><a href="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail1.jpg"><img src="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail1.jpg" alt="" /></a></p>
+
+<p>大家注意看，是通过ajax post方式将附件POST到服务器的，</p>
+
+<p><a href="/uploads/2010/04/Gmail-11.jpg"><img src="/uploads/2010/04/Gmail-11.jpg" alt="" /></a></p>
+
+<p><a href="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-31.jpg"><img src="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-31.jpg" alt="" /></a><a href="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-3.jpg">
+</a></p>
+
+<p>可以看出Gmail在firefox下不是通过表单直接提交实现的。在chrome下的开发人员工具有点简单，无法看到网络情况，我也懒的再去抓包看了，估计是使用透明<input type="file" />+ajax方式实现的。</p>
+
+<p>在Gmail支持托拽的声明中提到目前只支持Chrome 2+以及FireFox3.6+。虽然这两个浏览器都支持HTML5，但是对于所有规范的支持程度都是不一样的，并且规范也还不是正式规范。在Firefox3.6的release note中提到：</p>
+
+<p>Support for new DOM and HTML5 specifications including the Drag &amp; Drop API and the File API, which allow for more interactive web pages.</p>
+
+<p>开始支持了HTML5的拖拽接口以及File API。</p>
+
+<hr />
+
+<p>下面根据浏览器以及HTML5的规范整理出两个浏览器下实现类似Gmail 上传附件的代码。</p>
+
+<p><a href="/uploads/2010/04/14.jpg"><img src="/uploads/2010/04/14.jpg" alt="" /></a></p>
+
+<p>点击<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/FileAPI_Test.zip">这里下载所有代码</a>，有兴趣的童鞋查看源代码就知道怎么回事了，有一定的注释：）</p>
+
+<p>也可以点击这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/chrome_drop_upload.html">查看chrome下上传的demo</a>，点这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/firefox36_drop_upload.html">查看firefox下的demo</a>，之所以分开是为了简单起见，当然你真的想要给你的网站提供托拽上传功能，你就得自己去同时兼容这两个浏览器啦，相信这也不是件困难的事情：）</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <ul class="pager">
+    
+    <li class="previous"><a href="/page/2/">&larr; Older</a></li>
+    
+    <li><a href="/blog/archives">Blog Archives</a></li>
+    
+  </ul>
+</div>
+<aside class="sidebar-nav span3">
+  
+    <section class="well">
+  <ul id="recent_posts" class="nav nav-list">
+    <li class="nav-header">Recent Posts</li>
+    
+      <li class="post">
+        <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">[PHP-Internal]定制PHP语法获取PHP变量的变量名</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/28/doubanshow-for-wordpress/">[Plugin]豆瓣秀 For WordPress</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section class="well">
+  <ul id="gh_repos" class="nav">
+    <li class="nav-header">GitHub Repos</li>
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/reeze">@reeze</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'reeze',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo" class="page-footer"><hr>
+<p>
+  Copyright &copy; 2012 - reeze -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'reeze';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

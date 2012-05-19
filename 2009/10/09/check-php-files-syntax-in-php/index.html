@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>在PHP中检查PHP文件是否有语法错误 - Zen Space</title>
+  <meta name="author" content="reeze">
+
+  
+  <meta name="description" content="之前在当当的时候的一个项目中用到了一个简单的模板引擎，其实也是借鉴discuz来做的模板引擎，很简单，它所作的事情就是把一些自定义的标签编译成php代码。已经说了很简单了，所以编译的时候也名优进行模板语法的检查，那么在开发过程中就会出现编译出来的php文件有语法问题，有语法问题没有关系， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://reeze.cn/2009/10/09/check-php-files-syntax-in-php">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/syntax/syntax.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+    h1 {
+      margin-bottom: 15px;
+    }
+    img {
+      max-width: 100%;
+    }
+    .sharing, .meta {
+      margin: 20px 0px 20px 0px;
+    }
+    .pager {
+      margin: 20px 0px 5px 0px;
+    }
+    .page-footer p {
+      text-align: center;
+    }
+  </style>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Zen Space" type="application/atom+xml">
+  
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11029498-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+
+      <a class="brand" href="/">Zen Space</a>
+
+      <div class="nav-collapse">
+        <ul class="nav">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+      </div>
+
+      <ul class="nav pull-right" data-subscription="rss">
+        <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+        
+      </ul>
+
+        
+      <form class="pull-right navbar-search" action="http://google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="q" value="site:reeze.cn" />
+          <input class="search-query" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+        
+    </div>
+  </div>
+</div>
+</nav>
+  <div class="container">
+    <div class="row-fluid">
+      
+<article class="hentry span9" role="article">
+
+  
+  <header class="page-header">
+    
+      <h1 class="entry-title">在PHP中检查PHP文件是否有语法错误</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-09T19:21:32+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2009</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>之前在当当的时候的一个项目中用到了一个简单的模板引擎，其实也是借鉴discuz来做的模板引擎，很简单，它所作的事情就是把一些自定义的标签编译成php代码。已经说了很简单了，所以编译的时候也名优进行模板语法的检查，那么在开发过程中就会出现编译出来的php文件有语法问题，有语法问题没有关系，我修改重新编译一下就好了。首先不能在每次请求的时候都把php模板重新编译一下，会严重影响性能，折中的处理时在每个编译好的php文件末尾检查一下该模板文件是否已经修改过，根据设定的更新频率，如果又需要则重新编译模板文件，现在的问题是编译出来的php文件自己有语法错误，根本执行不到模板检查那一步，所以即使修改了模板文件中的问题也不会重新编译。 所以我想寻找一种简单的方法来检查生成的php文件是否合法。不合法就重新编译，这样开发过程中就不用出现错误就得手动删除缓存文件了。</p>
+
+<p>在网上找了一下。刚开始以为 token_get_all()函数能处理语法错误的问题，结果发现，它只是做简单的词法分析。没有办法。后来到论坛上去问了一下
+http://groups.google.com/group/professional-php/browse_thread/thread/b8581f6b07b10ff0/2601a63c406bb1c1?lnk=gst&amp;q=reeze#2601a63c406bb1c1</p>
+
+<p>有人告诉我有这样一个函数 php_check_syntax() http://www.php.net/manual/en/function.php-check-syntax.php 我想问题就这么坚决了。。我真应该RTF(Read The Fuck Mannual). 仔细一看。这个函数已近被弃用了：
+Note: For technical reasons, this function is deprecated and removed from PHP. Instead, use php -l somefile.php from the commandline.</p>
+
+<p>这个technical reason 到底是什么呢？ 先不管了，以后再慢慢研究，反正不能使用这个方法就对了。
+他们的建议是使用命令行$php -l filename.php 来检查语法。
+Gary Every给了我一个代码片段参考：</p>
+
+<p>在命令行下检查问题也不大。如果我要放在在线应用呢？ 这就涉及到可移植性的问题了。首先是操作系统，然后就是环境变量。这样的话就会依赖于服务器端的配置。在http://www.php.net/manual/en/function.php-check-syntax.php 上有人贴出了自己的php_check_syntax()函数实现。
+有的采用的就是上面的命令行的方法。
+后面有提到使用eval的方法来验证。eval方法会执行传入的代码， 如果代码有语法错误则会抛出parser error, 可以使用&#8217;@&#8217;错误抑制符去掉错误信息，eval和echo一样并不是函数，不能使用变量函数的方法调用比如：
+$func = &#8216;eval&#8217;
+$func()这样的调用就是无效的。它会提示没有eval函数，如果你自己定义这么一个函数也是有问题的。因为eval是一个关键字。
+eval调用和include差不多，如果被包含文件中没有明确return就返回null。如果直接eval我们需要检查的文件会造成被检查的文件内代码被执行，这可不是我们想要的，我们只需要检查一下这个文件的语法是否正确。 我们可以在要检查的文件之前添加return 语句，让代码提前跳出，那么后面的代码就不会执行了。好的，就这么干。代码如下：
+checker.php
+`
+&#8221;;</p>
+
+<pre><code>    $file_content = $check_code . $file_content . "
+</code></pre>
+
+<p>file.php
+<code>
+b
+?&gt;
+</code>
+因为Parse error 是没法被 set_error_handler处理函数处理的。这个异常没办法catch到。所以才使用了@来抑制错误。这带来的问题就是我们无法得到详细的错误信息。 不过目前我需要的功能也只是检查语法是否正确。不正确的话重新编译模板文件，就这么简单，至于语法错误，在显示网页的时候自然会看得到。
+最好的办法就是这个被遗弃的php_check_syntax这个方法回到php中。下次再研究下他们是出于什么原因把这个函数去掉的。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">reeze</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-09T19:21:32+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/web技术/'>Web技术</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/2009/10/09/check-php-files-syntax-in-php/" data-via="" data-counturl="http://reeze.cn/2009/10/09/check-php-files-syntax-in-php/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    
+    <ul class="pager">
+      
+      <li class="previous"><a class="basic-alignment left"
+        href="/2009/10/09/how-to-implement-a-simple-online-html-editor/" title="Previous Post:
+        实现一个简单在线HTML编辑器">&laquo; 实现一个简单在线HTML编辑器</a></li>
+      
+      <li><a href="/blog/archives">Blog Archives</a></li>
+      
+      <li class="next"><a class="basic-alignment right" href="/2009/12/30/ipv6-enabled-tunnelblick-for-mac-os-x/"
+        title="Next Post: 支持IPv6的Tunnelblick For Mac OS X OpenVPN客户端">支持IPv6的Tunnelblick For Mac OS X OpenVPN客户端
+        &raquo;</a></li>
+      
+    </ul>
+  </footer>
+</article>
+
+<aside class="sidebar-nav span3">
+  
+    <section class="well">
+  <ul id="recent_posts" class="nav nav-list">
+    <li class="nav-header">Recent Posts</li>
+    
+      <li class="post">
+        <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">[PHP-Internal]定制PHP语法获取PHP变量的变量名</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/28/doubanshow-for-wordpress/">[Plugin]豆瓣秀 For WordPress</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section class="well">
+  <ul id="gh_repos" class="nav">
+    <li class="nav-header">GitHub Repos</li>
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/reeze">@reeze</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'reeze',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo" class="page-footer"><hr>
+<p>
+  Copyright &copy; 2012 - reeze -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'reeze';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>基于var_export 和 include返回值的缓存方案 - Zen Space</title>
+  <meta name="author" content="reeze">
+
+  
+  <meta name="description" content="前一篇文章我们研究了include调用返回值的问题，并指出可以通过这种方式来完成序列化相同的功能，现在我就来研究一下这种方法的可行性和效率，因为直接的返回php值肯定是比unserialize()函数要快。 第一步我们来研究下怎么将php对象持久化的保存起来。下面是我定义的一些变量： &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://reeze.cn/2009/07/02/a-cache-system-using-var_export-and-includes-return-value">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/syntax/syntax.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+    h1 {
+      margin-bottom: 15px;
+    }
+    img {
+      max-width: 100%;
+    }
+    .sharing, .meta {
+      margin: 20px 0px 20px 0px;
+    }
+    .pager {
+      margin: 20px 0px 5px 0px;
+    }
+    .page-footer p {
+      text-align: center;
+    }
+  </style>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Zen Space" type="application/atom+xml">
+  
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11029498-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+
+      <a class="brand" href="/">Zen Space</a>
+
+      <div class="nav-collapse">
+        <ul class="nav">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+      </div>
+
+      <ul class="nav pull-right" data-subscription="rss">
+        <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+        
+      </ul>
+
+        
+      <form class="pull-right navbar-search" action="http://google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="q" value="site:reeze.cn" />
+          <input class="search-query" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+        
+    </div>
+  </div>
+</div>
+</nav>
+  <div class="container">
+    <div class="row-fluid">
+      
+<article class="hentry span9" role="article">
+
+  
+  <header class="page-header">
+    
+      <h1 class="entry-title">基于var_export 和 Include返回值的缓存方案</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-07-02T12:55:41+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2009</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://reeze.yo2.cn/2009/07/01/php-include-function-return-value-and-method-of-void-serialize/">前一篇文章</a>我们研究了include调用返回值的问题，并指出可以通过这种方式来完成序列化相同的功能，现在我就来研究一下这种方法的可行性和效率，因为直接的返回php值肯定是比unserialize()函数要快。</p>
+
+<p>第一步我们来研究下怎么将php对象持久化的保存起来。下面是我定义的一些变量：</p>
+
+<p><code>
+private $_var;
+public $pub = array('pub value', 3, 4);
+public function __constructor($var)
+{
+$this-&gt;_var = $var;
+}</code></p>
+
+<p>`public function show()
+{
+echo $this->_var;
+}
+}</p>
+
+<p>$string = &#8220;It&#8217;s a string&#8230;&#8221;;
+$array = array(1, 2, &#8216;key&#8217; => &#8216;value&#8217;, array(&#8216;sub-array&#8217;));
+$number = 135345.55;
+$class = new MyClass(&#8216;class var&#8217;);</p>
+
+<p>`</p>
+
+<p><code>//通过serialize()方法我们可以将他们持久化比如：
+echo serialize($string); //s:16:"It's a string...";
+echo serialize($array); //a:4:{i:0;i:1;i:1;i:2;s:3:"key";s:5:"value";i:2;a:1:{i:0;s:9:"sub-array";}}
+echo serialize($number); //d:135345.5499999999883584678173065185546875;
+echo serialize($class); //O:7:"MyClass":2:{s:13:"MyClass_var";N;s:3:"pub";a:3:{i:0;s:9:"pub value";i:1;i:3;i:2;i:4;}}
+// 我们可以将这些序列化的结果存到文件中，在需要的时候unserialize()返回得到相应的值，但是现在我不会这么做。
+</code></p>
+
+<p>前篇文章提到了通过include返回值来直接取得php值对象，首先我们要把值保存起来，因为我们要通过include来包含它，首先遇到的问题就是我们的序列化函数必须要生成合法的php表达式才行，否则include是无法得到相应的返回值的
+比如我们要序列化 字符串 &#8220;abcd&#8221; 我们可以这么做
+<code>
+file_puts_content("data.php", "return 'abcd';");
+//然后这样取得相应的值
+$string = include "data.php";
+echo $string; // 它应该输出 abcd
+</code>
+那数组怎么办呢？比如上面的数组。我们可以自己编写这个序列化函数
+<code>
+function encode($var){
+if (is_array($var)) {
+$code = 'array(';
+foreach ($var as $key =&gt; $value) {
+$code .= "'$key'=&gt;".encode($value).',';
+}
+$code = chop($code, ','); //remove unnecessary coma
+$code .= ')';
+return $code;
+} else {
+if (is_string($var)) {
+return "'".$var."'";
+} elseif (is_bool($var)) {
+return ($var ? 'TRUE' : 'FALSE');
+} elseif (is_numeric($var)) {
+return "$var";
+}
+else
+{
+return 'NULL';
+}
+}
+}</code>
+这个函数可以将字符串，数组以及数字变成合法的php表达式。
+比如：
+file_put_contents(&#8220;data.php&#8221;, &#8220;&lt;?phpn return &#8221; . encode($array) . &#8220;;n&#8221;);
+data.php文件的结果是：
+<code>
+return array ( 0 =&gt; 1, 1 =&gt; 2, 'key' =&gt; 'value', 2 =&gt; array ( 0 =&gt; 'sub-array', ), )array(4) { [0]=&gt; int(1) [1]=&gt; int(2) ["key"]=&gt; string(5) "value" [2]=&gt; array(1) { [0]=&gt; string(9) "sub-array" } }
+</code>
+我们的目的达到了。可以直接的通过include这个文件来得到我们的值。
+但是现在有个问题，我们没有序列化对象类型的值，这个该怎么处理呢？
+一个类对象有对象的状态和对象的行为，行为在类定义完以后就确定了，所以每个类的实例的行为都是一样的。所以我们可以不考虑，我们只需要考虑类对象的状态就可以了，简单来讲就是类的属性状态需要保存起来。那怎么样得到一个类的属性呢？
+经过一番搜寻以后发现一个函数
+get_object_vars
+(PHP 4, PHP 5)get_object_vars &#8211; 返回由对象属性组成的关联数组
+这个函数可以获得对象的属性关联数组，也就只可以得到对象的状态，但是对象的属性有各种访问控制，get_object_vars()函数在对象外访问只能得到对象的公开属性，而无法得到私有属性，这样的话我们就无法得到对象的全部状态，不可行，但是在对象内可以得到对象的所有属性，那我们可不可以在对象内定义一个___get_properties()方法来返回这些状态呢。
+给类增加这样一个方法
+<code>
+public function __get_properties()
+{
+return get_obj_vars($this);
+}
+</code>
+这样我们就可以得到类的所有属性了。第一步算是完成了，我们得到状态该怎么重新恢复出来呢？要在对象外部给对象设置属性我们只有两种情况：一种是这个属性是公开属性，我们可以直接赋值 比如： $obj->prop = $value; 如果是私有属性我们则需要自己增加setter方法比如 setProp($value);方法，来设置。但是这就会遇到一个问题，我们的属性要么是公开属性，要么必须要有setter方法来设置，很多情况下我们不希望给类增加这么多没有实际用处的方法，也为了封装性，不会有这么多的setter方法。虽然我们能得到对象的状态，但是却无法恢复对象状态，这样的话，我们的序列化方法也就没有什么意义了。我们探索到现在算是失败了。
+解决办法：var_export()函数。</p>
+
+<h2>在看symfony代码的时候发现了这个函数，手册是这么描述的：</h2>
+
+<p>var_export
+(PHP 4 >= 4.2.0, PHP 5)var_export &#8211; 输出或返回一个变量的字符串表示
+描述
+mixed var_export ( mixed expression [, bool return] )</p>
+
+<p>此函数返回关于传递给该函数的变量的结构信息，它和 var_dump() 类似，不同的是其返回的表示是合法的 PHP 代码。</p>
+
+<p>您可以通过将函数的第二个参数设置为 TRUE，从而返回变量的表示。</p>
+
+<p>这个就是我们想要的那个函数,我们来看看这个函数是怎么使用的。
+<code>
+//变量继续使用上面定义的变量
+echo var_export($string); //'It's a string...'
+echo var_export($array); /* array (0 =&gt; 1, 1 =&gt; 2, 'key' =&gt; 'value', 2 =&gt; array (0 =&gt; 'sub-array', ),)*/
+echo var_export($number); // 135345.55
+echo var_export($class); /* MyClass::__set_state(array('_var' =&gt; NULL, 'pub' =&gt; array (0 =&gt; 'pub value', 1 =&gt; 3, 2 =&gt; 4)) */
+</code>
+我们可以看到生成的都是合法的PHP表达式。通过设置第二个参数为true，就可以将返回结果赋值给变量比如$new_array_string = var_export($array, TRUE);然后将这个结果写入文件持久化</p>
+
+<p>file_put_contents(&#8220;data.php&#8221;, &#8220;public function <em>_constructor($var)
+{
+$this-></em>var = $var;
+}</p>
+
+<p>public function show()
+{
+echo $this->_var;
+}
+public static function __set_state(array $array)
+{
+$tmp = new MyClass();
+foreach($array as $key => $value)
+{
+$this->$key = $value;
+}
+}
+}</p>
+
+<p>// 一些变量
+$string = &#8220;It&#8217;s a string&#8230;&#8221;;
+$array = array(1, 2, &#8216;key&#8217; => &#8216;value&#8217;, array(&#8216;sub-array&#8217;));
+$number = 135345.55;
+$class = new MyClass(&#8216;class var&#8217;)</p>
+
+<p>// 缓存
+cache(&#8220;string.data.php&#8221;, $string); // 当然扩展名不一定非得php， 文件名我也只是简单的处理
+cache(&#8220;array.data.php&#8221;, $array);
+// 等等。。。</p>
+
+<p>// 获取数据,当然也可以在其他文件中来获取。
+$class = cache_get(&#8220;class.data.php&#8221;);</p>
+
+<p>参考：http://www.thoughtlabs.com/2008/02/02/phps-mystical-__set_state-method/?dsq=12016456</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">reeze</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-07-02T12:55:41+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/web技术/'>Web技术</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/2009/07/02/a-cache-system-using-var_export-and-includes-return-value/" data-via="" data-counturl="http://reeze.cn/2009/07/02/a-cache-system-using-var_export-and-includes-return-value/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    
+    <ul class="pager">
+      
+      <li class="previous"><a class="basic-alignment left"
+        href="/2009/07/01/a-way-use-include-to-avoid-unserialize/" title="Previous Post:
+        PHP中include语句的返回值及避免序列化开销的方法">&laquo; PHP中include语句的返回值及避免序列化开销的方法</a></li>
+      
+      <li><a href="/blog/archives">Blog Archives</a></li>
+      
+      <li class="next"><a class="basic-alignment right" href="/2009/10/09/how-to-implement-a-simple-online-html-editor/"
+        title="Next Post: 实现一个简单在线HTML编辑器">实现一个简单在线HTML编辑器
+        &raquo;</a></li>
+      
+    </ul>
+  </footer>
+</article>
+
+<aside class="sidebar-nav span3">
+  
+    <section class="well">
+  <ul id="recent_posts" class="nav nav-list">
+    <li class="nav-header">Recent Posts</li>
+    
+      <li class="post">
+        <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">[PHP-Internal]定制PHP语法获取PHP变量的变量名</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/28/doubanshow-for-wordpress/">[Plugin]豆瓣秀 For WordPress</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section class="well">
+  <ul id="gh_repos" class="nav">
+    <li class="nav-header">GitHub Repos</li>
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/reeze">@reeze</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'reeze',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo" class="page-footer"><hr>
+<p>
+  Copyright &copy; 2012 - reeze -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'reeze';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

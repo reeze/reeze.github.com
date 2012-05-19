@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 随笔 | Zen Space]]></title>
+  <link href="http://reeze.cn/categories/随笔/atom.xml" rel="self"/>
+  <link href="http://reeze.cn/"/>
+  <updated>2012-05-20T00:35:09+08:00</updated>
+  <id>http://reeze.cn/</id>
+  <author>
+    <name><![CDATA[reeze]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[在2009的尾巴上]]></title>
+    <link href="http://reeze.cn/2009/12/31/at-the-tail-of-2009/"/>
+    <updated>2009-12-31T23:59:06+08:00</updated>
+    <id>http://reeze.cn/2009/12/31/at-the-tail-of-2009</id>
+    <content type="html"><![CDATA[<p>09年最后一篇日志，充个数吧：）</p>
+
+<p>哈哈，刚买了本《<a href="http://www.douban.com/subject/3735649/">Orange S: 一个操作系统的实现</a>》，这一年下来买了挺多的书，也从图书馆借了很多的书（马上就要毕业了，再也享受不到学校图书馆丰富及时的藏书了，计划以后每个月发工资都买一本自己喜欢的书），发现我读书最大的问题是多而不精，拿一本好书就使劲的翻，很多书都是花几天就翻完了，但是读下来之后总觉得收获不够，一些很需要实践的部分也没有及时联系，总感觉自己浮在表面上，只知其然。所以呢，这个2010年争取多读好书，踏踏实实的啃几本好书，然后就是要多动手啦。</p>
+
+<p>计划2010年呢，能把耽搁很久的想法付诸行动，做出点东西来。希望有个好的开始吧！</p>
+
+<p>Happy New Year!!!</p>
+]]></content>
+  </entry>
+  
+</feed>

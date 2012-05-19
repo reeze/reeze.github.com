@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>怎样获取PHP变量的变量名之PHP实现 - Zen Space</title>
+  <meta name="author" content="reeze">
+
+  
+  <meta name="description" content="上一篇文章里提到是用PHP扩展实现获取变量的变量名的方法. 今天发现有一个PHP实现的版本 . 实现方法来自:http://mach13.com/how-to-get-a-variable-name-as-a-string-in-php 刚开始以为这个方法好使, 仔细想想其实也是有问题的. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://reeze.cn/2010/11/04/php-get-variables-name-a-php-impliment">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/syntax/syntax.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+    h1 {
+      margin-bottom: 15px;
+    }
+    img {
+      max-width: 100%;
+    }
+    .sharing, .meta {
+      margin: 20px 0px 20px 0px;
+    }
+    .pager {
+      margin: 20px 0px 5px 0px;
+    }
+    .page-footer p {
+      text-align: center;
+    }
+  </style>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Zen Space" type="application/atom+xml">
+  
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11029498-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+
+      <a class="brand" href="/">Zen Space</a>
+
+      <div class="nav-collapse">
+        <ul class="nav">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+      </div>
+
+      <ul class="nav pull-right" data-subscription="rss">
+        <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+        
+      </ul>
+
+        
+      <form class="pull-right navbar-search" action="http://google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="q" value="site:reeze.cn" />
+          <input class="search-query" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+        
+    </div>
+  </div>
+</div>
+</nav>
+  <div class="container">
+    <div class="row-fluid">
+      
+<article class="hentry span9" role="article">
+
+  
+  <header class="page-header">
+    
+      <h1 class="entry-title">怎样获取PHP变量的变量名之PHP实现</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-04T11:07:37+08:00" pubdate data-updated="true">Nov 4<span>th</span>, 2010</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://reeze.cn/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">上一篇文章</a>里提到是用PHP扩展实现获取变量的变量名的方法. 今天发现有一个PHP实现的版本 . 实现方法来自:http://mach13.com/how-to-get-a-variable-name-as-a-string-in-php</p>
+
+<p><strong>刚开始以为这个方法好使, 仔细想想其实也是有问题的.</strong>
+<del>
+这个解决方法是用的PHP里的get_defined_vars()方法,该方法返回当前作用域内的所有变量信息.也是和$GLOBALS一样,以变量名 => 值的方式返回.
+他的代码很简单:</p>
+
+<p>`
+$v)</p>
+
+<pre><code>    $aDefinedVars_0[$k] = $v;
+
+$iVarSave = $iVar;
+$iVar     =!$iVar;   // 将当前变量的值取反
+
+$aDiffKeys = array_keys (array_diff_assoc ($aDefinedVars_0, $aDefinedVars));  // 对比取反前后的变量
+$iVar      = $iVarSave; // 恢复当前变量的值
+
+return $aDiffKeys[0];
+}
+</code></pre>
+
+<p>?></p>
+
+<p>`</p>
+
+<p>它通过引用的方式改变当前变量的值, 然后通过对比前后两个数组的差异来获取值被改变了的变量.然后返回其名字.经过测试这的确是一个方法.相对我实现的方法. 它提供的方法移植性较好, 不需要赖以扩展. 而这个php版本的实现, 必须传递一个get_defined_vars()的参数, 我实现的那个扩展,则不需要. 对于类似 var_name($a=10,get_defined_vars()); 的调用,该方法无法正常获得变量名.
+</del></p>
+
+<p>这个今天又仔细想了想,下面提供的方法是有问题的.. 他解决问题的方法是通过修改变量的值, 并对比前后所有的变量来找出值发生变化的变量. 而实际上.修改了其中一个变量另一个变量的值也会发生变化: 这就是引用, 如下
+`</p>
+
+<p>PS: 如果你真的需要这种方法. 请重新思考一下你的需要真的需要这样的方法么?</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">reeze</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-04T11:07:37+08:00" pubdate data-updated="true">Nov 4<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/php内核/'>PHP内核</a>, <a class='category' href='/categories/web技术/'>Web技术</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/2010/11/04/php-get-variables-name-a-php-impliment/" data-via="" data-counturl="http://reeze.cn/2010/11/04/php-get-variables-name-a-php-impliment/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    
+    <ul class="pager">
+      
+      <li class="previous"><a class="basic-alignment left"
+        href="/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/" title="Previous Post:
+        Php Internal How To Get Variables Name An Extension Implement">&laquo; Php Internal How To Get Variables Name An Extension Implement</a></li>
+      
+      <li><a href="/blog/archives">Blog Archives</a></li>
+      
+      <li class="next"><a class="basic-alignment right" href="/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/"
+        title="Next Post: PHP Puzzle(一): 有趣的变量作用域-PHP中global和Javascript中的var关键字">PHP Puzzle(一): 有趣的变量作用域-PHP中global和Javascript中的var关键字
+        &raquo;</a></li>
+      
+    </ul>
+  </footer>
+</article>
+
+<aside class="sidebar-nav span3">
+  
+    <section class="well">
+  <ul id="recent_posts" class="nav nav-list">
+    <li class="nav-header">Recent Posts</li>
+    
+      <li class="post">
+        <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">[PHP-Internal]定制PHP语法获取PHP变量的变量名</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/28/doubanshow-for-wordpress/">[Plugin]豆瓣秀 For WordPress</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section class="well">
+  <ul id="gh_repos" class="nav">
+    <li class="nav-header">GitHub Repos</li>
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/reeze">@reeze</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'reeze',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo" class="page-footer"><hr>
+<p>
+  Copyright &copy; 2012 - reeze -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'reeze';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

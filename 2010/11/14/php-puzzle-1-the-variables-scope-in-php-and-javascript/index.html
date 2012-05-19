@@ -1,0 +1,377 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PHP Puzzle(一): 有趣的变量作用域-PHP中global和Javascript中的var关键字 - Zen Space</title>
+  <meta name="author" content="reeze">
+
+  
+  <meta name="description" content="昨天在网上看到几道有意思的PHP题, 下面这道题让我想起了对应的Javascript版本.
+` 这段代码运行结果是什么呢? 别急着执行这段代码,先想想你的结果.然后再对比一下吧. 我们看先看看global的定义 http://www.php.net/manual/en/language. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://reeze.cn/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/syntax/syntax.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+    h1 {
+      margin-bottom: 15px;
+    }
+    img {
+      max-width: 100%;
+    }
+    .sharing, .meta {
+      margin: 20px 0px 20px 0px;
+    }
+    .pager {
+      margin: 20px 0px 5px 0px;
+    }
+    .page-footer p {
+      text-align: center;
+    }
+  </style>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Zen Space" type="application/atom+xml">
+  
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11029498-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+
+      <a class="brand" href="/">Zen Space</a>
+
+      <div class="nav-collapse">
+        <ul class="nav">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+      </div>
+
+      <ul class="nav pull-right" data-subscription="rss">
+        <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+        
+      </ul>
+
+        
+      <form class="pull-right navbar-search" action="http://google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="q" value="site:reeze.cn" />
+          <input class="search-query" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+        
+    </div>
+  </div>
+</div>
+</nav>
+  <div class="container">
+    <div class="row-fluid">
+      
+<article class="hentry span9" role="article">
+
+  
+  <header class="page-header">
+    
+      <h1 class="entry-title">PHP Puzzle(一): 有趣的变量作用域-PHP中global和Javascript中的var关键字</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-14T15:38:32+08:00" pubdate data-updated="true">Nov 14<span>th</span>, 2010</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>昨天在网上看到几道有意思的PHP题, 下面这道题让我想起了对应的Javascript版本.
+`</p>
+
+<p>这段代码运行结果是什么呢? 别急着执行这段代码,先想想你的结果.然后再对比一下吧.</p>
+
+<p>我们看先看看global的定义 http://www.php.net/manual/en/language.variables.scope.php 这里也没有太为规范的解释.只是说可以通过global关键字来访问全局变量. 这里还涉及到一个类型转换的问题.</p>
+
+<p>大家都知道PHP脚本是编译为opcode逐语句执行的. 那么现在要一句语句解释就很容易了.
+`</p>
+
+<p>这里可能比较困惑的的是现在变量$a到底是局部变量还是全局变量了.因为global在定义局部变量之后.所以$a变为了全局变量,而在最后输出结果的时候$a并没有值.所以最后在相乘的时候是 NULL * 100; 也就是0了;可能会有人有疑问, 后面只是把$a变为了全局变量, 他的值应该不变的啊. 让我通过下面的例子来看把:
+`</p>
+
+<p>  int(0)
+  [&#8220;a&#8221;]=>
+  &NULL;
+}
+<code>
+变量a是NULL的一个引用,因为全局作用域内没有a这个变量. 所以即使在函数前面定义了一个a变量,但是它的值已经指向了全局作用域了.
+实际上 global关键字首先从全局符号表中查找变量名叫做a的变量,并把这个变量值设置为当前作用域的符号表中的a变量(更新了当前变量的值). 如果全局作用域内没有这个变量则会在全局作用域内增加这个变量, 实现代码见: $PHP_SRC/Zend/zend_vm_execute.h
+</code>
+static int ZEND_FASTCALL zend_fetch_var_address_helper_SPEC_CONST(int type, ZEND_OPCODE_HANDLER_ARGS) {</p>
+
+<pre><code>    // ...
+    if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;retval;) == FAILURE) {
+        switch (type) {
+            case BP_VAR_R:
+            case BP_VAR_UNSET:
+                zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));
+                /* break missing intentionally */
+            case BP_VAR_IS:
+                retval = &amp;EG;(uninitialized_zval_ptr);
+                break;
+            case BP_VAR_RW:
+                zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));
+                /* break missing intentionally */
+            case BP_VAR_W: {
+                    zval *new_zval = &amp;EG;(uninitialized_zval);
+
+                    Z_ADDREF_P(new_zval);
+                    zend_hash_update(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, &amp;new;_zval, sizeof(zval *), (void **) &amp;retval;);
+                }
+                break;
+            EMPTY_SWITCH_DEFAULT_CASE()
+        }
+    }
+
+ //...
+</code></pre>
+
+<p>}
+<code>
+看了这个解释大家可能觉得理所当然.一句一句执行的嘛. 看完了PHP中全局作用域的例子,咱们再看看类似的Javascript中的局部变量的版本吧
+</code>
+var a = 1;
+function multiply(b)
+{</p>
+
+<pre><code> a = 100;
+ var a;
+
+ return a * b;
+</code></pre>
+
+<p>}
+alert(a);
+alert(multiply(100));
+`
+那这段代码的输出将会是多少呢?
+如果还是同样的思路,结果可能是你的期望完全不一样的结果. <strong>这里的var定义变量和php中global不是一样的东西, php中的global是会在运行时执行的.而Javascript中的var在运行之前就已经&#8221;处理&#8221;好了</strong>.在运行之前的&#8221;语法分析&#8221;(没有看过Javascript引擎的实现.姑且这么分把)过程中,multiply函数中出现了var a;则把变量a加到函数体内的&#8221;局部变量表&#8221;中了.在运行过程中并不会执行var a;这一句.  这也是Javascript&#8221;怪异&#8221;的地方.定义变量的位置并没有关系.所以在函数内定义局部变量最好放在函数体的前面.</p>
+
+<p>所以第一个alert输出的1, 函数的执行并没有改版全局范围内的a变量; 第二就没有什么问题了, 是10000;</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">reeze</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-14T15:38:32+08:00" pubdate data-updated="true">Nov 14<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/javascript/'>Javascript</a>, <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/php内核/'>PHP内核</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/" data-via="" data-counturl="http://reeze.cn/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    
+    <ul class="pager">
+      
+      <li class="previous"><a class="basic-alignment left"
+        href="/2010/11/04/php-get-variables-name-a-php-impliment/" title="Previous Post:
+        怎样获取PHP变量的变量名之PHP实现">&laquo; 怎样获取PHP变量的变量名之PHP实现</a></li>
+      
+      <li><a href="/blog/archives">Blog Archives</a></li>
+      
+      <li class="next"><a class="basic-alignment right" href="/2010/11/28/doubanshow-for-wordpress/"
+        title="Next Post: [Plugin]豆瓣秀 For WordPress">[Plugin]豆瓣秀 For WordPress
+        &raquo;</a></li>
+      
+    </ul>
+  </footer>
+</article>
+
+<aside class="sidebar-nav span3">
+  
+    <section class="well">
+  <ul id="recent_posts" class="nav nav-list">
+    <li class="nav-header">Recent Posts</li>
+    
+      <li class="post">
+        <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">[PHP-Internal]定制PHP语法获取PHP变量的变量名</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/28/doubanshow-for-wordpress/">[Plugin]豆瓣秀 For WordPress</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section class="well">
+  <ul id="gh_repos" class="nav">
+    <li class="nav-header">GitHub Repos</li>
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/reeze">@reeze</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'reeze',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo" class="page-footer"><hr>
+<p>
+  Copyright &copy; 2012 - reeze -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'reeze';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

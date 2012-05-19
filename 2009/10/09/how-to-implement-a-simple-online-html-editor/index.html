@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>实现一个简单在线HTML编辑器 - Zen Space</title>
+  <meta name="author" content="reeze">
+
+  
+  <meta name="description" content="一直没有仔细研究过在线HTML编辑器，以前以为编辑功能很复杂，需要用大量的JavaScript来模拟编辑器的效果，以前都是使用一些开源的HTML编辑器，HTML在各网上随处可见，发表文章，评论。最近自己想做一个类似Things这样的Web版的应用，需要一个想Google  Notebook( &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/syntax/syntax.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+    h1 {
+      margin-bottom: 15px;
+    }
+    img {
+      max-width: 100%;
+    }
+    .sharing, .meta {
+      margin: 20px 0px 20px 0px;
+    }
+    .pager {
+      margin: 20px 0px 5px 0px;
+    }
+    .page-footer p {
+      text-align: center;
+    }
+  </style>
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Zen Space" type="application/atom+xml">
+  
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11029498-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+
+      <a class="brand" href="/">Zen Space</a>
+
+      <div class="nav-collapse">
+        <ul class="nav">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+      </div>
+
+      <ul class="nav pull-right" data-subscription="rss">
+        <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+        
+      </ul>
+
+        
+      <form class="pull-right navbar-search" action="http://google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="q" value="site:reeze.cn" />
+          <input class="search-query" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+        
+    </div>
+  </div>
+</div>
+</nav>
+  <div class="container">
+    <div class="row-fluid">
+      
+<article class="hentry span9" role="article">
+
+  
+  <header class="page-header">
+    
+      <h1 class="entry-title">实现一个简单在线HTML编辑器</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-09T15:11:26+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2009</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>一直没有仔细研究过在线HTML编辑器，以前以为编辑功能很复杂，需要用大量的JavaScript来模拟编辑器的效果，以前都是使用一些开源的HTML编辑器，HTML在各网上随处可见，发表文章，评论。最近自己想做一个类似Things这样的Web版的应用，需要一个想Google  Notebook(可惜的是现在已经停止开发了) 那样的编辑功能，看看现在网上的这些编辑器都庞大了，都是一些自己根本用不到的功能，其实我的需求很简单：简单的编辑既可以，并且需要轻量级一些，因为页面上可能需要开很多个编辑器实例。 所有想自己也来研究一下，看看能不能自己开发一个。</p>
+
+<p>几天前花了一个晚上用firebug看了下Google Docs是怎么做。第一个遇到的问题就是如何让光标停在鼠标点击所在得地方。我刚开始一味都是js模拟出来的，这得有多复杂啊。并且还要兼容各个浏览器，天啊！后来上网一搜发现，浏览器早就想到了我们会有这样的一个需求。其实很简单，两条语句就可以说明HTML编辑器的最为核心的部分：
+<code>
+document.designMode = 'On';
+document.contentEditable = true;
+</code>
+参考Mozilla上的<a href="https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla">这篇</a>文章，介绍了HTML编辑的基本信息，要自己DIY一个常用功能的HTML编辑，这篇文章已经够你用的了。</p>
+
+<p>在你的网页中嵌入这两条语句试试看：），你就会发现你的网站整个得都变的可以编辑了。可以随便乱修改。 不过放心，这样修改并不会破坏你的网站， 当然你也不希望你的整个网站是可以编辑的。例如我们只希望别人发布一条评论，只希望评论输入框可以输入。 要实现这样的效果可以有两种做法：</p>
+
+<p>第一种就是使用直接让某个元素变成可编辑的例如：</p>
+
+<p>index.html
+`
+Test TextEditor</p>
+
+<h1>Hi, HTML Editor!</h1>
+
+<p>Hello, you comment please</p>
+
+<p>Your comment</p>
+
+<p>Get HTML
+`
+点击该区域后该区域的内容就变成可以编辑的了，这是我们就是对其进行简单的编辑。你可能会觉得直接编辑的功能太简单了，比如想要插入链接或者图片什么的。就没有办法了。这些功能浏览器并没有帮我们做好，不过实现这些功能也不麻烦， 参考上面Mozilla的文档。浏览器都提供了常用的功能API。</p>
+
+<p>一般的编辑器都会提供一个工具栏之类的按钮来编辑文本内容。比如我使用的WordPress提供的编辑器：</p>
+
+<p>[caption id=&#8221;attachment_42&#8221; align=&#8221;alignnone&#8221; width=&#8221;936&#8221; caption=&#8221;wordpress提供的编辑器&#8221;]<a href="/uploads/2009/10/5b9e5c0b92f7fdf042ea3993165b80ec.png"><img src="/uploads/2009/10/5b9e5c0b92f7fdf042ea3993165b80ec.png" alt="wordpress提供的编辑器" /></a>[/caption]</p>
+
+<p>可以对文字内容进行操作，加粗下划线，字体，对齐等等，并且提供可视化以及HTML编辑模式。</p>
+
+<p>这个和FCKeditor 以及tinymce之类的编辑器使用的编辑方式和上面我提到的直接编辑html对象的方法不一样，他们使用的是iframe，使用iframe有很多好处，iframe中的文档和当前文档并不会因为样式或者HTML结构而影响到彼此，所以大部分的编辑器都是使用这种方式。它们基本的方式都是：</p>
+
+<ol>
+<li><p>在页面中使用一个不可见的字段比如:“input, textarea&#8221;之类表单字段，他们的值就是需要编辑的内容。</p></li>
+<li><p>页面初始化好，比如载入编辑器相关的一些脚本，也是就是window.onload好以后。创建一个iframe来显示可编辑区域，iframe初始化好以后读取父窗(相对于这个iframe)口的这个不可见表单值的内容，使之成为iframe中的body的html，也就是把所有需要编辑的内容添加到iframe中</p></li>
+<li><p>iframe中的内容初始化好以后，在iframe中执行上面提到的：
+<code>
+document.designMode = 'On';
+document.contentEditable = true;
+</code>
+把iframe整个窗口变成可以编辑的</p></li>
+<li><p>进行编辑，这时候的编辑可能需要一个工具栏，基于同样的原因，一般工具栏也会是一个iframe，显示它们自己的编辑按钮。编辑是就利用浏览器提供的接口来对ifame中的内容进行编辑</p></li>
+<li><p>父窗口中提交表单之前或者你需要的地方需要把编辑器中编辑完的内容回写到你的表单字段中去，否则编辑结果没有保存写来就没有意义了。</p></li>
+</ol>
+
+
+<p>基本原理就是这样。要做出这样一个东西来，需要的就是一些细活了。要想做出一个FCk这样好用的编辑器也不是那么简单的。但是至少我们知道它是怎么运作的。 这就够了。</p>
+
+<p>花了点时间做了一个简单的编辑器，真正要用的话很多的细节还是需要好好处理的，代码没有怎么清理，是变想边写，不是很完整。</p>
+
+<p>需要的同学可以下来参考参考。
+猛击 <a href="/uploads/2009/10/editor.rar"> >> 这里 &lt;&lt; </a>下载代码。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">reeze</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-09T15:11:26+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/web技术/'>Web技术</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor/" data-via="" data-counturl="http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    
+    <ul class="pager">
+      
+      <li class="previous"><a class="basic-alignment left"
+        href="/2009/07/02/a-cache-system-using-var_export-and-includes-return-value/" title="Previous Post:
+        基于var_export 和 include返回值的缓存方案">&laquo; 基于var_export 和 include返回值的缓存方案</a></li>
+      
+      <li><a href="/blog/archives">Blog Archives</a></li>
+      
+      <li class="next"><a class="basic-alignment right" href="/2009/10/09/check-php-files-syntax-in-php/"
+        title="Next Post: 在PHP中检查PHP文件是否有语法错误">在PHP中检查PHP文件是否有语法错误
+        &raquo;</a></li>
+      
+    </ul>
+  </footer>
+</article>
+
+<aside class="sidebar-nav span3">
+  
+    <section class="well">
+  <ul id="recent_posts" class="nav nav-list">
+    <li class="nav-header">Recent Posts</li>
+    
+      <li class="post">
+        <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">[PHP-Internal]定制PHP语法获取PHP变量的变量名</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2010/11/28/doubanshow-for-wordpress/">[Plugin]豆瓣秀 For WordPress</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section class="well">
+  <ul id="gh_repos" class="nav">
+    <li class="nav-header">GitHub Repos</li>
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/reeze">@reeze</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'reeze',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo" class="page-footer"><hr>
+<p>
+  Copyright &copy; 2012 - reeze -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'reeze';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

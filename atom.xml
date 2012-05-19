@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Zen Space]]></title>
+  <link href="http://reeze.cn/atom.xml" rel="self"/>
+  <link href="http://reeze.cn/"/>
+  <updated>2012-05-20T00:35:09+08:00</updated>
+  <id>http://reeze.cn/</id>
+  <author>
+    <name><![CDATA[reeze]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[迁移博客到Octopress]]></title>
+    <link href="http://reeze.cn/2012/05/19/migrate-to-octopress/"/>
+    <updated>2012-05-19T23:50:00+08:00</updated>
+    <id>http://reeze.cn/2012/05/19/migrate-to-octopress</id>
+    <content type="html"><![CDATA[<p>很久以前就像离开Wordpress了，不太习惯在线写东西，开始返璞归真了，比较喜欢
+纯文本的内容创作方式，在<a href="http://www.php-internal.com">TIPI</a>中就使用了markdown，
+在终端写也让我更有协作的欲望。</p>
+
+<p>翻了一下以前的博客，原来一共加起来也不足20篇。以此作为起点今后多继续更新博客吧。</p>
+
+<p>TIPI的issue里还有很多的待处理工作，计划是在7月份全部写完。这个始终是高优先级的。
+最进给PHP修复了一些bug，也有一些feature被接受了。在这过程中对PHP的实现又有了一些更加深入
+的理解。也有冲动想要写到TIPI里。总之，TIPI会一直更新。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[复制SSH会话,避免多次密码输入]]></title>
+    <link href="http://reeze.cn/2011/03/22/duplicate-ssh-session/"/>
+    <updated>2011-03-22T18:49:27+08:00</updated>
+    <id>http://reeze.cn/2011/03/22/duplicate-ssh-session</id>
+    <content type="html"><![CDATA[<p>就当时记事吧. 这不是怎样配置ssh密钥避免密码输入的实例,　当然经常ssh登陆的你肯定也配置过了.</p>
+
+<p>我们公司的内网环境比较特殊,　为了安全性做了各种认证,　联入网络需要准入一下,　准入需要使用密码+随即密码的方式认证,　是挺安全的,　可以对于我们来说其实很痛苦,每次都要输入一下密码,因为包含了随即密码,我们无法使用脚本来方便的准入.　我们联入公司的开发机需要通过一台特殊的服务器来将我们的登陆转发,　也就是登陆到中转机,然后通过中转机在ssh.同样登陆中转机也是需要这个随机密码的.　吐槽完毕.</p>
+
+<p>工作中经常需要在多台服务之间ssh登陆,　screen 是一个不错的选择,　不过有时候还是需要打开另一个窗口再次登陆,　这时我又得再次输入那个随机密码,　如果你使用windows并且使用SecureCRT那你可以不用继续往下看了,SecureCRT可以简单的复制回话, 这个功能很贴心. 如果使用Linux&amp;Mac OS那就继续往下看.</p>
+
+<p>在/etc/ssh_config 文件中加入</p>
+
+<pre><code>Host *
+ControlMaster auto
+ControlPath ~/.ssh/master-%r@%h:%p
+</code></pre>
+
+<p>下次登陆同一站点的时候就会自动复用已有的回话. 可以只输入一次密码开N个窗口了. 这个和密钥要解决的不是同一个问题.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[TIPI项目正式发布&恭喜er童鞋大婚]]></title>
+    <link href="http://reeze.cn/2011/03/20/tipi-first-release-and-ers-marriage/"/>
+    <updated>2011-03-20T23:45:12+08:00</updated>
+    <id>http://reeze.cn/2011/03/20/tipi-first-release-and-ers-marriage</id>
+    <content type="html"><![CDATA[<p>首先恭喜一下er童鞋的大婚吧.</p>
+
+<p>接着er大婚的喜气,项目决定在今天发布我们的TIPI项目,项目从成立到现在,一直有条不紊的前进. 现在项目也进行的差不多,可以公开给大家了.   项目的第一个tag,其实是在20分钟前才提交完.终于能如期发布.
+下面是我们的发布公告.  欢迎围观:)</p>
+
+<hr />
+
+<p>我们的朋友，TIPI团队成员，博客哥，er<a href="http://www.zhangabc.com/">http://www.zhangabc.com</a>同学在今天这个春光灿烂，春暖花开，春心荡漾，春情澎湃的大好日子里，兴高采烈的走入了婚姻的殿堂。 在这样一个让人激动不已，激情四射的日子，TIPI团队决定发布<a href="http://www.php-internal.com/">深入理解PHP内核项目</a>的第一阶段成果。</p>
+
+<p>大概在半年前，我们在网上相聚，莫名的邂逅，有了我们这样的一个团队。我们有激情，有想法，有行动，也有了我们这个项目。 开始的艰难，没有时间的痛苦，坚持，从而有了今天的发布。一路走来，有辛苦，也有收获，至少记录了我们的青春，至少做了我们想做的！</p>
+
+<p><a href="http://www.php-internal.com/">深入理解PHP内核（TIPI）项目</a>是一个开源的，分析PHP内核的系列文章项目。整个项目是基于PHP5.3版本的源码。 它包括PHP语言中我们常用的变量，函数，类，对象等的实现原理，也包括PHP的虚拟机，内存管理机制，线程安全，错误异常，文件流和PHP5.3新增加的垃圾收集机制，命名空间等。 除了PHP语言本身的特性外，还包括PHP扩展的相关信息。我们希望这个项目可以帮助更多的PHPer可以更加了解PHP语言本身，知其然知其所以然！</p>
+
+<p>第一阶段，我们发布了前四章，从环境的搭建，源码的阅读方式到对于PHP源码的整体把握，再到对于变量和函数的详细解说。随着项目的进展，我们本身对于PHP内核的理解也加深了许多。 后续我们将以章为单位发布后续的章节。现在第5章正在撰写&#8230;</p>
+
+<p><a href="http://www.php-internal.com/">在线阅读入口>>></a></p>
+
+<h2>TIPI团队序</h2>
+
+<p>博客哥三者，今聚首于网络一偶，共谋TIPI大计，与诸君共享技术之事： 向来穷PHP内核之事者或多，却鲜有分享之举。哥三者，常流连于中外博客也，若得一佳作，即欣喜若狂，本乐分享，及有学习总结之心，欲为PHP内核之事穷全身之力。</p>
+
+<ul>
+<li><p><a href="http://reeze.cn/">reeze</a>，博客哥者，好苹果，好开源, 陶醉于Web开发及架构, 为Ruby之美所折服, 甚爱iOS及其开发, 好一切善美之事物.</p></li>
+<li><p><a href="http://www.zhangabc.com/">er</a>，博客哥者，稀饭Linux, Web, 2.0, Ajax, C, PHP, Javascript, CSS等。乃一以代码为乐之码农也。</p></li>
+<li><p><a href="http://www.phppan.com/">phppan</a>，博客哥者，好书，好PHP，亲于PHP，C，Ajax，程序架构等</p></li>
+</ul>
+
+
+<p>是以三人之力行分享之事，转GIT，习markdown，论项目之计于深夜，何怕事之不成？务使PHP内核之事向众人知。 为此特示。</p>
+
+<h2>项目大事记</h2>
+
+<ul>
+<li><p>2010/12/28 14:47 pan向reeze提议写一个PHP内核系列文章,一拍即合.</p></li>
+<li><p>2010/12/28 15:10 er同学加入.组织正式形成.</p></li>
+<li><p>2010/12/30 11:11 pan发出&lt;&lt;深入理解PHP内核>>第一份完整目录草稿.</p></li>
+<li><p>2010/12/31 21:14 举行第一次三方会谈,结合pan和reeze的目录草稿确定了正式目录. 标志着TIPI团队项目的正式确立.. (鼓掌).</p></li>
+<li><p>2011/01/01 05:08 reeze向github版本库提交了完整的项目, TIPI项目开始进入实施阶段</p></li>
+<li><p>2011/01/06 15:22 经过哥三激烈的讨论后做出艰难的决定,我们的项目域名正式确定为php-internal.com.(撒花无数).</p></li>
+<li><p>2011/02/14 23:32 在这个几人欢喜几人愁，充满花香的日子里, 哥三在深夜确定了TIPI项目的第一次整体发布流程，并且定稿了前三章的大纲以及确定了发布前的调整工作。</p></li>
+<li><p>2011/02/25 02:53 虽然我们还没有正式开始推广TIPI, 但已经有人开始关注TIPI了.　恭喜icodeu<a href="http://blog.icodeu.com/">http://blog.icodeu.com</a>同学成为我们第一位留下脚印的同学(看留言时间,也是个夜猫子啊.)</p></li>
+<li><p>2011/03/10 11:22 经过TIPI团队的慎重考虑, TIPI团队新增一员大将:honestqiao同学, 欢迎他的加入!</p></li>
+<li><p>2011/03/20 20:00 今天是TIPI团队成员er同学的大婚之日，团队决定在这个喜庆的日子将我们第一阶段的成果对外发布。让我们恭喜这对新人和我们的TIPI团队。</p></li>
+</ul>
+
+
+<h2>特别鸣谢</h2>
+
+<p>我们需要感谢我们家里的领导，没有有她们的支持，也就没有我们今天的发布，感谢她们的包容，感谢她们的照顾，感谢她们的理解和支持。谢谢！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[PHP-Internal]定制PHP语法获取PHP变量的变量名]]></title>
+    <link href="http://reeze.cn/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/"/>
+    <updated>2010-12-26T17:56:53+08:00</updated>
+    <id>http://reeze.cn/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Plugin]豆瓣秀 For WordPress]]></title>
+    <link href="http://reeze.cn/2010/11/28/doubanshow-for-wordpress/"/>
+    <updated>2010-11-28T22:10:23+08:00</updated>
+    <id>http://reeze.cn/2010/11/28/doubanshow-for-wordpress</id>
+    <content type="html"><![CDATA[<p>我喜欢在博客中显示我在豆瓣上的一些信息，比如想看哪些书哪些电影神马的。刚开始用的是 Robin的 <a href="http://www.robb.com.cn/plugins">http://www.robb.com.cn/plugins/</a> 的 WP-DoubanShow插件，他用的是豆瓣API。这个插件需要手动修改主题模板文件。刚开始用的挺好，修改就修改吧。不过后来换过几次主题后发现每次修改模板文件还挺“脏”的。遂问robin能否修改成widget的方式，他说官方推出了一个豆瓣秀功能<a href="http://www.douban.com/service/badgemaker">http://www.douban.com/service/badgemaker</a>， 所以不继续维护了。看过官方的说明。发现要在Wordpress中用也只能手动修改模板，不过官方提供了一个生成js的设置项，可以根据需要生成相应的脚本，选项也还算简单。 在网上搜了一番，没有给wordpress用的插件，所以自己写了一个，设置项和官方的一样。下面简单的说明一下：</p>
+
+<ol>
+<li><p>第一步：下载插件文件： <a href="http://reeze.cn/uploads/2010/11/DoubanShow.zip">DoubanShow.zip</a>, 或者在管理界面中添加插件, 搜索douban即可看到&#8221;豆瓣秀For Wordpress&#8221; 选择安装, 如果这样的话,下面的上传步骤就不需要了</p></li>
+<li><p>第二步：上传安装。 后台管理的  插件 -> 添加插件 -> 上传中上传下载的文件。<a href="http://reeze.cn/uploads/2010/11/upload.png"><img src="http://reeze.cn/uploads/2010/11/upload.png" alt="" /></a></p></li>
+</ol>
+
+
+<p><a href="http://reeze.cn/uploads/2010/11/active.png"><img src="http://reeze.cn/uploads/2010/11/active2.png" alt="" /></a>
+上传完后记得“启用插件&#8221;</p>
+
+<ol>
+<li></li>
+</ol>
+
+
+<p>第三步：在后台管理的 外观 -> 小工具 中选择”豆瓣秀“ 拖到右侧你想放置的位置。 然后点击拖过去的豆瓣秀箭头。出现如下设置：</p>
+
+<p><a href="http://reeze.cn/uploads/2010/11/settings.png"><img src="http://reeze.cn/uploads/2010/11/settings.png" alt="" /></a></p>
+
+<p>标题默认为空，就是不显示标题。也可以设置成你想要的标题。然后要设置好你的豆瓣ID，记住不是豆瓣的登录用户名。 设置好以后。去你的页面看看效果吧，也可以看我博客页面右下角。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP Puzzle(一): 有趣的变量作用域-PHP中global和Javascript中的var关键字]]></title>
+    <link href="http://reeze.cn/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/"/>
+    <updated>2010-11-14T15:38:32+08:00</updated>
+    <id>http://reeze.cn/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript</id>
+    <content type="html"><![CDATA[<p>昨天在网上看到几道有意思的PHP题, 下面这道题让我想起了对应的Javascript版本.
+`</p>
+
+<p>这段代码运行结果是什么呢? 别急着执行这段代码,先想想你的结果.然后再对比一下吧.</p>
+
+<p>我们看先看看global的定义 http://www.php.net/manual/en/language.variables.scope.php 这里也没有太为规范的解释.只是说可以通过global关键字来访问全局变量. 这里还涉及到一个类型转换的问题.</p>
+
+<p>大家都知道PHP脚本是编译为opcode逐语句执行的. 那么现在要一句语句解释就很容易了.
+`</p>
+
+<p>这里可能比较困惑的的是现在变量$a到底是局部变量还是全局变量了.因为global在定义局部变量之后.所以$a变为了全局变量,而在最后输出结果的时候$a并没有值.所以最后在相乘的时候是 NULL * 100; 也就是0了;可能会有人有疑问, 后面只是把$a变为了全局变量, 他的值应该不变的啊. 让我通过下面的例子来看把:
+`</p>
+
+<p>  int(0)
+  [&#8220;a&#8221;]=>
+  &NULL;
+}
+<code>
+变量a是NULL的一个引用,因为全局作用域内没有a这个变量. 所以即使在函数前面定义了一个a变量,但是它的值已经指向了全局作用域了.
+实际上 global关键字首先从全局符号表中查找变量名叫做a的变量,并把这个变量值设置为当前作用域的符号表中的a变量(更新了当前变量的值). 如果全局作用域内没有这个变量则会在全局作用域内增加这个变量, 实现代码见: $PHP_SRC/Zend/zend_vm_execute.h
+</code>
+static int ZEND_FASTCALL zend_fetch_var_address_helper_SPEC_CONST(int type, ZEND_OPCODE_HANDLER_ARGS) {</p>
+
+<pre><code>    // ...
+    if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;retval;) == FAILURE) {
+        switch (type) {
+            case BP_VAR_R:
+            case BP_VAR_UNSET:
+                zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));
+                /* break missing intentionally */
+            case BP_VAR_IS:
+                retval = &amp;EG;(uninitialized_zval_ptr);
+                break;
+            case BP_VAR_RW:
+                zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));
+                /* break missing intentionally */
+            case BP_VAR_W: {
+                    zval *new_zval = &amp;EG;(uninitialized_zval);
+
+                    Z_ADDREF_P(new_zval);
+                    zend_hash_update(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, &amp;new;_zval, sizeof(zval *), (void **) &amp;retval;);
+                }
+                break;
+            EMPTY_SWITCH_DEFAULT_CASE()
+        }
+    }
+
+ //...
+</code></pre>
+
+<p>}
+<code>
+看了这个解释大家可能觉得理所当然.一句一句执行的嘛. 看完了PHP中全局作用域的例子,咱们再看看类似的Javascript中的局部变量的版本吧
+</code>
+var a = 1;
+function multiply(b)
+{</p>
+
+<pre><code> a = 100;
+ var a;
+
+ return a * b;
+</code></pre>
+
+<p>}
+alert(a);
+alert(multiply(100));
+`
+那这段代码的输出将会是多少呢?
+如果还是同样的思路,结果可能是你的期望完全不一样的结果. <strong>这里的var定义变量和php中global不是一样的东西, php中的global是会在运行时执行的.而Javascript中的var在运行之前就已经&#8221;处理&#8221;好了</strong>.在运行之前的&#8221;语法分析&#8221;(没有看过Javascript引擎的实现.姑且这么分把)过程中,multiply函数中出现了var a;则把变量a加到函数体内的&#8221;局部变量表&#8221;中了.在运行过程中并不会执行var a;这一句.  这也是Javascript&#8221;怪异&#8221;的地方.定义变量的位置并没有关系.所以在函数内定义局部变量最好放在函数体的前面.</p>
+
+<p>所以第一个alert输出的1, 函数的执行并没有改版全局范围内的a变量; 第二就没有什么问题了, 是10000;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[怎样获取PHP变量的变量名之PHP实现]]></title>
+    <link href="http://reeze.cn/2010/11/04/php-get-variables-name-a-php-impliment/"/>
+    <updated>2010-11-04T11:07:37+08:00</updated>
+    <id>http://reeze.cn/2010/11/04/php-get-variables-name-a-php-impliment</id>
+    <content type="html"><![CDATA[<p><a href="http://reeze.cn/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">上一篇文章</a>里提到是用PHP扩展实现获取变量的变量名的方法. 今天发现有一个PHP实现的版本 . 实现方法来自:http://mach13.com/how-to-get-a-variable-name-as-a-string-in-php</p>
+
+<p><strong>刚开始以为这个方法好使, 仔细想想其实也是有问题的.</strong>
+<del>
+这个解决方法是用的PHP里的get_defined_vars()方法,该方法返回当前作用域内的所有变量信息.也是和$GLOBALS一样,以变量名 => 值的方式返回.
+他的代码很简单:</p>
+
+<p>`
+$v)</p>
+
+<pre><code>    $aDefinedVars_0[$k] = $v;
+
+$iVarSave = $iVar;
+$iVar     =!$iVar;   // 将当前变量的值取反
+
+$aDiffKeys = array_keys (array_diff_assoc ($aDefinedVars_0, $aDefinedVars));  // 对比取反前后的变量
+$iVar      = $iVarSave; // 恢复当前变量的值
+
+return $aDiffKeys[0];
+}
+</code></pre>
+
+<p>?></p>
+
+<p>`</p>
+
+<p>它通过引用的方式改变当前变量的值, 然后通过对比前后两个数组的差异来获取值被改变了的变量.然后返回其名字.经过测试这的确是一个方法.相对我实现的方法. 它提供的方法移植性较好, 不需要赖以扩展. 而这个php版本的实现, 必须传递一个get_defined_vars()的参数, 我实现的那个扩展,则不需要. 对于类似 var_name($a=10,get_defined_vars()); 的调用,该方法无法正常获得变量名.
+</del></p>
+
+<p>这个今天又仔细想了想,下面提供的方法是有问题的.. 他解决问题的方法是通过修改变量的值, 并对比前后所有的变量来找出值发生变化的变量. 而实际上.修改了其中一个变量另一个变量的值也会发生变化: 这就是引用, 如下
+`</p>
+
+<p>PS: 如果你真的需要这种方法. 请重新思考一下你的需要真的需要这样的方法么?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Php Internal How To Get Variables Name An Extension Implement]]></title>
+    <link href="http://reeze.cn/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/"/>
+    <updated>2010-10-30T00:00:00+08:00</updated>
+    <id>http://reeze.cn/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement</id>
+    <content type="html"><![CDATA[<p>[?25l[J[J[J[J[J[J[?12l[?25h[?1049h[?1h=[1;37r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[37;1H&#8221;2010-10-30-php-internal-how-to-get-variables-name-an-extension-implement.markdown&#8221; 301L, 12377C[1;1H&#8212;
+date: &#8216;2010-10-30 00:39:01&#8217;
+layout: post
+slug: php-internal-how-to-get-variables-name-an-extension-implement
+status: publish
+title: &#8216;[PHP-Internal]鎬庝箞鏍疯幏鍙朠HP鍙橀噺鐨勫彉閲忓悕涔嬫墿灞曞疄鐜</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[解决Mac下终端中使用screen管理回话但看不到滚动条等问题]]></title>
+    <link href="http://reeze.cn/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/"/>
+    <updated>2010-07-02T15:16:33+08:00</updated>
+    <id>http://reeze.cn/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command</id>
+    <content type="html"><![CDATA[<p>工作中开发基本都是ssh到远程服务器上vim开发，有时候因为网络原因或者不小心把终端给关了或者网络出现问题以后就痛苦了，因为vim默认会用swp文件保存修改，我又不想关掉这个功能，一不小心真丢数据就划不来了，非法关闭vim之后再次打开就会提示是否恢复文件，自从发现screen这个绝佳的绘画管理工具，就深深的爱上了它，IBM的这篇文章有详细的介绍  “<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-screen/">linux 技巧：使用screen 管理你的远程会话</a>”。在使用过程中发现一些问题，默认快捷键是Ctrl + A, 用惯了命令行的人肯定会用Ctrl +A , Ctrl + E来定位当前输入的命令吧. 在~/.screenrc中修改一下就可以了，下面是我的.screenrc
+<code>
+vbell_msg "" # 比如在tab自动提示的时候，默认总是会出现一个Wuff,觉得很烦，关掉
+escape ``  # instead of Control-a  使用 反引号当快捷键，因为用的相对较少
+termcapinfo xterm* ti@:te@  # 这个就是解决mac下看不到滚动条的问题了
+</code>
+解决方法来源见：<a href="http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command">http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[让你的网站也像Gmail一样支持文件拖放上传-HTML5之File API]]></title>
+    <link href="http://reeze.cn/2010/04/25/make-your-site-drop-uploadable-with-html5s-file-api-like-gmail-does/"/>
+    <updated>2010-04-25T00:14:29+08:00</updated>
+    <id>http://reeze.cn/2010/04/25/make-your-site-drop-uploadable-with-html5s-file-api-like-gmail-does</id>
+    <content type="html"><![CDATA[<blockquote><p>如果你比较好奇，可以先从<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/FileAPI_Test.zip">这里下载所有代码</a>，也可以点击这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/chrome_drop_upload.html">查看chrome下上传的demo</a>，点这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/firefox36_drop_upload.html">查看firefox下的demo</a></p></blockquote>
+
+<p>前不久<a href="http://net.chinabyte.com/395/11221395.shtml">Gmail推出了支持拖拽的附件上传功能</a>，试用了下还真不错，其实很久以前就在想能有直接拖拽附件的功能，多亏有了HTML5，Web应用越来越像客户端的应用了。</p>
+
+<p>在好奇心驱使下，想了解一下Gmail到底是怎么做到的，了解了一下最新的<a href="http://www.w3.org/TR/FileAPI">HTML5 File API草案</a>，这个接口主要提供的就是提供对文件对象的访问，别想歪了，这个接口是无法随意的访问系统里的文件的。他能做的就是访问<input type="file" />标签里所选择的文件，这些文件可以通过用户手动选择，或者是HTML5的拖放接口选中的文件。有兴趣的童鞋可以看看这个规范，还算比较简单。</p>
+
+<p>下面简单看看接口定义几个对象。</p>
+
+<p>FileList、File对象。</p>
+
+<p>在HTML5中的<input type="file"  />标签中增加了mutilple属性，允许进行多文件选择。大家应该都知道一般上传标签中是不允许选择多个文件的。 新增的这个属性就是允许进行多个文件的选择（这个在桌面应用中也很常见）。<input type="file" **multiple="multiple"** id="file" /></p>
+
+<p>下面是在Firebug中的输出
+`</p>
+
+<blockquote><blockquote><blockquote><p>var f = document.getElementById(&#8220;file&#8221;)
+f.files
+FileList0=File length=1 // 选中的文件数量
+f.files[0]
+FilefileName=es.dll fileSize=271360
+`</p></blockquote></blockquote></blockquote>
+
+<p>FileList对象就是用户选择的所有文件的对象表示，如果是通过input标签选择的，就可以通过上面代码所示的方法进行访问，File对象就可以刚才选择的某个文件的信息，如上面的代码所示，主要可以得到所选中的文件名以及文件大小信息。</p>
+
+<p>你可能在想只能得到这些信息到底有什么用呢？都没有办法读取文件内容，这就得提到规范中的FileReader接口了，这个接口就是用来读取File对象文件的。</p>
+
+<p>在<a href="http://www.w3.org/TR/FileAPI">File API规范</a>中提到File API主要是和其他的接口协同合作。比如XMLHttpRequest (这个新接口支持通过xhr的send()方法发送File对象)， DataTransfer(也就是HTML5中的拖拽接口 )， 以及<a href="http://dev.w3.org/html5/workers">Web Worksers</a>(这个主要是异步脚本执行，相当于给JS提供了“多线程”脚本执行能力，并且支持通过postMessage()进行“线程间通信”)，感兴趣的，可以看看<a href="http://www.v-ec.com/dh20156/article.asp?id=242">这篇日志</a>，以及<a href="http://feedproxy.google.com/~r/webbang/~3/_usD4yheDqI">这篇</a>。</p>
+
+<p>目前能实现这样的效果的方式主要有如下几种：</p>
+
+<ul>
+<li><p>Gmail中提到的这两个浏览器都支持拖放接口，托放以后可以直接通过托放事件的DataTransfer属性访问到本次托放是关联的文件对象列表FileList,然后通过XMLHttpRequest的send方法将File对象发送到服务器</p></li>
+<li><p>在Chrome下支持直接将文件拖放到文件选择控件上，就相当于直接选择了文件。这时可以通过<input type="file" />DOM对象的files属性访问到被托放进来的文件列表对象，然后也可以通过Ajax将文件对象发送到服务器，通过将文件选择控件透明度降低也可以实现Gmail类似的效果。 在Chrome因为可以直接通过托拽的方式让文件选择控件“赋值”，此时也可以通过一个iframe加表单的方式将数据发送到服务器。</p></li>
+<li><p>在Firefox3.6下可以通过FileReader直接读取到文件的内容，然后直接将文件内容发送到服务器端(可以参考<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/index.html">这个例子</a>，这是个不完整的例子，直接浏览是看不到效果的，查看源代码你就会懂的。）</p></li>
+</ul>
+
+
+<p>下面就来看看Gmail到底是怎么做到的吧。</p>
+
+<p>本来想通过Firebug的概况功能来捕捉到在托拽期间的脚本执行情况，比如：</p>
+
+<p><a href="http://reeze.cn/uploads/2010/04/screenshot1.png"><img src="http://reeze.cn/uploads/2010/04/screenshot1.png" alt="" /></a><a href="http://reeze.cn/uploads/2010/04/screenshot.png">
+</a></p>
+
+<p>但是脚本执行里压根没有找到ajax相关的函数调用，可能是因为firebug还不支持监控页面里嵌入的iframe中的脚本执行跟踪，这也说明本次上传肯定是在某个iframe中完成的。，那就直接监听网络吧，托拽上传一个附件时查看网络情况，发现附件是通过下面的ajax post过去的：</p>
+
+<p><a href="http://reeze.cn/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail1.jpg"><img src="http://reeze.cn/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail1.jpg" alt="" /></a></p>
+
+<p>大家注意看，是通过ajax post方式将附件POST到服务器的，</p>
+
+<p><a href="http://reeze.cn/uploads/2010/04/Gmail-11.jpg"><img src="http://reeze.cn/uploads/2010/04/Gmail-11.jpg" alt="" /></a></p>
+
+<p><a href="http://reeze.cn/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-31.jpg"><img src="http://reeze.cn/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-31.jpg" alt="" /></a><a href="http://reeze.cn/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-3.jpg">
+</a></p>
+
+<p>可以看出Gmail在firefox下不是通过表单直接提交实现的。在chrome下的开发人员工具有点简单，无法看到网络情况，我也懒的再去抓包看了，估计是使用透明<input type="file" />+ajax方式实现的。</p>
+
+<p>在Gmail支持托拽的声明中提到目前只支持Chrome 2+以及FireFox3.6+。虽然这两个浏览器都支持HTML5，但是对于所有规范的支持程度都是不一样的，并且规范也还不是正式规范。在Firefox3.6的release note中提到：</p>
+
+<p>Support for new DOM and HTML5 specifications including the Drag &amp; Drop API and the File API, which allow for more interactive web pages.</p>
+
+<p>开始支持了HTML5的拖拽接口以及File API。</p>
+
+<hr />
+
+<p>下面根据浏览器以及HTML5的规范整理出两个浏览器下实现类似Gmail 上传附件的代码。</p>
+
+<p><a href="http://reeze.cn/uploads/2010/04/14.jpg"><img src="http://reeze.cn/uploads/2010/04/14.jpg" alt="" /></a></p>
+
+<p>点击<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/FileAPI_Test.zip">这里下载所有代码</a>，有兴趣的童鞋查看源代码就知道怎么回事了，有一定的注释：）</p>
+
+<p>也可以点击这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/chrome_drop_upload.html">查看chrome下上传的demo</a>，点这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/firefox36_drop_upload.html">查看firefox下的demo</a>，之所以分开是为了简单起见，当然你真的想要给你的网站提供托拽上传功能，你就得自己去同时兼容这两个浏览器啦，相信这也不是件困难的事情：）</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[开启Mac OS X Snow Leopard的NTFS原生读写]]></title>
+    <link href="http://reeze.cn/2010/01/24/guide-enable-native-ntfs-readwrite-in-snow-leopard/"/>
+    <updated>2010-01-24T18:19:31+08:00</updated>
+    <id>http://reeze.cn/2010/01/24/guide-enable-native-ntfs-readwrite-in-snow-leopard</id>
+    <content type="html"><![CDATA[<p>在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2之后出现fusefs.kext can&#8217;t load的错误，从官方得知目前macfuse在snow leopard下有问题，在网上看到<a href="http://forums.macrumors.com/showthread.php?t=785376">这篇贴子</a>提到Snow Leopard其实原生就支持NTFS分区的读写，真是个好消息。</p>
+
+<p>开启的方法有两种：
+一种是在/etc/fstab文件里增加挂载选项，基本步骤是：
+1，卸载NTFS-3G或者其他读写ntfs分区的软件
+2，打开终端$ diskutil info /Volumes/分区名 或者使用磁盘工具获得分区的UUID
+3，编辑/etc/fstab文件，增加一行 UUID=分区的UUID none ntfs rw
+4，如果还有其他的分区要挂载，则继续上面的步骤2－3增加其他分区</p>
+
+<p>这种方式比较烦琐，第二种方法就比较简单。
+大家应该都注意过系统已启动就会自动挂载所有的ntfs分区，这个命令在/sbin/mount_ntfs
+这个方法所要做的就是给这个默认的挂载命令增加可读写参数，按如下步骤在终端命令行操作：
+$ sudo mv /sbin/mount_ntfs /sbin/mount_ntfs.orig
+$ sudo vim /sbin/mount_ntfs
+编辑这个文件，加入如下内容：</p>
+
+<h1>!/bin/sh</h1>
+
+<p>/sbin/mount_ntfs.orig -o rw &#8220;$@“ ＃这里调用默认的挂载命令，不过增加了 rw参数，开启读写</p>
+
+<p>保存这个文件，然后：
+$ sudo chown root:wheel /sbin/mount_ntfs
+$ sudo chmod 755 /sbin/mount_ntfs</p>
+
+<p>然后重启，启动后，你应该就能得到一个可以自由读写的ntfs分区了。不过声明一点，这个功能据说不稳定，不知道是因为版权原因还是真的很不稳定，苹果默认没有开启这个功能。不过我更相信苹果。</p>
+
+<p>＝＝＝＝＝＝＝＝
+后话：刚好公司配了一台Dell E6400,偶尔看到有人在上面<a href="http://bbs.pcbeta.com/archiver/tid-625920.html">装了一个Leopard</a>,于是手痒也在上面装了一个，如果有人也有这台笔记本也可以试试看，不过我装好的系统还是有问题：</p>
+
+<p>1，触摸屏一碰就乱跑，我直接禁用就好了，反正也不喜欢用。
+2，关机和重启不断电，每天关机的次数也有限，也就无所谓了。
+3，声音控制不了，只能在具体的应用程序里控制。
+其实问题还是挺多的，不过基本上的使用我觉得还是没什么问题的，触摸屏的问题比较烦人，还好我不喜欢用触摸屏。如果有人也想尝试可以试试看。我用的安装文件是 Snow_Leopard_10.6.1-10.6.2_SSE2_SSE3_Intel_AMD_by_Hazard.iso, 至于安装方法<a href="http://bbs.pcbeta.com/forum-185-1.html">PCbeta</a>上有很多的教程可以参考，摸索一下大概都没有什么问题，安装的时候一定要做好备份，因为我到目前已经因为装Mac OS X丢失了不下10次数据了，大部分情况下都是分区被合并。所以一定要小心一点。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[在2009的尾巴上]]></title>
+    <link href="http://reeze.cn/2009/12/31/at-the-tail-of-2009/"/>
+    <updated>2009-12-31T23:59:06+08:00</updated>
+    <id>http://reeze.cn/2009/12/31/at-the-tail-of-2009</id>
+    <content type="html"><![CDATA[<p>09年最后一篇日志，充个数吧：）</p>
+
+<p>哈哈，刚买了本《<a href="http://www.douban.com/subject/3735649/">Orange S: 一个操作系统的实现</a>》，这一年下来买了挺多的书，也从图书馆借了很多的书（马上就要毕业了，再也享受不到学校图书馆丰富及时的藏书了，计划以后每个月发工资都买一本自己喜欢的书），发现我读书最大的问题是多而不精，拿一本好书就使劲的翻，很多书都是花几天就翻完了，但是读下来之后总觉得收获不够，一些很需要实践的部分也没有及时联系，总感觉自己浮在表面上，只知其然。所以呢，这个2010年争取多读好书，踏踏实实的啃几本好书，然后就是要多动手啦。</p>
+
+<p>计划2010年呢，能把耽搁很久的想法付诸行动，做出点东西来。希望有个好的开始吧！</p>
+
+<p>Happy New Year!!!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[支持IPv6的Tunnelblick For Mac OS X OpenVPN客户端]]></title>
+    <link href="http://reeze.cn/2009/12/30/ipv6-enabled-tunnelblick-for-mac-os-x/"/>
+    <updated>2009-12-30T13:20:15+08:00</updated>
+    <id>http://reeze.cn/2009/12/30/ipv6-enabled-tunnelblick-for-mac-os-x</id>
+    <content type="html"><![CDATA[<p>在<a href="http://yegle.net">yegle</a>那里买了OpenVPN服务 ，用着还挺不错，我也在教育网，所以只能使用支持IPv6版的客户端，openvpn默认不支持IPv6,不过yegle提供了相应的<a href="http://github.com/jjo/openvpn-ipv6">IPv6补丁</a>，在Linux下以及Windows下使用的都挺好，最近又在折腾电脑，装了个Snow Leopard，基本没什么问题了，除了我的ATI 2600 XT硬件加速暂时无解外其他的都挺爽，使用了yegle推荐的<a href="http://code.google.com/p/tunnelblick/downloads/list">Tunnelblick</a>, 总是连接不上，它提示让我查看日志，但是根本就找不到地方看日志，直接cd 到 Tunnelblick的包里面直接执行openvpn命令，提示不支持udp6 ，又是不支持 Ipv6，本想直接自己编译一个openvpn，但是想想那样就太不clean了，编译成app的话可以通用，还能共享给有需要的人多好啊，去google code checkout了一份代码，直接编译，错误百出，我是在Snow Leopard上编译的，仔细查看原来需要MacOSX10.4u的SDK 重新安装10.4的SDK还是未果，后来发现SDK的安装目录居然不一样。。自己手动拷贝过去也不行。。 切换到傲Leopard下安装，折腾了好久终于编译成功，废话太多了。呵呵，共享出来给需要的人吧：）</p>
+
+<p>猛击这个连接 下载<a href="http://code.google.com/p/tunnelblick-ipv6/downloads/list">http://code.google.com/p/tunnelblick-ipv6/downloads/list</a>
+可惜的是yegle不再提供IPv6用户的续费了，不过我到期之后差不多也要从学校滚蛋了。
+我提供的这个版本的tunnelblick的配置文件位置是  ~/Library/openvpn  最新版的配置放在 ~/Library/Application Support/Tunnelblick/Configuration目录里面。</p>
+
+<p>马上2009年就要过去了。最近很久都没有更新日志了，其实之间也想写一些东西，但是都丢在草稿箱里没写完。论文还有很多没有写完，马上就要交了，要抵制住诱惑乖乖写论文。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[在PHP中检查PHP文件是否有语法错误]]></title>
+    <link href="http://reeze.cn/2009/10/09/check-php-files-syntax-in-php/"/>
+    <updated>2009-10-09T19:21:32+08:00</updated>
+    <id>http://reeze.cn/2009/10/09/check-php-files-syntax-in-php</id>
+    <content type="html"><![CDATA[<p>之前在当当的时候的一个项目中用到了一个简单的模板引擎，其实也是借鉴discuz来做的模板引擎，很简单，它所作的事情就是把一些自定义的标签编译成php代码。已经说了很简单了，所以编译的时候也名优进行模板语法的检查，那么在开发过程中就会出现编译出来的php文件有语法问题，有语法问题没有关系，我修改重新编译一下就好了。首先不能在每次请求的时候都把php模板重新编译一下，会严重影响性能，折中的处理时在每个编译好的php文件末尾检查一下该模板文件是否已经修改过，根据设定的更新频率，如果又需要则重新编译模板文件，现在的问题是编译出来的php文件自己有语法错误，根本执行不到模板检查那一步，所以即使修改了模板文件中的问题也不会重新编译。 所以我想寻找一种简单的方法来检查生成的php文件是否合法。不合法就重新编译，这样开发过程中就不用出现错误就得手动删除缓存文件了。</p>
+
+<p>在网上找了一下。刚开始以为 token_get_all()函数能处理语法错误的问题，结果发现，它只是做简单的词法分析。没有办法。后来到论坛上去问了一下
+http://groups.google.com/group/professional-php/browse_thread/thread/b8581f6b07b10ff0/2601a63c406bb1c1?lnk=gst&amp;q=reeze#2601a63c406bb1c1</p>
+
+<p>有人告诉我有这样一个函数 php_check_syntax() http://www.php.net/manual/en/function.php-check-syntax.php 我想问题就这么坚决了。。我真应该RTF(Read The Fuck Mannual). 仔细一看。这个函数已近被弃用了：
+Note: For technical reasons, this function is deprecated and removed from PHP. Instead, use php -l somefile.php from the commandline.</p>
+
+<p>这个technical reason 到底是什么呢？ 先不管了，以后再慢慢研究，反正不能使用这个方法就对了。
+他们的建议是使用命令行$php -l filename.php 来检查语法。
+Gary Every给了我一个代码片段参考：</p>
+
+<p>在命令行下检查问题也不大。如果我要放在在线应用呢？ 这就涉及到可移植性的问题了。首先是操作系统，然后就是环境变量。这样的话就会依赖于服务器端的配置。在http://www.php.net/manual/en/function.php-check-syntax.php 上有人贴出了自己的php_check_syntax()函数实现。
+有的采用的就是上面的命令行的方法。
+后面有提到使用eval的方法来验证。eval方法会执行传入的代码， 如果代码有语法错误则会抛出parser error, 可以使用&#8217;@&#8217;错误抑制符去掉错误信息，eval和echo一样并不是函数，不能使用变量函数的方法调用比如：
+$func = &#8216;eval&#8217;
+$func()这样的调用就是无效的。它会提示没有eval函数，如果你自己定义这么一个函数也是有问题的。因为eval是一个关键字。
+eval调用和include差不多，如果被包含文件中没有明确return就返回null。如果直接eval我们需要检查的文件会造成被检查的文件内代码被执行，这可不是我们想要的，我们只需要检查一下这个文件的语法是否正确。 我们可以在要检查的文件之前添加return 语句，让代码提前跳出，那么后面的代码就不会执行了。好的，就这么干。代码如下：
+checker.php
+`
+&#8221;;</p>
+
+<pre><code>    $file_content = $check_code . $file_content . "
+</code></pre>
+
+<p>file.php
+<code>
+b
+?&gt;
+</code>
+因为Parse error 是没法被 set_error_handler处理函数处理的。这个异常没办法catch到。所以才使用了@来抑制错误。这带来的问题就是我们无法得到详细的错误信息。 不过目前我需要的功能也只是检查语法是否正确。不正确的话重新编译模板文件，就这么简单，至于语法错误，在显示网页的时候自然会看得到。
+最好的办法就是这个被遗弃的php_check_syntax这个方法回到php中。下次再研究下他们是出于什么原因把这个函数去掉的。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[实现一个简单在线HTML编辑器]]></title>
+    <link href="http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor/"/>
+    <updated>2009-10-09T15:11:26+08:00</updated>
+    <id>http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor</id>
+    <content type="html"><![CDATA[<p>一直没有仔细研究过在线HTML编辑器，以前以为编辑功能很复杂，需要用大量的JavaScript来模拟编辑器的效果，以前都是使用一些开源的HTML编辑器，HTML在各网上随处可见，发表文章，评论。最近自己想做一个类似Things这样的Web版的应用，需要一个想Google  Notebook(可惜的是现在已经停止开发了) 那样的编辑功能，看看现在网上的这些编辑器都庞大了，都是一些自己根本用不到的功能，其实我的需求很简单：简单的编辑既可以，并且需要轻量级一些，因为页面上可能需要开很多个编辑器实例。 所有想自己也来研究一下，看看能不能自己开发一个。</p>
+
+<p>几天前花了一个晚上用firebug看了下Google Docs是怎么做。第一个遇到的问题就是如何让光标停在鼠标点击所在得地方。我刚开始一味都是js模拟出来的，这得有多复杂啊。并且还要兼容各个浏览器，天啊！后来上网一搜发现，浏览器早就想到了我们会有这样的一个需求。其实很简单，两条语句就可以说明HTML编辑器的最为核心的部分：
+<code>
+document.designMode = 'On';
+document.contentEditable = true;
+</code>
+参考Mozilla上的<a href="https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla">这篇</a>文章，介绍了HTML编辑的基本信息，要自己DIY一个常用功能的HTML编辑，这篇文章已经够你用的了。</p>
+
+<p>在你的网页中嵌入这两条语句试试看：），你就会发现你的网站整个得都变的可以编辑了。可以随便乱修改。 不过放心，这样修改并不会破坏你的网站， 当然你也不希望你的整个网站是可以编辑的。例如我们只希望别人发布一条评论，只希望评论输入框可以输入。 要实现这样的效果可以有两种做法：</p>
+
+<p>第一种就是使用直接让某个元素变成可编辑的例如：</p>
+
+<p>index.html
+`
+Test TextEditor</p>
+
+<h1>Hi, HTML Editor!</h1>
+
+<p>Hello, you comment please</p>
+
+<p>Your comment</p>
+
+<p>Get HTML
+`
+点击该区域后该区域的内容就变成可以编辑的了，这是我们就是对其进行简单的编辑。你可能会觉得直接编辑的功能太简单了，比如想要插入链接或者图片什么的。就没有办法了。这些功能浏览器并没有帮我们做好，不过实现这些功能也不麻烦， 参考上面Mozilla的文档。浏览器都提供了常用的功能API。</p>
+
+<p>一般的编辑器都会提供一个工具栏之类的按钮来编辑文本内容。比如我使用的WordPress提供的编辑器：</p>
+
+<p>[caption id=&#8221;attachment_42&#8221; align=&#8221;alignnone&#8221; width=&#8221;936&#8221; caption=&#8221;wordpress提供的编辑器&#8221;]<a href="http://reeze.cn/uploads/2009/10/5b9e5c0b92f7fdf042ea3993165b80ec.png"><img src="http://reeze.cn/uploads/2009/10/5b9e5c0b92f7fdf042ea3993165b80ec.png" alt="wordpress提供的编辑器" /></a>[/caption]</p>
+
+<p>可以对文字内容进行操作，加粗下划线，字体，对齐等等，并且提供可视化以及HTML编辑模式。</p>
+
+<p>这个和FCKeditor 以及tinymce之类的编辑器使用的编辑方式和上面我提到的直接编辑html对象的方法不一样，他们使用的是iframe，使用iframe有很多好处，iframe中的文档和当前文档并不会因为样式或者HTML结构而影响到彼此，所以大部分的编辑器都是使用这种方式。它们基本的方式都是：</p>
+
+<ol>
+<li><p>在页面中使用一个不可见的字段比如:“input, textarea&#8221;之类表单字段，他们的值就是需要编辑的内容。</p></li>
+<li><p>页面初始化好，比如载入编辑器相关的一些脚本，也是就是window.onload好以后。创建一个iframe来显示可编辑区域，iframe初始化好以后读取父窗(相对于这个iframe)口的这个不可见表单值的内容，使之成为iframe中的body的html，也就是把所有需要编辑的内容添加到iframe中</p></li>
+<li><p>iframe中的内容初始化好以后，在iframe中执行上面提到的：
+<code>
+document.designMode = 'On';
+document.contentEditable = true;
+</code>
+把iframe整个窗口变成可以编辑的</p></li>
+<li><p>进行编辑，这时候的编辑可能需要一个工具栏，基于同样的原因，一般工具栏也会是一个iframe，显示它们自己的编辑按钮。编辑是就利用浏览器提供的接口来对ifame中的内容进行编辑</p></li>
+<li><p>父窗口中提交表单之前或者你需要的地方需要把编辑器中编辑完的内容回写到你的表单字段中去，否则编辑结果没有保存写来就没有意义了。</p></li>
+</ol>
+
+
+<p>基本原理就是这样。要做出这样一个东西来，需要的就是一些细活了。要想做出一个FCk这样好用的编辑器也不是那么简单的。但是至少我们知道它是怎么运作的。 这就够了。</p>
+
+<p>花了点时间做了一个简单的编辑器，真正要用的话很多的细节还是需要好好处理的，代码没有怎么清理，是变想边写，不是很完整。</p>
+
+<p>需要的同学可以下来参考参考。
+猛击 <a href="http://reeze.cn/uploads/2009/10/editor.rar"> >> 这里 &lt;&lt; </a>下载代码。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[基于var_export 和 include返回值的缓存方案]]></title>
+    <link href="http://reeze.cn/2009/07/02/a-cache-system-using-var_export-and-includes-return-value/"/>
+    <updated>2009-07-02T12:55:41+08:00</updated>
+    <id>http://reeze.cn/2009/07/02/a-cache-system-using-var_export-and-includes-return-value</id>
+    <content type="html"><![CDATA[<p><a href="http://reeze.yo2.cn/2009/07/01/php-include-function-return-value-and-method-of-void-serialize/">前一篇文章</a>我们研究了include调用返回值的问题，并指出可以通过这种方式来完成序列化相同的功能，现在我就来研究一下这种方法的可行性和效率，因为直接的返回php值肯定是比unserialize()函数要快。</p>
+
+<p>第一步我们来研究下怎么将php对象持久化的保存起来。下面是我定义的一些变量：</p>
+
+<p><code>
+private $_var;
+public $pub = array('pub value', 3, 4);
+public function __constructor($var)
+{
+$this-&gt;_var = $var;
+}</code></p>
+
+<p>`public function show()
+{
+echo $this->_var;
+}
+}</p>
+
+<p>$string = &#8220;It&#8217;s a string&#8230;&#8221;;
+$array = array(1, 2, &#8216;key&#8217; => &#8216;value&#8217;, array(&#8216;sub-array&#8217;));
+$number = 135345.55;
+$class = new MyClass(&#8216;class var&#8217;);</p>
+
+<p>`</p>
+
+<p><code>//通过serialize()方法我们可以将他们持久化比如：
+echo serialize($string); //s:16:"It's a string...";
+echo serialize($array); //a:4:{i:0;i:1;i:1;i:2;s:3:"key";s:5:"value";i:2;a:1:{i:0;s:9:"sub-array";}}
+echo serialize($number); //d:135345.5499999999883584678173065185546875;
+echo serialize($class); //O:7:"MyClass":2:{s:13:"MyClass_var";N;s:3:"pub";a:3:{i:0;s:9:"pub value";i:1;i:3;i:2;i:4;}}
+// 我们可以将这些序列化的结果存到文件中，在需要的时候unserialize()返回得到相应的值，但是现在我不会这么做。
+</code></p>
+
+<p>前篇文章提到了通过include返回值来直接取得php值对象，首先我们要把值保存起来，因为我们要通过include来包含它，首先遇到的问题就是我们的序列化函数必须要生成合法的php表达式才行，否则include是无法得到相应的返回值的
+比如我们要序列化 字符串 &#8220;abcd&#8221; 我们可以这么做
+<code>
+file_puts_content("data.php", "return 'abcd';");
+//然后这样取得相应的值
+$string = include "data.php";
+echo $string; // 它应该输出 abcd
+</code>
+那数组怎么办呢？比如上面的数组。我们可以自己编写这个序列化函数
+<code>
+function encode($var){
+if (is_array($var)) {
+$code = 'array(';
+foreach ($var as $key =&gt; $value) {
+$code .= "'$key'=&gt;".encode($value).',';
+}
+$code = chop($code, ','); //remove unnecessary coma
+$code .= ')';
+return $code;
+} else {
+if (is_string($var)) {
+return "'".$var."'";
+} elseif (is_bool($var)) {
+return ($var ? 'TRUE' : 'FALSE');
+} elseif (is_numeric($var)) {
+return "$var";
+}
+else
+{
+return 'NULL';
+}
+}
+}</code>
+这个函数可以将字符串，数组以及数字变成合法的php表达式。
+比如：
+file_put_contents(&#8220;data.php&#8221;, &#8220;&lt;?phpn return &#8221; . encode($array) . &#8220;;n&#8221;);
+data.php文件的结果是：
+<code>
+return array ( 0 =&gt; 1, 1 =&gt; 2, 'key' =&gt; 'value', 2 =&gt; array ( 0 =&gt; 'sub-array', ), )array(4) { [0]=&gt; int(1) [1]=&gt; int(2) ["key"]=&gt; string(5) "value" [2]=&gt; array(1) { [0]=&gt; string(9) "sub-array" } }
+</code>
+我们的目的达到了。可以直接的通过include这个文件来得到我们的值。
+但是现在有个问题，我们没有序列化对象类型的值，这个该怎么处理呢？
+一个类对象有对象的状态和对象的行为，行为在类定义完以后就确定了，所以每个类的实例的行为都是一样的。所以我们可以不考虑，我们只需要考虑类对象的状态就可以了，简单来讲就是类的属性状态需要保存起来。那怎么样得到一个类的属性呢？
+经过一番搜寻以后发现一个函数
+get_object_vars
+(PHP 4, PHP 5)get_object_vars &#8211; 返回由对象属性组成的关联数组
+这个函数可以获得对象的属性关联数组，也就只可以得到对象的状态，但是对象的属性有各种访问控制，get_object_vars()函数在对象外访问只能得到对象的公开属性，而无法得到私有属性，这样的话我们就无法得到对象的全部状态，不可行，但是在对象内可以得到对象的所有属性，那我们可不可以在对象内定义一个___get_properties()方法来返回这些状态呢。
+给类增加这样一个方法
+<code>
+public function __get_properties()
+{
+return get_obj_vars($this);
+}
+</code>
+这样我们就可以得到类的所有属性了。第一步算是完成了，我们得到状态该怎么重新恢复出来呢？要在对象外部给对象设置属性我们只有两种情况：一种是这个属性是公开属性，我们可以直接赋值 比如： $obj->prop = $value; 如果是私有属性我们则需要自己增加setter方法比如 setProp($value);方法，来设置。但是这就会遇到一个问题，我们的属性要么是公开属性，要么必须要有setter方法来设置，很多情况下我们不希望给类增加这么多没有实际用处的方法，也为了封装性，不会有这么多的setter方法。虽然我们能得到对象的状态，但是却无法恢复对象状态，这样的话，我们的序列化方法也就没有什么意义了。我们探索到现在算是失败了。
+解决办法：var_export()函数。</p>
+
+<h2>在看symfony代码的时候发现了这个函数，手册是这么描述的：</h2>
+
+<p>var_export
+(PHP 4 >= 4.2.0, PHP 5)var_export &#8211; 输出或返回一个变量的字符串表示
+描述
+mixed var_export ( mixed expression [, bool return] )</p>
+
+<p>此函数返回关于传递给该函数的变量的结构信息，它和 var_dump() 类似，不同的是其返回的表示是合法的 PHP 代码。</p>
+
+<p>您可以通过将函数的第二个参数设置为 TRUE，从而返回变量的表示。</p>
+
+<p>这个就是我们想要的那个函数,我们来看看这个函数是怎么使用的。
+<code>
+//变量继续使用上面定义的变量
+echo var_export($string); //'It's a string...'
+echo var_export($array); /* array (0 =&gt; 1, 1 =&gt; 2, 'key' =&gt; 'value', 2 =&gt; array (0 =&gt; 'sub-array', ),)*/
+echo var_export($number); // 135345.55
+echo var_export($class); /* MyClass::__set_state(array('_var' =&gt; NULL, 'pub' =&gt; array (0 =&gt; 'pub value', 1 =&gt; 3, 2 =&gt; 4)) */
+</code>
+我们可以看到生成的都是合法的PHP表达式。通过设置第二个参数为true，就可以将返回结果赋值给变量比如$new_array_string = var_export($array, TRUE);然后将这个结果写入文件持久化</p>
+
+<p>file_put_contents(&#8220;data.php&#8221;, &#8220;public function <em>_constructor($var)
+{
+$this-></em>var = $var;
+}</p>
+
+<p>public function show()
+{
+echo $this->_var;
+}
+public static function __set_state(array $array)
+{
+$tmp = new MyClass();
+foreach($array as $key => $value)
+{
+$this->$key = $value;
+}
+}
+}</p>
+
+<p>// 一些变量
+$string = &#8220;It&#8217;s a string&#8230;&#8221;;
+$array = array(1, 2, &#8216;key&#8217; => &#8216;value&#8217;, array(&#8216;sub-array&#8217;));
+$number = 135345.55;
+$class = new MyClass(&#8216;class var&#8217;)</p>
+
+<p>// 缓存
+cache(&#8220;string.data.php&#8221;, $string); // 当然扩展名不一定非得php， 文件名我也只是简单的处理
+cache(&#8220;array.data.php&#8221;, $array);
+// 等等。。。</p>
+
+<p>// 获取数据,当然也可以在其他文件中来获取。
+$class = cache_get(&#8220;class.data.php&#8221;);</p>
+
+<p>参考：http://www.thoughtlabs.com/2008/02/02/phps-mystical-__set_state-method/?dsq=12016456</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP中include语句的返回值及避免序列化开销的方法]]></title>
+    <link href="http://reeze.cn/2009/07/01/a-way-use-include-to-avoid-unserialize/"/>
+    <updated>2009-07-01T18:24:21+08:00</updated>
+    <id>http://reeze.cn/2009/07/01/a-way-use-include-to-avoid-unserialize</id>
+    <content type="html"><![CDATA[<p>以前乱翻symfony生成的缓存文件的时候看到很多类似：</p>
+
+<p><code>
+"value"); ?&gt;
+</code></p>
+
+<p>这种表达式，当时并没有怎么在意，今天研究symfony代码的时候看到这样一句代码</p>
+
+<p><code>
+classes = include($file); ?&gt;;
+</code></p>
+
+<p>一直都是通过include require来包含文件，但是从来没有使用过他的返回值，印象中include返回的无非是true或者false吧。今天自己看了下文档，发现在php文件中是可以直接调用return的。比如：</p>
+
+<p>`
+// return.php</p>
+
+<p>// get_return.php</p>
+
+<p>echo $value; // 输出 Array, 因为$value 是从return.php返回的一个数组
+?>
+`
+其实项目中很少情况需要这样的返回方法。如果想要从return.php中得到返回值一般是通过调用return.php中所调用的函数来得到。</p>
+
+<p>在symfony中这种方式就很合理，如果大家熟悉symfony的话，应该知道，symfony运行起来以后会在cache目录下生成系统配置文件的缓存,诚然可以通过序列化的方式来缓存这些信息，但是反序列化是需要消耗资源的。通过这种方式来做持久化也是个不错的选择.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac下我常用的软件]]></title>
+    <link href="http://reeze.cn/2009/06/19/my-mac-softwares/"/>
+    <updated>2009-06-19T21:05:29+08:00</updated>
+    <id>http://reeze.cn/2009/06/19/my-mac-softwares</id>
+    <content type="html"><![CDATA[<p>习惯了Mac OS X Leopard以后发现自己已经离不开它了。像很多Linuxer一样除了上网银以外统统不用Windows，玩个CS什么的也都用Wine了，我很笨，目前在Mac 上和Ubuntu下都没有Wine成功过 <img src="http://extra-001.yo2cdn.com/wp-includes/images/smilies/icon_sad.gif" alt=":(" /> &#8220;, 下面就介绍一些我认为在Mac下非常使用的软件吧。</p>
+
+<ol>
+<li>QuickSilver</li>
+</ol>
+
+
+<p>只需要Command+Space 再加上几个字母就可以方便的你的程序，通过一些插件QuickSilver能极大的提高我们的效率，强烈推荐，唯一不足的是这款软件的作者已经不继续维护这款软件了，他被Google请去做另外一款和这个类似的软件<a href="http://code.google.com/p/qsb-mac/">Google Quick Search Box</a> 试用了一下还不够成熟，目前和QS比起来还是差太多了。</p>
+
+<ol>
+<li>TextMate</li>
+</ol>
+
+
+<p>这款软件就不用多介绍了吧，强大的编辑器。开发进度有点慢，作者对软件质量要求很高，不许诺2.0版本到底何时能出来，很多人都以为作者停止了开发，前不久作者发布了<a href="http://blog.macromates.com/2009/working-on-it/">这篇文章</a>，声明开发仍在继续，感兴趣的同学可以看<a href="http://www.tuaw.com/2007/01/11/textmate-2s-upcoming-features/">这里</a>看看TextMate2.0到底有哪些改进。这篇在2007年就发布了。实在过的有点久了。</p>
+
+<p>3.Things</p>
+
+<p>GTD绝佳软件，缺点不具有网络同步功能</p>
+
+<p>4.Evernote</p>
+
+<p>笔记软件，很方便，之前我也用Evernote来做GTD发现管理器来很不方便，后来发现上面提到的Things就放弃用Evernote做GTD了，Evernote做笔记绝对顺手，他同时提供Windows 和Mac OS 两个版本，还有Web版的，跨平台很有优势。免费用户提供40M得空间，对我来说这其实绝对够用。</p>
+
+<p>5.Adium</p>
+
+<p>多协议IM客户端支持：Gtalk, MSN, &#8230;QQ(因为QQ的协议是不公开的，所以可能定期会抽风，上QQ也可以用官方的 QQ for Mac)..</p>
+
+<p>6.Tweetie</p>
+
+<p>Twitter就靠他了，说不出那里好，就是很好用。免费版有广告。还好基本不影响用户体验。</p>
+
+<p>7.iChm</p>
+
+<p>看chm的电子书就靠它了。支持搜索</p>
+
+<p>8.RescueTime</p>
+
+<p>这个软件也有各个操作系统的版本，收集自己的时间分配，然后会有个汇总。</p>
+
+<p>9.AppZapper</p>
+
+<p>卸载软件用它来卸载还是比较干净的。方便快捷</p>
+
+<p>10.Monolingual</p>
+
+<p>帮你清除一些不需要的语言信息，节省磁盘空间。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac OS 启动sshd服务]]></title>
+    <link href="http://reeze.cn/2009/06/19/start-sshd-service-in-mac-os-x/"/>
+    <updated>2009-06-19T20:21:18+08:00</updated>
+    <id>http://reeze.cn/2009/06/19/start-sshd-service-in-mac-os-x</id>
+    <content type="html"><![CDATA[<p><strong>[UPDATE]  系统偏号设置  -> 共享 -> 远程登陆 ,开启即可.  下面的方法不推荐使用.</strong></p>
+
+<p>想push自己写的一些代码到本地的版本库中去，看了很多的协议，都挺麻烦的，至今没有配置好一个git server，遂放弃搭建server，直接使用ssh来提交到本地</p>
+
+<p>无奈Mac OS X 似乎默认不启动SSHD服务。所以我尝试启动</p>
+
+<p>Leopard:etc reeze$ sshd
+sshd re-exec requires execution with an absolute path
+看来不行。
+不过这个提示错误似乎不是很明白。上网baidu了一把。发现
+只能用绝对路径启动。不知道为什么程序非得用绝对路劲启动。有时间研究下为何是这样的，或者有知道的直接告诉我：）
+$ sudo /usr/sbin/sshd
+服务就启动了
+不能每次都这么运行一下先啊。放在 ~/.bashrc 似乎可以，不过这个得需要管理员权限
+得sudo，每次输入密码很烦人。干脆放到 /etc/rc.common,</p>
+
+<h4>#</h4>
+
+<p>/usr/sbin/sshd</p>
+
+<p>网上有人说apple不推荐这么干。但是我又不知道怎么让他自动启动。先就这么放着吧。找到好方法再改。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP调试函数]]></title>
+    <link href="http://reeze.cn/2009/06/19/a-php-debug-function/"/>
+    <updated>2009-06-19T20:05:43+08:00</updated>
+    <id>http://reeze.cn/2009/06/19/a-php-debug-function</id>
+    <content type="html"><![CDATA[<p>在项目中经常要调试程序，但是我电脑上的ZendStudio总是没配置好，不能单步调试，不过有时候不一定需要让ZendStudio来帮我们调试，所以写了下面这个辅助函数来方便调试，因为有时候调试的位置加多了自己也不知道到底是加在什么地方了，下面的函数就是方便的dump对象信息，同时显示调试的问题和所在的行数。</p>
+
+<p>`
+//调试函数,方便显示调试函数的位置和文件
+function p(){
+  $args = func_get_args();</p>
+
+<p>   // 调用栈,debug_backtrace()可以返回调用栈。这样 我们就可以方便的知道函数在哪里调用的。
+  $backtrace = debug_backtrace();</p>
+
+<p>  $file = $backtrace[0][&#8216;file&#8217;];
+  $line = $backtrace[0][&#8216;line&#8217;];
+  echo &#8221;</p>
+
+<pre><code>";
+  echo "$file:$linen";
+  foreach ($args as $arg)
+  {
+    var_dump($arg);
+  }
+  echo "
+</code></pre>
+
+<p>&#8221;;
+  exit;
+}
+`</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Mac/iOS | Zen Space]]></title>
+  <link href="http://reeze.cn/categories/mac-ios/atom.xml" rel="self"/>
+  <link href="http://reeze.cn/"/>
+  <updated>2012-05-20T00:35:09+08:00</updated>
+  <id>http://reeze.cn/</id>
+  <author>
+    <name><![CDATA[reeze]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[解决Mac下终端中使用screen管理回话但看不到滚动条等问题]]></title>
+    <link href="http://reeze.cn/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/"/>
+    <updated>2010-07-02T15:16:33+08:00</updated>
+    <id>http://reeze.cn/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command</id>
+    <content type="html"><![CDATA[<p>工作中开发基本都是ssh到远程服务器上vim开发，有时候因为网络原因或者不小心把终端给关了或者网络出现问题以后就痛苦了，因为vim默认会用swp文件保存修改，我又不想关掉这个功能，一不小心真丢数据就划不来了，非法关闭vim之后再次打开就会提示是否恢复文件，自从发现screen这个绝佳的绘画管理工具，就深深的爱上了它，IBM的这篇文章有详细的介绍  “<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-screen/">linux 技巧：使用screen 管理你的远程会话</a>”。在使用过程中发现一些问题，默认快捷键是Ctrl + A, 用惯了命令行的人肯定会用Ctrl +A , Ctrl + E来定位当前输入的命令吧. 在~/.screenrc中修改一下就可以了，下面是我的.screenrc
+<code>
+vbell_msg "" # 比如在tab自动提示的时候，默认总是会出现一个Wuff,觉得很烦，关掉
+escape ``  # instead of Control-a  使用 反引号当快捷键，因为用的相对较少
+termcapinfo xterm* ti@:te@  # 这个就是解决mac下看不到滚动条的问题了
+</code>
+解决方法来源见：<a href="http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command">http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[开启Mac OS X Snow Leopard的NTFS原生读写]]></title>
+    <link href="http://reeze.cn/2010/01/24/guide-enable-native-ntfs-readwrite-in-snow-leopard/"/>
+    <updated>2010-01-24T18:19:31+08:00</updated>
+    <id>http://reeze.cn/2010/01/24/guide-enable-native-ntfs-readwrite-in-snow-leopard</id>
+    <content type="html"><![CDATA[<p>在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2之后出现fusefs.kext can't load的错误，从官方得知目前macfuse在snow leopard下有问题，在网上看到<a href="http://forums.macrumors.com/showthread.php?t=785376">这篇贴子</a>提到Snow Leopard其实原生就支持NTFS分区的读写，真是个好消息。</p>
+
+<p>开启的方法有两种：
+一种是在/etc/fstab文件里增加挂载选项，基本步骤是：
+1，卸载NTFS-3G或者其他读写ntfs分区的软件
+2，打开终端$ diskutil info /Volumes/分区名 或者使用磁盘工具获得分区的UUID
+3，编辑/etc/fstab文件，增加一行 UUID=分区的UUID none ntfs rw
+4，如果还有其他的分区要挂载，则继续上面的步骤2－3增加其他分区</p>
+
+<p>这种方式比较烦琐，第二种方法就比较简单。
+大家应该都注意过系统已启动就会自动挂载所有的ntfs分区，这个命令在/sbin/mount_ntfs
+这个方法所要做的就是给这个默认的挂载命令增加可读写参数，按如下步骤在终端命令行操作：
+$ sudo mv /sbin/mount_ntfs /sbin/mount_ntfs.orig
+$ sudo vim /sbin/mount_ntfs
+编辑这个文件，加入如下内容：</p>
+
+<h1>!/bin/sh</h1>
+
+<p>/sbin/mount_ntfs.orig -o rw "$@“ ＃这里调用默认的挂载命令，不过增加了 rw参数，开启读写</p>
+
+<p>保存这个文件，然后：
+$ sudo chown root:wheel /sbin/mount_ntfs
+$ sudo chmod 755 /sbin/mount_ntfs</p>
+
+<p>然后重启，启动后，你应该就能得到一个可以自由读写的ntfs分区了。不过声明一点，这个功能据说不稳定，不知道是因为版权原因还是真的很不稳定，苹果默认没有开启这个功能。不过我更相信苹果。</p>
+
+<p>＝＝＝＝＝＝＝＝
+后话：刚好公司配了一台Dell E6400,偶尔看到有人在上面<a href="http://bbs.pcbeta.com/archiver/tid-625920.html">装了一个Leopard</a>,于是手痒也在上面装了一个，如果有人也有这台笔记本也可以试试看，不过我装好的系统还是有问题：</p>
+
+<p>1，触摸屏一碰就乱跑，我直接禁用就好了，反正也不喜欢用。
+2，关机和重启不断电，每天关机的次数也有限，也就无所谓了。
+3，声音控制不了，只能在具体的应用程序里控制。
+其实问题还是挺多的，不过基本上的使用我觉得还是没什么问题的，触摸屏的问题比较烦人，还好我不喜欢用触摸屏。如果有人也想尝试可以试试看。我用的安装文件是 Snow_Leopard_10.6.1-10.6.2_SSE2_SSE3_Intel_AMD_by_Hazard.iso, 至于安装方法<a href="http://bbs.pcbeta.com/forum-185-1.html">PCbeta</a>上有很多的教程可以参考，摸索一下大概都没有什么问题，安装的时候一定要做好备份，因为我到目前已经因为装Mac OS X丢失了不下10次数据了，大部分情况下都是分区被合并。所以一定要小心一点。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[支持IPv6的Tunnelblick For Mac OS X OpenVPN客户端]]></title>
+    <link href="http://reeze.cn/2009/12/30/ipv6-enabled-tunnelblick-for-mac-os-x/"/>
+    <updated>2009-12-30T13:20:15+08:00</updated>
+    <id>http://reeze.cn/2009/12/30/ipv6-enabled-tunnelblick-for-mac-os-x</id>
+    <content type="html"><![CDATA[<p>在<a href="http://yegle.net">yegle</a>那里买了OpenVPN服务 ，用着还挺不错，我也在教育网，所以只能使用支持IPv6版的客户端，openvpn默认不支持IPv6,不过yegle提供了相应的<a href="http://github.com/jjo/openvpn-ipv6">IPv6补丁</a>，在Linux下以及Windows下使用的都挺好，最近又在折腾电脑，装了个Snow Leopard，基本没什么问题了，除了我的ATI 2600 XT硬件加速暂时无解外其他的都挺爽，使用了yegle推荐的<a href="http://code.google.com/p/tunnelblick/downloads/list">Tunnelblick</a>, 总是连接不上，它提示让我查看日志，但是根本就找不到地方看日志，直接cd 到 Tunnelblick的包里面直接执行openvpn命令，提示不支持udp6 ，又是不支持 Ipv6，本想直接自己编译一个openvpn，但是想想那样就太不clean了，编译成app的话可以通用，还能共享给有需要的人多好啊，去google code checkout了一份代码，直接编译，错误百出，我是在Snow Leopard上编译的，仔细查看原来需要MacOSX10.4u的SDK 重新安装10.4的SDK还是未果，后来发现SDK的安装目录居然不一样。。自己手动拷贝过去也不行。。 切换到傲Leopard下安装，折腾了好久终于编译成功，废话太多了。呵呵，共享出来给需要的人吧：）</p>
+
+<p>猛击这个连接 下载<a href="http://code.google.com/p/tunnelblick-ipv6/downloads/list">http://code.google.com/p/tunnelblick-ipv6/downloads/list</a>
+可惜的是yegle不再提供IPv6用户的续费了，不过我到期之后差不多也要从学校滚蛋了。
+我提供的这个版本的tunnelblick的配置文件位置是  ~/Library/openvpn  最新版的配置放在 ~/Library/Application Support/Tunnelblick/Configuration目录里面。</p>
+
+<p>马上2009年就要过去了。最近很久都没有更新日志了，其实之间也想写一些东西，但是都丢在草稿箱里没写完。论文还有很多没有写完，马上就要交了，要抵制住诱惑乖乖写论文。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac下我常用的软件]]></title>
+    <link href="http://reeze.cn/2009/06/19/my-mac-softwares/"/>
+    <updated>2009-06-19T21:05:29+08:00</updated>
+    <id>http://reeze.cn/2009/06/19/my-mac-softwares</id>
+    <content type="html"><![CDATA[<p>习惯了Mac OS X Leopard以后发现自己已经离不开它了。像很多Linuxer一样除了上网银以外统统不用Windows，玩个CS什么的也都用Wine了，我很笨，目前在Mac 上和Ubuntu下都没有Wine成功过 <img src="http://extra-001.yo2cdn.com/wp-includes/images/smilies/icon_sad.gif" alt=":(" /> ``, 下面就介绍一些我认为在Mac下非常使用的软件吧。</p>
+
+<ol>
+<li>QuickSilver</li>
+</ol>
+
+
+<p>只需要Command+Space 再加上几个字母就可以方便的你的程序，通过一些插件QuickSilver能极大的提高我们的效率，强烈推荐，唯一不足的是这款软件的作者已经不继续维护这款软件了，他被Google请去做另外一款和这个类似的软件<a href="http://code.google.com/p/qsb-mac/">Google Quick Search Box</a> 试用了一下还不够成熟，目前和QS比起来还是差太多了。</p>
+
+<ol>
+<li>TextMate</li>
+</ol>
+
+
+<p>这款软件就不用多介绍了吧，强大的编辑器。开发进度有点慢，作者对软件质量要求很高，不许诺2.0版本到底何时能出来，很多人都以为作者停止了开发，前不久作者发布了<a href="http://blog.macromates.com/2009/working-on-it/">这篇文章</a>，声明开发仍在继续，感兴趣的同学可以看<a href="http://www.tuaw.com/2007/01/11/textmate-2s-upcoming-features/">这里</a>看看TextMate2.0到底有哪些改进。这篇在2007年就发布了。实在过的有点久了。</p>
+
+<p>3.Things</p>
+
+<p>GTD绝佳软件，缺点不具有网络同步功能</p>
+
+<p>4.Evernote</p>
+
+<p>笔记软件，很方便，之前我也用Evernote来做GTD发现管理器来很不方便，后来发现上面提到的Things就放弃用Evernote做GTD了，Evernote做笔记绝对顺手，他同时提供Windows 和Mac OS 两个版本，还有Web版的，跨平台很有优势。免费用户提供40M得空间，对我来说这其实绝对够用。</p>
+
+<p>5.Adium</p>
+
+<p>多协议IM客户端支持：Gtalk, MSN, ...QQ(因为QQ的协议是不公开的，所以可能定期会抽风，上QQ也可以用官方的 QQ for Mac)..</p>
+
+<p>6.Tweetie</p>
+
+<p>Twitter就靠他了，说不出那里好，就是很好用。免费版有广告。还好基本不影响用户体验。</p>
+
+<p>7.iChm</p>
+
+<p>看chm的电子书就靠它了。支持搜索</p>
+
+<p>8.RescueTime</p>
+
+<p>这个软件也有各个操作系统的版本，收集自己的时间分配，然后会有个汇总。</p>
+
+<p>9.AppZapper</p>
+
+<p>卸载软件用它来卸载还是比较干净的。方便快捷</p>
+
+<p>10.Monolingual</p>
+
+<p>帮你清除一些不需要的语言信息，节省磁盘空间。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac OS 启动sshd服务]]></title>
+    <link href="http://reeze.cn/2009/06/19/start-sshd-service-in-mac-os-x/"/>
+    <updated>2009-06-19T20:21:18+08:00</updated>
+    <id>http://reeze.cn/2009/06/19/start-sshd-service-in-mac-os-x</id>
+    <content type="html"><![CDATA[<p><strong>[UPDATE]  系统偏号设置  -> 共享 -> 远程登陆 ,开启即可.  下面的方法不推荐使用.</strong></p>
+
+<p>想push自己写的一些代码到本地的版本库中去，看了很多的协议，都挺麻烦的，至今没有配置好一个git server，遂放弃搭建server，直接使用ssh来提交到本地</p>
+
+<p>无奈Mac OS X 似乎默认不启动SSHD服务。所以我尝试启动</p>
+
+<p>Leopard:etc reeze$ sshd
+sshd re-exec requires execution with an absolute path
+看来不行。
+不过这个提示错误似乎不是很明白。上网baidu了一把。发现
+只能用绝对路径启动。不知道为什么程序非得用绝对路劲启动。有时间研究下为何是这样的，或者有知道的直接告诉我：）
+$ sudo /usr/sbin/sshd
+服务就启动了
+不能每次都这么运行一下先啊。放在 ~/.bashrc 似乎可以，不过这个得需要管理员权限
+得sudo，每次输入密码很烦人。干脆放到 /etc/rc.common,</p>
+
+<h4>#</h4>
+
+<p>/usr/sbin/sshd</p>
+
+<p>网上有人说apple不推荐这么干。但是我又不知道怎么让他自动启动。先就这么放着吧。找到好方法再改。</p>
+]]></content>
+  </entry>
+  
+</feed>

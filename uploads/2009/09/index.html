@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<title>Test TextEditor</title>
+		<script src="rEditor/rEditor.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="rEditor/css/rEditor.css" />
+		<script type="text/javascript" charset="utf-8">
+			windowOnload = function() {
+				rEditor.create({
+					'type': 'rich',
+					'instanceName': 'content'
+				});
+			}
+
+			window.onload = windowOnload;
+
+			function gethtml() {
+				rEditor.update('content');
+				alert(rEditor.getHTML('content'));
+			}
+		</script>
+
+		<style type="text/css" media="screen">
+			#content:hover {
+				border: 1px solid red
+			}
+		</style>
+	</head>
+	<body id="index">
+
+		<textarea id="content">Hi, <h1>Haha</h1> is supported???</textarea>
+
+		<button onclick="gethtml()">Get HTML</button>
+	</body>
+</html>

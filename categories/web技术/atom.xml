@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Web技术 | Zen Space]]></title>
+  <link href="http://reeze.cn/categories/web技术/atom.xml" rel="self"/>
+  <link href="http://reeze.cn/"/>
+  <updated>2012-05-20T00:35:09+08:00</updated>
+  <id>http://reeze.cn/</id>
+  <author>
+    <name><![CDATA[reeze]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[PHP-Internal]定制PHP语法获取PHP变量的变量名]]></title>
+    <link href="http://reeze.cn/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/"/>
+    <updated>2010-12-26T17:56:53+08:00</updated>
+    <id>http://reeze.cn/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[怎样获取PHP变量的变量名之PHP实现]]></title>
+    <link href="http://reeze.cn/2010/11/04/php-get-variables-name-a-php-impliment/"/>
+    <updated>2010-11-04T11:07:37+08:00</updated>
+    <id>http://reeze.cn/2010/11/04/php-get-variables-name-a-php-impliment</id>
+    <content type="html"><![CDATA[<p><a href="http://reeze.cn/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">上一篇文章</a>里提到是用PHP扩展实现获取变量的变量名的方法. 今天发现有一个PHP实现的版本 . 实现方法来自:http://mach13.com/how-to-get-a-variable-name-as-a-string-in-php</p>
+
+<p><strong>刚开始以为这个方法好使, 仔细想想其实也是有问题的.</strong>
+<del>
+这个解决方法是用的PHP里的get_defined_vars()方法,该方法返回当前作用域内的所有变量信息.也是和$GLOBALS一样,以变量名 => 值的方式返回.
+他的代码很简单:</p>
+
+<p>`
+$v)</p>
+
+<pre><code>    $aDefinedVars_0[$k] = $v;
+
+$iVarSave = $iVar;
+$iVar     =!$iVar;   // 将当前变量的值取反
+
+$aDiffKeys = array_keys (array_diff_assoc ($aDefinedVars_0, $aDefinedVars));  // 对比取反前后的变量
+$iVar      = $iVarSave; // 恢复当前变量的值
+
+return $aDiffKeys[0];
+}
+</code></pre>
+
+<p>?></p>
+
+<p>`</p>
+
+<p>它通过引用的方式改变当前变量的值, 然后通过对比前后两个数组的差异来获取值被改变了的变量.然后返回其名字.经过测试这的确是一个方法.相对我实现的方法. 它提供的方法移植性较好, 不需要赖以扩展. 而这个php版本的实现, 必须传递一个get_defined_vars()的参数, 我实现的那个扩展,则不需要. 对于类似 var_name($a=10,get_defined_vars()); 的调用,该方法无法正常获得变量名.
+</del></p>
+
+<p>这个今天又仔细想了想,下面提供的方法是有问题的.. 他解决问题的方法是通过修改变量的值, 并对比前后所有的变量来找出值发生变化的变量. 而实际上.修改了其中一个变量另一个变量的值也会发生变化: 这就是引用, 如下
+`</p>
+
+<p>PS: 如果你真的需要这种方法. 请重新思考一下你的需要真的需要这样的方法么?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[让你的网站也像Gmail一样支持文件拖放上传-HTML5之File API]]></title>
+    <link href="http://reeze.cn/2010/04/25/make-your-site-drop-uploadable-with-html5s-file-api-like-gmail-does/"/>
+    <updated>2010-04-25T00:14:29+08:00</updated>
+    <id>http://reeze.cn/2010/04/25/make-your-site-drop-uploadable-with-html5s-file-api-like-gmail-does</id>
+    <content type="html"><![CDATA[<blockquote><p>如果你比较好奇，可以先从<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/FileAPI_Test.zip">这里下载所有代码</a>，也可以点击这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/chrome_drop_upload.html">查看chrome下上传的demo</a>，点这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/firefox36_drop_upload.html">查看firefox下的demo</a></p></blockquote>
+
+<p>前不久<a href="http://net.chinabyte.com/395/11221395.shtml">Gmail推出了支持拖拽的附件上传功能</a>，试用了下还真不错，其实很久以前就在想能有直接拖拽附件的功能，多亏有了HTML5，Web应用越来越像客户端的应用了。</p>
+
+<p>在好奇心驱使下，想了解一下Gmail到底是怎么做到的，了解了一下最新的<a href="http://www.w3.org/TR/FileAPI">HTML5 File API草案</a>，这个接口主要提供的就是提供对文件对象的访问，别想歪了，这个接口是无法随意的访问系统里的文件的。他能做的就是访问<input type="file" />标签里所选择的文件，这些文件可以通过用户手动选择，或者是HTML5的拖放接口选中的文件。有兴趣的童鞋可以看看这个规范，还算比较简单。</p>
+
+<p>下面简单看看接口定义几个对象。</p>
+
+<p>FileList、File对象。</p>
+
+<p>在HTML5中的<input type="file"  />标签中增加了mutilple属性，允许进行多文件选择。大家应该都知道一般上传标签中是不允许选择多个文件的。 新增的这个属性就是允许进行多个文件的选择（这个在桌面应用中也很常见）。<input type="file" **multiple="multiple"** id="file" /></p>
+
+<p>下面是在Firebug中的输出
+`</p>
+
+<blockquote><blockquote><blockquote><p>var f = document.getElementById("file")
+f.files
+FileList0=File length=1 // 选中的文件数量
+f.files[0]
+FilefileName=es.dll fileSize=271360
+`</p></blockquote></blockquote></blockquote>
+
+<p>FileList对象就是用户选择的所有文件的对象表示，如果是通过input标签选择的，就可以通过上面代码所示的方法进行访问，File对象就可以刚才选择的某个文件的信息，如上面的代码所示，主要可以得到所选中的文件名以及文件大小信息。</p>
+
+<p>你可能在想只能得到这些信息到底有什么用呢？都没有办法读取文件内容，这就得提到规范中的FileReader接口了，这个接口就是用来读取File对象文件的。</p>
+
+<p>在<a href="http://www.w3.org/TR/FileAPI">File API规范</a>中提到File API主要是和其他的接口协同合作。比如XMLHttpRequest (这个新接口支持通过xhr的send()方法发送File对象)， DataTransfer(也就是HTML5中的拖拽接口 )， 以及<a href="http://dev.w3.org/html5/workers">Web Worksers</a>(这个主要是异步脚本执行，相当于给JS提供了“多线程”脚本执行能力，并且支持通过postMessage()进行“线程间通信”)，感兴趣的，可以看看<a href="http://www.v-ec.com/dh20156/article.asp?id=242">这篇日志</a>，以及<a href="http://feedproxy.google.com/~r/webbang/~3/_usD4yheDqI">这篇</a>。</p>
+
+<p>目前能实现这样的效果的方式主要有如下几种：</p>
+
+<ul>
+<li><p>Gmail中提到的这两个浏览器都支持拖放接口，托放以后可以直接通过托放事件的DataTransfer属性访问到本次托放是关联的文件对象列表FileList,然后通过XMLHttpRequest的send方法将File对象发送到服务器</p></li>
+<li><p>在Chrome下支持直接将文件拖放到文件选择控件上，就相当于直接选择了文件。这时可以通过<input type="file" />DOM对象的files属性访问到被托放进来的文件列表对象，然后也可以通过Ajax将文件对象发送到服务器，通过将文件选择控件透明度降低也可以实现Gmail类似的效果。 在Chrome因为可以直接通过托拽的方式让文件选择控件“赋值”，此时也可以通过一个iframe加表单的方式将数据发送到服务器。</p></li>
+<li><p>在Firefox3.6下可以通过FileReader直接读取到文件的内容，然后直接将文件内容发送到服务器端(可以参考<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/index.html">这个例子</a>，这是个不完整的例子，直接浏览是看不到效果的，查看源代码你就会懂的。）</p></li>
+</ul>
+
+
+<p>下面就来看看Gmail到底是怎么做到的吧。</p>
+
+<p>本来想通过Firebug的概况功能来捕捉到在托拽期间的脚本执行情况，比如：</p>
+
+<p><a href="/uploads/2010/04/screenshot1.png"><img src="/uploads/2010/04/screenshot1.png" alt="" /></a><a href="/uploads/2010/04/screenshot.png">
+</a></p>
+
+<p>但是脚本执行里压根没有找到ajax相关的函数调用，可能是因为firebug还不支持监控页面里嵌入的iframe中的脚本执行跟踪，这也说明本次上传肯定是在某个iframe中完成的。，那就直接监听网络吧，托拽上传一个附件时查看网络情况，发现附件是通过下面的ajax post过去的：</p>
+
+<p><a href="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail1.jpg"><img src="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail1.jpg" alt="" /></a></p>
+
+<p>大家注意看，是通过ajax post方式将附件POST到服务器的，</p>
+
+<p><a href="/uploads/2010/04/Gmail-11.jpg"><img src="/uploads/2010/04/Gmail-11.jpg" alt="" /></a></p>
+
+<p><a href="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-31.jpg"><img src="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-31.jpg" alt="" /></a><a href="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-3.jpg">
+</a></p>
+
+<p>可以看出Gmail在firefox下不是通过表单直接提交实现的。在chrome下的开发人员工具有点简单，无法看到网络情况，我也懒的再去抓包看了，估计是使用透明<input type="file" />+ajax方式实现的。</p>
+
+<p>在Gmail支持托拽的声明中提到目前只支持Chrome 2+以及FireFox3.6+。虽然这两个浏览器都支持HTML5，但是对于所有规范的支持程度都是不一样的，并且规范也还不是正式规范。在Firefox3.6的release note中提到：</p>
+
+<p>Support for new DOM and HTML5 specifications including the Drag &amp; Drop API and the File API, which allow for more interactive web pages.</p>
+
+<p>开始支持了HTML5的拖拽接口以及File API。</p>
+
+<hr />
+
+<p>下面根据浏览器以及HTML5的规范整理出两个浏览器下实现类似Gmail 上传附件的代码。</p>
+
+<p><a href="/uploads/2010/04/14.jpg"><img src="/uploads/2010/04/14.jpg" alt="" /></a></p>
+
+<p>点击<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/FileAPI_Test.zip">这里下载所有代码</a>，有兴趣的童鞋查看源代码就知道怎么回事了，有一定的注释：）</p>
+
+<p>也可以点击这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/chrome_drop_upload.html">查看chrome下上传的demo</a>，点这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/firefox36_drop_upload.html">查看firefox下的demo</a>，之所以分开是为了简单起见，当然你真的想要给你的网站提供托拽上传功能，你就得自己去同时兼容这两个浏览器啦，相信这也不是件困难的事情：）</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[在PHP中检查PHP文件是否有语法错误]]></title>
+    <link href="http://reeze.cn/2009/10/09/check-php-files-syntax-in-php/"/>
+    <updated>2009-10-09T19:21:32+08:00</updated>
+    <id>http://reeze.cn/2009/10/09/check-php-files-syntax-in-php</id>
+    <content type="html"><![CDATA[<p>之前在当当的时候的一个项目中用到了一个简单的模板引擎，其实也是借鉴discuz来做的模板引擎，很简单，它所作的事情就是把一些自定义的标签编译成php代码。已经说了很简单了，所以编译的时候也名优进行模板语法的检查，那么在开发过程中就会出现编译出来的php文件有语法问题，有语法问题没有关系，我修改重新编译一下就好了。首先不能在每次请求的时候都把php模板重新编译一下，会严重影响性能，折中的处理时在每个编译好的php文件末尾检查一下该模板文件是否已经修改过，根据设定的更新频率，如果又需要则重新编译模板文件，现在的问题是编译出来的php文件自己有语法错误，根本执行不到模板检查那一步，所以即使修改了模板文件中的问题也不会重新编译。 所以我想寻找一种简单的方法来检查生成的php文件是否合法。不合法就重新编译，这样开发过程中就不用出现错误就得手动删除缓存文件了。</p>
+
+<p>在网上找了一下。刚开始以为 token_get_all()函数能处理语法错误的问题，结果发现，它只是做简单的词法分析。没有办法。后来到论坛上去问了一下
+http://groups.google.com/group/professional-php/browse_thread/thread/b8581f6b07b10ff0/2601a63c406bb1c1?lnk=gst&amp;q=reeze#2601a63c406bb1c1</p>
+
+<p>有人告诉我有这样一个函数 php_check_syntax() http://www.php.net/manual/en/function.php-check-syntax.php 我想问题就这么坚决了。。我真应该RTF(Read The Fuck Mannual). 仔细一看。这个函数已近被弃用了：
+Note: For technical reasons, this function is deprecated and removed from PHP. Instead, use php -l somefile.php from the commandline.</p>
+
+<p>这个technical reason 到底是什么呢？ 先不管了，以后再慢慢研究，反正不能使用这个方法就对了。
+他们的建议是使用命令行$php -l filename.php 来检查语法。
+Gary Every给了我一个代码片段参考：</p>
+
+<p>在命令行下检查问题也不大。如果我要放在在线应用呢？ 这就涉及到可移植性的问题了。首先是操作系统，然后就是环境变量。这样的话就会依赖于服务器端的配置。在http://www.php.net/manual/en/function.php-check-syntax.php 上有人贴出了自己的php_check_syntax()函数实现。
+有的采用的就是上面的命令行的方法。
+后面有提到使用eval的方法来验证。eval方法会执行传入的代码， 如果代码有语法错误则会抛出parser error, 可以使用'@'错误抑制符去掉错误信息，eval和echo一样并不是函数，不能使用变量函数的方法调用比如：
+$func = 'eval'
+$func()这样的调用就是无效的。它会提示没有eval函数，如果你自己定义这么一个函数也是有问题的。因为eval是一个关键字。
+eval调用和include差不多，如果被包含文件中没有明确return就返回null。如果直接eval我们需要检查的文件会造成被检查的文件内代码被执行，这可不是我们想要的，我们只需要检查一下这个文件的语法是否正确。 我们可以在要检查的文件之前添加return 语句，让代码提前跳出，那么后面的代码就不会执行了。好的，就这么干。代码如下：
+checker.php
+`
+";</p>
+
+<pre><code>    $file_content = $check_code . $file_content . "
+</code></pre>
+
+<p>file.php
+<code>
+b
+?&gt;
+</code>
+因为Parse error 是没法被 set_error_handler处理函数处理的。这个异常没办法catch到。所以才使用了@来抑制错误。这带来的问题就是我们无法得到详细的错误信息。 不过目前我需要的功能也只是检查语法是否正确。不正确的话重新编译模板文件，就这么简单，至于语法错误，在显示网页的时候自然会看得到。
+最好的办法就是这个被遗弃的php_check_syntax这个方法回到php中。下次再研究下他们是出于什么原因把这个函数去掉的。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[实现一个简单在线HTML编辑器]]></title>
+    <link href="http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor/"/>
+    <updated>2009-10-09T15:11:26+08:00</updated>
+    <id>http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor</id>
+    <content type="html"><![CDATA[<p>一直没有仔细研究过在线HTML编辑器，以前以为编辑功能很复杂，需要用大量的JavaScript来模拟编辑器的效果，以前都是使用一些开源的HTML编辑器，HTML在各网上随处可见，发表文章，评论。最近自己想做一个类似Things这样的Web版的应用，需要一个想Google  Notebook(可惜的是现在已经停止开发了) 那样的编辑功能，看看现在网上的这些编辑器都庞大了，都是一些自己根本用不到的功能，其实我的需求很简单：简单的编辑既可以，并且需要轻量级一些，因为页面上可能需要开很多个编辑器实例。 所有想自己也来研究一下，看看能不能自己开发一个。</p>
+
+<p>几天前花了一个晚上用firebug看了下Google Docs是怎么做。第一个遇到的问题就是如何让光标停在鼠标点击所在得地方。我刚开始一味都是js模拟出来的，这得有多复杂啊。并且还要兼容各个浏览器，天啊！后来上网一搜发现，浏览器早就想到了我们会有这样的一个需求。其实很简单，两条语句就可以说明HTML编辑器的最为核心的部分：
+<code>
+document.designMode = 'On';
+document.contentEditable = true;
+</code>
+参考Mozilla上的<a href="https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla">这篇</a>文章，介绍了HTML编辑的基本信息，要自己DIY一个常用功能的HTML编辑，这篇文章已经够你用的了。</p>
+
+<p>在你的网页中嵌入这两条语句试试看：），你就会发现你的网站整个得都变的可以编辑了。可以随便乱修改。 不过放心，这样修改并不会破坏你的网站， 当然你也不希望你的整个网站是可以编辑的。例如我们只希望别人发布一条评论，只希望评论输入框可以输入。 要实现这样的效果可以有两种做法：</p>
+
+<p>第一种就是使用直接让某个元素变成可编辑的例如：</p>
+
+<p>index.html
+`
+Test TextEditor</p>
+
+<h1>Hi, HTML Editor!</h1>
+
+<p>Hello, you comment please</p>
+
+<p>Your comment</p>
+
+<p>Get HTML
+`
+点击该区域后该区域的内容就变成可以编辑的了，这是我们就是对其进行简单的编辑。你可能会觉得直接编辑的功能太简单了，比如想要插入链接或者图片什么的。就没有办法了。这些功能浏览器并没有帮我们做好，不过实现这些功能也不麻烦， 参考上面Mozilla的文档。浏览器都提供了常用的功能API。</p>
+
+<p>一般的编辑器都会提供一个工具栏之类的按钮来编辑文本内容。比如我使用的WordPress提供的编辑器：</p>
+
+<p>[caption id="attachment_42" align="alignnone" width="936" caption="wordpress提供的编辑器"]<a href="/uploads/2009/10/5b9e5c0b92f7fdf042ea3993165b80ec.png"><img src="/uploads/2009/10/5b9e5c0b92f7fdf042ea3993165b80ec.png" alt="wordpress提供的编辑器" /></a>[/caption]</p>
+
+<p>可以对文字内容进行操作，加粗下划线，字体，对齐等等，并且提供可视化以及HTML编辑模式。</p>
+
+<p>这个和FCKeditor 以及tinymce之类的编辑器使用的编辑方式和上面我提到的直接编辑html对象的方法不一样，他们使用的是iframe，使用iframe有很多好处，iframe中的文档和当前文档并不会因为样式或者HTML结构而影响到彼此，所以大部分的编辑器都是使用这种方式。它们基本的方式都是：</p>
+
+<ol>
+<li><p>在页面中使用一个不可见的字段比如:“input, textarea"之类表单字段，他们的值就是需要编辑的内容。</p></li>
+<li><p>页面初始化好，比如载入编辑器相关的一些脚本，也是就是window.onload好以后。创建一个iframe来显示可编辑区域，iframe初始化好以后读取父窗(相对于这个iframe)口的这个不可见表单值的内容，使之成为iframe中的body的html，也就是把所有需要编辑的内容添加到iframe中</p></li>
+<li><p>iframe中的内容初始化好以后，在iframe中执行上面提到的：
+<code>
+document.designMode = 'On';
+document.contentEditable = true;
+</code>
+把iframe整个窗口变成可以编辑的</p></li>
+<li><p>进行编辑，这时候的编辑可能需要一个工具栏，基于同样的原因，一般工具栏也会是一个iframe，显示它们自己的编辑按钮。编辑是就利用浏览器提供的接口来对ifame中的内容进行编辑</p></li>
+<li><p>父窗口中提交表单之前或者你需要的地方需要把编辑器中编辑完的内容回写到你的表单字段中去，否则编辑结果没有保存写来就没有意义了。</p></li>
+</ol>
+
+
+<p>基本原理就是这样。要做出这样一个东西来，需要的就是一些细活了。要想做出一个FCk这样好用的编辑器也不是那么简单的。但是至少我们知道它是怎么运作的。 这就够了。</p>
+
+<p>花了点时间做了一个简单的编辑器，真正要用的话很多的细节还是需要好好处理的，代码没有怎么清理，是变想边写，不是很完整。</p>
+
+<p>需要的同学可以下来参考参考。
+猛击 <a href="/uploads/2009/10/editor.rar"> >> 这里 &lt;&lt; </a>下载代码。</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: PHP内核 | Zen Space]]></title>
+  <link href="http://reeze.cn/categories/php内核/atom.xml" rel="self"/>
+  <link href="http://reeze.cn/"/>
+  <updated>2012-05-20T00:35:09+08:00</updated>
+  <id>http://reeze.cn/</id>
+  <author>
+    <name><![CDATA[reeze]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[PHP-Internal]定制PHP语法获取PHP变量的变量名]]></title>
+    <link href="http://reeze.cn/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/"/>
+    <updated>2010-12-26T17:56:53+08:00</updated>
+    <id>http://reeze.cn/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP Puzzle(一): 有趣的变量作用域-PHP中global和Javascript中的var关键字]]></title>
+    <link href="http://reeze.cn/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/"/>
+    <updated>2010-11-14T15:38:32+08:00</updated>
+    <id>http://reeze.cn/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript</id>
+    <content type="html"><![CDATA[<p>昨天在网上看到几道有意思的PHP题, 下面这道题让我想起了对应的Javascript版本.
+`</p>
+
+<p>这段代码运行结果是什么呢? 别急着执行这段代码,先想想你的结果.然后再对比一下吧.</p>
+
+<p>我们看先看看global的定义 http://www.php.net/manual/en/language.variables.scope.php 这里也没有太为规范的解释.只是说可以通过global关键字来访问全局变量. 这里还涉及到一个类型转换的问题.</p>
+
+<p>大家都知道PHP脚本是编译为opcode逐语句执行的. 那么现在要一句语句解释就很容易了.
+`</p>
+
+<p>这里可能比较困惑的的是现在变量$a到底是局部变量还是全局变量了.因为global在定义局部变量之后.所以$a变为了全局变量,而在最后输出结果的时候$a并没有值.所以最后在相乘的时候是 NULL * 100; 也就是0了;可能会有人有疑问, 后面只是把$a变为了全局变量, 他的值应该不变的啊. 让我通过下面的例子来看把:
+`</p>
+
+<p>  int(0)
+  ["a"]=>
+  &NULL;
+}
+<code>
+变量a是NULL的一个引用,因为全局作用域内没有a这个变量. 所以即使在函数前面定义了一个a变量,但是它的值已经指向了全局作用域了.
+实际上 global关键字首先从全局符号表中查找变量名叫做a的变量,并把这个变量值设置为当前作用域的符号表中的a变量(更新了当前变量的值). 如果全局作用域内没有这个变量则会在全局作用域内增加这个变量, 实现代码见: $PHP_SRC/Zend/zend_vm_execute.h
+</code>
+static int ZEND_FASTCALL zend_fetch_var_address_helper_SPEC_CONST(int type, ZEND_OPCODE_HANDLER_ARGS) {</p>
+
+<pre><code>    // ...
+    if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;retval;) == FAILURE) {
+        switch (type) {
+            case BP_VAR_R:
+            case BP_VAR_UNSET:
+                zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));
+                /* break missing intentionally */
+            case BP_VAR_IS:
+                retval = &amp;EG;(uninitialized_zval_ptr);
+                break;
+            case BP_VAR_RW:
+                zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));
+                /* break missing intentionally */
+            case BP_VAR_W: {
+                    zval *new_zval = &amp;EG;(uninitialized_zval);
+
+                    Z_ADDREF_P(new_zval);
+                    zend_hash_update(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, &amp;new;_zval, sizeof(zval *), (void **) &amp;retval;);
+                }
+                break;
+            EMPTY_SWITCH_DEFAULT_CASE()
+        }
+    }
+
+ //...
+</code></pre>
+
+<p>}
+<code>
+看了这个解释大家可能觉得理所当然.一句一句执行的嘛. 看完了PHP中全局作用域的例子,咱们再看看类似的Javascript中的局部变量的版本吧
+</code>
+var a = 1;
+function multiply(b)
+{</p>
+
+<pre><code> a = 100;
+ var a;
+
+ return a * b;
+</code></pre>
+
+<p>}
+alert(a);
+alert(multiply(100));
+`
+那这段代码的输出将会是多少呢?
+如果还是同样的思路,结果可能是你的期望完全不一样的结果. <strong>这里的var定义变量和php中global不是一样的东西, php中的global是会在运行时执行的.而Javascript中的var在运行之前就已经"处理"好了</strong>.在运行之前的"语法分析"(没有看过Javascript引擎的实现.姑且这么分把)过程中,multiply函数中出现了var a;则把变量a加到函数体内的"局部变量表"中了.在运行过程中并不会执行var a;这一句.  这也是Javascript"怪异"的地方.定义变量的位置并没有关系.所以在函数内定义局部变量最好放在函数体的前面.</p>
+
+<p>所以第一个alert输出的1, 函数的执行并没有改版全局范围内的a变量; 第二就没有什么问题了, 是10000;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[怎样获取PHP变量的变量名之PHP实现]]></title>
+    <link href="http://reeze.cn/2010/11/04/php-get-variables-name-a-php-impliment/"/>
+    <updated>2010-11-04T11:07:37+08:00</updated>
+    <id>http://reeze.cn/2010/11/04/php-get-variables-name-a-php-impliment</id>
+    <content type="html"><![CDATA[<p><a href="http://reeze.cn/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">上一篇文章</a>里提到是用PHP扩展实现获取变量的变量名的方法. 今天发现有一个PHP实现的版本 . 实现方法来自:http://mach13.com/how-to-get-a-variable-name-as-a-string-in-php</p>
+
+<p><strong>刚开始以为这个方法好使, 仔细想想其实也是有问题的.</strong>
+<del>
+这个解决方法是用的PHP里的get_defined_vars()方法,该方法返回当前作用域内的所有变量信息.也是和$GLOBALS一样,以变量名 => 值的方式返回.
+他的代码很简单:</p>
+
+<p>`
+$v)</p>
+
+<pre><code>    $aDefinedVars_0[$k] = $v;
+
+$iVarSave = $iVar;
+$iVar     =!$iVar;   // 将当前变量的值取反
+
+$aDiffKeys = array_keys (array_diff_assoc ($aDefinedVars_0, $aDefinedVars));  // 对比取反前后的变量
+$iVar      = $iVarSave; // 恢复当前变量的值
+
+return $aDiffKeys[0];
+}
+</code></pre>
+
+<p>?></p>
+
+<p>`</p>
+
+<p>它通过引用的方式改变当前变量的值, 然后通过对比前后两个数组的差异来获取值被改变了的变量.然后返回其名字.经过测试这的确是一个方法.相对我实现的方法. 它提供的方法移植性较好, 不需要赖以扩展. 而这个php版本的实现, 必须传递一个get_defined_vars()的参数, 我实现的那个扩展,则不需要. 对于类似 var_name($a=10,get_defined_vars()); 的调用,该方法无法正常获得变量名.
+</del></p>
+
+<p>这个今天又仔细想了想,下面提供的方法是有问题的.. 他解决问题的方法是通过修改变量的值, 并对比前后所有的变量来找出值发生变化的变量. 而实际上.修改了其中一个变量另一个变量的值也会发生变化: 这就是引用, 如下
+`</p>
+
+<p>PS: 如果你真的需要这种方法. 请重新思考一下你的需要真的需要这样的方法么?</p>
+]]></content>
+  </entry>
+  
+</feed>
