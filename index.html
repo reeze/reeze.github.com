@@ -9,9 +9,9 @@
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="什么是NOP NOP 是一个特殊的opcode，表示空操作，在很多语言中存在，汇编中的NOP含义也是一样，
+  <meta name="description" content="什么是NOP NOP 是一个特殊的opcode，表示空操作，在很多地方存在，汇编中的NOP含义也一样，
 机器指令中的空操作通常用来将内存地址进行对齐，以提高CPU访问内存的效率，
-GCC等编译器也会将特定的语句进行优化而产生空操作。 同样，在Zend引擎中也有类似的opcode: NOP， &hellip;">
+GCC等编译器也会将特定的语句进行优化而产生空操作。 PHP中的空操作opcode NOP: ZEND_NOP &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,7 +110,7 @@ GCC等编译器也会将特定的语句进行优化而产生空操作。 同样�
       
   <header class="page-header">
     
-      <h1 class="entry-title"><a href="/2012/05/28/what-is-opcode-zend-nop-in-php/">PHP中的NOP及为什么有这个opcode</a></h1>
+      <h1 class="entry-title"><a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">PHP中的NOP及为什么有这个opcode</a></h1>
     
     
       <p class="meta">
@@ -128,7 +128,7 @@ GCC等编译器也会将特定的语句进行优化而产生空操作。 同样�
 
 <time datetime="2012-05-28T14:19:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2012</time>
         
-         | <a href="/2012/05/28/what-is-opcode-zend-nop-in-php/#disqus_thread">Comments</a>
+         | <a href="/2012/05/28/what-opcode-zend-nop-is-in-php/#disqus_thread">Comments</a>
         
       </p>
     
@@ -137,11 +137,14 @@ GCC等编译器也会将特定的语句进行优化而产生空操作。 同样�
 
   <div class="entry-content"><h2>什么是NOP</h2>
 
-<p>NOP 是一个特殊的opcode，表示空操作，在很多语言中存在，汇编中的NOP含义也是一样，
+<p>NOP 是一个特殊的opcode，表示空操作，在很多地方存在，汇编中的NOP含义也一样，
 机器指令中的空操作通常用来将内存地址进行对齐，以提高CPU访问内存的效率，
 GCC等编译器也会将特定的语句进行优化而产生空操作。</p>
 
-<p>同样，在Zend引擎中也有类似的opcode: NOP，官方文档有对此的<a href="http://cn.php.net/manual/en/internals2.opcodes.nop.php">简单说明</a>：</p>
+<h2>PHP中的空操作opcode NOP: ZEND_NOP</h2>
+
+<p>PHP基于Zend虚拟机，其他基于虚拟机的语言中大都会有类似NOP的指令，
+PHP文档有对此的<a href="http://cn.php.net/manual/en/internals2.opcodes.nop.php">简单说明</a>：</p>
 
 <pre><code>[php]
 &lt;?php
@@ -164,16 +167,24 @@ line    #   op  fetch   ext return  operands
 6   0   RETURN              null
 </code></pre>
 
-<p>上面的VLD结果可以看出，函数A()的声明编译后变成了NOP操作。</p>
-
-<h2>为什么PHP中需要空操作opcode NOP</h2>
+<p>上面的VLD结果可以看出，函数A()的声明编译后变成了<code>NOP</code>操作。</p>
 
 <p>Zend虚拟机是高级抽象，不要考虑内存对齐等的问题，为什么还需要空操作这样的opcode呢？</p>
 
-<p>在没有使用opcode缓存的时候，PHP脚本的执行都需要经过opcode编译及执行两个环节。
-先看看下面这段代码的VLD输出吧：</p>
+<p>原因简单讲就是：编译过程优化的结果。有的内容由于可以在编译时就可确定，那么一部分opcode可以
+在编译时替换成空操作。</p>
 
-<pre><code>filename:       /Users/reeze/Opensource/php-test/php-src-5.4/test.php
+<p>我们来看看这段代码的编译结果：</p>
+
+<pre><code>&lt;?php
+if(true) {
+    class Foo {}
+}
+
+new Bar();
+class Bar {}
+
+filename:       /Users/reeze/Opensource/php-test/php-src-5.4/test.php
 function name:  (null)
 number of ops:  8
 compiled vars:  none
@@ -189,32 +200,69 @@ line     # *  op                           fetch          ext  return  operands
    9     7    &gt; RETURN  
 </code></pre>
 
-<p>和函数定义一样，上面VLD输出的第7行看到类Bar的opcode变成了NOP，不过请留意第3行，
+<p>和前面官方函数定义代码一样，上面VLD输出的第7行看到类Bar的opcode变成了NOP，不过请留意第3行，
 这一行类Foo定义的opcode是ZEND_DECLARE_CLASS，也就是类的声明。</p>
 
 <p><em>为什么同样是类的声明，第一个类声明的OPCODE和第二个的不一样呢？</em></p>
 
-<p>上例中的代码，在Bar类声明之前的<code>new Bar</code>是可以的，但是此时Bar类的声明并没有执行到，
+<p>上例中的代码，在Bar类声明之前是可以执行的<code>new Bar</code>，但是此时Bar类的声明并没有执行到，
 那为什么可以访问到Bar类呢，<em>这是因为Bar类的声明在编译时就已经完成了</em>，
 因为Bar类已经在编译时声明好了，所以在真正执行的时候就不需要再次执行声明类的操作了，
-所以它所对应的opcode被优化成NOP了，</p>
+所以它所对应的opcode被替换成NOP了。</p>
 
-<p>而Foo这个类由于处在条件快之中，编译器无法确定Foo类是否一定会被执行，所以还是需要在
+<p>而Foo这个类由于处在条件判断块之中，编译期无法确定Foo类是否一定会被执行，所以还是需要在
 执行时来声明这个类，所以opcode没有改变。</p>
 
 <p>对于使用了opcode缓存的代码来说，把函数和类的声明移到了编译时，也就减少了执行时的opcode执行，
 这能加快代码的执行。</p>
 
-<p>你可能回想，既然这种类及函数的声明可以优化掉，为什么不直接丢弃这个opcode呢？
-Zend引擎在实现时的确采用了这种方法进行了优化，比如在Zend/zend_compile.c 中的<code>void zend_do_assign()</code>函数
-就采用了这中方式，那为什么在opcode中还是存在NOP opcode呢？
-Zend引擎在编译时会申请一块连续的内存保存opcode数组，在进行这类的优化时，
-opcode数组已经编译好了，这时可以选择将这个opcode删掉，也就是从一个数组中删掉一个元素，
-为了保证数组连续，这就需要将后面所有的元素向前移动，如果这样做的话带来的开销是非常大的。
-为此只是简单的就优化掉的OPCODE置为NOP，这也是空间换时间的一种做法。</p>
+<h2>优化</h2>
 
-<p>在实际代码中，函数及类的声明占总的代码量的比率是比较小的，为了不必要的增加代码复杂度，
-所以选择继续保留这个opcode所占用的空间。</p>
+<p>你可能会想，既然类及函数的声明可以优化掉，为什么不能直接丢弃这个opcode呢？
+一能减少opcode占用的内容，比如很多的框架中有大量的类定义，也能减少执行时间，
+因为空操作并不是0成本的，执行NOP的时候还是需要消耗CPU的。</p>
+
+<p>先看看opcode编译过程的一个重要函数：</p>
+
+<pre><code>zend_op *get_next_op(zend_op_array *op_array TSRMLS_DC)
+{
+    zend_uint next_op_num = op_array-&gt;last++;
+    zend_op *next_op;
+    if (next_op_num &gt;= CG(context).opcodes_size) {
+        if (op_array-&gt;fn_flags &amp; ZEND_ACC_INTERACTIVE) {
+            /* we messed up */
+            zend_printf("Ran out of opcode space!\n"
+                        "You should probably consider writing this huge script into a file!\n");
+            zend_bailout();
+        }
+        CG(context).opcodes_size *= 4;
+        op_array_alloc_ops(op_array, CG(context).opcodes_size);
+    }
+
+    next_op = &amp;(op_array-&gt;opcodes[next_op_num]);
+
+    init_op(next_op TSRMLS_CC);
+
+    return next_op;
+}
+</code></pre>
+
+<p>这个函数每次会返回一个zend_op(也就是opcode一个最小单位)，opcode的存储空间申请和哈希表类似，
+通过预先申请空间的方式，如果空间不足则适当扩容。在编译时，opcode是以文件为单位的，而通常
+在一个文件中函数或类声明的个数是不会太多的。而在编译时opcode数组已经是预先申请好的，所以
+及时优化掉这个opcode，而实际在编译时的内存占用也不会有任何的优化。</p>
+
+<p>目前只有少数几处使用了ZEND_NOP这个opcode。读者可以参考Zend/zend_compile.c: zend_do_early_binding()，
+这个函数进行就是在确定在编译时能确定的函数以及类声明，在完成函数或类的声明后将当前编译的opcode设置为ZEND_NOP。
+因为后续在执行是并需要再次对该函数或类进行声明了。</p>
+
+<p>在这个函数中其实可以将生成的ZEND_NOP优化掉的，比如eAccelarator扩展中就对opcode进行了优化，将ZEND_NOP从
+opcode_array数组中移除了，因为使用了opcode cache扩展优化只进行一次，而执行对多次执行，
+这样的优化是值得的。目前Zend引擎并没有进行任何的优化，首先从代码上来看，类和函数声明的数量和其他指令的数量
+之间差很多个等级，所以至少这个地方优化的收益是有限的，为了保证Zend引擎的简洁它没有进行优化。</p>
+
+<p>目前APC扩展已经基本确定为将要进入PHP默认opcode缓存的官方扩展了，那么这些优化都可以在扩展中进行，
+保证Zend引擎的简单易维护更为重要。</p>
 </div>
   
   
@@ -252,9 +300,9 @@ opcode数组已经编译好了，这时可以选择将这个opcode删掉，也�
   </header>
 
 
-  <div class="entry-content"><p>很久以前就像想开Wordpress了，不太习惯在线写东西，开始返璞归真了，比较喜欢
-纯文本的内容创作方式，在<a href="http://www.php-internal.com">TIPI</a>就使用的是markdown，
-在终端也会让我更有写作的欲望。</p>
+  <div class="entry-content"><p>很久以前就不想继续使用Wordpress了，不太习惯在线写东西，开始返璞归真，比较喜欢
+纯文本的内容创作方式，<a href="http://www.php-internal.com">TIPI</a>就使用的是markdown格式，
+同时在终端也会让我更有写作的欲望。</p>
 
 <p>翻了一下以前的博客，原来一共加起来也不足20篇。以此作为起点今后多继续更新博客吧。</p>
 
@@ -782,7 +830,7 @@ termcapinfo xterm* ti@:te@  # 这个就是解决mac下看不到滚动条的问�
     <li class="nav-header">Recent Posts</li>
     
       <li class="post">
-        <a href="/2012/05/28/what-is-opcode-zend-nop-in-php/">PHP中的NOP及为什么有这个opcode</a>
+        <a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">PHP中的NOP及为什么有这个opcode</a>
       </li>
     
       <li class="post">
