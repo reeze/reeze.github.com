@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[PHP-Internal]定制PHP语法获取PHP变量的变量名 - Zen Space | 寻找善美</title>
+  <title>PHP中的NOP及为什么有这个opcode - Zen Space | 寻找善美</title>
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="什么是NOP NOP 是一个特殊的opcode，表示空操作，在很多语言中存在，汇编中的NOP含义也是一样，
+机器指令中的空操作通常用来将内存地址进行对齐，以提高CPU访问内存的效率，
+GCC等编译器也会将特定的语句进行优化而产生空操作。 同样，在Zend引擎中也有类似的opcode: NOP， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://reeze.cn/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation">
+  <link rel="canonical" href="http://reeze.cn/2012/05/28/what-is-opcode-zend-nop-in-php">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -107,7 +108,7 @@
   
   <header class="page-header">
     
-      <h1 class="entry-title">[PHP-Internal]定制PHP语法获取PHP变量的变量名</h1>
+      <h1 class="entry-title">PHP中的NOP及为什么有这个opcode</h1>
     
     
       <p class="meta">
@@ -123,7 +124,7 @@
   
 
 
-<time datetime="2010-12-26T17:56:53+08:00" pubdate data-updated="true">Dec 26<span>th</span>, 2010</time>
+<time datetime="2012-05-28T14:19:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -132,7 +133,86 @@
   </header>
 
 
-<div class="entry-content">
+<div class="entry-content"><h2>什么是NOP</h2>
+
+<p>NOP 是一个特殊的opcode，表示空操作，在很多语言中存在，汇编中的NOP含义也是一样，
+机器指令中的空操作通常用来将内存地址进行对齐，以提高CPU访问内存的效率，
+GCC等编译器也会将特定的语句进行优化而产生空操作。</p>
+
+<p>同样，在Zend引擎中也有类似的opcode: NOP，官方文档有对此的<a href="http://cn.php.net/manual/en/internals2.opcodes.nop.php">简单说明</a>：</p>
+
+<pre><code>[php]
+&lt;?php
+/*
+ * no operation
+ * opcode number: 0
+ */
+function A(){}; 
+?&gt;
+
+/* VLD 的输出结果 */
+line    #   op  fetch   ext return  operands
+6   0   NOP              
+7   1   RETURN              1
+Function name: A
+
+Compiled variables: none
+
+line    #   op  fetch   ext return  operands
+6   0   RETURN              null
+</code></pre>
+
+<p>上面的VLD结果可以看出，函数A()的声明编译后变成了NOP操作。</p>
+
+<h2>为什么PHP中需要空操作opcode NOP</h2>
+
+<p>Zend虚拟机是高级抽象，不要考虑内存对齐等的问题，为什么还需要空操作这样的opcode呢？</p>
+
+<p>在没有使用opcode缓存的时候，PHP脚本的执行都需要经过opcode编译及执行两个环节。
+先看看下面这段代码的VLD输出吧：</p>
+
+<pre><code>filename:       /Users/reeze/Opensource/php-test/php-src-5.4/test.php
+function name:  (null)
+number of ops:  8
+compiled vars:  none
+line     # *  op                           fetch          ext  return  operands
+---------------------------------------------------------------------------------
+   2     0  &gt; &gt; JMPZ                                                     true, -&gt;3
+   3     1  &gt;   ZEND_DECLARE_CLASS                               $0      '%00foo%2FUsers%2Freeze%2FOpensource%2Fphp-test%2Fphp-src-5.4%2Ftest.php0x106cd601f', 'foo'
+   4     2    &gt; JMP                                                      -&gt;3
+   6     3  &gt;   ZEND_FETCH_CLASS                              4  :1      'Bar'
+         4      NEW                                                      :1
+         5      DO_FCALL_BY_NAME                              0          
+   7     6      NOP                                                      
+   9     7    &gt; RETURN  
+</code></pre>
+
+<p>和函数定义一样，上面VLD输出的第7行看到类Bar的opcode变成了NOP，不过请留意第3行，
+这一行类Foo定义的opcode是ZEND_DECLARE_CLASS，也就是类的声明。</p>
+
+<p><em>为什么同样是类的声明，第一个类声明的OPCODE和第二个的不一样呢？</em></p>
+
+<p>上例中的代码，在Bar类声明之前的<code>new Bar</code>是可以的，但是此时Bar类的声明并没有执行到，
+那为什么可以访问到Bar类呢，<em>这是因为Bar类的声明在编译时就已经完成了</em>，
+因为Bar类已经在编译时声明好了，所以在真正执行的时候就不需要再次执行声明类的操作了，
+所以它所对应的opcode被优化成NOP了，</p>
+
+<p>而Foo这个类由于处在条件快之中，编译器无法确定Foo类是否一定会被执行，所以还是需要在
+执行时来声明这个类，所以opcode没有改变。</p>
+
+<p>对于使用了opcode缓存的代码来说，把函数和类的声明移到了编译时，也就减少了执行时的opcode执行，
+这能加快代码的执行。</p>
+
+<p>你可能回想，既然这种类及函数的声明可以优化掉，为什么不直接丢弃这个opcode呢？
+Zend引擎在实现时的确采用了这种方法进行了优化，比如在Zend/zend_compile.c 中的<code>void zend_do_assign()</code>函数
+就采用了这中方式，那为什么在opcode中还是存在NOP opcode呢？
+Zend引擎在编译时会申请一块连续的内存保存opcode数组，在进行这类的优化时，
+opcode数组已经编译好了，这时可以选择将这个opcode删掉，也就是从一个数组中删掉一个元素，
+为了保证数组连续，这就需要将后面所有的元素向前移动，如果这样做的话带来的开销是非常大的。
+为此只是简单的就优化掉的OPCODE置为NOP，这也是空间换时间的一种做法。</p>
+
+<p>在实际代码中，函数及类的声明占总的代码量的比率是比较小的，为了不必要的增加代码复杂度，
+所以选择继续保留这个opcode所占用的空间。</p>
 </div>
 
 
@@ -155,12 +235,12 @@
   
 
 
-<time datetime="2010-12-26T17:56:53+08:00" pubdate data-updated="true">Dec 26<span>th</span>, 2010</time>
+<time datetime="2012-05-28T14:19:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/categories/php内核/'>PHP内核</a>, <a class='category' href='/categories/web技术/'>Web技术</a>
+    <a class='category' href='/categories/php内核/'>PHP内核</a>
   
 </span>
 
@@ -169,7 +249,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/" data-via="" data-counturl="http://reeze.cn/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/2012/05/28/what-is-opcode-zend-nop-in-php/" data-via="" data-counturl="http://reeze.cn/2012/05/28/what-is-opcode-zend-nop-in-php/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -179,17 +259,19 @@
 
     
     
+    <section>
+      <h1>Comments</h1>
+      <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </section>
+    
     <ul class="pager">
       
       <li class="previous"><a class="basic-alignment left"
-        href="/2010/11/28/doubanshow-for-wordpress/" title="Previous Post:
-        [Plugin]豆瓣秀 For WordPress">&laquo; [Plugin]豆瓣秀 For WordPress</a></li>
+        href="/2012/05/19/migrate-to-octopress/" title="Previous Post:
+        迁移博客到Octopress">&laquo; 迁移博客到Octopress</a></li>
       
       <li><a href="/blog/archives">Blog Archives</a></li>
-      
-      <li class="next"><a class="basic-alignment right" href="/2011/03/20/tipi-first-release-and-ers-marriage/"
-        title="Next Post: TIPI项目正式发布&恭喜er童鞋大婚">TIPI项目正式发布&恭喜er童鞋大婚
-        &raquo;</a></li>
       
     </ul>
   </footer>
@@ -296,7 +378,10 @@
       var disqus_shortname = 'reeze';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://reeze.cn/2012/05/28/what-is-opcode-zend-nop-in-php/';
+        var disqus_url = 'http://reeze.cn/2012/05/28/what-is-opcode-zend-nop-in-php/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
