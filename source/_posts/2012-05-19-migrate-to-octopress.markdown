@@ -7,9 +7,9 @@ comments: true
 categories:
 ---
 
-很久以前就像想开Wordpress了，不太习惯在线写东西，开始返璞归真了，比较喜欢
-纯文本的内容创作方式，在[TIPI](http://www.php-internal.com)就使用的是markdown，
-在终端也会让我更有写作的欲望。
+很久以前就不想继续使用Wordpress了，不太习惯在线写东西，开始返璞归真，比较喜欢
+纯文本的内容创作方式，[TIPI](http://www.php-internal.com)就使用的是markdown格式，
+同时在终端也会让我更有写作的欲望。
 
 翻了一下以前的博客，原来一共加起来也不足20篇。以此作为起点今后多继续更新博客吧。
 
