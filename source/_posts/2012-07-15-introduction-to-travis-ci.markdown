@@ -33,9 +33,9 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 
 ## Travis-CI配置文件
 要使用Travis，首先需要在你的代码根目录下包含一个叫做.travis.yml的文件，这是一个配置文件，
-为[yaml格式](http://www.yaml.org)，
+为[yaml格式](http://www.yaml.org)
 
-``yml
+```
 language: php
 php:
   - 5.2
