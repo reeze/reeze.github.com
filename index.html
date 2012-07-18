@@ -9,9 +9,9 @@
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="什么是NOP NOP 是一个特殊的opcode，表示空操作，在很多地方存在，汇编中的NOP含义也一样，
-机器指令中的空操作通常用来将内存地址进行对齐，以提高CPU访问内存的效率，
-GCC等编译器也会将特定的语句进行优化而产生空操作。 PHP中的空操作opcode NOP: ZEND_NOP &hellip;">
+  <meta name="description" content="Travis CI是一个基于云的持续集成项目，
+目前已经支持大部分主流语言了，比如：C，PHP，Ruby，Python, Nodejs等等。和Jenkins类似，
+Travis CI也是开源的，不过Travis和Github集成非常紧密，官方的集成测试托管只支持Github项目， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -104,6 +104,162 @@ GCC等编译器也会将特定的语句进行优化而产生空操作。 PHP中�
     <div class="row-fluid">
       <div class="span9">
   
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
+      <h1 class="entry-title"><a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-15T20:26:00+08:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
+        
+         | <a href="/2012/07/15/introduction-to-travis-ci/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Travis CI是一个基于云的<a href="http://en.wikipedia.org/wiki/Continuous_integration">持续集成</a>项目，
+目前已经支持大部分主流语言了，比如：C，PHP，Ruby，Python, Nodejs等等。和<a href="http://jenkins-ci.org/">Jenkins</a>类似，
+Travis CI也是开源的，不过Travis和Github集成非常紧密，官方的集成测试托管只支持Github项目，
+不过你也可以搭建一套自己的方案。 这里有一篇比较详实的<a href="http://www.juvenxu.com/2012/03/06/travis-ci/">对Travis-CI的介绍</a>，
+同时InfoQ上也有一篇<a href="http://www.juvenxu.com/2012/03/06/travis-ci/">关于Travic_CI的报道</a>，</p>
+
+<p>如果你有开源项目，那么Travis绝对值得一试，目前托管在Github上的大部分知名项目都使用了Travis来做集成测试。
+比如Ruby语言的：Rails, Rack, Sinatra, RSpec, Cumber, Node.js, PHP的：Symfony2, Doctrine2, Zend Framework 2。</p>
+
+<p>PHP语言也<a href="https://github.com/php/php-src">使用了Travis做集成测试</a>，不过目前由于PHP的扩展众多，
+很多的测试用例本身也不够健壮，PHP的测试经常会失败。</p>
+
+<p>使用Travis-CI的项目可以在说明文件中增加目前版本的构建状态。Travis为每个项目提供一个图片地址，比如PHP的：
+https://secure.travis-ci.org/php/php-src.png?branch=master,
+<img src="https://secure.travis-ci.org/php/php-src.png?branch=master" alt="php-src" />，之所以是构建失败，是因为前面提到的原因。</p>
+
+<p>如果构建成功，图片将显示：<img src="https://secure.travis-ci.org/reeze/php-leveldb.png?branch=master" alt="php-leveldb" />，
+这是我最近在写的一个扩展：<a href="https://github.com/reeze/php-leveldb">php-leveldb</a>的构建状态。</p>
+
+<p>下面简单介绍一下，如果你在编写一个PHP扩展，该怎么样使用Travis-CI来做持续集成。
+当然，你的代码需要在Github上进行托管。</p>
+
+<h2>Travis-CI配置文件</h2>
+
+<p>要使用Travis，首先需要在你的代码根目录下包含一个叫做.travis.yml的文件，这是一个配置文件，
+为<a href="http://www.yaml.org">yaml格式</a>，</p>
+
+<p>&#8220;yml
+language: php
+php:
+  - 5.2
+  - 5.3
+  - 5.4</p>
+
+<p>env:
+  - REPORT_EXIT_STATUS=1 NO_INTERACTION=1</p>
+
+<p>before_script: sh travis/prepare.sh</p>
+
+<p>script: sh travis/run-test.sh</p>
+
+<p>notifications:
+  email:</p>
+
+<pre><code>- reeze.xia@gmail.com
+</code></pre>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>配置简单明了，选择需要的语言，同时可以设置需要测试的语言版本，因为php-leveldb支持5.2 ~ 5.4, 
+</span><span class='line'>所以这里设置了3个需要测试的版本。
+</span><span class='line'>
+</span><span class='line'>env 设置为执行测试时需要设置的环境变量，因为php 执行`make test`测试时如果测试失败会提示
+</span><span class='line'>用户是否将测试结果发送给PHP官方。因为测试是自动进行的，如果不设置NO_INTERACTION=1会导致
+</span><span class='line'>测试失败后一直等待用户输入而hang住直到测试超时。
+</span><span class='line'>
+</span><span class='line'>before_script 可以用来进行一些准备工作，例如php-leveldb扩展需要先安装leveldb才能编译。
+</span><span class='line'>
+</span><span class='line'>travis/prepare.sh文件做的工作也就是从leveldb官方下载代码并编译，
+</span><span class='line'>最后编译扩展。</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>!/bin/sh</h1>
+
+<p>wget http://leveldb.googlecode.com/files/leveldb-1.5.0.tar.gz
+tar zxvf leveldb-1.5.0.tar.gz
+cd leveldb-1.5.0 &amp;&amp; make
+cd ..
+phpize &amp;&amp; ./configure &#8211;with-leveldb=$PWD/leveldb-1.5.0 &amp;&amp; make</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>travis可以执行任何脚本。因为travis在执行测试之前会建立一个虚拟机用于测试。
+</span><span class='line'>
+</span><span class='line'>script属性就是测试的入口，可以是任何的sh命令。测试结果到底是成功还是失败会依据这个命令的
+</span><span class='line'>返回值，如果返回非0结果，则表示测试失败，失败的时候就会给下面notifications设置的邮箱发送邮件。
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>!/bin/sh</h1>
+
+<p>make test</p>
+
+<h1>make test didn&#8217;t return status code correctly</h1>
+
+<h1>use this to find whether the make test failed</h1>
+
+<p>cat tests/*.diff</p>
+
+<p>if [ $? -eq 0 ]; then</p>
+
+<pre><code>exit 1;
+</code></pre>
+
+<p>fi
+&#8220;`
+从上面的注释里也提到，因为PHP生成的<a href="https://bugs.php.net/bug.php?id=60285">测试不能正常的返回错误码</a>，这样的结果是即使测试失败了，
+travis也会忽略，所以采用了一个折中的方式来测试。因为测试失败会生产diff文件，
+报告测试失败的具体原因，cat的好处是能把错误详细信息报告出来，也能方便调试。</p>
+
+<p>每次提交代码到Github上时，Travis将自动对新提交的版本进行测试。</p>
+
+<p>除了PHP，其实你可以在Travis上测试绝大部分的软件，因为travis提供的是一个完整的环境，
+而你可以编写任何的脚本来进行你的测试工作。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -771,50 +927,6 @@ title: &#8216;[PHP-Internal]鎬庝箞鏍疯幏鍙朠HP鍙橀噺鐨勫彉閲忓�
 
     </article>
   
-  
-    <article>
-      
-  <header class="page-header">
-    
-      <h1 class="entry-title"><a href="/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/">解决Mac下终端中使用screen管理回话但看不到滚动条等问题</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-07-02T15:16:33+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2010</time>
-        
-         | <a href="/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>工作中开发基本都是ssh到远程服务器上vim开发，有时候因为网络原因或者不小心把终端给关了或者网络出现问题以后就痛苦了，因为vim默认会用swp文件保存修改，我又不想关掉这个功能，一不小心真丢数据就划不来了，非法关闭vim之后再次打开就会提示是否恢复文件，自从发现screen这个绝佳的绘画管理工具，就深深的爱上了它，IBM的这篇文章有详细的介绍  “<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-screen/">linux 技巧：使用screen 管理你的远程会话</a>”。在使用过程中发现一些问题，默认快捷键是Ctrl + A, 用惯了命令行的人肯定会用Ctrl +A , Ctrl + E来定位当前输入的命令吧. 在~/.screenrc中修改一下就可以了，下面是我的.screenrc
-<code>
-vbell_msg "" # 比如在tab自动提示的时候，默认总是会出现一个Wuff,觉得很烦，关掉
-escape ``  # instead of Control-a  使用 反引号当快捷键，因为用的相对较少
-termcapinfo xterm* ti@:te@  # 这个就是解决mac下看不到滚动条的问题了
-</code>
-解决方法来源见：<a href="http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command">http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <ul class="pager">
     
     <li class="previous"><a href="/page/2/">&larr; Older</a></li>
@@ -828,6 +940,10 @@ termcapinfo xterm* ti@:te@  # 这个就是解决mac下看不到滚动条的问�
     <section class="well">
   <ul id="recent_posts" class="nav nav-list">
     <li class="nav-header">Recent Posts</li>
+    
+      <li class="post">
+        <a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a>
+      </li>
     
       <li class="post">
         <a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">PHP中的NOP及为什么有这个opcode</a>
@@ -863,10 +979,6 @@ termcapinfo xterm* ti@:te@  # 这个就是解决mac下看不到滚动条的问�
     
       <li class="post">
         <a href="/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">Php Internal How To Get Variables Name An Extension Implement</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/">解决Mac下终端中使用screen管理回话但看不到滚动条等问题</a>
       </li>
     
   </ul>

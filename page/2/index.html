@@ -9,7 +9,7 @@
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="如果你比较好奇，可以先从这里下载所有代码，也可以点击这里查看chrome下上传的demo，点这里查看firefox下的demo 前不久Gmail推出了支持拖拽的附件上传功能，试用了下还真不错，其实很久以前就在想能有直接拖拽附件的功能，多亏有了HTML5，Web应用越来越像客户端的应用了。 &hellip;">
+  <meta name="description" content="工作中开发基本都是ssh到远程服务器上vim开发，有时候因为网络原因或者不小心把终端给关了或者网络出现问题以后就痛苦了，因为vim默认会用swp文件保存修改，我又不想关掉这个功能，一不小心真丢数据就划不来了，非法关闭vim之后再次打开就会提示是否恢复文件，自从发现screen这个绝佳的绘画管理工具 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -102,6 +102,50 @@
     <div class="row-fluid">
       <div class="span9">
   
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
+      <h1 class="entry-title"><a href="/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/">解决Mac下终端中使用screen管理回话但看不到滚动条等问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-07-02T15:16:33+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2010</time>
+        
+         | <a href="/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>工作中开发基本都是ssh到远程服务器上vim开发，有时候因为网络原因或者不小心把终端给关了或者网络出现问题以后就痛苦了，因为vim默认会用swp文件保存修改，我又不想关掉这个功能，一不小心真丢数据就划不来了，非法关闭vim之后再次打开就会提示是否恢复文件，自从发现screen这个绝佳的绘画管理工具，就深深的爱上了它，IBM的这篇文章有详细的介绍  “<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-screen/">linux 技巧：使用screen 管理你的远程会话</a>”。在使用过程中发现一些问题，默认快捷键是Ctrl + A, 用惯了命令行的人肯定会用Ctrl +A , Ctrl + E来定位当前输入的命令吧. 在~/.screenrc中修改一下就可以了，下面是我的.screenrc
+<code>
+vbell_msg "" # 比如在tab自动提示的时候，默认总是会出现一个Wuff,觉得很烦，关掉
+escape ``  # instead of Control-a  使用 反引号当快捷键，因为用的相对较少
+termcapinfo xterm* ti@:te@  # 这个就是解决mac下看不到滚动条的问题了
+</code>
+解决方法来源见：<a href="http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command">http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -859,64 +903,6 @@ classes = include($file); ?&gt;;
 
     </article>
   
-  
-    <article>
-      
-  <header class="page-header">
-    
-      <h1 class="entry-title"><a href="/2009/06/19/start-sshd-service-in-mac-os-x/">Mac OS 启动sshd服务</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-06-19T20:21:18+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2009</time>
-        
-         | <a href="/2009/06/19/start-sshd-service-in-mac-os-x/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>[UPDATE]  系统偏号设置  -> 共享 -> 远程登陆 ,开启即可.  下面的方法不推荐使用.</strong></p>
-
-<p>想push自己写的一些代码到本地的版本库中去，看了很多的协议，都挺麻烦的，至今没有配置好一个git server，遂放弃搭建server，直接使用ssh来提交到本地</p>
-
-<p>无奈Mac OS X 似乎默认不启动SSHD服务。所以我尝试启动</p>
-
-<p>Leopard:etc reeze$ sshd
-sshd re-exec requires execution with an absolute path
-看来不行。
-不过这个提示错误似乎不是很明白。上网baidu了一把。发现
-只能用绝对路径启动。不知道为什么程序非得用绝对路劲启动。有时间研究下为何是这样的，或者有知道的直接告诉我：）
-$ sudo /usr/sbin/sshd
-服务就启动了
-不能每次都这么运行一下先啊。放在 ~/.bashrc 似乎可以，不过这个得需要管理员权限
-得sudo，每次输入密码很烦人。干脆放到 /etc/rc.common,</p>
-
-<h4>#</h4>
-
-<p>/usr/sbin/sshd</p>
-
-<p>网上有人说apple不推荐这么干。但是我又不知道怎么让他自动启动。先就这么放着吧。找到好方法再改。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <ul class="pager">
     
     <li class="previous"><a href="/page/3/">&larr; Older</a></li>
@@ -932,6 +918,10 @@ $ sudo /usr/sbin/sshd
     <section class="well">
   <ul id="recent_posts" class="nav nav-list">
     <li class="nav-header">Recent Posts</li>
+    
+      <li class="post">
+        <a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a>
+      </li>
     
       <li class="post">
         <a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">PHP中的NOP及为什么有这个opcode</a>
@@ -967,10 +957,6 @@ $ sudo /usr/sbin/sshd
     
       <li class="post">
         <a href="/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">Php Internal How To Get Variables Name An Extension Implement</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/">解决Mac下终端中使用screen管理回话但看不到滚动条等问题</a>
       </li>
     
   </ul>

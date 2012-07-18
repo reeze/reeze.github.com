@@ -9,7 +9,7 @@
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="在项目中经常要调试程序，但是我电脑上的ZendStudio总是没配置好，不能单步调试，不过有时候不一定需要让ZendStudio来帮我们调试，所以写了下面这个辅助函数来方便调试，因为有时候调试的位置加多了自己也不知道到底是加在什么地方了，下面的函数就是方便的dump对象信息， &hellip;">
+  <meta name="description" content="[UPDATE]  系统偏号设置  -> 共享 -> 远程登陆 ,开启即可.  下面的方法不推荐使用. 想push自己写的一些代码到本地的版本库中去，看了很多的协议，都挺麻烦的，至今没有配置好一个git server，遂放弃搭建server，直接使用ssh来提交到本地 无奈Mac OS X &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,64 @@
       
   <header class="page-header">
     
+      <h1 class="entry-title"><a href="/2009/06/19/start-sshd-service-in-mac-os-x/">Mac OS 启动sshd服务</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-19T20:21:18+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2009</time>
+        
+         | <a href="/2009/06/19/start-sshd-service-in-mac-os-x/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>[UPDATE]  系统偏号设置  -> 共享 -> 远程登陆 ,开启即可.  下面的方法不推荐使用.</strong></p>
+
+<p>想push自己写的一些代码到本地的版本库中去，看了很多的协议，都挺麻烦的，至今没有配置好一个git server，遂放弃搭建server，直接使用ssh来提交到本地</p>
+
+<p>无奈Mac OS X 似乎默认不启动SSHD服务。所以我尝试启动</p>
+
+<p>Leopard:etc reeze$ sshd
+sshd re-exec requires execution with an absolute path
+看来不行。
+不过这个提示错误似乎不是很明白。上网baidu了一把。发现
+只能用绝对路径启动。不知道为什么程序非得用绝对路劲启动。有时间研究下为何是这样的，或者有知道的直接告诉我：）
+$ sudo /usr/sbin/sshd
+服务就启动了
+不能每次都这么运行一下先啊。放在 ~/.bashrc 似乎可以，不过这个得需要管理员权限
+得sudo，每次输入密码很烦人。干脆放到 /etc/rc.common,</p>
+
+<h4>#</h4>
+
+<p>/usr/sbin/sshd</p>
+
+<p>网上有人说apple不推荐这么干。但是我又不知道怎么让他自动启动。先就这么放着吧。找到好方法再改。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
       <h1 class="entry-title"><a href="/2009/06/19/a-php-debug-function/">PHP调试函数</a></h1>
     
     
@@ -182,6 +240,10 @@ function p(){
     <li class="nav-header">Recent Posts</li>
     
       <li class="post">
+        <a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">PHP中的NOP及为什么有这个opcode</a>
       </li>
     
@@ -215,10 +277,6 @@ function p(){
     
       <li class="post">
         <a href="/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">Php Internal How To Get Variables Name An Extension Implement</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/">解决Mac下终端中使用screen管理回话但看不到滚动条等问题</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PHP | Zen Space | 寻找善美]]></title>
   <link href="http://reeze.cn/categories/php/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2012-07-07T21:09:05+08:00</updated>
+  <updated>2012-07-18T22:37:24+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -12,6 +12,117 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[初试Travis-CI]]></title>
+    <link href="http://reeze.cn/2012/07/15/introduction-to-travis-ci/"/>
+    <updated>2012-07-15T20:26:00+08:00</updated>
+    <id>http://reeze.cn/2012/07/15/introduction-to-travis-ci</id>
+    <content type="html"><![CDATA[<p>Travis CI是一个基于云的<a href="http://en.wikipedia.org/wiki/Continuous_integration">持续集成</a>项目，
+目前已经支持大部分主流语言了，比如：C，PHP，Ruby，Python, Nodejs等等。和<a href="http://jenkins-ci.org/">Jenkins</a>类似，
+Travis CI也是开源的，不过Travis和Github集成非常紧密，官方的集成测试托管只支持Github项目，
+不过你也可以搭建一套自己的方案。 这里有一篇比较详实的<a href="http://www.juvenxu.com/2012/03/06/travis-ci/">对Travis-CI的介绍</a>，
+同时InfoQ上也有一篇<a href="http://www.juvenxu.com/2012/03/06/travis-ci/">关于Travic_CI的报道</a>，</p>
+
+<p>如果你有开源项目，那么Travis绝对值得一试，目前托管在Github上的大部分知名项目都使用了Travis来做集成测试。
+比如Ruby语言的：Rails, Rack, Sinatra, RSpec, Cumber, Node.js, PHP的：Symfony2, Doctrine2, Zend Framework 2。</p>
+
+<p>PHP语言也<a href="https://github.com/php/php-src">使用了Travis做集成测试</a>，不过目前由于PHP的扩展众多，
+很多的测试用例本身也不够健壮，PHP的测试经常会失败。</p>
+
+<p>使用Travis-CI的项目可以在说明文件中增加目前版本的构建状态。Travis为每个项目提供一个图片地址，比如PHP的：
+https://secure.travis-ci.org/php/php-src.png?branch=master,
+<img src="https://secure.travis-ci.org/php/php-src.png?branch=master" alt="php-src" />，之所以是构建失败，是因为前面提到的原因。</p>
+
+<p>如果构建成功，图片将显示：<img src="https://secure.travis-ci.org/reeze/php-leveldb.png?branch=master" alt="php-leveldb" />，
+这是我最近在写的一个扩展：<a href="https://github.com/reeze/php-leveldb">php-leveldb</a>的构建状态。</p>
+
+<p>下面简单介绍一下，如果你在编写一个PHP扩展，该怎么样使用Travis-CI来做持续集成。
+当然，你的代码需要在Github上进行托管。</p>
+
+<h2>Travis-CI配置文件</h2>
+
+<p>要使用Travis，首先需要在你的代码根目录下包含一个叫做.travis.yml的文件，这是一个配置文件，
+为<a href="http://www.yaml.org">yaml格式</a>，</p>
+
+<p>``yml
+language: php
+php:
+  - 5.2
+  - 5.3
+  - 5.4</p>
+
+<p>env:
+  - REPORT_EXIT_STATUS=1 NO_INTERACTION=1</p>
+
+<p>before_script: sh travis/prepare.sh</p>
+
+<p>script: sh travis/run-test.sh</p>
+
+<p>notifications:
+  email:</p>
+
+<pre><code>- reeze.xia@gmail.com
+</code></pre>
+
+<p>```</p>
+
+<p>配置简单明了，选择需要的语言，同时可以设置需要测试的语言版本，因为php-leveldb支持5.2 ~ 5.4,
+所以这里设置了3个需要测试的版本。</p>
+
+<p>env 设置为执行测试时需要设置的环境变量，因为php 执行<code>make test</code>测试时如果测试失败会提示
+用户是否将测试结果发送给PHP官方。因为测试是自动进行的，如果不设置NO_INTERACTION=1会导致
+测试失败后一直等待用户输入而hang住直到测试超时。</p>
+
+<p>before_script 可以用来进行一些准备工作，例如php-leveldb扩展需要先安装leveldb才能编译。</p>
+
+<p>travis/prepare.sh文件做的工作也就是从leveldb官方下载代码并编译，
+最后编译扩展。
+```</p>
+
+<h1>!/bin/sh</h1>
+
+<p>wget http://leveldb.googlecode.com/files/leveldb-1.5.0.tar.gz
+tar zxvf leveldb-1.5.0.tar.gz
+cd leveldb-1.5.0 &amp;&amp; make
+cd ..
+phpize &amp;&amp; ./configure --with-leveldb=$PWD/leveldb-1.5.0 &amp;&amp; make
+```</p>
+
+<p>travis可以执行任何脚本。因为travis在执行测试之前会建立一个虚拟机用于测试。</p>
+
+<p>script属性就是测试的入口，可以是任何的sh命令。测试结果到底是成功还是失败会依据这个命令的
+返回值，如果返回非0结果，则表示测试失败，失败的时候就会给下面notifications设置的邮箱发送邮件。</p>
+
+<p>```</p>
+
+<h1>!/bin/sh</h1>
+
+<p>make test</p>
+
+<h1>make test didn't return status code correctly</h1>
+
+<h1>use this to find whether the make test failed</h1>
+
+<p>cat tests/*.diff</p>
+
+<p>if [ $? -eq 0 ]; then</p>
+
+<pre><code>exit 1;
+</code></pre>
+
+<p>fi
+```
+从上面的注释里也提到，因为PHP生成的<a href="https://bugs.php.net/bug.php?id=60285">测试不能正常的返回错误码</a>，这样的结果是即使测试失败了，
+travis也会忽略，所以采用了一个折中的方式来测试。因为测试失败会生产diff文件，
+报告测试失败的具体原因，cat的好处是能把错误详细信息报告出来，也能方便调试。</p>
+
+<p>每次提交代码到Github上时，Travis将自动对新提交的版本进行测试。</p>
+
+<p>除了PHP，其实你可以在Travis上测试绝大部分的软件，因为travis提供的是一个完整的环境，
+而你可以编写任何的脚本来进行你的测试工作。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[Plugin]豆瓣秀 For WordPress]]></title>
@@ -200,69 +311,6 @@ b
 </code>
 因为Parse error 是没法被 set_error_handler处理函数处理的。这个异常没办法catch到。所以才使用了@来抑制错误。这带来的问题就是我们无法得到详细的错误信息。 不过目前我需要的功能也只是检查语法是否正确。不正确的话重新编译模板文件，就这么简单，至于语法错误，在显示网页的时候自然会看得到。
 最好的办法就是这个被遗弃的php_check_syntax这个方法回到php中。下次再研究下他们是出于什么原因把这个函数去掉的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[实现一个简单在线HTML编辑器]]></title>
-    <link href="http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor/"/>
-    <updated>2009-10-09T15:11:26+08:00</updated>
-    <id>http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor</id>
-    <content type="html"><![CDATA[<p>一直没有仔细研究过在线HTML编辑器，以前以为编辑功能很复杂，需要用大量的JavaScript来模拟编辑器的效果，以前都是使用一些开源的HTML编辑器，HTML在各网上随处可见，发表文章，评论。最近自己想做一个类似Things这样的Web版的应用，需要一个想Google  Notebook(可惜的是现在已经停止开发了) 那样的编辑功能，看看现在网上的这些编辑器都庞大了，都是一些自己根本用不到的功能，其实我的需求很简单：简单的编辑既可以，并且需要轻量级一些，因为页面上可能需要开很多个编辑器实例。 所有想自己也来研究一下，看看能不能自己开发一个。</p>
-
-<p>几天前花了一个晚上用firebug看了下Google Docs是怎么做。第一个遇到的问题就是如何让光标停在鼠标点击所在得地方。我刚开始一味都是js模拟出来的，这得有多复杂啊。并且还要兼容各个浏览器，天啊！后来上网一搜发现，浏览器早就想到了我们会有这样的一个需求。其实很简单，两条语句就可以说明HTML编辑器的最为核心的部分：
-<code>
-document.designMode = 'On';
-document.contentEditable = true;
-</code>
-参考Mozilla上的<a href="https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla">这篇</a>文章，介绍了HTML编辑的基本信息，要自己DIY一个常用功能的HTML编辑，这篇文章已经够你用的了。</p>
-
-<p>在你的网页中嵌入这两条语句试试看：），你就会发现你的网站整个得都变的可以编辑了。可以随便乱修改。 不过放心，这样修改并不会破坏你的网站， 当然你也不希望你的整个网站是可以编辑的。例如我们只希望别人发布一条评论，只希望评论输入框可以输入。 要实现这样的效果可以有两种做法：</p>
-
-<p>第一种就是使用直接让某个元素变成可编辑的例如：</p>
-
-<p>index.html
-`
-Test TextEditor</p>
-
-<h1>Hi, HTML Editor!</h1>
-
-<p>Hello, you comment please</p>
-
-<p>Your comment</p>
-
-<p>Get HTML
-`
-点击该区域后该区域的内容就变成可以编辑的了，这是我们就是对其进行简单的编辑。你可能会觉得直接编辑的功能太简单了，比如想要插入链接或者图片什么的。就没有办法了。这些功能浏览器并没有帮我们做好，不过实现这些功能也不麻烦， 参考上面Mozilla的文档。浏览器都提供了常用的功能API。</p>
-
-<p>一般的编辑器都会提供一个工具栏之类的按钮来编辑文本内容。比如我使用的WordPress提供的编辑器：</p>
-
-<p>[caption id="attachment_42" align="alignnone" width="936" caption="wordpress提供的编辑器"]<a href="/uploads/2009/10/5b9e5c0b92f7fdf042ea3993165b80ec.png"><img src="/uploads/2009/10/5b9e5c0b92f7fdf042ea3993165b80ec.png" alt="wordpress提供的编辑器" /></a>[/caption]</p>
-
-<p>可以对文字内容进行操作，加粗下划线，字体，对齐等等，并且提供可视化以及HTML编辑模式。</p>
-
-<p>这个和FCKeditor 以及tinymce之类的编辑器使用的编辑方式和上面我提到的直接编辑html对象的方法不一样，他们使用的是iframe，使用iframe有很多好处，iframe中的文档和当前文档并不会因为样式或者HTML结构而影响到彼此，所以大部分的编辑器都是使用这种方式。它们基本的方式都是：</p>
-
-<ol>
-<li><p>在页面中使用一个不可见的字段比如:“input, textarea"之类表单字段，他们的值就是需要编辑的内容。</p></li>
-<li><p>页面初始化好，比如载入编辑器相关的一些脚本，也是就是window.onload好以后。创建一个iframe来显示可编辑区域，iframe初始化好以后读取父窗(相对于这个iframe)口的这个不可见表单值的内容，使之成为iframe中的body的html，也就是把所有需要编辑的内容添加到iframe中</p></li>
-<li><p>iframe中的内容初始化好以后，在iframe中执行上面提到的：
-<code>
-document.designMode = 'On';
-document.contentEditable = true;
-</code>
-把iframe整个窗口变成可以编辑的</p></li>
-<li><p>进行编辑，这时候的编辑可能需要一个工具栏，基于同样的原因，一般工具栏也会是一个iframe，显示它们自己的编辑按钮。编辑是就利用浏览器提供的接口来对ifame中的内容进行编辑</p></li>
-<li><p>父窗口中提交表单之前或者你需要的地方需要把编辑器中编辑完的内容回写到你的表单字段中去，否则编辑结果没有保存写来就没有意义了。</p></li>
-</ol>
-
-
-<p>基本原理就是这样。要做出这样一个东西来，需要的就是一些细活了。要想做出一个FCk这样好用的编辑器也不是那么简单的。但是至少我们知道它是怎么运作的。 这就够了。</p>
-
-<p>花了点时间做了一个简单的编辑器，真正要用的话很多的细节还是需要好好处理的，代码没有怎么清理，是变想边写，不是很完整。</p>
-
-<p>需要的同学可以下来参考参考。
-猛击 <a href="/uploads/2009/10/editor.rar"> >> 这里 &lt;&lt; </a>下载代码。</p>
 ]]></content>
   </entry>
   

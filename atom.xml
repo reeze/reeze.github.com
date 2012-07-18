@@ -4,7 +4,7 @@
   <title><![CDATA[Zen Space | 寻找善美]]></title>
   <link href="http://reeze.cn/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2012-07-07T21:09:05+08:00</updated>
+  <updated>2012-07-18T22:37:24+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -12,6 +12,133 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[初试Travis-CI]]></title>
+    <link href="http://reeze.cn/2012/07/15/introduction-to-travis-ci/"/>
+    <updated>2012-07-15T20:26:00+08:00</updated>
+    <id>http://reeze.cn/2012/07/15/introduction-to-travis-ci</id>
+    <content type="html"><![CDATA[<p>Travis CI是一个基于云的<a href="http://en.wikipedia.org/wiki/Continuous_integration">持续集成</a>项目，
+目前已经支持大部分主流语言了，比如：C，PHP，Ruby，Python, Nodejs等等。和<a href="http://jenkins-ci.org/">Jenkins</a>类似，
+Travis CI也是开源的，不过Travis和Github集成非常紧密，官方的集成测试托管只支持Github项目，
+不过你也可以搭建一套自己的方案。 这里有一篇比较详实的<a href="http://www.juvenxu.com/2012/03/06/travis-ci/">对Travis-CI的介绍</a>，
+同时InfoQ上也有一篇<a href="http://www.juvenxu.com/2012/03/06/travis-ci/">关于Travic_CI的报道</a>，</p>
+
+<p>如果你有开源项目，那么Travis绝对值得一试，目前托管在Github上的大部分知名项目都使用了Travis来做集成测试。
+比如Ruby语言的：Rails, Rack, Sinatra, RSpec, Cumber, Node.js, PHP的：Symfony2, Doctrine2, Zend Framework 2。</p>
+
+<p>PHP语言也<a href="https://github.com/php/php-src">使用了Travis做集成测试</a>，不过目前由于PHP的扩展众多，
+很多的测试用例本身也不够健壮，PHP的测试经常会失败。</p>
+
+<p>使用Travis-CI的项目可以在说明文件中增加目前版本的构建状态。Travis为每个项目提供一个图片地址，比如PHP的：
+https://secure.travis-ci.org/php/php-src.png?branch=master,
+<img src="https://secure.travis-ci.org/php/php-src.png?branch=master" alt="php-src" />，之所以是构建失败，是因为前面提到的原因。</p>
+
+<p>如果构建成功，图片将显示：<img src="https://secure.travis-ci.org/reeze/php-leveldb.png?branch=master" alt="php-leveldb" />，
+这是我最近在写的一个扩展：<a href="https://github.com/reeze/php-leveldb">php-leveldb</a>的构建状态。</p>
+
+<p>下面简单介绍一下，如果你在编写一个PHP扩展，该怎么样使用Travis-CI来做持续集成。
+当然，你的代码需要在Github上进行托管。</p>
+
+<h2>Travis-CI配置文件</h2>
+
+<p>要使用Travis，首先需要在你的代码根目录下包含一个叫做.travis.yml的文件，这是一个配置文件，
+为<a href="http://www.yaml.org">yaml格式</a>，</p>
+
+<p>&#8220;yml
+language: php
+php:
+  - 5.2
+  - 5.3
+  - 5.4</p>
+
+<p>env:
+  - REPORT_EXIT_STATUS=1 NO_INTERACTION=1</p>
+
+<p>before_script: sh travis/prepare.sh</p>
+
+<p>script: sh travis/run-test.sh</p>
+
+<p>notifications:
+  email:</p>
+
+<pre><code>- reeze.xia@gmail.com
+</code></pre>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>配置简单明了，选择需要的语言，同时可以设置需要测试的语言版本，因为php-leveldb支持5.2 ~ 5.4, 
+</span><span class='line'>所以这里设置了3个需要测试的版本。
+</span><span class='line'>
+</span><span class='line'>env 设置为执行测试时需要设置的环境变量，因为php 执行`make test`测试时如果测试失败会提示
+</span><span class='line'>用户是否将测试结果发送给PHP官方。因为测试是自动进行的，如果不设置NO_INTERACTION=1会导致
+</span><span class='line'>测试失败后一直等待用户输入而hang住直到测试超时。
+</span><span class='line'>
+</span><span class='line'>before_script 可以用来进行一些准备工作，例如php-leveldb扩展需要先安装leveldb才能编译。
+</span><span class='line'>
+</span><span class='line'>travis/prepare.sh文件做的工作也就是从leveldb官方下载代码并编译，
+</span><span class='line'>最后编译扩展。</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>!/bin/sh</h1>
+
+<p>wget http://leveldb.googlecode.com/files/leveldb-1.5.0.tar.gz
+tar zxvf leveldb-1.5.0.tar.gz
+cd leveldb-1.5.0 &amp;&amp; make
+cd ..
+phpize &amp;&amp; ./configure &#8211;with-leveldb=$PWD/leveldb-1.5.0 &amp;&amp; make</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>travis可以执行任何脚本。因为travis在执行测试之前会建立一个虚拟机用于测试。
+</span><span class='line'>
+</span><span class='line'>script属性就是测试的入口，可以是任何的sh命令。测试结果到底是成功还是失败会依据这个命令的
+</span><span class='line'>返回值，如果返回非0结果，则表示测试失败，失败的时候就会给下面notifications设置的邮箱发送邮件。
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>!/bin/sh</h1>
+
+<p>make test</p>
+
+<h1>make test didn&#8217;t return status code correctly</h1>
+
+<h1>use this to find whether the make test failed</h1>
+
+<p>cat tests/*.diff</p>
+
+<p>if [ $? -eq 0 ]; then</p>
+
+<pre><code>exit 1;
+</code></pre>
+
+<p>fi
+&#8220;`
+从上面的注释里也提到，因为PHP生成的<a href="https://bugs.php.net/bug.php?id=60285">测试不能正常的返回错误码</a>，这样的结果是即使测试失败了，
+travis也会忽略，所以采用了一个折中的方式来测试。因为测试失败会生产diff文件，
+报告测试失败的具体原因，cat的好处是能把错误详细信息报告出来，也能方便调试。</p>
+
+<p>每次提交代码到Github上时，Travis将自动对新提交的版本进行测试。</p>
+
+<p>除了PHP，其实你可以在Travis上测试绝大部分的软件，因为travis提供的是一个完整的环境，
+而你可以编写任何的脚本来进行你的测试工作。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PHP中的NOP及为什么有这个opcode]]></title>
@@ -925,35 +1052,6 @@ classes = include($file); ?&gt;;
 <p>10.Monolingual</p>
 
 <p>帮你清除一些不需要的语言信息，节省磁盘空间。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mac OS 启动sshd服务]]></title>
-    <link href="http://reeze.cn/2009/06/19/start-sshd-service-in-mac-os-x/"/>
-    <updated>2009-06-19T20:21:18+08:00</updated>
-    <id>http://reeze.cn/2009/06/19/start-sshd-service-in-mac-os-x</id>
-    <content type="html"><![CDATA[<p><strong>[UPDATE]  系统偏号设置  -> 共享 -> 远程登陆 ,开启即可.  下面的方法不推荐使用.</strong></p>
-
-<p>想push自己写的一些代码到本地的版本库中去，看了很多的协议，都挺麻烦的，至今没有配置好一个git server，遂放弃搭建server，直接使用ssh来提交到本地</p>
-
-<p>无奈Mac OS X 似乎默认不启动SSHD服务。所以我尝试启动</p>
-
-<p>Leopard:etc reeze$ sshd
-sshd re-exec requires execution with an absolute path
-看来不行。
-不过这个提示错误似乎不是很明白。上网baidu了一把。发现
-只能用绝对路径启动。不知道为什么程序非得用绝对路劲启动。有时间研究下为何是这样的，或者有知道的直接告诉我：）
-$ sudo /usr/sbin/sshd
-服务就启动了
-不能每次都这么运行一下先啊。放在 ~/.bashrc 似乎可以，不过这个得需要管理员权限
-得sudo，每次输入密码很烦人。干脆放到 /etc/rc.common,</p>
-
-<h4>#</h4>
-
-<p>/usr/sbin/sshd</p>
-
-<p>网上有人说apple不推荐这么干。但是我又不知道怎么让他自动启动。先就这么放着吧。找到好方法再改。</p>
 ]]></content>
   </entry>
   

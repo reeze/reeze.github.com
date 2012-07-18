@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>PHP中的NOP及为什么有这个opcode - Zen Space | 寻找善美</title>
+  <title>初试Travis-CI - Zen Space | 寻找善美</title>
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="什么是NOP NOP 是一个特殊的opcode，表示空操作，在很多地方存在，汇编中的NOP含义也一样，
-机器指令中的空操作通常用来将内存地址进行对齐，以提高CPU访问内存的效率，
-GCC等编译器也会将特定的语句进行优化而产生空操作。 PHP中的空操作opcode NOP: ZEND_NOP &hellip;">
+  <meta name="description" content="Travis CI是一个基于云的持续集成项目，
+目前已经支持大部分主流语言了，比如：C，PHP，Ruby，Python, Nodejs等等。和Jenkins类似，
+Travis CI也是开源的，不过Travis和Github集成非常紧密，官方的集成测试托管只支持Github项目， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@ GCC等编译器也会将特定的语句进行优化而产生空操作。 PHP中�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://reeze.cn/2012/05/28/what-opcode-zend-nop-is-in-php">
+  <link rel="canonical" href="http://reeze.cn/2012/07/15/introduction-to-travis-ci">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -108,7 +108,7 @@ GCC等编译器也会将特定的语句进行优化而产生空操作。 PHP中�
   
   <header class="page-header">
     
-      <h1 class="entry-title">PHP中的NOP及为什么有这个opcode</h1>
+      <h1 class="entry-title">初试Travis-CI</h1>
     
     
       <p class="meta">
@@ -124,7 +124,7 @@ GCC等编译器也会将特定的语句进行优化而产生空操作。 PHP中�
   
 
 
-<time datetime="2012-05-28T14:19:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2012</time>
+<time datetime="2012-07-15T20:26:00+08:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -133,134 +133,125 @@ GCC等编译器也会将特定的语句进行优化而产生空操作。 PHP中�
   </header>
 
 
-<div class="entry-content"><h2>什么是NOP</h2>
+<div class="entry-content"><p>Travis CI是一个基于云的<a href="http://en.wikipedia.org/wiki/Continuous_integration">持续集成</a>项目，
+目前已经支持大部分主流语言了，比如：C，PHP，Ruby，Python, Nodejs等等。和<a href="http://jenkins-ci.org/">Jenkins</a>类似，
+Travis CI也是开源的，不过Travis和Github集成非常紧密，官方的集成测试托管只支持Github项目，
+不过你也可以搭建一套自己的方案。 这里有一篇比较详实的<a href="http://www.juvenxu.com/2012/03/06/travis-ci/">对Travis-CI的介绍</a>，
+同时InfoQ上也有一篇<a href="http://www.juvenxu.com/2012/03/06/travis-ci/">关于Travic_CI的报道</a>，</p>
 
-<p>NOP 是一个特殊的opcode，表示空操作，在很多地方存在，汇编中的NOP含义也一样，
-机器指令中的空操作通常用来将内存地址进行对齐，以提高CPU访问内存的效率，
-GCC等编译器也会将特定的语句进行优化而产生空操作。</p>
+<p>如果你有开源项目，那么Travis绝对值得一试，目前托管在Github上的大部分知名项目都使用了Travis来做集成测试。
+比如Ruby语言的：Rails, Rack, Sinatra, RSpec, Cumber, Node.js, PHP的：Symfony2, Doctrine2, Zend Framework 2。</p>
 
-<h2>PHP中的空操作opcode NOP: ZEND_NOP</h2>
+<p>PHP语言也<a href="https://github.com/php/php-src">使用了Travis做集成测试</a>，不过目前由于PHP的扩展众多，
+很多的测试用例本身也不够健壮，PHP的测试经常会失败。</p>
 
-<p>PHP基于Zend虚拟机，其他基于虚拟机的语言中大都会有类似NOP的指令，
-PHP文档有对此的<a href="http://cn.php.net/manual/en/internals2.opcodes.nop.php">简单说明</a>：</p>
+<p>使用Travis-CI的项目可以在说明文件中增加目前版本的构建状态。Travis为每个项目提供一个图片地址，比如PHP的：
+https://secure.travis-ci.org/php/php-src.png?branch=master,
+<img src="https://secure.travis-ci.org/php/php-src.png?branch=master" alt="php-src" />，之所以是构建失败，是因为前面提到的原因。</p>
 
-<pre><code>[php]
-&lt;?php
-/*
- * no operation
- * opcode number: 0
- */
-function A(){}; 
-?&gt;
+<p>如果构建成功，图片将显示：<img src="https://secure.travis-ci.org/reeze/php-leveldb.png?branch=master" alt="php-leveldb" />，
+这是我最近在写的一个扩展：<a href="https://github.com/reeze/php-leveldb">php-leveldb</a>的构建状态。</p>
 
-/* VLD 的输出结果 */
-line    #   op  fetch   ext return  operands
-6   0   NOP              
-7   1   RETURN              1
-Function name: A
+<p>下面简单介绍一下，如果你在编写一个PHP扩展，该怎么样使用Travis-CI来做持续集成。
+当然，你的代码需要在Github上进行托管。</p>
 
-Compiled variables: none
+<h2>Travis-CI配置文件</h2>
 
-line    #   op  fetch   ext return  operands
-6   0   RETURN              null
+<p>要使用Travis，首先需要在你的代码根目录下包含一个叫做.travis.yml的文件，这是一个配置文件，
+为<a href="http://www.yaml.org">yaml格式</a>，</p>
+
+<p>&#8220;yml
+language: php
+php:
+  - 5.2
+  - 5.3
+  - 5.4</p>
+
+<p>env:
+  - REPORT_EXIT_STATUS=1 NO_INTERACTION=1</p>
+
+<p>before_script: sh travis/prepare.sh</p>
+
+<p>script: sh travis/run-test.sh</p>
+
+<p>notifications:
+  email:</p>
+
+<pre><code>- reeze.xia@gmail.com
 </code></pre>
 
-<p>上面的VLD结果可以看出，函数A()的声明编译后变成了<code>NOP</code>操作。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>配置简单明了，选择需要的语言，同时可以设置需要测试的语言版本，因为php-leveldb支持5.2 ~ 5.4, 
+</span><span class='line'>所以这里设置了3个需要测试的版本。
+</span><span class='line'>
+</span><span class='line'>env 设置为执行测试时需要设置的环境变量，因为php 执行`make test`测试时如果测试失败会提示
+</span><span class='line'>用户是否将测试结果发送给PHP官方。因为测试是自动进行的，如果不设置NO_INTERACTION=1会导致
+</span><span class='line'>测试失败后一直等待用户输入而hang住直到测试超时。
+</span><span class='line'>
+</span><span class='line'>before_script 可以用来进行一些准备工作，例如php-leveldb扩展需要先安装leveldb才能编译。
+</span><span class='line'>
+</span><span class='line'>travis/prepare.sh文件做的工作也就是从leveldb官方下载代码并编译，
+</span><span class='line'>最后编译扩展。</span></code></pre></td></tr></table></div></figure>
 
-<p>Zend虚拟机是高级抽象，不要考虑内存对齐等的问题，为什么还需要空操作这样的opcode呢？</p>
 
-<p>原因简单讲就是：编译过程优化的结果。有的内容由于可以在编译时就可确定，那么一部分opcode可以
-在编译时替换成空操作。</p>
+<h1>!/bin/sh</h1>
 
-<p>我们来看看这段代码的编译结果：</p>
+<p>wget http://leveldb.googlecode.com/files/leveldb-1.5.0.tar.gz
+tar zxvf leveldb-1.5.0.tar.gz
+cd leveldb-1.5.0 &amp;&amp; make
+cd ..
+phpize &amp;&amp; ./configure &#8211;with-leveldb=$PWD/leveldb-1.5.0 &amp;&amp; make</p>
 
-<pre><code>&lt;?php
-if(true) {
-    class Foo {}
-}
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>travis可以执行任何脚本。因为travis在执行测试之前会建立一个虚拟机用于测试。
+</span><span class='line'>
+</span><span class='line'>script属性就是测试的入口，可以是任何的sh命令。测试结果到底是成功还是失败会依据这个命令的
+</span><span class='line'>返回值，如果返回非0结果，则表示测试失败，失败的时候就会给下面notifications设置的邮箱发送邮件。
+</span></code></pre></td></tr></table></div></figure>
 
-new Bar();
-class Bar {}
 
-filename:       /Users/reeze/Opensource/php-test/php-src-5.4/test.php
-function name:  (null)
-number of ops:  8
-compiled vars:  none
-line     # *  op                           fetch          ext  return  operands
----------------------------------------------------------------------------------
-   2     0  &gt; &gt; JMPZ                                                     true, -&gt;3
-   3     1  &gt;   ZEND_DECLARE_CLASS                               $0      '%00foo%2FUsers%2Freeze%2FOpensource%2Fphp-test%2Fphp-src-5.4%2Ftest.php0x106cd601f', 'foo'
-   4     2    &gt; JMP                                                      -&gt;3
-   6     3  &gt;   ZEND_FETCH_CLASS                              4  :1      'Bar'
-         4      NEW                                                      :1
-         5      DO_FCALL_BY_NAME                              0          
-   7     6      NOP                                                      
-   9     7    &gt; RETURN  
+<h1>!/bin/sh</h1>
+
+<p>make test</p>
+
+<h1>make test didn&#8217;t return status code correctly</h1>
+
+<h1>use this to find whether the make test failed</h1>
+
+<p>cat tests/*.diff</p>
+
+<p>if [ $? -eq 0 ]; then</p>
+
+<pre><code>exit 1;
 </code></pre>
 
-<p>和前面官方函数定义代码一样，上面VLD输出的第7行看到类Bar的opcode变成了NOP，不过请留意第3行，
-这一行类Foo定义的opcode是ZEND_DECLARE_CLASS，也就是类的声明。</p>
+<p>fi
+&#8220;`
+从上面的注释里也提到，因为PHP生成的<a href="https://bugs.php.net/bug.php?id=60285">测试不能正常的返回错误码</a>，这样的结果是即使测试失败了，
+travis也会忽略，所以采用了一个折中的方式来测试。因为测试失败会生产diff文件，
+报告测试失败的具体原因，cat的好处是能把错误详细信息报告出来，也能方便调试。</p>
 
-<p><em>为什么同样是类的声明，第一个类声明的OPCODE和第二个的不一样呢？</em></p>
+<p>每次提交代码到Github上时，Travis将自动对新提交的版本进行测试。</p>
 
-<p>上例中的代码，在Bar类声明之前是可以执行的<code>new Bar</code>，但是此时Bar类的声明并没有执行到，
-那为什么可以访问到Bar类呢，<em>这是因为Bar类的声明在编译时就已经完成了</em>，
-因为Bar类已经在编译时声明好了，所以在真正执行的时候就不需要再次执行声明类的操作了，
-所以它所对应的opcode被替换成NOP了。</p>
-
-<p>而Foo这个类由于处在条件判断块之中，编译期无法确定Foo类是否一定会被执行，所以还是需要在
-执行时来声明这个类，所以opcode没有改变。</p>
-
-<p>对于使用了opcode缓存的代码来说，把函数和类的声明移到了编译时，也就减少了执行时的opcode执行，
-这能加快代码的执行。</p>
-
-<h2>优化</h2>
-
-<p>你可能会想，既然类及函数的声明可以优化掉，为什么不能直接丢弃这个opcode呢？
-一能减少opcode占用的内容，比如很多的框架中有大量的类定义，也能减少执行时间，
-因为空操作并不是0成本的，执行NOP的时候还是需要消耗CPU的。</p>
-
-<p>先看看opcode编译过程的一个重要函数：</p>
-
-<pre><code>zend_op *get_next_op(zend_op_array *op_array TSRMLS_DC)
-{
-    zend_uint next_op_num = op_array-&gt;last++;
-    zend_op *next_op;
-    if (next_op_num &gt;= CG(context).opcodes_size) {
-        if (op_array-&gt;fn_flags &amp; ZEND_ACC_INTERACTIVE) {
-            /* we messed up */
-            zend_printf("Ran out of opcode space!\n"
-                        "You should probably consider writing this huge script into a file!\n");
-            zend_bailout();
-        }
-        CG(context).opcodes_size *= 4;
-        op_array_alloc_ops(op_array, CG(context).opcodes_size);
-    }
-
-    next_op = &amp;(op_array-&gt;opcodes[next_op_num]);
-
-    init_op(next_op TSRMLS_CC);
-
-    return next_op;
-}
-</code></pre>
-
-<p>这个函数每次会返回一个zend_op(也就是opcode一个最小单位)，opcode的存储空间申请和哈希表类似，
-通过预先申请空间的方式，如果空间不足则适当扩容。在编译时，opcode是以文件为单位的，而通常
-在一个文件中函数或类声明的个数是不会太多的。而在编译时opcode数组已经是预先申请好的，所以
-及时优化掉这个opcode，而实际在编译时的内存占用也不会有任何的优化。</p>
-
-<p>目前只有少数几处使用了ZEND_NOP这个opcode。读者可以参考Zend/zend_compile.c: zend_do_early_binding()，
-这个函数进行就是在确定在编译时能确定的函数以及类声明，在完成函数或类的声明后将当前编译的opcode设置为ZEND_NOP。
-因为后续在执行是并需要再次对该函数或类进行声明了。</p>
-
-<p>在这个函数中其实可以将生成的ZEND_NOP优化掉的，比如eAccelarator扩展中就对opcode进行了优化，将ZEND_NOP从
-opcode_array数组中移除了，因为使用了opcode cache扩展优化只进行一次，而执行对多次执行，
-这样的优化是值得的。目前Zend引擎并没有进行任何的优化，首先从代码上来看，类和函数声明的数量和其他指令的数量
-之间差很多个等级，所以至少这个地方优化的收益是有限的，为了保证Zend引擎的简洁它没有进行优化。</p>
-
-<p>目前APC扩展已经基本确定为将要进入PHP默认opcode缓存的官方扩展了，那么这些优化都可以在扩展中进行，
-保证Zend引擎的简单易维护更为重要。</p>
+<p>除了PHP，其实你可以在Travis上测试绝大部分的软件，因为travis提供的是一个完整的环境，
+而你可以编写任何的脚本来进行你的测试工作。</p>
 </div>
 
 
@@ -283,12 +274,12 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
   
 
 
-<time datetime="2012-05-28T14:19:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2012</time>
+<time datetime="2012-07-15T20:26:00+08:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/categories/php内核/'>PHP内核</a>
+    <a class='category' href='/categories/ci/'>CI</a>, <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/travis/'>Travis</a>
   
 </span>
 
@@ -297,7 +288,7 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/2012/05/28/what-opcode-zend-nop-is-in-php/" data-via="" data-counturl="http://reeze.cn/2012/05/28/what-opcode-zend-nop-is-in-php/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/2012/07/15/introduction-to-travis-ci/" data-via="" data-counturl="http://reeze.cn/2012/07/15/introduction-to-travis-ci/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -316,14 +307,10 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
     <ul class="pager">
       
       <li class="previous"><a class="basic-alignment left"
-        href="/2012/05/19/migrate-to-octopress/" title="Previous Post:
-        迁移博客到Octopress">&laquo; 迁移博客到Octopress</a></li>
+        href="/2012/05/28/what-opcode-zend-nop-is-in-php/" title="Previous Post:
+        PHP中的NOP及为什么有这个opcode">&laquo; PHP中的NOP及为什么有这个opcode</a></li>
       
       <li><a href="/blog/archives">Blog Archives</a></li>
-      
-      <li class="next"><a class="basic-alignment right" href="/2012/07/15/introduction-to-travis-ci/"
-        title="Next Post: 初试Travis-CI">初试Travis-CI
-        &raquo;</a></li>
       
     </ul>
   </footer>
@@ -431,8 +418,8 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://reeze.cn/2012/05/28/what-opcode-zend-nop-is-in-php/';
-        var disqus_url = 'http://reeze.cn/2012/05/28/what-opcode-zend-nop-is-in-php/';
+        var disqus_identifier = 'http://reeze.cn/2012/07/15/introduction-to-travis-ci/';
+        var disqus_url = 'http://reeze.cn/2012/07/15/introduction-to-travis-ci/';
         var disqus_script = 'embed.js';
       
     (function () {
