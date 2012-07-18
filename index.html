@@ -160,27 +160,7 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 <h2>Travis-CI配置文件</h2>
 
 <p>要使用Travis，首先需要在你的代码根目录下包含一个叫做.travis.yml的文件，这是一个配置文件，
-为<a href="http://www.yaml.org">yaml格式</a>，</p>
-
-<p>&#8220;yml
-language: php
-php:
-  - 5.2
-  - 5.3
-  - 5.4</p>
-
-<p>env:
-  - REPORT_EXIT_STATUS=1 NO_INTERACTION=1</p>
-
-<p>before_script: sh travis/prepare.sh</p>
-
-<p>script: sh travis/run-test.sh</p>
-
-<p>notifications:
-  email:</p>
-
-<pre><code>- reeze.xia@gmail.com
-</code></pre>
+为<a href="http://www.yaml.org">yaml格式</a></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -194,59 +174,86 @@ php:
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>配置简单明了，选择需要的语言，同时可以设置需要测试的语言版本，因为php-leveldb支持5.2 ~ 5.4, 
-</span><span class='line'>所以这里设置了3个需要测试的版本。
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>language: php
+</span><span class='line'>php:
+</span><span class='line'>  - 5.2
+</span><span class='line'>  - 5.3
+</span><span class='line'>  - 5.4
 </span><span class='line'>
-</span><span class='line'>env 设置为执行测试时需要设置的环境变量，因为php 执行`make test`测试时如果测试失败会提示
-</span><span class='line'>用户是否将测试结果发送给PHP官方。因为测试是自动进行的，如果不设置NO_INTERACTION=1会导致
-</span><span class='line'>测试失败后一直等待用户输入而hang住直到测试超时。
+</span><span class='line'>env:
+</span><span class='line'>  - REPORT_EXIT_STATUS=1 NO_INTERACTION=1
 </span><span class='line'>
-</span><span class='line'>before_script 可以用来进行一些准备工作，例如php-leveldb扩展需要先安装leveldb才能编译。
+</span><span class='line'>before_script: sh travis/prepare.sh
 </span><span class='line'>
-</span><span class='line'>travis/prepare.sh文件做的工作也就是从leveldb官方下载代码并编译，
-</span><span class='line'>最后编译扩展。</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>script: sh travis/run-test.sh
+</span><span class='line'>
+</span><span class='line'>notifications:
+</span><span class='line'>  email:
+</span><span class='line'>    - reeze.xia@gmail.com</span></code></pre></td></tr></table></div></figure>
 
 
-<h1>!/bin/sh</h1>
+<p>配置简单明了，选择需要的语言，同时可以设置需要测试的语言版本，因为php-leveldb支持5.2 ~ 5.4,
+所以这里设置了3个需要测试的版本。</p>
 
-<p>wget http://leveldb.googlecode.com/files/leveldb-1.5.0.tar.gz
-tar zxvf leveldb-1.5.0.tar.gz
-cd leveldb-1.5.0 &amp;&amp; make
-cd ..
-phpize &amp;&amp; ./configure &#8211;with-leveldb=$PWD/leveldb-1.5.0 &amp;&amp; make</p>
+<p>env 设置为执行测试时需要设置的环境变量，因为php 执行<code>make test</code>测试时如果测试失败会提示
+用户是否将测试结果发送给PHP官方。因为测试是自动进行的，如果不设置NO_INTERACTION=1会导致
+测试失败后一直等待用户输入而hang住直到测试超时。</p>
+
+<p>before_script 可以用来进行一些准备工作，例如php-leveldb扩展需要先安装leveldb才能编译。</p>
+
+<p>travis/prepare.sh文件做的工作也就是从leveldb官方下载代码并编译，
+最后编译扩展。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>travis可以执行任何脚本。因为travis在执行测试之前会建立一个虚拟机用于测试。
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/sh
 </span><span class='line'>
-</span><span class='line'>script属性就是测试的入口，可以是任何的sh命令。测试结果到底是成功还是失败会依据这个命令的
-</span><span class='line'>返回值，如果返回非0结果，则表示测试失败，失败的时候就会给下面notifications设置的邮箱发送邮件。
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>wget http://leveldb.googlecode.com/files/leveldb-1.5.0.tar.gz
+</span><span class='line'>tar zxvf leveldb-1.5.0.tar.gz
+</span><span class='line'>cd leveldb-1.5.0 && make
+</span><span class='line'>cd ..
+</span><span class='line'>phpize && ./configure --with-leveldb=$PWD/leveldb-1.5.0 && make</span></code></pre></td></tr></table></div></figure>
 
 
-<h1>!/bin/sh</h1>
+<p>travis可以执行任何脚本。因为travis在执行测试之前会建立一个虚拟机用于测试。</p>
 
-<p>make test</p>
+<p>script属性就是测试的入口，可以是任何的sh命令。测试结果到底是成功还是失败会依据这个命令的
+返回值，如果返回非0结果，则表示测试失败，失败的时候就会给下面notifications设置的邮箱发送邮件。</p>
 
-<h1>make test didn&#8217;t return status code correctly</h1>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/sh
+</span><span class='line'>
+</span><span class='line'>make test
+</span><span class='line'>
+</span><span class='line'># make test didn't return status code correctly
+</span><span class='line'># use this to find whether the make test failed
+</span><span class='line'>cat tests/\*.diff
+</span><span class='line'>
+</span><span class='line'>if [ $? -eq 0 ]; then
+</span><span class='line'>  exit 1;
+</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
 
-<h1>use this to find whether the make test failed</h1>
 
-<p>cat tests/*.diff</p>
-
-<p>if [ $? -eq 0 ]; then</p>
-
-<pre><code>exit 1;
-</code></pre>
-
-<p>fi
-&#8220;`
-从上面的注释里也提到，因为PHP生成的<a href="https://bugs.php.net/bug.php?id=60285">测试不能正常的返回错误码</a>，这样的结果是即使测试失败了，
+<p>从上面的注释里也提到，因为PHP生成的<a href="https://bugs.php.net/bug.php?id=60285">测试不能正常的返回错误码</a>，这样的结果是即使测试失败了，
 travis也会忽略，所以采用了一个折中的方式来测试。因为测试失败会生产diff文件，
 报告测试失败的具体原因，cat的好处是能把错误详细信息报告出来，也能方便调试。</p>
 

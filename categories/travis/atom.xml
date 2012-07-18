@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Travis | Zen Space | 寻找善美]]></title>
   <link href="http://reeze.cn/categories/travis/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2012-07-18T22:46:20+08:00</updated>
+  <updated>2012-07-18T22:47:09+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -43,9 +43,9 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 <h2>Travis-CI配置文件</h2>
 
 <p>要使用Travis，首先需要在你的代码根目录下包含一个叫做.travis.yml的文件，这是一个配置文件，
-为<a href="http://www.yaml.org">yaml格式</a>，</p>
+为<a href="http://www.yaml.org">yaml格式</a></p>
 
-<p>``yml
+<p>```
 language: php
 php:
   - 5.2
