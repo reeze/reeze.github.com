@@ -7,6 +7,9 @@ categories:
   - PHP
   - CI
   - Travis
+  - 扩展
+  - leveldb
+  - php-leveldb
 ---
 
 Travis CI是一个基于云的[持续集成](http://en.wikipedia.org/wiki/Continuous_integration)项目，
