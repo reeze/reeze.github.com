@@ -26,7 +26,7 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 ![php-src](https://secure.travis-ci.org/php/php-src.png?branch=master)，之所以是构建失败，是因为前面提到的原因。
 
 如果构建成功，图片将显示：![php-leveldb](https://secure.travis-ci.org/reeze/php-leveldb.png?branch=master)，
-这是我最近在写的一个扩展：[php-leveldb](https://github.com/reeze/php-leveldb)的构建状态。
+这是我最近在写的一个扩展：[php-leveldb](https://github.com/reeze/php-leveldb)的构建状态<http://travis-ci.org/reeze/php-leveldb>
 
 下面简单介绍一下，如果你在编写一个PHP扩展，该怎么样使用Travis-CI来做持续集成。
 当然，你的代码需要在Github上进行托管。
