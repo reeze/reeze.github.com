@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Travis | Zen Space | 寻找善美]]></title>
-  <link href="http://reeze.cn/categories/travis/atom.xml" rel="self"/>
+  <title><![CDATA[Category: php-leveldb | Zen Space | 寻找善美]]></title>
+  <link href="http://reeze.cn/categories/php-leveldb/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
   <updated>2012-07-18T22:48:42+08:00</updated>
   <id>http://reeze.cn/</id>
