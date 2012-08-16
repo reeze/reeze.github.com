@@ -160,7 +160,7 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 <p>要使用Travis，首先需要在你的代码根目录下包含一个叫做.travis.yml的文件，这是一个配置文件，
 为<a href="http://www.yaml.org">yaml格式</a></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -176,22 +176,23 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
 <span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>language: php
-</span><span class='line'>php:
-</span><span class='line'>  - 5.2
-</span><span class='line'>  - 5.3
-</span><span class='line'>  - 5.4
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">php</span>
+</span><span class='line'><span class="l-Scalar-Plain">php</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">5.2</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">5.3</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">5.4</span>
 </span><span class='line'>
-</span><span class='line'>env:
-</span><span class='line'>  - REPORT_EXIT_STATUS=1 NO_INTERACTION=1
+</span><span class='line'><span class="l-Scalar-Plain">env</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">REPORT_EXIT_STATUS=1 NO_INTERACTION=1</span>
 </span><span class='line'>
-</span><span class='line'>before_script: sh travis/prepare.sh
+</span><span class='line'><span class="l-Scalar-Plain">before_script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">sh travis/prepare.sh</span>
 </span><span class='line'>
-</span><span class='line'>script: sh travis/run-test.sh
+</span><span class='line'><span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">sh travis/run-test.sh</span>
 </span><span class='line'>
-</span><span class='line'>notifications:
-</span><span class='line'>  email:
-</span><span class='line'>    - reeze.xia@gmail.com</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="l-Scalar-Plain">notifications</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">email</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">reeze.xia@gmail.com</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>配置简单明了，选择需要的语言，同时可以设置需要测试的语言版本，因为php-leveldb支持5.2 ~ 5.4,
@@ -206,20 +207,21 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 <p>travis/prepare.sh文件做的工作也就是从leveldb官方下载代码并编译，
 最后编译扩展。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/sh
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/sh</span>
 </span><span class='line'>
 </span><span class='line'>wget http://leveldb.googlecode.com/files/leveldb-1.5.0.tar.gz
 </span><span class='line'>tar zxvf leveldb-1.5.0.tar.gz
-</span><span class='line'>cd leveldb-1.5.0 && make
-</span><span class='line'>cd ..
-</span><span class='line'>phpize && ./configure --with-leveldb=$PWD/leveldb-1.5.0 && make</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="nb">cd </span>leveldb-1.5.0 <span class="o">&amp;&amp;</span> make
+</span><span class='line'><span class="nb">cd</span> ..
+</span><span class='line'>phpize <span class="o">&amp;&amp;</span> ./configure --with-leveldb<span class="o">=</span><span class="nv">$PWD</span>/leveldb-1.5.0 <span class="o">&amp;&amp;</span> make
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>travis可以执行任何脚本。因为travis在执行测试之前会建立一个虚拟机用于测试。</p>
@@ -227,7 +229,7 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 <p>script属性就是测试的入口，可以是任何的sh命令。测试结果到底是成功还是失败会依据这个命令的
 返回值，如果返回非0结果，则表示测试失败，失败的时候就会给下面notifications设置的邮箱发送邮件。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -238,17 +240,18 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/sh
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/sh</span>
 </span><span class='line'>
-</span><span class='line'>make test
+</span><span class='line'>make <span class="nb">test</span>
 </span><span class='line'>
-</span><span class='line'># make test didn't return status code correctly
-</span><span class='line'># use this to find whether the make test failed
-</span><span class='line'>cat tests/\*.diff
+</span><span class='line'><span class="c"># make test didn&#39;t return status code correctly</span>
+</span><span class='line'><span class="c"># use this to find whether the make test failed</span>
+</span><span class='line'>cat tests/<span class="se">\*</span>.diff
 </span><span class='line'>
-</span><span class='line'>if [ $? -eq 0 ]; then
-</span><span class='line'>  exit 1;
-</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq 0 <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">  </span><span class="nb">exit </span>1;
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>从上面的注释里也提到，因为PHP生成的<a href="https://bugs.php.net/bug.php?id=60285">测试不能正常的返回错误码</a>，这样的结果是即使测试失败了，
@@ -319,6 +322,10 @@ travis也会忽略，所以采用了一个折中的方式来测试。因为测�
       
       <li><a href="/blog/archives">Blog Archives</a></li>
       
+      <li class="next"><a class="basic-alignment right" href="/2012/07/22/how-to-get-php-functions-const-parameters-name/"
+        title="Next Post: 怎么样获取PHP函数默认参数的常量名">怎么样获取PHP函数默认参数的常量名
+        &raquo;</a></li>
+      
     </ul>
   </footer>
 </article>
@@ -328,6 +335,10 @@ travis也会忽略，所以采用了一个折中的方式来测试。因为测�
     <section class="well">
   <ul id="recent_posts" class="nav nav-list">
     <li class="nav-header">Recent Posts</li>
+    
+      <li class="post">
+        <a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">怎么样获取PHP函数默认参数的常量名</a>
+      </li>
     
       <li class="post">
         <a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a>
@@ -363,10 +374,6 @@ travis也会忽略，所以采用了一个折中的方式来测试。因为测�
     
       <li class="post">
         <a href="/2010/11/04/php-get-variables-name-a-php-impliment/">怎样获取PHP变量的变量名之PHP实现</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">Php Internal How To Get Variables Name An Extension Implement</a>
       </li>
     
   </ul>

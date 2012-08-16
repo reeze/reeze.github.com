@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PHP内核 | Zen Space | 寻找善美]]></title>
   <link href="http://reeze.cn/categories/php内核/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2012-07-18T22:48:42+08:00</updated>
+  <updated>2012-08-16T20:41:17+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -12,6 +12,123 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[怎么样获取PHP函数默认参数的常量名]]></title>
+    <link href="http://reeze.cn/2012/07/22/how-to-get-php-functions-const-parameters-name/"/>
+    <updated>2012-07-22T20:40:00+08:00</updated>
+    <id>http://reeze.cn/2012/07/22/how-to-get-php-functions-const-parameters-name</id>
+    <content type="html"><![CDATA[<p>好久没有更新了，发篇占位文：如果某个函数的默认参数是个常量，那么怎么样获取这个参数的常量名称？见代码：</p>
+
+<p>```php
+&lt;?php</p>
+
+<p>function new_blog($title = DEFAULT_TITLE) {</p>
+
+<pre><code>// blahblah
+</code></pre>
+
+<p>}
+```</p>
+
+<p>在上面的代码中，怎么样获取函数new_blog函数的参数$title所对应的默认值常量名： <code>DEFAULT_TITLE</code>。这个问题和以前我曾写过的一篇
+关于<a href="http://reeze.cn/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">如何获取变量名称</a>的博文相似。</p>
+
+<p>这个问题，在PHP5.4.6之前基本上没有解决方法了，因为函数定义是编译时的信息，在PHP运行时是获取不到的。
+当然这里说的无法实现是指的使用官方PHP版本时没法搞定。</p>
+
+<p>在PHP中类似的需求，一般都可以使用PHP的反射扩展。</p>
+
+<h3>PHP的反射(Reflection)</h3>
+
+<p>反射是PHP5中提供的用于获取或操作PHP内部信息的标准扩展，可能写应用代码的用户使用的较少一些，
+编写框架或者平台性的系统会使用到。</p>
+
+<p>比如你的框架需要实现一种插件机制，而你可能需要利用反射来获取类或者函数的元信息。
+这里就不对Reflection的使用做过多的介绍了，详细信息见官方文档： <a href="http://cn.php.net/manual/en/book.reflection.php">http://cn.php.net/manual/en/book.reflection.php</a></p>
+
+<h3>新的函数ReflectionParameter::getDefaultValueConstantName()</h3>
+
+<p>不过在PHP5.4.6之前，Reflection是没有实现该功能的。这个需求其实来自PHPUnit的作者<a href="https://github.com/sebastianbergmann">Sebastian Bergmann</a>。
+因为这个需求在Reflection模块来说是一个缺失，不属于大功能的升级，所以直接进入了目前的最新分支PHP-5.4。
+同时这个功能在PHP-5.4.6中可用了。<a href="https://github.com/php/php-src/blob/PHP-5.4.6/NEWS#L41">https://github.com/php/php-src/blob/PHP-5.4.6/NEWS#L41</a></p>
+
+<p>实现代码见：<a href="https://github.com/php/php-src/commit/13a9555342a4156a6150818234639b49a596ccd6">https://github.com/php/php-src/commit/13a9555342a4156a6150818234639b49a596ccd6</a>,
+这个方法目前没有使用说明，不过看名字应该也能明白。不过可以参考<a href="https://github.com/php/php-src/commit/13a9555342a4156a6150818234639b49a596ccd6#diff-1">测试用例</a>。</p>
+
+<p>这个提交给ReflectionParameter类增加了两个函数：</p>
+
+<ol>
+<li>ReflectionParameter::isDefaultValueConstant() 用于判断函数的这个参数是否是常量默认参数</li>
+<li>ReflectionParameter::getDefaultValueConstantName() 用于获取这个常量默认参数的参数名称</li>
+</ol>
+
+
+<p>```php
+&lt;?php
+define("CONST_TEST_1", "const1");</p>
+
+<p>function ReflectionParameterTest($test1=array(), $test2 = CONST_TEST_1) {</p>
+
+<pre><code>echo $test;
+</code></pre>
+
+<p>}
+$reflect = new ReflectionFunction('ReflectionParameterTest');
+foreach($reflect->getParameters() as $param) {</p>
+
+<pre><code>if($param-&gt;getName() == 'test1') {
+    var_dump($param-&gt;isDefaultValueConstant());
+}
+if($param-&gt;getName() == 'test2') {
+    var_dump($param-&gt;isDefaultValueConstant());
+}
+if($param-&gt;isDefaultValueAvailable() &amp;&amp; $param-&gt;isDefaultValueConstant()) {
+    var_dump($param-&gt;getDefaultValueConstantName());
+}
+</code></pre>
+
+<p>}</p>
+
+<p>class Foo2 {</p>
+
+<pre><code>const bar = 'Foo2::bar';
+</code></pre>
+
+<p>}</p>
+
+<p>class Foo {</p>
+
+<pre><code>const bar = 'Foo::bar';
+
+public function baz($param1 = self::bar, $param2=Foo2::bar, $param3=CONST_TEST_1) {
+}
+</code></pre>
+
+<p>}</p>
+
+<p>$method = new ReflectionMethod('Foo', 'baz');
+$params = $method->getParameters();</p>
+
+<p>foreach ($params as $param) {</p>
+
+<pre><code>if ($param-&gt;isDefaultValueConstant()) {
+    var_dump($param-&gt;getDefaultValueConstantName());
+}
+</code></pre>
+
+<p>}
+?>
+// 运行结果
+bool(false)
+bool(true)
+string(12) "CONST_TEST_1"
+string(9) "self::bar"
+string(9) "Foo2::bar"
+string(12) "CONST_TEST_1"
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PHP中的NOP及为什么有这个opcode]]></title>
@@ -29,8 +146,9 @@ GCC等编译器也会将特定的语句进行优化而产生空操作。</p>
 <p>PHP基于Zend虚拟机，其他基于虚拟机的语言中大都会有类似NOP的指令，
 PHP文档有对此的<a href="http://cn.php.net/manual/en/internals2.opcodes.nop.php">简单说明</a>：</p>
 
-<pre><code>[php]
-&lt;?php
+<p>```php</p>
+
+<pre><code>&lt;?php
 /*
  * no operation
  * opcode number: 0
@@ -50,6 +168,8 @@ line    #   op  fetch   ext return  operands
 6   0   RETURN              null
 </code></pre>
 
+<p>```</p>
+
 <p>上面的VLD结果可以看出，函数A()的声明编译后变成了<code>NOP</code>操作。</p>
 
 <p>Zend虚拟机是高级抽象，不要考虑内存对齐等的问题，为什么还需要空操作这样的opcode呢？</p>
@@ -58,6 +178,8 @@ line    #   op  fetch   ext return  operands
 在编译时替换成空操作。</p>
 
 <p>我们来看看这段代码的编译结果：</p>
+
+<p>```php</p>
 
 <pre><code>&lt;?php
 if(true) {
@@ -83,6 +205,8 @@ line     # *  op                           fetch          ext  return  operands
    9     7    &gt; RETURN  
 </code></pre>
 
+<p>```</p>
+
 <p>和前面官方函数定义代码一样，上面VLD输出的第7行看到类Bar的opcode变成了NOP，不过请留意第3行，
 这一行类Foo定义的opcode是ZEND_DECLARE_CLASS，也就是类的声明。</p>
 
@@ -107,6 +231,8 @@ line     # *  op                           fetch          ext  return  operands
 
 <p>先看看opcode编译过程的一个重要函数：</p>
 
+<p>```c</p>
+
 <pre><code>zend_op *get_next_op(zend_op_array *op_array TSRMLS_DC)
 {
     zend_uint next_op_num = op_array-&gt;last++;
@@ -129,6 +255,8 @@ line     # *  op                           fetch          ext  return  operands
     return next_op;
 }
 </code></pre>
+
+<p>```</p>
 
 <p>这个函数每次会返回一个zend_op(也就是opcode一个最小单位)，opcode的存储空间申请和哈希表类似，
 通过预先申请空间的方式，如果空间不足则适当扩容。在编译时，opcode是以文件为单位的，而通常

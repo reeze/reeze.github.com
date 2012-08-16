@@ -94,11 +94,15 @@
     </url>
     <url>
         <loc>http://reeze.cn/2012/05/28/what-opcode-zend-nop-is-in-php/</loc>
-        <lastmod>2012-07-07T20:58:57+08:00</lastmod>
+        <lastmod>2012-08-16T19:54:48+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2012/07/15/introduction-to-travis-ci/</loc>
-        <lastmod>2012-07-18T22:48:24+08:00</lastmod>
+        <lastmod>2012-08-16T19:58:57+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://reeze.cn/2012/07/22/how-to-get-php-functions-const-parameters-name/</loc>
+        <lastmod>2012-08-16T20:41:15+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/about/</loc>
@@ -106,10 +110,10 @@
     </url>
     <url>
         <loc>http://reeze.cn/blog/archives/</loc>
-        <lastmod>2012-07-18T22:48:24+08:00</lastmod>
+        <lastmod>2012-08-16T20:41:15+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/</loc>
-        <lastmod>2012-07-18T22:48:24+08:00</lastmod>
+        <lastmod>2012-08-16T20:41:15+08:00</lastmod>
     </url>
 </urlset>

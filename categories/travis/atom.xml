@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Travis | Zen Space | 寻找善美]]></title>
   <link href="http://reeze.cn/categories/travis/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2012-07-18T22:48:42+08:00</updated>
+  <updated>2012-08-16T20:41:17+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -45,7 +45,7 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 <p>要使用Travis，首先需要在你的代码根目录下包含一个叫做.travis.yml的文件，这是一个配置文件，
 为<a href="http://www.yaml.org">yaml格式</a></p>
 
-<p>```
+<p>```yml
 language: php
 php:
   - 5.2
@@ -77,8 +77,9 @@ php:
 <p>before_script 可以用来进行一些准备工作，例如php-leveldb扩展需要先安装leveldb才能编译。</p>
 
 <p>travis/prepare.sh文件做的工作也就是从leveldb官方下载代码并编译，
-最后编译扩展。
-```</p>
+最后编译扩展。</p>
+
+<p>```sh</p>
 
 <h1>!/bin/sh</h1>
 
@@ -94,7 +95,7 @@ phpize &amp;&amp; ./configure --with-leveldb=$PWD/leveldb-1.5.0 &amp;&amp; make
 <p>script属性就是测试的入口，可以是任何的sh命令。测试结果到底是成功还是失败会依据这个命令的
 返回值，如果返回非0结果，则表示测试失败，失败的时候就会给下面notifications设置的邮箱发送邮件。</p>
 
-<p>```</p>
+<p>```sh</p>
 
 <h1>!/bin/sh</h1>
 

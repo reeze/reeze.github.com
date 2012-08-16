@@ -9,9 +9,13 @@
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="Travis CI是一个基于云的持续集成项目，
-目前已经支持大部分主流语言了，比如：C，PHP，Ruby，Python, Nodejs等等。和Jenkins类似，
-Travis CI也是开源的，不过Travis和Github集成非常紧密，官方的集成测试托管只支持Github项目， &hellip;">
+  <meta name="description" content="好久没有更新了，发篇占位文：如果某个函数的默认参数是个常量，那么怎么样获取这个参数的常量名称？见代码： 1
+2
+3
+4
+5
+&lt;?php function new_blog($title = DEFAULT_TITLE) { // blahblah
+} 在上面的代码中， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +114,185 @@ Travis CI也是开源的，不过Travis和Github集成非常紧密，官方的�
       
   <header class="page-header">
     
+      <h1 class="entry-title"><a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">怎么样获取PHP函数默认参数的常量名</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-22T20:40:00+08:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2012</time>
+        
+         | <a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>好久没有更新了，发篇占位文：如果某个函数的默认参数是个常量，那么怎么样获取这个参数的常量名称？见代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">new_blog</span><span class="p">(</span><span class="nv">$title</span> <span class="o">=</span> <span class="nx">DEFAULT_TITLE</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// blahblah</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在上面的代码中，怎么样获取函数new_blog函数的参数$title所对应的默认值常量名： <code>DEFAULT_TITLE</code>。这个问题和以前我曾写过的一篇
+关于<a href="http://reeze.cn/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">如何获取变量名称</a>的博文相似。</p>
+
+<p>这个问题，在PHP5.4.6之前基本上没有解决方法了，因为函数定义是编译时的信息，在PHP运行时是获取不到的。
+当然这里说的无法实现是指的使用官方PHP版本时没法搞定。</p>
+
+<p>在PHP中类似的需求，一般都可以使用PHP的反射扩展。</p>
+
+<h3>PHP的反射(Reflection)</h3>
+
+<p>反射是PHP5中提供的用于获取或操作PHP内部信息的标准扩展，可能写应用代码的用户使用的较少一些，
+编写框架或者平台性的系统会使用到。</p>
+
+<p>比如你的框架需要实现一种插件机制，而你可能需要利用反射来获取类或者函数的元信息。
+这里就不对Reflection的使用做过多的介绍了，详细信息见官方文档： <a href="http://cn.php.net/manual/en/book.reflection.php">http://cn.php.net/manual/en/book.reflection.php</a></p>
+
+<h3>新的函数ReflectionParameter::getDefaultValueConstantName()</h3>
+
+<p>不过在PHP5.4.6之前，Reflection是没有实现该功能的。这个需求其实来自PHPUnit的作者<a href="https://github.com/sebastianbergmann">Sebastian Bergmann</a>。
+因为这个需求在Reflection模块来说是一个缺失，不属于大功能的升级，所以直接进入了目前的最新分支PHP-5.4。
+同时这个功能在PHP-5.4.6中可用了。<a href="https://github.com/php/php-src/blob/PHP-5.4.6/NEWS#L41">https://github.com/php/php-src/blob/PHP-5.4.6/NEWS#L41</a></p>
+
+<p>实现代码见：<a href="https://github.com/php/php-src/commit/13a9555342a4156a6150818234639b49a596ccd6">https://github.com/php/php-src/commit/13a9555342a4156a6150818234639b49a596ccd6</a>,
+这个方法目前没有使用说明，不过看名字应该也能明白。不过可以参考<a href="https://github.com/php/php-src/commit/13a9555342a4156a6150818234639b49a596ccd6#diff-1">测试用例</a>。</p>
+
+<p>这个提交给ReflectionParameter类增加了两个函数：</p>
+
+<ol>
+<li>ReflectionParameter::isDefaultValueConstant() 用于判断函数的这个参数是否是常量默认参数</li>
+<li>ReflectionParameter::getDefaultValueConstantName() 用于获取这个常量默认参数的参数名称</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="nb">define</span><span class="p">(</span><span class="s2">&quot;CONST_TEST_1&quot;</span><span class="p">,</span> <span class="s2">&quot;const1&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">ReflectionParameterTest</span><span class="p">(</span><span class="nv">$test1</span><span class="o">=</span><span class="k">array</span><span class="p">(),</span> <span class="nv">$test2</span> <span class="o">=</span> <span class="nx">CONST_TEST_1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">echo</span> <span class="nv">$test</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nv">$reflect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReflectionFunction</span><span class="p">(</span><span class="s1">&#39;ReflectionParameterTest&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">foreach</span><span class="p">(</span><span class="nv">$reflect</span><span class="o">-&gt;</span><span class="na">getParameters</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$param</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;test1&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueConstant</span><span class="p">());</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;test2&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueConstant</span><span class="p">());</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueAvailable</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueConstant</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">getDefaultValueConstantName</span><span class="p">());</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Foo2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">const</span> <span class="no">bar</span> <span class="o">=</span> <span class="s1">&#39;Foo2::bar&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">const</span> <span class="no">bar</span> <span class="o">=</span> <span class="s1">&#39;Foo::bar&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">baz</span><span class="p">(</span><span class="nv">$param1</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="na">bar</span><span class="p">,</span> <span class="nv">$param2</span><span class="o">=</span><span class="nx">Foo2</span><span class="o">::</span><span class="na">bar</span><span class="p">,</span> <span class="nv">$param3</span><span class="o">=</span><span class="nx">CONST_TEST_1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$method</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReflectionMethod</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$params</span> <span class="o">=</span> <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">getParameters</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$params</span> <span class="k">as</span> <span class="nv">$param</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueConstant</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">getDefaultValueConstantName</span><span class="p">());</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">// 运行结果</span>
+</span><span class='line'><span class="x">bool(false)</span>
+</span><span class='line'><span class="x">bool(true)</span>
+</span><span class='line'><span class="x">string(12) &quot;CONST_TEST_1&quot;</span>
+</span><span class='line'><span class="x">string(9) &quot;self::bar&quot;</span>
+</span><span class='line'><span class="x">string(9) &quot;Foo2::bar&quot;</span>
+</span><span class='line'><span class="x">string(12) &quot;CONST_TEST_1&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
       <h1 class="entry-title"><a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a></h1>
     
     
@@ -162,7 +345,7 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 <p>要使用Travis，首先需要在你的代码根目录下包含一个叫做.travis.yml的文件，这是一个配置文件，
 为<a href="http://www.yaml.org">yaml格式</a></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -178,22 +361,23 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
 <span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>language: php
-</span><span class='line'>php:
-</span><span class='line'>  - 5.2
-</span><span class='line'>  - 5.3
-</span><span class='line'>  - 5.4
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">php</span>
+</span><span class='line'><span class="l-Scalar-Plain">php</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">5.2</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">5.3</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">5.4</span>
 </span><span class='line'>
-</span><span class='line'>env:
-</span><span class='line'>  - REPORT_EXIT_STATUS=1 NO_INTERACTION=1
+</span><span class='line'><span class="l-Scalar-Plain">env</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">REPORT_EXIT_STATUS=1 NO_INTERACTION=1</span>
 </span><span class='line'>
-</span><span class='line'>before_script: sh travis/prepare.sh
+</span><span class='line'><span class="l-Scalar-Plain">before_script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">sh travis/prepare.sh</span>
 </span><span class='line'>
-</span><span class='line'>script: sh travis/run-test.sh
+</span><span class='line'><span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">sh travis/run-test.sh</span>
 </span><span class='line'>
-</span><span class='line'>notifications:
-</span><span class='line'>  email:
-</span><span class='line'>    - reeze.xia@gmail.com</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="l-Scalar-Plain">notifications</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">email</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">reeze.xia@gmail.com</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>配置简单明了，选择需要的语言，同时可以设置需要测试的语言版本，因为php-leveldb支持5.2 ~ 5.4,
@@ -208,20 +392,21 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 <p>travis/prepare.sh文件做的工作也就是从leveldb官方下载代码并编译，
 最后编译扩展。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/sh
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/sh</span>
 </span><span class='line'>
 </span><span class='line'>wget http://leveldb.googlecode.com/files/leveldb-1.5.0.tar.gz
 </span><span class='line'>tar zxvf leveldb-1.5.0.tar.gz
-</span><span class='line'>cd leveldb-1.5.0 && make
-</span><span class='line'>cd ..
-</span><span class='line'>phpize && ./configure --with-leveldb=$PWD/leveldb-1.5.0 && make</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="nb">cd </span>leveldb-1.5.0 <span class="o">&amp;&amp;</span> make
+</span><span class='line'><span class="nb">cd</span> ..
+</span><span class='line'>phpize <span class="o">&amp;&amp;</span> ./configure --with-leveldb<span class="o">=</span><span class="nv">$PWD</span>/leveldb-1.5.0 <span class="o">&amp;&amp;</span> make
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>travis可以执行任何脚本。因为travis在执行测试之前会建立一个虚拟机用于测试。</p>
@@ -229,7 +414,7 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 <p>script属性就是测试的入口，可以是任何的sh命令。测试结果到底是成功还是失败会依据这个命令的
 返回值，如果返回非0结果，则表示测试失败，失败的时候就会给下面notifications设置的邮箱发送邮件。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -240,17 +425,18 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/sh
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/sh</span>
 </span><span class='line'>
-</span><span class='line'>make test
+</span><span class='line'>make <span class="nb">test</span>
 </span><span class='line'>
-</span><span class='line'># make test didn't return status code correctly
-</span><span class='line'># use this to find whether the make test failed
-</span><span class='line'>cat tests/\*.diff
+</span><span class='line'><span class="c"># make test didn&#39;t return status code correctly</span>
+</span><span class='line'><span class="c"># use this to find whether the make test failed</span>
+</span><span class='line'>cat tests/<span class="se">\*</span>.diff
 </span><span class='line'>
-</span><span class='line'>if [ $? -eq 0 ]; then
-</span><span class='line'>  exit 1;
-</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq 0 <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">  </span><span class="nb">exit </span>1;
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>从上面的注释里也提到，因为PHP生成的<a href="https://bugs.php.net/bug.php?id=60285">测试不能正常的返回错误码</a>，这样的结果是即使测试失败了，
@@ -309,26 +495,44 @@ GCC等编译器也会将特定的语句进行优化而产生空操作。</p>
 <p>PHP基于Zend虚拟机，其他基于虚拟机的语言中大都会有类似NOP的指令，
 PHP文档有对此的<a href="http://cn.php.net/manual/en/internals2.opcodes.nop.php">简单说明</a>：</p>
 
-<pre><code>[php]
-&lt;?php
-/*
- * no operation
- * opcode number: 0
- */
-function A(){}; 
-?&gt;
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm"> * no operation</span>
+</span><span class='line'><span class="cm"> * opcode number: 0</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="k">function</span> <span class="nf">A</span><span class="p">(){};</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span><span class='line'>
+</span><span class='line'><span class="x">/* VLD 的输出结果 */</span>
+</span><span class='line'><span class="x">line  #   op  fetch   ext return  operands</span>
+</span><span class='line'><span class="x">6 0   NOP              </span>
+</span><span class='line'><span class="x">7 1   RETURN              1</span>
+</span><span class='line'><span class="x">Function name: A</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">Compiled variables: none</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">line  #   op  fetch   ext return  operands</span>
+</span><span class='line'><span class="x">6 0   RETURN              null</span>
+</span></code></pre></td></tr></table></div></figure>
 
-/* VLD 的输出结果 */
-line    #   op  fetch   ext return  operands
-6   0   NOP              
-7   1   RETURN              1
-Function name: A
-
-Compiled variables: none
-
-line    #   op  fetch   ext return  operands
-6   0   RETURN              null
-</code></pre>
 
 <p>上面的VLD结果可以看出，函数A()的声明编译后变成了<code>NOP</code>操作。</p>
 
@@ -339,29 +543,52 @@ line    #   op  fetch   ext return  operands
 
 <p>我们来看看这段代码的编译结果：</p>
 
-<pre><code>&lt;?php
-if(true) {
-    class Foo {}
-}
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">Foo</span> <span class="p">{}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">new</span> <span class="nx">Bar</span><span class="p">();</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Bar</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">filename</span><span class="o">:</span>       <span class="o">/</span><span class="nx">Users</span><span class="o">/</span><span class="nx">reeze</span><span class="o">/</span><span class="nx">Opensource</span><span class="o">/</span><span class="nx">php</span><span class="o">-</span><span class="nx">test</span><span class="o">/</span><span class="nx">php</span><span class="o">-</span><span class="nx">src</span><span class="o">-</span><span class="mf">5.4</span><span class="o">/</span><span class="nx">test</span><span class="o">.</span><span class="nx">php</span>
+</span><span class='line'><span class="k">function</span> <span class="nf">name</span><span class="o">:</span>  <span class="p">(</span><span class="k">null</span><span class="p">)</span>
+</span><span class='line'><span class="nx">number</span> <span class="nx">of</span> <span class="nx">ops</span><span class="o">:</span>  <span class="mi">8</span>
+</span><span class='line'><span class="nx">compiled</span> <span class="nx">vars</span><span class="o">:</span>  <span class="nx">none</span>
+</span><span class='line'><span class="nx">line</span>     <span class="c1"># *  op                           fetch          ext  return  operands</span>
+</span><span class='line'><span class="o">---------------------------------------------------------------------------------</span>
+</span><span class='line'>   <span class="mi">2</span>     <span class="mi">0</span>  <span class="o">&gt;</span> <span class="o">&gt;</span> <span class="nx">JMPZ</span>                                                     <span class="k">true</span><span class="p">,</span> <span class="o">-&gt;</span><span class="mi">3</span>
+</span><span class='line'>   <span class="mi">3</span>     <span class="mi">1</span>  <span class="o">&gt;</span>   <span class="nx">ZEND_DECLARE_CLASS</span>                               <span class="err">$</span><span class="mi">0</span>      <span class="s1">&#39;%00foo%2FUsers%2Freeze%2FOpensource%2Fphp-test%2Fphp-src-5.4%2Ftest.php0x106cd601f&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span>
+</span><span class='line'>   <span class="mi">4</span>     <span class="mi">2</span>    <span class="o">&gt;</span> <span class="nx">JMP</span>                                                      <span class="o">-&gt;</span><span class="mi">3</span>
+</span><span class='line'>   <span class="mi">6</span>     <span class="mi">3</span>  <span class="o">&gt;</span>   <span class="nx">ZEND_FETCH_CLASS</span>                              <span class="mi">4</span>  <span class="o">:</span><span class="mi">1</span>      <span class="s1">&#39;Bar&#39;</span>
+</span><span class='line'>       <span class="mi">4</span>      <span class="k">NEW</span>                                                      <span class="o">:</span><span class="mi">1</span>
+</span><span class='line'>       <span class="mi">5</span>      <span class="nx">DO_FCALL_BY_NAME</span>                              <span class="mi">0</span>
+</span><span class='line'>   <span class="mi">7</span>     <span class="mi">6</span>      <span class="nx">NOP</span>
+</span><span class='line'>   <span class="mi">9</span>     <span class="mi">7</span>    <span class="o">&gt;</span> <span class="k">RETURN</span>
+</span></code></pre></td></tr></table></div></figure>
 
-new Bar();
-class Bar {}
-
-filename:       /Users/reeze/Opensource/php-test/php-src-5.4/test.php
-function name:  (null)
-number of ops:  8
-compiled vars:  none
-line     # *  op                           fetch          ext  return  operands
----------------------------------------------------------------------------------
-   2     0  &gt; &gt; JMPZ                                                     true, -&gt;3
-   3     1  &gt;   ZEND_DECLARE_CLASS                               $0      '%00foo%2FUsers%2Freeze%2FOpensource%2Fphp-test%2Fphp-src-5.4%2Ftest.php0x106cd601f', 'foo'
-   4     2    &gt; JMP                                                      -&gt;3
-   6     3  &gt;   ZEND_FETCH_CLASS                              4  :1      'Bar'
-         4      NEW                                                      :1
-         5      DO_FCALL_BY_NAME                              0          
-   7     6      NOP                                                      
-   9     7    &gt; RETURN  
-</code></pre>
 
 <p>和前面官方函数定义代码一样，上面VLD输出的第7行看到类Bar的opcode变成了NOP，不过请留意第3行，
 这一行类Foo定义的opcode是ZEND_DECLARE_CLASS，也就是类的声明。</p>
@@ -387,28 +614,50 @@ line     # *  op                           fetch          ext  return  operands
 
 <p>先看看opcode编译过程的一个重要函数：</p>
 
-<pre><code>zend_op *get_next_op(zend_op_array *op_array TSRMLS_DC)
-{
-    zend_uint next_op_num = op_array-&gt;last++;
-    zend_op *next_op;
-    if (next_op_num &gt;= CG(context).opcodes_size) {
-        if (op_array-&gt;fn_flags &amp; ZEND_ACC_INTERACTIVE) {
-            /* we messed up */
-            zend_printf("Ran out of opcode space!\n"
-                        "You should probably consider writing this huge script into a file!\n");
-            zend_bailout();
-        }
-        CG(context).opcodes_size *= 4;
-        op_array_alloc_ops(op_array, CG(context).opcodes_size);
-    }
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">zend_op</span> <span class="o">*</span><span class="nf">get_next_op</span><span class="p">(</span><span class="n">zend_op_array</span> <span class="o">*</span><span class="n">op_array</span> <span class="n">TSRMLS_DC</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">zend_uint</span> <span class="n">next_op_num</span> <span class="o">=</span> <span class="n">op_array</span><span class="o">-&gt;</span><span class="n">last</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">zend_op</span> <span class="o">*</span><span class="n">next_op</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">next_op_num</span> <span class="o">&gt;=</span> <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">op_array</span><span class="o">-&gt;</span><span class="n">fn_flags</span> <span class="o">&amp;</span> <span class="n">ZEND_ACC_INTERACTIVE</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="cm">/* we messed up */</span>
+</span><span class='line'>          <span class="n">zend_printf</span><span class="p">(</span><span class="s">&quot;Ran out of opcode space!</span><span class="se">\n</span><span class="s">&quot;</span>
+</span><span class='line'>                      <span class="s">&quot;You should probably consider writing this huge script into a file!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>          <span class="n">zend_bailout</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span> <span class="o">*=</span> <span class="mi">4</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">op_array_alloc_ops</span><span class="p">(</span><span class="n">op_array</span><span class="p">,</span> <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">next_op</span> <span class="o">=</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">op_array</span><span class="o">-&gt;</span><span class="n">opcodes</span><span class="p">[</span><span class="n">next_op_num</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">init_op</span><span class="p">(</span><span class="n">next_op</span> <span class="n">TSRMLS_CC</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="n">next_op</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-    next_op = &amp;(op_array-&gt;opcodes[next_op_num]);
-
-    init_op(next_op TSRMLS_CC);
-
-    return next_op;
-}
-</code></pre>
 
 <p>这个函数每次会返回一个zend_op(也就是opcode一个最小单位)，opcode的存储空间申请和哈希表类似，
 通过预先申请空间的方式，如果空间不足则适当扩容。在编译时，opcode是以文件为单位的，而通常
@@ -891,49 +1140,6 @@ return $aDiffKeys[0];
 
     </article>
   
-  
-    <article>
-      
-  <header class="page-header">
-    
-      <h1 class="entry-title"><a href="/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">Php Internal How to Get Variables Name an Extension Implement</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-10-30T00:00:00+08:00" pubdate data-updated="true">Oct 30<span>th</span>, 2010</time>
-        
-         | <a href="/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>[?25l[J[J[J[J[J[J[?12l[?25h[?1049h[?1h=[1;37r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[37;1H&#8221;2010-10-30-php-internal-how-to-get-variables-name-an-extension-implement.markdown&#8221; 301L, 12377C[1;1H&#8212;
-date: &#8216;2010-10-30 00:39:01&#8217;
-layout: post
-slug: php-internal-how-to-get-variables-name-an-extension-implement
-status: publish
-title: &#8216;[PHP-Internal]鎬庝箞鏍疯幏鍙朠HP鍙橀噺鐨勫彉閲忓悕涔嬫墿灞曞疄鐜</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <ul class="pager">
     
     <li class="previous"><a href="/page/2/">&larr; Older</a></li>
@@ -947,6 +1153,10 @@ title: &#8216;[PHP-Internal]鎬庝箞鏍疯幏鍙朠HP鍙橀噺鐨勫彉閲忓�
     <section class="well">
   <ul id="recent_posts" class="nav nav-list">
     <li class="nav-header">Recent Posts</li>
+    
+      <li class="post">
+        <a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">怎么样获取PHP函数默认参数的常量名</a>
+      </li>
     
       <li class="post">
         <a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a>
@@ -982,10 +1192,6 @@ title: &#8216;[PHP-Internal]鎬庝箞鏍疯幏鍙朠HP鍙橀噺鐨勫彉閲忓�
     
       <li class="post">
         <a href="/2010/11/04/php-get-variables-name-a-php-impliment/">怎样获取PHP变量的变量名之PHP实现</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">Php Internal How To Get Variables Name An Extension Implement</a>
       </li>
     
   </ul>

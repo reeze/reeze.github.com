@@ -144,26 +144,44 @@ GCC等编译器也会将特定的语句进行优化而产生空操作。</p>
 <p>PHP基于Zend虚拟机，其他基于虚拟机的语言中大都会有类似NOP的指令，
 PHP文档有对此的<a href="http://cn.php.net/manual/en/internals2.opcodes.nop.php">简单说明</a>：</p>
 
-<pre><code>[php]
-&lt;?php
-/*
- * no operation
- * opcode number: 0
- */
-function A(){}; 
-?&gt;
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm"> * no operation</span>
+</span><span class='line'><span class="cm"> * opcode number: 0</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="k">function</span> <span class="nf">A</span><span class="p">(){};</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span><span class='line'>
+</span><span class='line'><span class="x">/* VLD 的输出结果 */</span>
+</span><span class='line'><span class="x">line  #   op  fetch   ext return  operands</span>
+</span><span class='line'><span class="x">6 0   NOP              </span>
+</span><span class='line'><span class="x">7 1   RETURN              1</span>
+</span><span class='line'><span class="x">Function name: A</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">Compiled variables: none</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">line  #   op  fetch   ext return  operands</span>
+</span><span class='line'><span class="x">6 0   RETURN              null</span>
+</span></code></pre></td></tr></table></div></figure>
 
-/* VLD 的输出结果 */
-line    #   op  fetch   ext return  operands
-6   0   NOP              
-7   1   RETURN              1
-Function name: A
-
-Compiled variables: none
-
-line    #   op  fetch   ext return  operands
-6   0   RETURN              null
-</code></pre>
 
 <p>上面的VLD结果可以看出，函数A()的声明编译后变成了<code>NOP</code>操作。</p>
 
@@ -174,29 +192,52 @@ line    #   op  fetch   ext return  operands
 
 <p>我们来看看这段代码的编译结果：</p>
 
-<pre><code>&lt;?php
-if(true) {
-    class Foo {}
-}
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">Foo</span> <span class="p">{}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">new</span> <span class="nx">Bar</span><span class="p">();</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Bar</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">filename</span><span class="o">:</span>       <span class="o">/</span><span class="nx">Users</span><span class="o">/</span><span class="nx">reeze</span><span class="o">/</span><span class="nx">Opensource</span><span class="o">/</span><span class="nx">php</span><span class="o">-</span><span class="nx">test</span><span class="o">/</span><span class="nx">php</span><span class="o">-</span><span class="nx">src</span><span class="o">-</span><span class="mf">5.4</span><span class="o">/</span><span class="nx">test</span><span class="o">.</span><span class="nx">php</span>
+</span><span class='line'><span class="k">function</span> <span class="nf">name</span><span class="o">:</span>  <span class="p">(</span><span class="k">null</span><span class="p">)</span>
+</span><span class='line'><span class="nx">number</span> <span class="nx">of</span> <span class="nx">ops</span><span class="o">:</span>  <span class="mi">8</span>
+</span><span class='line'><span class="nx">compiled</span> <span class="nx">vars</span><span class="o">:</span>  <span class="nx">none</span>
+</span><span class='line'><span class="nx">line</span>     <span class="c1"># *  op                           fetch          ext  return  operands</span>
+</span><span class='line'><span class="o">---------------------------------------------------------------------------------</span>
+</span><span class='line'>   <span class="mi">2</span>     <span class="mi">0</span>  <span class="o">&gt;</span> <span class="o">&gt;</span> <span class="nx">JMPZ</span>                                                     <span class="k">true</span><span class="p">,</span> <span class="o">-&gt;</span><span class="mi">3</span>
+</span><span class='line'>   <span class="mi">3</span>     <span class="mi">1</span>  <span class="o">&gt;</span>   <span class="nx">ZEND_DECLARE_CLASS</span>                               <span class="err">$</span><span class="mi">0</span>      <span class="s1">&#39;%00foo%2FUsers%2Freeze%2FOpensource%2Fphp-test%2Fphp-src-5.4%2Ftest.php0x106cd601f&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span>
+</span><span class='line'>   <span class="mi">4</span>     <span class="mi">2</span>    <span class="o">&gt;</span> <span class="nx">JMP</span>                                                      <span class="o">-&gt;</span><span class="mi">3</span>
+</span><span class='line'>   <span class="mi">6</span>     <span class="mi">3</span>  <span class="o">&gt;</span>   <span class="nx">ZEND_FETCH_CLASS</span>                              <span class="mi">4</span>  <span class="o">:</span><span class="mi">1</span>      <span class="s1">&#39;Bar&#39;</span>
+</span><span class='line'>       <span class="mi">4</span>      <span class="k">NEW</span>                                                      <span class="o">:</span><span class="mi">1</span>
+</span><span class='line'>       <span class="mi">5</span>      <span class="nx">DO_FCALL_BY_NAME</span>                              <span class="mi">0</span>
+</span><span class='line'>   <span class="mi">7</span>     <span class="mi">6</span>      <span class="nx">NOP</span>
+</span><span class='line'>   <span class="mi">9</span>     <span class="mi">7</span>    <span class="o">&gt;</span> <span class="k">RETURN</span>
+</span></code></pre></td></tr></table></div></figure>
 
-new Bar();
-class Bar {}
-
-filename:       /Users/reeze/Opensource/php-test/php-src-5.4/test.php
-function name:  (null)
-number of ops:  8
-compiled vars:  none
-line     # *  op                           fetch          ext  return  operands
----------------------------------------------------------------------------------
-   2     0  &gt; &gt; JMPZ                                                     true, -&gt;3
-   3     1  &gt;   ZEND_DECLARE_CLASS                               $0      '%00foo%2FUsers%2Freeze%2FOpensource%2Fphp-test%2Fphp-src-5.4%2Ftest.php0x106cd601f', 'foo'
-   4     2    &gt; JMP                                                      -&gt;3
-   6     3  &gt;   ZEND_FETCH_CLASS                              4  :1      'Bar'
-         4      NEW                                                      :1
-         5      DO_FCALL_BY_NAME                              0          
-   7     6      NOP                                                      
-   9     7    &gt; RETURN  
-</code></pre>
 
 <p>和前面官方函数定义代码一样，上面VLD输出的第7行看到类Bar的opcode变成了NOP，不过请留意第3行，
 这一行类Foo定义的opcode是ZEND_DECLARE_CLASS，也就是类的声明。</p>
@@ -222,28 +263,50 @@ line     # *  op                           fetch          ext  return  operands
 
 <p>先看看opcode编译过程的一个重要函数：</p>
 
-<pre><code>zend_op *get_next_op(zend_op_array *op_array TSRMLS_DC)
-{
-    zend_uint next_op_num = op_array-&gt;last++;
-    zend_op *next_op;
-    if (next_op_num &gt;= CG(context).opcodes_size) {
-        if (op_array-&gt;fn_flags &amp; ZEND_ACC_INTERACTIVE) {
-            /* we messed up */
-            zend_printf("Ran out of opcode space!\n"
-                        "You should probably consider writing this huge script into a file!\n");
-            zend_bailout();
-        }
-        CG(context).opcodes_size *= 4;
-        op_array_alloc_ops(op_array, CG(context).opcodes_size);
-    }
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">zend_op</span> <span class="o">*</span><span class="nf">get_next_op</span><span class="p">(</span><span class="n">zend_op_array</span> <span class="o">*</span><span class="n">op_array</span> <span class="n">TSRMLS_DC</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">zend_uint</span> <span class="n">next_op_num</span> <span class="o">=</span> <span class="n">op_array</span><span class="o">-&gt;</span><span class="n">last</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">zend_op</span> <span class="o">*</span><span class="n">next_op</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">next_op_num</span> <span class="o">&gt;=</span> <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">op_array</span><span class="o">-&gt;</span><span class="n">fn_flags</span> <span class="o">&amp;</span> <span class="n">ZEND_ACC_INTERACTIVE</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="cm">/* we messed up */</span>
+</span><span class='line'>          <span class="n">zend_printf</span><span class="p">(</span><span class="s">&quot;Ran out of opcode space!</span><span class="se">\n</span><span class="s">&quot;</span>
+</span><span class='line'>                      <span class="s">&quot;You should probably consider writing this huge script into a file!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>          <span class="n">zend_bailout</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span> <span class="o">*=</span> <span class="mi">4</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">op_array_alloc_ops</span><span class="p">(</span><span class="n">op_array</span><span class="p">,</span> <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">next_op</span> <span class="o">=</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">op_array</span><span class="o">-&gt;</span><span class="n">opcodes</span><span class="p">[</span><span class="n">next_op_num</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">init_op</span><span class="p">(</span><span class="n">next_op</span> <span class="n">TSRMLS_CC</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="n">next_op</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-    next_op = &amp;(op_array-&gt;opcodes[next_op_num]);
-
-    init_op(next_op TSRMLS_CC);
-
-    return next_op;
-}
-</code></pre>
 
 <p>这个函数每次会返回一个zend_op(也就是opcode一个最小单位)，opcode的存储空间申请和哈希表类似，
 通过预先申请空间的方式，如果空间不足则适当扩容。在编译时，opcode是以文件为单位的，而通常
@@ -336,6 +399,10 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
     <li class="nav-header">Recent Posts</li>
     
       <li class="post">
+        <a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">怎么样获取PHP函数默认参数的常量名</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a>
       </li>
     
@@ -369,10 +436,6 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
     
       <li class="post">
         <a href="/2010/11/04/php-get-variables-name-a-php-impliment/">怎样获取PHP变量的变量名之PHP实现</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">Php Internal How To Get Variables Name An Extension Implement</a>
       </li>
     
   </ul>
