@@ -17,7 +17,7 @@ GCC等编译器也会将特定的语句进行优化而产生空操作。
 PHP基于Zend虚拟机，其他基于虚拟机的语言中大都会有类似NOP的指令，
 PHP文档有对此的[简单说明](http://cn.php.net/manual/en/internals2.opcodes.nop.php)：
 
-	[php]
+```php
 	<?php
 	/*
 	 * no operation
@@ -36,6 +36,7 @@ PHP文档有对此的[简单说明](http://cn.php.net/manual/en/internals2.opcod
 
 	line	#	op	fetch	ext	return	operands
 	6	0	RETURN	 	 	 	null
+```
 
 上面的VLD结果可以看出，函数A()的声明编译后变成了`NOP`操作。
 
@@ -46,6 +47,7 @@ Zend虚拟机是高级抽象，不要考虑内存对齐等的问题，为什么�
 
 我们来看看这段代码的编译结果：
 
+```php
 	<?php
 	if(true) {
 		class Foo {}
@@ -68,6 +70,8 @@ Zend虚拟机是高级抽象，不要考虑内存对齐等的问题，为什么�
 			 5      DO_FCALL_BY_NAME                              0          
 	   7     6      NOP                                                      
 	   9     7    > RETURN  
+```
+
 
 和前面官方函数定义代码一样，上面VLD输出的第7行看到类Bar的opcode变成了NOP，不过请留意第3行，
 这一行类Foo定义的opcode是ZEND_DECLARE_CLASS，也就是类的声明。
@@ -92,6 +96,7 @@ Zend虚拟机是高级抽象，不要考虑内存对齐等的问题，为什么�
 
 先看看opcode编译过程的一个重要函数：
 
+```c
 	zend_op *get_next_op(zend_op_array *op_array TSRMLS_DC)
 	{
 		zend_uint next_op_num = op_array->last++;
@@ -113,6 +118,7 @@ Zend虚拟机是高级抽象，不要考虑内存对齐等的问题，为什么�
 
 		return next_op;
 	}
+```
 
 这个函数每次会返回一个zend\_op(也就是opcode一个最小单位)，opcode的存储空间申请和哈希表类似，
 通过预先申请空间的方式，如果空间不足则适当扩容。在编译时，opcode是以文件为单位的，而通常

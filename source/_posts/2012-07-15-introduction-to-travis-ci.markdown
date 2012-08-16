@@ -38,7 +38,7 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 要使用Travis，首先需要在你的代码根目录下包含一个叫做.travis.yml的文件，这是一个配置文件，
 为[yaml格式](http://www.yaml.org)
 
-```
+```yml
 language: php
 php:
   - 5.2
@@ -68,7 +68,8 @@ before_script 可以用来进行一些准备工作，例如php-leveldb扩展需�
 
 travis/prepare.sh文件做的工作也就是从leveldb官方下载代码并编译，
 最后编译扩展。
-```
+
+```sh
 #!/bin/sh
 
 wget http://leveldb.googlecode.com/files/leveldb-1.5.0.tar.gz
@@ -83,7 +84,7 @@ travis可以执行任何脚本。因为travis在执行测试之前会建立一�
 script属性就是测试的入口，可以是任何的sh命令。测试结果到底是成功还是失败会依据这个命令的
 返回值，如果返回非0结果，则表示测试失败，失败的时候就会给下面notifications设置的邮箱发送邮件。
 
-```
+```sh
 #!/bin/sh
 
 make test
