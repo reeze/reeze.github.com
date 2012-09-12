@@ -13,7 +13,7 @@ footer: true
 	reeze
 
 关注Linux, Web, 2.0, Ajax, Mac OS
-C/C++, Ruby, PHP, Rails, Erlang, <del>Javascript CSS</del>
+C/C++, Ruby, PHP, Rails, Erlang, <del>Javascript, CSS</del>
 苹果迷，热爱开源。喜欢探究世界的运转方式。
 
 ## 项目
@@ -23,7 +23,7 @@ Fork me @github :<http://github.com/reeze>
 1. TIPI: 深入理解PHP内核 <http://www.php-internal.com>
    TIPI是一个关于PHP内部实现原理的项目。
 1. PHP-LevelDB <http://reeze.cn/php-leveldb>
-   PHP-LevelDB是一个google leveldb的PHP扩展
+   PHP-LevelDB是一个Google LevelDB的PHP扩展
 1. TiPHP TiPHP是PHP子集的一个小型实现, WIP 
 1. [Find More](http://github.com/reeze)
 
@@ -40,4 +40,5 @@ Fork me @github :<http://github.com/reeze>
 
 - Twitter: follow me  [@reeze\_xia](http://twitter.com/reeze_xia)
 - 新浪微博： [@reeze](http://weibo.com/reeze)
+- 邮箱: reeze(#)php.net
 - Gtalk: reeze.xia(#)gmail.com 最常用
