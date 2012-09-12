@@ -9,13 +9,8 @@
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="好久没有更新了，发篇占位文：如果某个函数的默认参数是个常量，那么怎么样获取这个参数的常量名称？见代码： 1
-2
-3
-4
-5
-&lt;?php function new_blog($title = DEFAULT_TITLE) { // blahblah
-} 在上面的代码中， &hellip;">
+  <meta name="description" content="很开心，第一个提交的PHP扩展已经在PECL官方发布了，这是一个Google LevelDB的PHP
+封装，主要用于对LevelDB的访问，目前已经实现了LevelDB最具价值的一些特性：迭代器，快照等。 如果有需要可以前去 http://pecl.php.net/package/leveldb &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +103,50 @@
     <div class="row-fluid">
       <div class="span9">
   
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
+      <h1 class="entry-title"><a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-12T23:16:00+08:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
+        
+         | <a href="/2012/09/12/new-ext-php-leveldb-pecl/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>很开心，第一个提交的PHP扩展已经在PECL官方发布了，这是一个<a href="http://code.google.com/p/leveldb/">Google LevelDB</a>的PHP
+封装，主要用于对LevelDB的访问，目前已经实现了LevelDB最具价值的一些特性：迭代器，快照等。</p>
+
+<p>如果有需要可以前去 <a href="http://pecl.php.net/package/leveldb">http://pecl.php.net/package/leveldb</a> 下载。基本的使用说明在<a href="http://reeze.cn/php-leveldb/">http://reeze.cn/php-leveldb/</a>
+详细的API文档由勤劳高效的胖胖<a href="http://www.phppan.com/">http://www.phppan.com/</a>编写，不过还没有发布。</p>
+
+<p>于此同时，还获得了@php.net的马甲一枚: reeze(at)php.net。MARK一下。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1070,76 +1109,6 @@ alert(multiply(100));
 
     </article>
   
-  
-    <article>
-      
-  <header class="page-header">
-    
-      <h1 class="entry-title"><a href="/2010/11/04/php-get-variables-name-a-php-impliment/">怎样获取PHP变量的变量名之PHP实现</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-11-04T11:07:37+08:00" pubdate data-updated="true">Nov 4<span>th</span>, 2010</time>
-        
-         | <a href="/2010/11/04/php-get-variables-name-a-php-impliment/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://reeze.cn/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">上一篇文章</a>里提到是用PHP扩展实现获取变量的变量名的方法. 今天发现有一个PHP实现的版本 . 实现方法来自:http://mach13.com/how-to-get-a-variable-name-as-a-string-in-php</p>
-
-<p><strong>刚开始以为这个方法好使, 仔细想想其实也是有问题的.</strong>
-<del>
-这个解决方法是用的PHP里的get_defined_vars()方法,该方法返回当前作用域内的所有变量信息.也是和$GLOBALS一样,以变量名 => 值的方式返回.
-他的代码很简单:</p>
-
-<p>`
-$v)</p>
-
-<pre><code>    $aDefinedVars_0[$k] = $v;
-
-$iVarSave = $iVar;
-$iVar     =!$iVar;   // 将当前变量的值取反
-
-$aDiffKeys = array_keys (array_diff_assoc ($aDefinedVars_0, $aDefinedVars));  // 对比取反前后的变量
-$iVar      = $iVarSave; // 恢复当前变量的值
-
-return $aDiffKeys[0];
-}
-</code></pre>
-
-<p>?></p>
-
-<p>`</p>
-
-<p>它通过引用的方式改变当前变量的值, 然后通过对比前后两个数组的差异来获取值被改变了的变量.然后返回其名字.经过测试这的确是一个方法.相对我实现的方法. 它提供的方法移植性较好, 不需要赖以扩展. 而这个php版本的实现, 必须传递一个get_defined_vars()的参数, 我实现的那个扩展,则不需要. 对于类似 var_name($a=10,get_defined_vars()); 的调用,该方法无法正常获得变量名.
-</del></p>
-
-<p>这个今天又仔细想了想,下面提供的方法是有问题的.. 他解决问题的方法是通过修改变量的值, 并对比前后所有的变量来找出值发生变化的变量. 而实际上.修改了其中一个变量另一个变量的值也会发生变化: 这就是引用, 如下
-`</p>
-
-<p>PS: 如果你真的需要这种方法. 请重新思考一下你的需要真的需要这样的方法么?</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <ul class="pager">
     
     <li class="previous"><a href="/page/2/">&larr; Older</a></li>
@@ -1153,6 +1122,10 @@ return $aDiffKeys[0];
     <section class="well">
   <ul id="recent_posts" class="nav nav-list">
     <li class="nav-header">Recent Posts</li>
+    
+      <li class="post">
+        <a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a>
+      </li>
     
       <li class="post">
         <a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">怎么样获取PHP函数默认参数的常量名</a>
@@ -1188,10 +1161,6 @@ return $aDiffKeys[0];
     
       <li class="post">
         <a href="/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/">PHP Puzzle(一): 有趣的变量作用域-PHP中global和Javascript中的var关键字</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/11/04/php-get-variables-name-a-php-impliment/">怎样获取PHP变量的变量名之PHP实现</a>
       </li>
     
   </ul>
