@@ -14,7 +14,10 @@ tags:
 - Snow Leopard
 ---
 
-在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2之后出现fusefs.kext can't load的错误，从官方得知目前macfuse在snow leopard下有问题，在网上看到[这篇贴子](http://forums.macrumors.com/showthread.php?t=785376)提到Snow Leopard其实原生就支持NTFS分区的读写，真是个好消息。
+在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2
+之后出现fusefs.kext can't load的错误，从官方得知目前macfuse在snow leopard下有问题，
+在网上看到[这篇贴子](http://forums.macrumors.com/showthread.php?t=785376)提到
+Snow Leopard其实原生就支持NTFS分区的读写，真是个好消息。
 
 开启的方法有两种：
 一种是在/etc/fstab文件里增加挂载选项，基本步骤是：
@@ -36,12 +39,15 @@ $ sudo vim /sbin/mount_ntfs
 $ sudo chown root:wheel /sbin/mount_ntfs
 $ sudo chmod 755 /sbin/mount_ntfs
 
-然后重启，启动后，你应该就能得到一个可以自由读写的ntfs分区了。不过声明一点，这个功能据说不稳定，不知道是因为版权原因还是真的很不稳定，苹果默认没有开启这个功能。不过我更相信苹果。
+然后重启，启动后，你应该就能得到一个可以自由读写的ntfs分区了。不过声明一点，
+这个功能据说不稳定，不知道是因为版权原因还是真的很不稳定，苹果默认没有开启这个功能。不过我更相信苹果。
 
 ＝＝＝＝＝＝＝＝
-后话：刚好公司配了一台Dell E6400,偶尔看到有人在上面[装了一个Leopard](http://bbs.pcbeta.com/archiver/tid-625920.html),于是手痒也在上面装了一个，如果有人也有这台笔记本也可以试试看，不过我装好的系统还是有问题：
+后话：刚好公司配了一台Dell E6400,偶尔看到有人在上面[装了一个Leopard](http://bbs.pcbeta.com/archiver/tid-625920.html),
+于是手痒也在上面装了一个，如果有人也有这台笔记本也可以试试看，不过我装好的系统还是有问题：
 
 1，触摸屏一碰就乱跑，我直接禁用就好了，反正也不喜欢用。
 2，关机和重启不断电，每天关机的次数也有限，也就无所谓了。
 3，声音控制不了，只能在具体的应用程序里控制。
+
 其实问题还是挺多的，不过基本上的使用我觉得还是没什么问题的，触摸屏的问题比较烦人，还好我不喜欢用触摸屏。如果有人也想尝试可以试试看。我用的安装文件是 Snow_Leopard_10.6.1-10.6.2_SSE2_SSE3_Intel_AMD_by_Hazard.iso, 至于安装方法[PCbeta](http://bbs.pcbeta.com/forum-185-1.html)上有很多的教程可以参考，摸索一下大概都没有什么问题，安装的时候一定要做好备份，因为我到目前已经因为装Mac OS X丢失了不下10次数据了，大部分情况下都是分区被合并。所以一定要小心一点。
