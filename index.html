@@ -9,7 +9,8 @@
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="Tweet 怎么样追查PHP的Bug、Segment Fault(core Dump):方法，工具等 Mar 11th, 2013 | Comments Tweet How-to-crash-php Jan 9th, 2013 | Comments 怎么样把PHP搞挂。 从一个语言(或任何程序) &hellip;">
+  <meta name="description" content="
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,17 +19,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://reeze.cn/">
+  <link rel="canonical" href="http://reeze.cn">
   <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/syntax/syntax.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+    h1 {
+      margin-bottom: 15px;
+    }
+    img {
+      max-width: 100%;
+    }
+    .sharing, .meta {
+      margin: 20px 0px 20px 0px;
+    }
+    .pager {
+      margin: 20px 0px 5px 0px;
+    }
+    .page-footer p {
+      text-align: center;
+    }
+  </style>
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Zen Space | 寻找善美" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
+  
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -45,85 +66,50 @@
 
 </head>
 
-<body >
-  <header role="banner" id="sidebar">
-    <!-- Logo -->
-<aside id="logo" class="clearfix">
-  <div class="clearfix">
-    <a href="/">Zen Space | 寻找善美</a>
-  </div>
-</aside>
+<body   >
+  <nav role="navigation"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
 
-<ul id="menu">
+      <a class="brand" href="/">Zen Space | 寻找善美</a>
 
-  <li class="title">
-    <h1 id="title"><a href="/">Zen Space | 寻找善美</a></h1>
-  </li>
-
-
-  <li class="subtitle">
-    <h2 id="subtitle">寻找善美</h2>
-  </li>
-
-  <li class="link">
-    <a href="/about/">about</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://github.com/reeze/">github</a>
-  </li>
-
-  <li class="link rss">
-    <a href="/atom.xml">rss feed</a>
-  </li>
+      <div class="nav-collapse">
+        <ul class="nav">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about/">About</a></li>
 </ul>
 
+      </div>
 
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:reeze.cn" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
+      <ul class="nav pull-right" data-subscription="rss">
+        <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+        
+      </ul>
 
-
-<!-- Octopress Love -->
-<aside id="octopress_linkback">
-  <a href="http://octopress.org/">
-    <span class="unicode_square">
-      <span class="unicode_circle">
-        &nbsp;
-      </span>
-    </span>
-    <span class="octopress">Powered by Octopress</span>
-  </a>
-</aside>
-
-  </header>
-  <section id="main">
-      
-  
-  
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/index.html" data-via="" data-counturl="http://reeze.cn/index.html" data-size="large">Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
+        
+      <form class="pull-right navbar-search" action="http://google.com/search" method="get">
+        <fieldset role="search">
+          <input type="hidden" name="q" value="site:reeze.cn" />
+          <input class="search-query" type="text" name="q" results="0" placeholder="Search"/>
+        </fieldset>
+      </form>
+        
+    </div>
+  </div>
 </div>
-
+</nav>
+  <div class="container">
+    <div class="row-fluid">
+      <div class="span9">
+  
+  
+  
+    <article>
       
-  <header>
+  <header class="page-header">
     
-      <h2 class="entry-title">
-        
-        <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment Fault(core Dump):方法，工具等</a>
-        
-      </h2>
+      <h1 class="entry-title"><a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment Fault(core Dump):方法，工具等</a></h1>
     
     
       <p class="meta">
@@ -148,8 +134,8 @@
   </header>
 
 
-  
-
+  <div class="entry-content">
+</div>
   
   
 
@@ -157,25 +143,11 @@
     </article>
   
   
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/index.html" data-via="" data-counturl="http://reeze.cn/index.html" data-size="large">Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
+    <article>
       
-  <header>
+  <header class="page-header">
     
-      <h2 class="entry-title">
-        
-        <a href="/2013/01/09/how-to-crash-php/">How-to-crash-php</a>
-        
-      </h2>
+      <h1 class="entry-title"><a href="/2013/01/09/how-to-crash-php/">How-to-crash-php</a></h1>
     
     
       <p class="meta">
@@ -200,7 +172,7 @@
   </header>
 
 
-  <p>怎么样把PHP搞挂。</p>
+  <div class="entry-content"><p>怎么样把PHP搞挂。</p>
 
 <p>从一个语言(或任何程序)的角度来说，奔溃都不是该有的行为。不过计算机科学中一直就存在各种
 折中，比如很多的算法为了提高效率会用空间来换时间，比如Ruby语言的实现中，性能不是在首位的，
@@ -216,7 +188,7 @@
 <li><p>通过配置disable_class禁用某些存在继承关系的类</p></li>
 </ol>
 
-
+</div>
   
   
 
@@ -224,25 +196,11 @@
     </article>
   
   
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/index.html" data-via="" data-counturl="http://reeze.cn/index.html" data-size="large">Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
+    <article>
       
-  <header>
+  <header class="page-header">
     
-      <h2 class="entry-title">
-        
-        <a href="/2012/12/05/the-nearly-end-of-the-end-of-the-world/">The Nearly End of the End of the World</a>
-        
-      </h2>
+      <h1 class="entry-title"><a href="/2012/12/05/the-nearly-end-of-the-end-of-the-world/">The Nearly End of the End of the World</a></h1>
     
     
       <p class="meta">
@@ -267,7 +225,7 @@
   </header>
 
 
-  <p>不巧刚才突然发现家里的网络怎么都连不上了，登陆路由器发现网络已经连不上了，
+  <div class="entry-content"><p>不巧刚才突然发现家里的网络怎么都连不上了，登陆路由器发现网络已经连不上了，
 才发现，我们的网已经到期了。看着屏幕右上角的日期，猛然发现原来，世界末日
 都快要过去了。</p>
 
@@ -317,7 +275,7 @@
 <h2>收获</h2>
 
 <h2>计划</h2>
-
+</div>
   
   
 
@@ -325,25 +283,11 @@
     </article>
   
   
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/index.html" data-via="" data-counturl="http://reeze.cn/index.html" data-size="large">Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
+    <article>
       
-  <header>
+  <header class="page-header">
     
-      <h2 class="entry-title">
-        
-        <a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a>
-        
-      </h2>
+      <h1 class="entry-title"><a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a></h1>
     
     
       <p class="meta">
@@ -368,7 +312,7 @@
   </header>
 
 
-  <p>很开心，第一个提交的PHP扩展已经在PECL官方发布了，这是一个<a href="http://code.google.com/p/leveldb/">Google LevelDB</a>的PHP
+  <div class="entry-content"><p>很开心，第一个提交的PHP扩展已经在PECL官方发布了，这是一个<a href="http://code.google.com/p/leveldb/">Google LevelDB</a>的PHP
 封装，主要用于对LevelDB的访问，目前已经实现了LevelDB最具价值的一些特性：迭代器，快照等。</p>
 
 <p>LevelDB数据的设计是只能单进程访问的（多线程没有问题），所以通常这个扩展不合适作为普通的Web应用数据存储，
@@ -378,7 +322,7 @@
 详细的API文档由勤劳高效的胖胖<a href="http://www.phppan.com/">http://www.phppan.com/</a>编写，不过还没有发布。</p>
 
 <p>同时，还有了@php.net的马甲一枚: reeze(at)php.net。MARK一下。</p>
-
+</div>
   
   
 
@@ -386,25 +330,11 @@
     </article>
   
   
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/index.html" data-via="" data-counturl="http://reeze.cn/index.html" data-size="large">Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
+    <article>
       
-  <header>
+  <header class="page-header">
     
-      <h2 class="entry-title">
-        
-        <a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">怎么样获取PHP函数默认参数的常量名</a>
-        
-      </h2>
+      <h1 class="entry-title"><a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">怎么样获取PHP函数默认参数的常量名</a></h1>
     
     
       <p class="meta">
@@ -429,7 +359,7 @@
   </header>
 
 
-  <p>好久没有更新了，发篇占位文：如果某个函数的默认参数是个常量，那么怎么样获取这个参数的常量名称？见代码：</p>
+  <div class="entry-content"><p>好久没有更新了，发篇占位文：如果某个函数的默认参数是个常量，那么怎么样获取这个参数的常量名称？见代码：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -571,7 +501,7 @@
 </span><span class='line'><span class="x">string(12) &quot;CONST_TEST_1&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-
+</div>
   
   
 
@@ -579,26 +509,11 @@
     </article>
   
   
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/index.html" data-via="" data-counturl="http://reeze.cn/index.html" data-size="large">Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
+    <article>
       
-  <header>
+  <header class="page-header">
     
-      <h2 class="entry-title">
-        
-        <a href="http://google.com">The Problem With Pingdom</a>
-        <a href="/2012/07/22/the-problem-with-pingdom/" class="anchor">&#9875;</a>
-        
-      </h2>
+      <h1 class="entry-title"><a href="/2012/07/22/the-problem-with-pingdom/">The Problem With Pingdom</a></h1>
     
     
       <p class="meta">
@@ -623,7 +538,7 @@
   </header>
 
 
-  
+  <div class="entry-content">
 
 <figure class='code'><figcaption><span>Time to be Awesome - awesome.rb </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -647,7 +562,7 @@ bullshit?</p></blockquote>
 <p>Your bones don&#8217;t break, mine do. That&#8217;s clear. Your cells react to bacteria and viruses differently than mine. You don&#8217;t get sick, I do. That&#8217;s also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We&#8217;re on the same curve, just on opposite ends.</p>
 
 <p>Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that&#8217;s what you see at a toy store. And you must think you&#8217;re in a toy store, because you&#8217;re here shopping for an infant named Jeb.</p>
-
+</div>
   
   
 
@@ -655,25 +570,11 @@ bullshit?</p></blockquote>
     </article>
   
   
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/index.html" data-via="" data-counturl="http://reeze.cn/index.html" data-size="large">Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
+    <article>
       
-  <header>
+  <header class="page-header">
     
-      <h2 class="entry-title">
-        
-        <a href="/2012/07/22/intro/">Intro</a>
-        
-      </h2>
+      <h1 class="entry-title"><a href="/2012/07/22/intro/">Intro</a></h1>
     
     
       <p class="meta">
@@ -698,7 +599,7 @@ bullshit?</p></blockquote>
   </header>
 
 
-  <p>Testing!</p>
+  <div class="entry-content"><p>Testing!</p>
 
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin, massa eu vestibulum laoreet, nibh ante vulputate lorem, ac lobortis ante tellus eu mi. Duis sem nisi, luctus at feugiat eget, fringilla ut tellus. Nam a molestie justo. Sed pulvinar est vitae tellus semper tincidunt. Fusce euismod luctus lacus nec placerat. Mauris rutrum scelerisque nulla ut tempor. Nunc porttitor posuere mi, aliquet vehicula lorem feugiat in. Ut ut fermentum risus. Aliquam tincidunt ultricies ante sit amet bibendum. Cras nec sapien odio. Duis posuere congue sem, at congue massa faucibus at.</p>
 
@@ -709,7 +610,7 @@ bullshit?</p></blockquote>
 <p>Proin ut hendrerit arcu. Maecenas ullamcorper tristique magna vel mattis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam tincidunt euismod viverra. In sit amet neque turpis. Suspendisse ac sapien mi, id blandit purus. Ut tortor turpis, rutrum ac tempor at, accumsan sit amet erat. Etiam ultricies eleifend dolor, eget tempus justo tristique vitae. In hac habitasse platea dictumst. Aliquam eu enim neque.</p>
 
 <p>Morbi massa lorem, viverra non dictum at, malesuada vel nibh. Nam fermentum lobortis varius. Sed a nulla lacus, quis posuere risus. Nunc id urna libero, quis rutrum mi. In gravida felis urna. Praesent nec dolor ac urna tempor fermentum. Curabitur rutrum arcu et lorem volutpat viverra.</p>
-
+</div>
   
   
 
@@ -717,25 +618,11 @@ bullshit?</p></blockquote>
     </article>
   
   
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/index.html" data-via="" data-counturl="http://reeze.cn/index.html" data-size="large">Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
+    <article>
       
-  <header>
+  <header class="page-header">
     
-      <h2 class="entry-title">
-        
-        <a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a>
-        
-      </h2>
+      <h1 class="entry-title"><a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a></h1>
     
     
       <p class="meta">
@@ -760,7 +647,7 @@ bullshit?</p></blockquote>
   </header>
 
 
-  <p>Travis CI是一个基于云的<a href="http://en.wikipedia.org/wiki/Continuous_integration">持续集成</a>项目，
+  <div class="entry-content"><p>Travis CI是一个基于云的<a href="http://en.wikipedia.org/wiki/Continuous_integration">持续集成</a>项目，
 目前已经支持大部分主流语言了，比如：C，PHP，Ruby，Python, Nodejs等等。和<a href="http://jenkins-ci.org/">Jenkins</a>类似，
 Travis CI也是开源的，不过Travis和Github集成非常紧密，官方的集成测试托管只支持Github项目，
 不过你也可以搭建一套自己的方案。 这里有一篇比较详实的<a href="http://www.juvenxu.com/2012/03/06/travis-ci/">对Travis-CI的介绍</a>，
@@ -893,7 +780,7 @@ travis也会忽略，所以采用了一个折中的方式来测试。因为测�
 
 <p>除了PHP，其实你可以在Travis上测试绝大部分的软件，因为travis提供的是一个完整的环境，
 而你可以编写任何的脚本来进行你的测试工作。</p>
-
+</div>
   
   
 
@@ -901,25 +788,11 @@ travis也会忽略，所以采用了一个折中的方式来测试。因为测�
     </article>
   
   
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/index.html" data-via="" data-counturl="http://reeze.cn/index.html" data-size="large">Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
+    <article>
       
-  <header>
+  <header class="page-header">
     
-      <h2 class="entry-title">
-        
-        <a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">PHP中的NOP及为什么有这个opcode</a>
-        
-      </h2>
+      <h1 class="entry-title"><a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">PHP中的NOP及为什么有这个opcode</a></h1>
     
     
       <p class="meta">
@@ -944,7 +817,7 @@ travis也会忽略，所以采用了一个折中的方式来测试。因为测�
   </header>
 
 
-  <h2>什么是NOP</h2>
+  <div class="entry-content"><h2>什么是NOP</h2>
 
 <p>NOP 是一个特殊的opcode，表示空操作，在很多地方存在，汇编中的NOP含义也一样，
 机器指令中的空操作通常用来将内存地址进行对齐，以提高CPU访问内存的效率，
@@ -1138,7 +1011,7 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
 
 <p>目前APC扩展已经基本确定为将要进入PHP默认opcode缓存的官方扩展了，那么这些优化都可以在扩展中进行，
 保证Zend引擎的简单易维护更为重要。</p>
-
+</div>
   
   
 
@@ -1146,25 +1019,11 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
     </article>
   
   
-    <article class="post">
-      <div class="sharing-box">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/index.html" data-via="" data-counturl="http://reeze.cn/index.html" data-size="large">Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
+    <article>
       
-  <header>
+  <header class="page-header">
     
-      <h2 class="entry-title">
-        
-        <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
-        
-      </h2>
+      <h1 class="entry-title"><a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a></h1>
     
     
       <p class="meta">
@@ -1189,7 +1048,7 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
   </header>
 
 
-  <p>很久以前就不想继续使用Wordpress了，不太习惯在线写东西，开始返璞归真，比较喜欢
+  <div class="entry-content"><p>很久以前就不想继续使用Wordpress了，不太习惯在线写东西，开始返璞归真，比较喜欢
 纯文本的内容创作方式，<a href="http://www.php-internal.com">TIPI</a>就使用的是markdown格式，
 同时在终端也会让我更有写作的欲望。</p>
 
@@ -1198,24 +1057,115 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
 <p>TIPI的issue里还有很多的待处理工作，计划在7月份全部写完。这个始终是高优先级的。
 最近给PHP修复了一些bug，也有一些feature被接受了。在这过程中对PHP的实现又有了一些更加深入
 的理解。也有冲动想要写到TIPI里。总之，TIPI会一直更新。</p>
-
+</div>
   
   
 
 
     </article>
   
-
-    <nav role="navigation" id="pagination">
-  <span class="next">
-    <a href="/page/2/" rel="next">Continue &rarr;</a>
-  </span>
-
-
-</nav>
-  </section>
+  <ul class="pager">
+    
+    <li class="previous"><a href="/page/2/">&larr; Older</a></li>
+    
+    <li><a href="/blog/archives">Blog Archives</a></li>
+    
+  </ul>
+</div>
+<aside class="sidebar-nav span3">
   
+    <section class="well">
+  <ul id="recent_posts" class="nav nav-list">
+    <li class="nav-header">Recent Posts</li>
+    
+      <li class="post">
+        <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/09/how-to-crash-php/">how-to-crash-php</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/12/05/the-nearly-end-of-the-end-of-the-world/">The nearly end of the end of the world</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">怎么样获取PHP函数默认参数的常量名</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/22/the-problem-with-pingdom/">The problem with Pingdom</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/22/intro/">Intro</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">PHP中的NOP及为什么有这个opcode</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
+      </li>
+    
+  </ul>
+</section>
 
+<section class="well">
+  <ul id="gh_repos" class="nav">
+    <li class="nav-header">GitHub Repos</li>
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/reeze">@reeze</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'reeze',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo" class="page-footer"><hr>
+<p>
+  Copyright &copy; 2013 - reeze -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
   
 
 <script type="text/javascript">
@@ -1254,6 +1204,7 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
+
 
 
 

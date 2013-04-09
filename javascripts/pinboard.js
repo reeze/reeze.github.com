@@ -53,4 +53,3 @@ function Pinboard_Linkroll() {
 }
 Pinboard_Linkroll.prototype = new Pinboard_Linkroll();
 pinboardNS_fetch_script("http://feeds.pinboard.in/json/v1/u:"+pinboard_user+"/?cb=pinboardNS_show_bmarks\&count="+pinboard_count);
-
