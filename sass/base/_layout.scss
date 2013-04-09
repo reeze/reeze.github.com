@@ -1,0 +1,347 @@
+$min-width: 895px;
+$logo-height: 110px;
+$logo-width: 110px;
+$logo-radius: 10px;
+$logo-inner-height: 90px;
+$logo-inner-width: 90px;
+$logo-inner-radius: 50%;
+
+body {
+  min-width: $min-width;
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+#sidebar {
+  width: 27%;
+  padding-left: 1.5%;
+  min-width: 240px;
+  position: fixed;
+  min-height: 100%;
+  z-index: 1;
+}
+
+aside#logo {
+  position: relative;
+  display: block;
+  width: $logo-width;
+  height: $logo-height;
+  border-radius: $logo-radius;
+  -moz-border-radius: $logo-radius;
+  -webkit-border-radius: $logo-radius;
+  margin-left: 30px;
+  margin-top: 40px;
+}
+
+aside#logo div {
+  border-radius: $logo-inner-radius;
+  -moz-border-radius: $logo-inner-radius;
+  -webkit-border-radius: $logo-inner-radius;
+  width: $logo-inner-width;
+  height: $logo-inner-height;
+  text-indent: -9999px;
+  margin: 0 auto;
+  margin-top: 10px;
+  clear: both;
+}
+
+aside#logo div a {
+  display: block;
+  clear: both;
+  width: 78px;
+  height: 78px;
+  margin: 0 auto;
+  margin-top: 6px;
+}
+
+ul#menu {
+  clear: both;
+  margin: 0;
+  padding: 0;
+  margin-left: 30px;
+  width: 75%;
+}
+
+ul#menu li {
+  display: block;
+  clear: both;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 15px;
+}
+
+ul#menu a {
+  display: inline-block;
+  font-size: 15px;
+  line-height: 14px;
+  z-index: 999;
+  padding: 7px;
+  padding-left: 33px;
+  padding-right: 12px;
+  margin-left: -15px;
+  font-weight: 600;
+  position: relative;
+}
+
+ul#menu li.title {
+  margin-bottom: 0;
+}
+
+ul#menu li.subtitle {
+  margin-top: 0;
+}
+
+header#sidebar h1#title {
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+#octopress_linkback {
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+  font-size: 15px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  font-family: "Rokkitt",serif;
+  font-weight: 900;
+  line-height: 15px;
+  padding: 10px;
+  height: 30px;
+  z-index: 9999;
+  border-radius: 5px;
+}
+
+#main {
+  border-left: 1px solid #e3e3e3;
+  margin-left: 27%;
+  min-height: 900px;
+  min-width: 658px;
+  position: relative;
+  z-index: 9999;
+}
+
+header#sidebar h1#title a {
+  font-family: sans-serif;
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 30px;
+  border: none;
+  padding: 0;
+  display: block;
+  color: black;
+  margin-left: 0;
+}
+
+header#sidebar h2#subtitle {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 23px;
+  color: #585C60;
+  -webkit-font-smoothing: antialiased;
+  max-width: none;
+  margin-top: 5px;
+  margin-bottom: 25px;
+}
+
+// Large screen
+@media only screen and (min-width: 1300px) {
+  #sidebar {
+    margin-left: 0;
+    padding-left: 2%;
+  }
+
+  aside#logo {
+    width: 165px;
+    height: 165px;
+  }
+
+  aside#logo div {
+    width: 135px;
+    height: 135px;
+    margin-top: 15px;
+  }
+
+  aside#logo div a {
+    width: 117px;
+    height: 117px;
+    margin-top: 9px;
+  }
+
+  ul#menu {
+    max-width: 300px;
+    width: 65%;
+  }
+
+  header#sidebar h1#title a {
+    font-size: 35px;
+    line-height: 35px;
+  }
+
+  header#sidebar h2#subtitle {
+    font-size: 20px;
+    line-height: 25px;
+  }
+}
+
+// Short screen
+@media only screen and (max-height: 650px) {
+  #sidebar {
+    position: absolute;
+  }
+
+  #octopress_linkback {
+    top: 700px;
+    position: absolute;
+  }
+}
+
+// Medium-width screen
+@media only screen and (max-width: 630px),
+  (device-height: 1024px) and (device-width: 768px) and (orientation: portrait) {
+  body { min-width: 0; }
+
+  #sidebar {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  aside#logo {
+    margin: 0 auto;
+    position: relative;
+    left: auto;
+    right: auto;
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+
+  ul#menu {
+    width: auto;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+  }
+
+  ul#menu li.link {
+    display: inline-block;
+    float: none;
+    width: auto;
+    clear: none;
+    margin: 0;
+    margin-bottom: 5px;
+  }
+
+  ul#menu li.rss {
+    display: none;
+  }
+
+  section#main {
+    margin: 0;
+    border: none;
+    width: 100%;
+    min-width: 0;
+    margin-top: 15px;
+    overflow: hidden;
+  }
+
+  section#main article {
+    width: auto;
+    padding-left: 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    overflow: hidden;
+  }
+
+  article p, article h2, article h1, article h3, article h4, article h5, article h6 {
+    padding-right: 10px;
+    padding-left: 15px;
+  }
+
+  section#main article h2 {
+    margin-top: 0;
+  }
+
+  article.post {
+    width: auto;
+    padding-left: 0;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    overflow: hidden;
+  }
+
+  article.post figure {
+    padding-right: 10px;
+    padding-left: 15px;
+    width: 90%;
+  }
+
+  aside#octopress_linkback {
+    display: none;
+  }
+}
+
+// Articles
+article.post {
+  width: auto;
+  position: relative;
+  padding-left: 50px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-top: 1px solid #E2E2E2;
+  min-height: 130px;
+}
+
+section.comments {
+  width: auto;
+  position: relative;
+  padding-left: 50px;
+  overflow-x: hidden;
+}
+
+article.post h2, article.post p {
+  max-width: 500px;
+}
+
+article.post figure {
+  max-width: 500px;
+}
+
+// Anchor
+h2.entry-title a.anchor {
+  font-size: 0.9em;
+  margin-left: 5px;
+  border-bottom: 0;
+}
+
+// Navigation
+nav#pagination {
+  padding: 40px;
+  border-top: 1px solid #E2E2E2;
+  padding-bottom: 100px;
+}
+
+nav#pagination span.next a, nav#pagination span.prev a {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 30px;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 3px solid;
+}
+
+nav#pagination span.prev {
+  display: block;
+  float: left;
+}
+
+nav#pagination span.next {
+  display: block;
+  float: right;
+}
