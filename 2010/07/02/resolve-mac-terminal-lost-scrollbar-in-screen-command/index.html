@@ -9,9 +9,8 @@
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="工作中开发主要在公司的开发机上，ssh到远程服务器上用vim开发，有时候因为网络原因或者不小心把终端给
-关了或者网络出现问题以后就痛苦了，因为会话关闭后开启的程序就挂了，vim默认会用swp文件保存修改，
-但是为了安全起见，不想关掉swp，一不小心真丢数据就划不来了， &hellip;">
+  <meta name="description" content="Tweet 解决Mac下终端中使用screen管理回话但看不到滚动条等问题 Jul 2nd, 2010 | Comments 工作中开发主要在公司的开发机上，ssh到远程服务器上用vim开发，有时候因为网络原因或者不小心把终端给
+关了或者网络出现问题以后就痛苦了，因为会话关闭后开启的程序就挂了， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,37 +19,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://reeze.cn/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command">
+  <link rel="canonical" href="http://reeze.cn/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/">
   <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/syntax/syntax.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <style type="text/css">
-    body {
-      padding-top: 60px;
-      padding-bottom: 40px;
-    }
-    h1 {
-      margin-bottom: 15px;
-    }
-    img {
-      max-width: 100%;
-    }
-    .sharing, .meta {
-      margin: 20px 0px 20px 0px;
-    }
-    .pager {
-      margin: 20px 0px 5px 0px;
-    }
-    .page-footer p {
-      text-align: center;
-    }
-  </style>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Zen Space | 寻找善美" type="application/atom+xml">
-  
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -67,48 +46,78 @@
 
 </head>
 
-<body   >
-  <nav role="navigation"><div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+  <div class="clearfix">
+    <a href="/">Zen Space | 寻找善美</a>
+  </div>
+</aside>
 
-      <a class="brand" href="/">Zen Space | 寻找善美</a>
+<ul id="menu">
 
-      <div class="nav-collapse">
-        <ul class="nav">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about/">About</a></li>
+  <li class="title">
+    <h1 id="title"><a href="/">Zen Space | 寻找善美</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">寻找善美</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/reeze/">github</a>
+  </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
 </ul>
 
-      </div>
 
-      <ul class="nav pull-right" data-subscription="rss">
-        <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-        
-      </ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:reeze.cn" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
 
-        
-      <form class="pull-right navbar-search" action="http://google.com/search" method="get">
-        <fieldset role="search">
-          <input type="hidden" name="q" value="site:reeze.cn" />
-          <input class="search-query" type="text" name="q" results="0" placeholder="Search"/>
-        </fieldset>
-      </form>
-        
-    </div>
-  </div>
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+    <article class="post">
+  <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/" data-via="" data-counturl="http://reeze.cn/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
 </div>
-</nav>
-  <div class="container">
-    <div class="row-fluid">
-      
-<article class="hentry span9" role="article">
 
   
-  <header class="page-header">
+  <header>
     
-      <h1 class="entry-title">解决Mac下终端中使用screen管理回话但看不到滚动条等问题</h1>
+      <h2 class="entry-title">解决Mac下终端中使用screen管理回话但看不到滚动条等问题</h2>
     
     
       <p class="meta">
@@ -133,7 +142,7 @@
   </header>
 
 
-<div class="entry-content"><p>工作中开发主要在公司的开发机上，ssh到远程服务器上用vim开发，有时候因为网络原因或者不小心把终端给
+<p>工作中开发主要在公司的开发机上，ssh到远程服务器上用vim开发，有时候因为网络原因或者不小心把终端给
 关了或者网络出现问题以后就痛苦了，因为会话关闭后开启的程序就挂了，vim默认会用swp文件保存修改，
 但是为了安全起见，不想关掉swp，一不小心真丢数据就划不来了，非法关闭vim之后再次打开就会提示是否恢复文件，
 自从发现screen这个绝佳的会话管理工具，就深深的爱上了它，IBM的这篇文章有详细的介绍
@@ -150,163 +159,18 @@ Ctrl + E来定位当前输入的命令吧. 其实在~/.screenrc中修改一下�
 
 
 <p>解决方法来源见：<a href="http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command">http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command</a></p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">reeze</span></span>
-
-      
 
 
 
-
-
-
-
-
-  
-
-
-<time datetime="2010-07-02T15:16:33+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2010</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/categories/-nix/'>*Nix</a>, <a class='category' href='/categories/mac-ios/'>Mac/iOS</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/" data-via="" data-counturl="http://reeze.cn/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
-    
-    
-    <ul class="pager">
-      
-      <li class="previous"><a class="basic-alignment left"
-        href="/2010/04/25/make-your-site-drop-uploadable-with-html5s-file-api-like-gmail-does/" title="Previous Post:
-        让你的网站也像Gmail一样支持文件拖放上传-HTML5之File API">&laquo; 让你的网站也像Gmail一样支持文件拖放上传-HTML5之File API</a></li>
-      
-      <li><a href="/blog/archives">Blog Archives</a></li>
-      
-      <li class="next"><a class="basic-alignment right" href="/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/"
-        title="Next Post: Php Internal How To Get Variables Name An Extension Implement">Php Internal How To Get Variables Name An Extension Implement
-        &raquo;</a></li>
-      
-    </ul>
-  </footer>
 </article>
 
-<aside class="sidebar-nav span3">
+
+    <nav role="navigation" id="pagination">
+
+</nav>
+  </section>
   
-    <section class="well">
-  <ul id="recent_posts" class="nav nav-list">
-    <li class="nav-header">Recent Posts</li>
-    
-      <li class="post">
-        <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/01/09/how-to-crash-php/">how-to-crash-php</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/12/05/the-nearly-end-of-the-end-of-the-world/">The nearly end of the end of the world</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">怎么样获取PHP函数默认参数的常量名</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">PHP中的NOP及为什么有这个opcode</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
-      </li>
-    
-  </ul>
-</section>
 
-<section class="well">
-  <ul id="gh_repos" class="nav">
-    <li class="nav-header">GitHub Repos</li>
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/reeze">@reeze</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'reeze',
-            count: 5,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo" class="page-footer"><hr>
-<p>
-  Copyright &copy; 2013 - reeze -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
   
 
 <script type="text/javascript">
@@ -345,7 +209,6 @@ Ctrl + E来定位当前输入的命令吧. 其实在~/.screenrc中修改一下�
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
-
 
 
 

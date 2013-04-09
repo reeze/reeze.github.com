@@ -4,7 +4,7 @@
   <title><![CDATA[Zen Space | 寻找善美]]></title>
   <link href="http://reeze.cn/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2013-04-09T21:46:25+08:00</updated>
+  <updated>2013-04-09T21:49:16+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -269,6 +269,57 @@
 </span><span class='line'><span class="x">string(12) &quot;CONST_TEST_1&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The problem with Pingdom]]></title>
+    <link href="http://reeze.cn/2012/07/22/the-problem-with-pingdom/"/>
+    <updated>2012-07-22T19:13:00+08:00</updated>
+    <id>http://reeze.cn/2012/07/22/the-problem-with-pingdom</id>
+    <content type="html"><![CDATA[
+
+<figure class='code'><figcaption><span>Time to be Awesome - awesome.rb </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Awesome!&quot;</span> <span class="k">unless</span> <span class="n">lame</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://www.pingdom.com%20Pingdom">The problem with pingdom.</a></p>
+
+<p>My money&#8217;s in that office, right? If she start giving me some bullshit about it ain&#8217;t there, and we got to go someplace else and get it, I&#8217;m gonna shoot you in the head then and there. Then I&#8217;m gonna shoot that bitch in the kneecaps, find out where my goddamn money is. She gonna tell me too. Hey, look at me when I&#8217;m talking to you, motherfucker. You listen: we go in there, and that nigga Winston or anybody else is in there, you the first motherfucker to get shot. You understand?</p>
+
+<blockquote><p>Blockquote is what goes
+inside this block here
+would you believe that
+bullshit?</p></blockquote>
+
+<p>Well, the way they make shows is, they make one show. That show&#8217;s called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they&#8217;re going to make more shows. Some pilots get picked and become television programs. Some don&#8217;t, become nothing. She starred in one of the ones that became nothing.</p>
+
+<p>The path of the righteous man is beset on all sides by the iniquities of the selfish and the tyranny of evil men. Blessed is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brother&#8217;s keeper and the finder of lost children. And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and destroy My brothers. And you will know My name is the Lord when I lay My vengeance upon thee.</p>
+
+<p>Your bones don&#8217;t break, mine do. That&#8217;s clear. Your cells react to bacteria and viruses differently than mine. You don&#8217;t get sick, I do. That&#8217;s also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We&#8217;re on the same curve, just on opposite ends.</p>
+
+<p>Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that&#8217;s what you see at a toy store. And you must think you&#8217;re in a toy store, because you&#8217;re here shopping for an infant named Jeb.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Intro]]></title>
+    <link href="http://reeze.cn/2012/07/22/intro/"/>
+    <updated>2012-07-22T08:23:00+08:00</updated>
+    <id>http://reeze.cn/2012/07/22/intro</id>
+    <content type="html"><![CDATA[<p>Testing!</p>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin, massa eu vestibulum laoreet, nibh ante vulputate lorem, ac lobortis ante tellus eu mi. Duis sem nisi, luctus at feugiat eget, fringilla ut tellus. Nam a molestie justo. Sed pulvinar est vitae tellus semper tincidunt. Fusce euismod luctus lacus nec placerat. Mauris rutrum scelerisque nulla ut tempor. Nunc porttitor posuere mi, aliquet vehicula lorem feugiat in. Ut ut fermentum risus. Aliquam tincidunt ultricies ante sit amet bibendum. Cras nec sapien odio. Duis posuere congue sem, at congue massa faucibus at.</p>
+
+<p>Integer ut sapien eget nisl auctor faucibus ut fermentum arcu. Nunc rutrum urna non risus congue et tristique felis eleifend. Maecenas blandit est eu mauris aliquam aliquet. Quisque porttitor enim eget risus blandit in mollis orci eleifend. Nam malesuada nulla sed lacus elementum placerat accumsan arcu rhoncus. Phasellus feugiat cursus turpis nec facilisis. Duis eget metus arcu, eget commodo velit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer cursus vulputate enim, vel gravida velit faucibus et. Ut a urna vitae tellus cursus rhoncus. Maecenas at odio eget quam cursus elementum. Aliquam vitae eros quis tellus laoreet accumsan sed id lorem. Suspendisse et rutrum leo. Integer scelerisque vestibulum adipiscing. In posuere, libero ac accumsan suscipit, nulla ligula gravida erat, ut tempor odio erat nec sem. Quisque justo ipsum, adipiscing volutpat varius vitae, blandit eget nisi.</p>
+
+<p>Nullam adipiscing neque ac lacus commodo vitae imperdiet dui sollicitudin. Ut ac nunc augue. Nam at sem ut quam commodo aliquet vitae vitae dui. Vivamus scelerisque felis eget dolor cursus feugiat. Phasellus at dui sed lectus scelerisque pretium. Etiam nec massa ut justo vestibulum fringilla ac vitae urna. Morbi tortor erat, tempus sed consectetur at, elementum nec eros. Vivamus mattis arcu a sapien semper non lacinia eros pretium.</p>
+
+<p>Proin ut hendrerit arcu. Maecenas ullamcorper tristique magna vel mattis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam tincidunt euismod viverra. In sit amet neque turpis. Suspendisse ac sapien mi, id blandit purus. Ut tortor turpis, rutrum ac tempor at, accumsan sit amet erat. Etiam ultricies eleifend dolor, eget tempus justo tristique vitae. In hac habitasse platea dictumst. Aliquam eu enim neque.</p>
+
+<p>Morbi massa lorem, viverra non dictum at, malesuada vel nibh. Nam fermentum lobortis varius. Sed a nulla lacus, quis posuere risus. Nunc id urna libero, quis rutrum mi. In gravida felis urna. Praesent nec dolor ac urna tempor fermentum. Curabitur rutrum arcu et lorem volutpat viverra.</p>
 ]]></content>
   </entry>
   
@@ -1041,41 +1092,6 @@ $ sudo chmod 755 /sbin/mount_ntfs</p>
 3，声音控制不了，只能在具体的应用程序里控制。</p>
 
 <p>其实问题还是挺多的，不过基本上的使用我觉得还是没什么问题的，触摸屏的问题比较烦人，还好我不喜欢用触摸屏。如果有人也想尝试可以试试看。我用的安装文件是 Snow_Leopard_10.6.1-10.6.2_SSE2_SSE3_Intel_AMD_by_Hazard.iso, 至于安装方法<a href="http://bbs.pcbeta.com/forum-185-1.html">PCbeta</a>上有很多的教程可以参考，摸索一下大概都没有什么问题，安装的时候一定要做好备份，因为我到目前已经因为装Mac OS X丢失了不下10次数据了，大部分情况下都是分区被合并。所以一定要小心一点。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[在2009的尾巴上]]></title>
-    <link href="http://reeze.cn/2009/12/31/at-the-tail-of-2009/"/>
-    <updated>2009-12-31T23:59:06+08:00</updated>
-    <id>http://reeze.cn/2009/12/31/at-the-tail-of-2009</id>
-    <content type="html"><![CDATA[<p>09年最后一篇日志，充个数吧：）</p>
-
-<p>刚买了本《<a href="http://www.douban.com/subject/3735649/">Orange S: 一个操作系统的实现</a>》，
-这一年下来买了挺多的书，也从图书馆借了很多的书（马上就要毕业了，再也享受不到学校图书馆丰富及时的藏书了，
-计划以后每个月发工资都买一本自己喜欢的书），发现我读书最大的问题是多而不精，
-拿一本好书就使劲的翻，很多书都是花几天就翻完了，但是读下来之后总觉得收获不够，
-一些很需要实践的部分也没有及时巩固练习，总感觉自己浮在表面上，只知其然。所以呢，
-2010年争取多读好书，踏踏实实的啃几本好书，然后就是要多动手啦。</p>
-
-<p>计划2010年呢，能把耽搁很久的想法付诸行动，做出点东西来。希望有个好的开始吧！</p>
-
-<p>Happy New Year!!!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[支持IPv6的Tunnelblick For Mac OS X OpenVPN客户端]]></title>
-    <link href="http://reeze.cn/2009/12/30/ipv6-enabled-tunnelblick-for-mac-os-x/"/>
-    <updated>2009-12-30T13:20:15+08:00</updated>
-    <id>http://reeze.cn/2009/12/30/ipv6-enabled-tunnelblick-for-mac-os-x</id>
-    <content type="html"><![CDATA[<p>在<a href="http://yegle.net">yegle</a>那里买了OpenVPN服务 ，用着还挺不错，我也在教育网，所以只能使用支持IPv6版的客户端，openvpn默认不支持IPv6,不过yegle提供了相应的<a href="http://github.com/jjo/openvpn-ipv6">IPv6补丁</a>，在Linux下以及Windows下使用的都挺好，最近又在折腾电脑，装了个Snow Leopard，基本没什么问题了，除了我的ATI 2600 XT硬件加速暂时无解外其他的都挺爽，使用了yegle推荐的<a href="http://code.google.com/p/tunnelblick/downloads/list">Tunnelblick</a>, 总是连接不上，它提示让我查看日志，但是根本就找不到地方看日志，直接cd 到 Tunnelblick的包里面直接执行openvpn命令，提示不支持udp6 ，又是不支持 Ipv6，本想直接自己编译一个openvpn，但是想想那样就太不clean了，编译成app的话可以通用，还能共享给有需要的人多好啊，去google code checkout了一份代码，直接编译，错误百出，我是在Snow Leopard上编译的，仔细查看原来需要MacOSX10.4u的SDK 重新安装10.4的SDK还是未果，后来发现SDK的安装目录居然不一样。。自己手动拷贝过去也不行。。 切换到傲Leopard下安装，折腾了好久终于编译成功，废话太多了。呵呵，共享出来给需要的人吧：）</p>
-
-<p>猛击这个连接 下载<a href="http://code.google.com/p/tunnelblick-ipv6/downloads/list">http://code.google.com/p/tunnelblick-ipv6/downloads/list</a>
-可惜的是yegle不再提供IPv6用户的续费了，不过我到期之后差不多也要从学校滚蛋了。
-我提供的这个版本的tunnelblick的配置文件位置是  ~/Library/openvpn  最新版的配置放在 ~/Library/Application Support/Tunnelblick/Configuration目录里面。</p>
-
-<p>马上2009年就要过去了。最近很久都没有更新日志了，其实之间也想写一些东西，但是都丢在草稿箱里没写完。论文还有很多没有写完，马上就要交了，要抵制住诱惑乖乖写论文。</p>
 ]]></content>
   </entry>
   

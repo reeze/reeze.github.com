@@ -9,8 +9,8 @@
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="Tweet 复制SSH会话,避免多次密码输入 Mar 22nd, 2011 | Comments 就当是笔记吧. 首先，这不是配置ssh密钥简历信任关系免密码登陆的方法。
+主要解决的问题是在终端下多次登陆统一主机需要多次输入用户密码的问题。 我们公司的内网环境比较特殊,　为了安全性做了各种认证 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,37 +19,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://reeze.cn/page/2">
+  <link rel="canonical" href="http://reeze.cn/page/2/">
   <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/syntax/syntax.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <style type="text/css">
-    body {
-      padding-top: 60px;
-      padding-bottom: 40px;
-    }
-    h1 {
-      margin-bottom: 15px;
-    }
-    img {
-      max-width: 100%;
-    }
-    .sharing, .meta {
-      margin: 20px 0px 20px 0px;
-    }
-    .pager {
-      margin: 20px 0px 5px 0px;
-    }
-    .page-footer p {
-      text-align: center;
-    }
-  </style>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Zen Space | 寻找善美" type="application/atom+xml">
-  
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -66,50 +46,258 @@
 
 </head>
 
-<body   >
-  <nav role="navigation"><div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+  <div class="clearfix">
+    <a href="/">Zen Space | 寻找善美</a>
+  </div>
+</aside>
 
-      <a class="brand" href="/">Zen Space | 寻找善美</a>
+<ul id="menu">
 
-      <div class="nav-collapse">
-        <ul class="nav">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about/">About</a></li>
+  <li class="title">
+    <h1 id="title"><a href="/">Zen Space | 寻找善美</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">寻找善美</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/reeze/">github</a>
+  </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
 </ul>
 
-      </div>
 
-      <ul class="nav pull-right" data-subscription="rss">
-        <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-        
-      </ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:reeze.cn" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
 
-        
-      <form class="pull-right navbar-search" action="http://google.com/search" method="get">
-        <fieldset role="search">
-          <input type="hidden" name="q" value="site:reeze.cn" />
-          <input class="search-query" type="text" name="q" results="0" placeholder="Search"/>
-        </fieldset>
-      </form>
-        
-    </div>
-  </div>
-</div>
-</nav>
-  <div class="container">
-    <div class="row-fluid">
-      <div class="span9">
-  
-  
-  
-    <article>
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
       
-  <header class="page-header">
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/page/2/index.html" data-via="" data-counturl="http://reeze.cn/page/2/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+      
+  <header>
     
-      <h1 class="entry-title"><a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">[PHP-Internal]定制PHP语法获取PHP变量的变量名</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-22T18:49:27+08:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2011</time>
+        
+         | <a href="/2011/03/22/duplicate-ssh-session/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>就当是笔记吧. 首先，这不是配置ssh密钥简历信任关系免密码登陆的方法。
+主要解决的问题是在终端下多次登陆统一主机需要多次输入用户密码的问题。</p>
+
+<p>我们公司的内网环境比较特殊,　为了安全性做了各种认证,　联入网络需要准入一下,　
+准入需要使用密码+随即密码的方式认证,　是挺安全的,　可以对于我们来说其实很痛苦,
+每次都要输入一下密码,因为包含了随机密码, 这就无法使用脚本来方便的自动准入.　
+我们连入公司的远程开发机需要通过一台特殊的服务器来将我们的登陆转发,　
+也就是登陆到中转机,然后通过中转机在ssh.同样登陆中转机也是需要这个随机密码的.　吐槽完毕.</p>
+
+<p>工作中经常需要在多台服务之间ssh登陆,　screen 是一个不错的选择,　
+不过有时候还是需要打开另一个窗口再次登陆,　这时我又得再次输入那个随机密码,　
+如果你使用windows并且使用SecureCRT那你可以不用继续往下看了,
+SecureCRT可以简单的复制回话, 这个功能很贴心. 如果使用Linux&amp;Mac OS那就继续往下看.</p>
+
+<p>在/etc/ssh_config 文件中加入</p>
+
+<pre><code>Host *
+ControlMaster auto
+ControlPath ~/.ssh/master-%r@%h:%p
+</code></pre>
+
+<p>下次登陆同一站点的时候就会自动复用已有的回话. 可以只输入一次密码开N个窗口了.</p>
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/page/2/index.html" data-via="" data-counturl="http://reeze.cn/page/2/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-20T23:45:12+08:00" pubdate data-updated="true">Mar 20<span>th</span>, 2011</time>
+        
+         | <a href="/2011/03/20/tipi-first-release-and-ers-marriage/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>首先恭喜一下er童鞋的大婚吧.</p>
+
+<p>接着er大婚的喜气,项目决定在今天发布我们的TIPI项目,项目从成立到现在,一直有条不紊的前进. 现在项目也进行的差不多,可以公开给大家了.   项目的第一个tag,其实是在20分钟前才提交完.终于能如期发布.
+下面是我们的发布公告.  欢迎围观:)</p>
+
+<hr />
+
+<p>我们的朋友，TIPI团队成员，博客哥，er<a href="http://www.zhangabc.com/">http://www.zhangabc.com</a>同学在今天这个春光灿烂，春暖花开，春心荡漾，春情澎湃的大好日子里，兴高采烈的走入了婚姻的殿堂。 在这样一个让人激动不已，激情四射的日子，TIPI团队决定发布<a href="http://www.php-internal.com/">深入理解PHP内核项目</a>的第一阶段成果。</p>
+
+<p>大概在半年前，我们在网上相聚，莫名的邂逅，有了我们这样的一个团队。我们有激情，有想法，有行动，也有了我们这个项目。 开始的艰难，没有时间的痛苦，坚持，从而有了今天的发布。一路走来，有辛苦，也有收获，至少记录了我们的青春，至少做了我们想做的！</p>
+
+<p><a href="http://www.php-internal.com/">深入理解PHP内核（TIPI）项目</a>是一个开源的，分析PHP内核的系列文章项目。整个项目是基于PHP5.3版本的源码。 它包括PHP语言中我们常用的变量，函数，类，对象等的实现原理，也包括PHP的虚拟机，内存管理机制，线程安全，错误异常，文件流和PHP5.3新增加的垃圾收集机制，命名空间等。 除了PHP语言本身的特性外，还包括PHP扩展的相关信息。我们希望这个项目可以帮助更多的PHPer可以更加了解PHP语言本身，知其然知其所以然！</p>
+
+<p>第一阶段，我们发布了前四章，从环境的搭建，源码的阅读方式到对于PHP源码的整体把握，再到对于变量和函数的详细解说。随着项目的进展，我们本身对于PHP内核的理解也加深了许多。 后续我们将以章为单位发布后续的章节。现在第5章正在撰写&#8230;</p>
+
+<p><a href="http://www.php-internal.com/">在线阅读入口>>></a></p>
+
+<h2>TIPI团队序</h2>
+
+<p>博客哥三者，今聚首于网络一偶，共谋TIPI大计，与诸君共享技术之事： 向来穷PHP内核之事者或多，却鲜有分享之举。哥三者，常流连于中外博客也，若得一佳作，即欣喜若狂，本乐分享，及有学习总结之心，欲为PHP内核之事穷全身之力。</p>
+
+<ul>
+<li><p><a href="http://reeze.cn/">reeze</a>，博客哥者，好苹果，好开源, 陶醉于Web开发及架构, 为Ruby之美所折服, 甚爱iOS及其开发, 好一切善美之事物.</p></li>
+<li><p><a href="http://www.zhangabc.com/">er</a>，博客哥者，稀饭Linux, Web, 2.0, Ajax, C, PHP, Javascript, CSS等。乃一以代码为乐之码农也。</p></li>
+<li><p><a href="http://www.phppan.com/">phppan</a>，博客哥者，好书，好PHP，亲于PHP，C，Ajax，程序架构等</p></li>
+</ul>
+
+
+<p>是以三人之力行分享之事，转GIT，习markdown，论项目之计于深夜，何怕事之不成？务使PHP内核之事向众人知。 为此特示。</p>
+
+<h2>项目大事记</h2>
+
+<ul>
+<li><p>2010/12/28 14:47 pan向reeze提议写一个PHP内核系列文章,一拍即合.</p></li>
+<li><p>2010/12/28 15:10 er同学加入.组织正式形成.</p></li>
+<li><p>2010/12/30 11:11 pan发出&lt;&lt;深入理解PHP内核>>第一份完整目录草稿.</p></li>
+<li><p>2010/12/31 21:14 举行第一次三方会谈,结合pan和reeze的目录草稿确定了正式目录. 标志着TIPI团队项目的正式确立.. (鼓掌).</p></li>
+<li><p>2011/01/01 05:08 reeze向github版本库提交了完整的项目, TIPI项目开始进入实施阶段</p></li>
+<li><p>2011/01/06 15:22 经过哥三激烈的讨论后做出艰难的决定,我们的项目域名正式确定为php-internal.com.(撒花无数).</p></li>
+<li><p>2011/02/14 23:32 在这个几人欢喜几人愁，充满花香的日子里, 哥三在深夜确定了TIPI项目的第一次整体发布流程，并且定稿了前三章的大纲以及确定了发布前的调整工作。</p></li>
+<li><p>2011/02/25 02:53 虽然我们还没有正式开始推广TIPI, 但已经有人开始关注TIPI了.　恭喜icodeu<a href="http://blog.icodeu.com/">http://blog.icodeu.com</a>同学成为我们第一位留下脚印的同学(看留言时间,也是个夜猫子啊.)</p></li>
+<li><p>2011/03/10 11:22 经过TIPI团队的慎重考虑, TIPI团队新增一员大将:honestqiao同学, 欢迎他的加入!</p></li>
+<li><p>2011/03/20 20:00 今天是TIPI团队成员er同学的大婚之日，团队决定在这个喜庆的日子将我们第一阶段的成果对外发布。让我们恭喜这对新人和我们的TIPI团队。</p></li>
+</ul>
+
+
+<h2>特别鸣谢</h2>
+
+<p>我们需要感谢我们家里的领导，没有有她们的支持，也就没有我们今天的发布，感谢她们的包容，感谢她们的照顾，感谢她们的理解和支持。谢谢！</p>
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/page/2/index.html" data-via="" data-counturl="http://reeze.cn/page/2/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">[PHP-Internal]定制PHP语法获取PHP变量的变量名</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -134,8 +322,8 @@
   </header>
 
 
-  <div class="entry-content">
-</div>
+  
+
   
   
 
@@ -143,11 +331,25 @@
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/page/2/index.html" data-via="" data-counturl="http://reeze.cn/page/2/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
       
-  <header class="page-header">
+  <header>
     
-      <h1 class="entry-title"><a href="/2010/11/28/doubanshow-for-wordpress/">[Plugin]豆瓣秀 for WordPress</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/2010/11/28/doubanshow-for-wordpress/">[Plugin]豆瓣秀 for WordPress</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -172,7 +374,7 @@
   </header>
 
 
-  <div class="entry-content"><p>我喜欢在博客中显示我在豆瓣上的一些信息，比如想看哪些书哪些电影神马的。刚开始用的是 Robin的 <a href="http://www.robb.com.cn/plugins">http://www.robb.com.cn/plugins/</a> 的 WP-DoubanShow插件，他用的是豆瓣API。这个插件需要手动修改主题模板文件。刚开始用的挺好，修改就修改吧。不过后来换过几次主题后发现每次修改模板文件还挺“脏”的。遂问robin能否修改成widget的方式，他说官方推出了一个豆瓣秀功能<a href="http://www.douban.com/service/badgemaker">http://www.douban.com/service/badgemaker</a>， 所以不继续维护了。看过官方的说明。发现要在Wordpress中用也只能手动修改模板，不过官方提供了一个生成js的设置项，可以根据需要生成相应的脚本，选项也还算简单。 在网上搜了一番，没有给wordpress用的插件，所以自己写了一个，设置项和官方的一样。下面简单的说明一下：</p>
+  <p>我喜欢在博客中显示我在豆瓣上的一些信息，比如想看哪些书哪些电影神马的。刚开始用的是 Robin的 <a href="http://www.robb.com.cn/plugins">http://www.robb.com.cn/plugins/</a> 的 WP-DoubanShow插件，他用的是豆瓣API。这个插件需要手动修改主题模板文件。刚开始用的挺好，修改就修改吧。不过后来换过几次主题后发现每次修改模板文件还挺“脏”的。遂问robin能否修改成widget的方式，他说官方推出了一个豆瓣秀功能<a href="http://www.douban.com/service/badgemaker">http://www.douban.com/service/badgemaker</a>， 所以不继续维护了。看过官方的说明。发现要在Wordpress中用也只能手动修改模板，不过官方提供了一个生成js的设置项，可以根据需要生成相应的脚本，选项也还算简单。 在网上搜了一番，没有给wordpress用的插件，所以自己写了一个，设置项和官方的一样。下面简单的说明一下：</p>
 
 <ol>
 <li><p>第一步：下载插件文件： <a href="/uploads/2010/11/DoubanShow.zip">DoubanShow.zip</a>, 或者在管理界面中添加插件, 搜索douban即可看到&#8221;豆瓣秀For Wordpress&#8221; 选择安装, 如果这样的话,下面的上传步骤就不需要了</p></li>
@@ -193,7 +395,7 @@
 <p><a href="/uploads/2010/11/settings.png"><img src="/uploads/2010/11/settings.png" alt="" /></a></p>
 
 <p>标题默认为空，就是不显示标题。也可以设置成你想要的标题。然后要设置好你的豆瓣ID，记住不是豆瓣的登录用户名。 设置好以后。去你的页面看看效果吧，也可以看我博客页面右下角。</p>
-</div>
+
   
   
 
@@ -201,11 +403,25 @@
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/page/2/index.html" data-via="" data-counturl="http://reeze.cn/page/2/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
       
-  <header class="page-header">
+  <header>
     
-      <h1 class="entry-title"><a href="/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/">PHP Puzzle(一): 有趣的变量作用域-PHP中global和Javascript中的var关键字</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/">PHP Puzzle(一): 有趣的变量作用域-PHP中global和Javascript中的var关键字</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -230,7 +446,7 @@
   </header>
 
 
-  <div class="entry-content"><p>昨天在网上看到几道有意思的PHP题, 下面这道题让我想起了对应的Javascript版本.
+  <p>昨天在网上看到几道有意思的PHP题, 下面这道题让我想起了对应的Javascript版本.
 `</p>
 
 <p>这段代码运行结果是什么呢? 别急着执行这段代码,先想想你的结果.然后再对比一下吧.</p>
@@ -302,7 +518,7 @@ alert(multiply(100));
 如果还是同样的思路,结果可能是你的期望完全不一样的结果. <strong>这里的var定义变量和php中global不是一样的东西, php中的global是会在运行时执行的.而Javascript中的var在运行之前就已经&#8221;处理&#8221;好了</strong>.在运行之前的&#8221;语法分析&#8221;(没有看过Javascript引擎的实现.姑且这么分把)过程中,multiply函数中出现了var a;则把变量a加到函数体内的&#8221;局部变量表&#8221;中了.在运行过程中并不会执行var a;这一句.  这也是Javascript&#8221;怪异&#8221;的地方.定义变量的位置并没有关系.所以在函数内定义局部变量最好放在函数体的前面.</p>
 
 <p>所以第一个alert输出的1, 函数的执行并没有改版全局范围内的a变量; 第二就没有什么问题了, 是10000;</p>
-</div>
+
   
   
 
@@ -310,11 +526,25 @@ alert(multiply(100));
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/page/2/index.html" data-via="" data-counturl="http://reeze.cn/page/2/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
       
-  <header class="page-header">
+  <header>
     
-      <h1 class="entry-title"><a href="/2010/11/04/php-get-variables-name-a-php-impliment/">怎样获取PHP变量的变量名之PHP实现</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/2010/11/04/php-get-variables-name-a-php-impliment/">怎样获取PHP变量的变量名之PHP实现</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -339,7 +569,7 @@ alert(multiply(100));
   </header>
 
 
-  <div class="entry-content"><p><a href="http://reeze.cn/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">上一篇文章</a>里提到是用PHP扩展实现获取变量的变量名的方法. 今天发现有一个PHP实现的版本 . 实现方法来自:http://mach13.com/how-to-get-a-variable-name-as-a-string-in-php</p>
+  <p><a href="http://reeze.cn/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">上一篇文章</a>里提到是用PHP扩展实现获取变量的变量名的方法. 今天发现有一个PHP实现的版本 . 实现方法来自:http://mach13.com/how-to-get-a-variable-name-as-a-string-in-php</p>
 
 <p><strong>刚开始以为这个方法好使, 仔细想想其实也是有问题的.</strong>
 <del>
@@ -372,7 +602,7 @@ return $aDiffKeys[0];
 `</p>
 
 <p>PS: 如果你真的需要这种方法. 请重新思考一下你的需要真的需要这样的方法么?</p>
-</div>
+
   
   
 
@@ -380,11 +610,25 @@ return $aDiffKeys[0];
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/page/2/index.html" data-via="" data-counturl="http://reeze.cn/page/2/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
       
-  <header class="page-header">
+  <header>
     
-      <h1 class="entry-title"><a href="/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">Php Internal How to Get Variables Name an Extension Implement</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/">Php Internal How to Get Variables Name an Extension Implement</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -409,13 +653,13 @@ return $aDiffKeys[0];
   </header>
 
 
-  <div class="entry-content"><p>[?25l[J[J[J[J[J[J[?12l[?25h[?1049h[?1h=[1;37r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[37;1H&#8221;2010-10-30-php-internal-how-to-get-variables-name-an-extension-implement.markdown&#8221; 301L, 12377C[1;1H&#8212;
+  <p>[?25l[J[J[J[J[J[J[?12l[?25h[?1049h[?1h=[1;37r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[37;1H&#8221;2010-10-30-php-internal-how-to-get-variables-name-an-extension-implement.markdown&#8221; 301L, 12377C[1;1H&#8212;
 date: &#8216;2010-10-30 00:39:01&#8217;
 layout: post
 slug: php-internal-how-to-get-variables-name-an-extension-implement
 status: publish
 title: &#8216;[PHP-Internal]鎬庝箞鏍疯幏鍙朠HP鍙橀噺鐨勫彉閲忓悕涔嬫墿灞曞疄鐜</p>
-</div>
+
   
   
 
@@ -423,11 +667,25 @@ title: &#8216;[PHP-Internal]鎬庝箞鏍疯幏鍙朠HP鍙橀噺鐨勫彉閲忓�
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/page/2/index.html" data-via="" data-counturl="http://reeze.cn/page/2/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
       
-  <header class="page-header">
+  <header>
     
-      <h1 class="entry-title"><a href="/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/">解决Mac下终端中使用screen管理回话但看不到滚动条等问题</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/">解决Mac下终端中使用screen管理回话但看不到滚动条等问题</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -452,7 +710,7 @@ title: &#8216;[PHP-Internal]鎬庝箞鏍疯幏鍙朠HP鍙橀噺鐨勫彉閲忓�
   </header>
 
 
-  <div class="entry-content"><p>工作中开发主要在公司的开发机上，ssh到远程服务器上用vim开发，有时候因为网络原因或者不小心把终端给
+  <p>工作中开发主要在公司的开发机上，ssh到远程服务器上用vim开发，有时候因为网络原因或者不小心把终端给
 关了或者网络出现问题以后就痛苦了，因为会话关闭后开启的程序就挂了，vim默认会用swp文件保存修改，
 但是为了安全起见，不想关掉swp，一不小心真丢数据就划不来了，非法关闭vim之后再次打开就会提示是否恢复文件，
 自从发现screen这个绝佳的会话管理工具，就深深的爱上了它，IBM的这篇文章有详细的介绍
@@ -469,7 +727,7 @@ Ctrl + E来定位当前输入的命令吧. 其实在~/.screenrc中修改一下�
 
 
 <p>解决方法来源见：<a href="http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command">http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command</a></p>
-</div>
+
   
   
 
@@ -477,11 +735,25 @@ Ctrl + E来定位当前输入的命令吧. 其实在~/.screenrc中修改一下�
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/page/2/index.html" data-via="" data-counturl="http://reeze.cn/page/2/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
       
-  <header class="page-header">
+  <header>
     
-      <h1 class="entry-title"><a href="/2010/04/25/make-your-site-drop-uploadable-with-html5s-file-api-like-gmail-does/">让你的网站也像Gmail一样支持文件拖放上传-HTML5之File API</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/2010/04/25/make-your-site-drop-uploadable-with-html5s-file-api-like-gmail-does/">让你的网站也像Gmail一样支持文件拖放上传-HTML5之File API</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -506,7 +778,7 @@ Ctrl + E来定位当前输入的命令吧. 其实在~/.screenrc中修改一下�
   </header>
 
 
-  <div class="entry-content"><blockquote><p>如果你比较好奇，可以先从<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/FileAPI_Test.zip">这里下载所有代码</a>，也可以点击这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/chrome_drop_upload.html">查看chrome下上传的demo</a>，点这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/firefox36_drop_upload.html">查看firefox下的demo</a></p></blockquote>
+  <blockquote><p>如果你比较好奇，可以先从<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/FileAPI_Test.zip">这里下载所有代码</a>，也可以点击这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/chrome_drop_upload.html">查看chrome下上传的demo</a>，点这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/firefox36_drop_upload.html">查看firefox下的demo</a></p></blockquote>
 
 <p>前不久<a href="http://net.chinabyte.com/395/11221395.shtml">Gmail推出了支持拖拽的附件上传功能</a>，试用了下还真不错，其实很久以前就在想能有直接拖拽附件的功能，多亏有了HTML5，Web应用越来越像客户端的应用了。</p>
 
@@ -578,7 +850,7 @@ FilefileName=es.dll fileSize=271360
 <p>点击<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/FileAPI_Test.zip">这里下载所有代码</a>，有兴趣的童鞋查看源代码就知道怎么回事了，有一定的注释：）</p>
 
 <p>也可以点击这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/chrome_drop_upload.html">查看chrome下上传的demo</a>，点这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/firefox36_drop_upload.html">查看firefox下的demo</a>，之所以分开是为了简单起见，当然你真的想要给你的网站提供托拽上传功能，你就得自己去同时兼容这两个浏览器啦，相信这也不是件困难的事情：）</p>
-</div>
+
   
   
 
@@ -586,11 +858,25 @@ FilefileName=es.dll fileSize=271360
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/page/2/index.html" data-via="" data-counturl="http://reeze.cn/page/2/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
       
-  <header class="page-header">
+  <header>
     
-      <h1 class="entry-title"><a href="/2010/01/24/guide-enable-native-ntfs-readwrite-in-snow-leopard/">开启Mac OS X Snow Leopard的NTFS原生读写</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/2010/01/24/guide-enable-native-ntfs-readwrite-in-snow-leopard/">开启Mac OS X Snow Leopard的NTFS原生读写</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -615,7 +901,7 @@ FilefileName=es.dll fileSize=271360
   </header>
 
 
-  <div class="entry-content"><p>在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2
+  <p>在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2
 之后出现fusefs.kext can&#8217;t load的错误，从官方得知目前macfuse在snow leopard下有问题，
 在网上看到<a href="http://forums.macrumors.com/showthread.php?t=785376">这篇贴子</a>提到
 Snow Leopard其实原生就支持NTFS分区的读写，真是个好消息。</p>
@@ -654,210 +940,28 @@ $ sudo chmod 755 /sbin/mount_ntfs</p>
 3，声音控制不了，只能在具体的应用程序里控制。</p>
 
 <p>其实问题还是挺多的，不过基本上的使用我觉得还是没什么问题的，触摸屏的问题比较烦人，还好我不喜欢用触摸屏。如果有人也想尝试可以试试看。我用的安装文件是 Snow_Leopard_10.6.1-10.6.2_SSE2_SSE3_Intel_AMD_by_Hazard.iso, 至于安装方法<a href="http://bbs.pcbeta.com/forum-185-1.html">PCbeta</a>上有很多的教程可以参考，摸索一下大概都没有什么问题，安装的时候一定要做好备份，因为我到目前已经因为装Mac OS X丢失了不下10次数据了，大部分情况下都是分区被合并。所以一定要小心一点。</p>
-</div>
-  
-  
 
-
-    </article>
-  
-  
-    <article>
-      
-  <header class="page-header">
-    
-      <h1 class="entry-title"><a href="/2009/12/31/at-the-tail-of-2009/">在2009的尾巴上</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-12-31T23:59:06+08:00" pubdate data-updated="true">Dec 31<span>st</span>, 2009</time>
-        
-         | <a href="/2009/12/31/at-the-tail-of-2009/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>09年最后一篇日志，充个数吧：）</p>
-
-<p>刚买了本《<a href="http://www.douban.com/subject/3735649/">Orange S: 一个操作系统的实现</a>》，
-这一年下来买了挺多的书，也从图书馆借了很多的书（马上就要毕业了，再也享受不到学校图书馆丰富及时的藏书了，
-计划以后每个月发工资都买一本自己喜欢的书），发现我读书最大的问题是多而不精，
-拿一本好书就使劲的翻，很多书都是花几天就翻完了，但是读下来之后总觉得收获不够，
-一些很需要实践的部分也没有及时巩固练习，总感觉自己浮在表面上，只知其然。所以呢，
-2010年争取多读好书，踏踏实实的啃几本好书，然后就是要多动手啦。</p>
-
-<p>计划2010年呢，能把耽搁很久的想法付诸行动，做出点东西来。希望有个好的开始吧！</p>
-
-<p>Happy New Year!!!</p>
-</div>
   
   
 
 
     </article>
   
-  
-    <article>
-      
-  <header class="page-header">
-    
-      <h1 class="entry-title"><a href="/2009/12/30/ipv6-enabled-tunnelblick-for-mac-os-x/">支持IPv6的Tunnelblick for Mac OS X OpenVPN客户端</a></h1>
-    
-    
-      <p class="meta">
-        
+
+    <nav role="navigation" id="pagination">
+  <span class="next">
+    <a href="/page/3/" rel="next">Continue &rarr;</a>
+  </span>
 
 
+  <span class="prev">
+    <a href="/" rel="prev">Newer &larr;</a>
+  </span>
 
-
-
-
-
-
+</nav>
+  </section>
   
 
-
-<time datetime="2009-12-30T13:20:15+08:00" pubdate data-updated="true">Dec 30<span>th</span>, 2009</time>
-        
-         | <a href="/2009/12/30/ipv6-enabled-tunnelblick-for-mac-os-x/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在<a href="http://yegle.net">yegle</a>那里买了OpenVPN服务 ，用着还挺不错，我也在教育网，所以只能使用支持IPv6版的客户端，openvpn默认不支持IPv6,不过yegle提供了相应的<a href="http://github.com/jjo/openvpn-ipv6">IPv6补丁</a>，在Linux下以及Windows下使用的都挺好，最近又在折腾电脑，装了个Snow Leopard，基本没什么问题了，除了我的ATI 2600 XT硬件加速暂时无解外其他的都挺爽，使用了yegle推荐的<a href="http://code.google.com/p/tunnelblick/downloads/list">Tunnelblick</a>, 总是连接不上，它提示让我查看日志，但是根本就找不到地方看日志，直接cd 到 Tunnelblick的包里面直接执行openvpn命令，提示不支持udp6 ，又是不支持 Ipv6，本想直接自己编译一个openvpn，但是想想那样就太不clean了，编译成app的话可以通用，还能共享给有需要的人多好啊，去google code checkout了一份代码，直接编译，错误百出，我是在Snow Leopard上编译的，仔细查看原来需要MacOSX10.4u的SDK 重新安装10.4的SDK还是未果，后来发现SDK的安装目录居然不一样。。自己手动拷贝过去也不行。。 切换到傲Leopard下安装，折腾了好久终于编译成功，废话太多了。呵呵，共享出来给需要的人吧：）</p>
-
-<p>猛击这个连接 下载<a href="http://code.google.com/p/tunnelblick-ipv6/downloads/list">http://code.google.com/p/tunnelblick-ipv6/downloads/list</a>
-可惜的是yegle不再提供IPv6用户的续费了，不过我到期之后差不多也要从学校滚蛋了。
-我提供的这个版本的tunnelblick的配置文件位置是  ~/Library/openvpn  最新版的配置放在 ~/Library/Application Support/Tunnelblick/Configuration目录里面。</p>
-
-<p>马上2009年就要过去了。最近很久都没有更新日志了，其实之间也想写一些东西，但是都丢在草稿箱里没写完。论文还有很多没有写完，马上就要交了，要抵制住诱惑乖乖写论文。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  <ul class="pager">
-    
-    <li class="previous"><a href="/page/3/">&larr; Older</a></li>
-    
-    <li><a href="/blog/archives">Blog Archives</a></li>
-    
-    <li class="next"><a href="/">Newer &rarr;</a></li>
-    
-  </ul>
-</div>
-<aside class="sidebar-nav span3">
-  
-    <section class="well">
-  <ul id="recent_posts" class="nav nav-list">
-    <li class="nav-header">Recent Posts</li>
-    
-      <li class="post">
-        <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/01/09/how-to-crash-php/">how-to-crash-php</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/12/05/the-nearly-end-of-the-end-of-the-world/">The nearly end of the end of the world</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">怎么样获取PHP函数默认参数的常量名</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">PHP中的NOP及为什么有这个opcode</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section class="well">
-  <ul id="gh_repos" class="nav">
-    <li class="nav-header">GitHub Repos</li>
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/reeze">@reeze</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'reeze',
-            count: 5,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo" class="page-footer"><hr>
-<p>
-  Copyright &copy; 2013 - reeze -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
   
 
 <script type="text/javascript">
@@ -896,7 +1000,6 @@ $ sudo chmod 755 /sbin/mount_ntfs</p>
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
-
 
 
 

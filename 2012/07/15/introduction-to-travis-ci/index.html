@@ -9,9 +9,9 @@
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="Travis CI是一个基于云的持续集成项目，
+  <meta name="description" content="Tweet 初试Travis-CI Jul 15th, 2012 | Comments Travis CI是一个基于云的持续集成项目，
 目前已经支持大部分主流语言了，比如：C，PHP，Ruby，Python, Nodejs等等。和Jenkins类似，
-Travis CI也是开源的，不过Travis和Github集成非常紧密，官方的集成测试托管只支持Github项目， &hellip;">
+Travis CI也是开源的， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,37 +20,17 @@ Travis CI也是开源的，不过Travis和Github集成非常紧密，官方的�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://reeze.cn/2012/07/15/introduction-to-travis-ci">
+  <link rel="canonical" href="http://reeze.cn/2012/07/15/introduction-to-travis-ci/">
   <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/syntax/syntax.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <style type="text/css">
-    body {
-      padding-top: 60px;
-      padding-bottom: 40px;
-    }
-    h1 {
-      margin-bottom: 15px;
-    }
-    img {
-      max-width: 100%;
-    }
-    .sharing, .meta {
-      margin: 20px 0px 20px 0px;
-    }
-    .pager {
-      margin: 20px 0px 5px 0px;
-    }
-    .page-footer p {
-      text-align: center;
-    }
-  </style>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Zen Space | 寻找善美" type="application/atom+xml">
-  
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -67,48 +47,78 @@ Travis CI也是开源的，不过Travis和Github集成非常紧密，官方的�
 
 </head>
 
-<body   >
-  <nav role="navigation"><div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+  <div class="clearfix">
+    <a href="/">Zen Space | 寻找善美</a>
+  </div>
+</aside>
 
-      <a class="brand" href="/">Zen Space | 寻找善美</a>
+<ul id="menu">
 
-      <div class="nav-collapse">
-        <ul class="nav">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about/">About</a></li>
+  <li class="title">
+    <h1 id="title"><a href="/">Zen Space | 寻找善美</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">寻找善美</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/reeze/">github</a>
+  </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
 </ul>
 
-      </div>
 
-      <ul class="nav pull-right" data-subscription="rss">
-        <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-        
-      </ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:reeze.cn" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
 
-        
-      <form class="pull-right navbar-search" action="http://google.com/search" method="get">
-        <fieldset role="search">
-          <input type="hidden" name="q" value="site:reeze.cn" />
-          <input class="search-query" type="text" name="q" results="0" placeholder="Search"/>
-        </fieldset>
-      </form>
-        
-    </div>
-  </div>
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+    <article class="post">
+  <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/2012/07/15/introduction-to-travis-ci/" data-via="" data-counturl="http://reeze.cn/2012/07/15/introduction-to-travis-ci/" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
 </div>
-</nav>
-  <div class="container">
-    <div class="row-fluid">
-      
-<article class="hentry span9" role="article">
 
   
-  <header class="page-header">
+  <header>
     
-      <h1 class="entry-title">初试Travis-CI</h1>
+      <h2 class="entry-title">初试Travis-CI</h2>
     
     
       <p class="meta">
@@ -133,7 +143,7 @@ Travis CI也是开源的，不过Travis和Github集成非常紧密，官方的�
   </header>
 
 
-<div class="entry-content"><p>Travis CI是一个基于云的<a href="http://en.wikipedia.org/wiki/Continuous_integration">持续集成</a>项目，
+<p>Travis CI是一个基于云的<a href="http://en.wikipedia.org/wiki/Continuous_integration">持续集成</a>项目，
 目前已经支持大部分主流语言了，比如：C，PHP，Ruby，Python, Nodejs等等。和<a href="http://jenkins-ci.org/">Jenkins</a>类似，
 Travis CI也是开源的，不过Travis和Github集成非常紧密，官方的集成测试托管只支持Github项目，
 不过你也可以搭建一套自己的方案。 这里有一篇比较详实的<a href="http://www.juvenxu.com/2012/03/06/travis-ci/">对Travis-CI的介绍</a>，
@@ -266,169 +276,24 @@ travis也会忽略，所以采用了一个折中的方式来测试。因为测�
 
 <p>除了PHP，其实你可以在Travis上测试绝大部分的软件，因为travis提供的是一个完整的环境，
 而你可以编写任何的脚本来进行你的测试工作。</p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">reeze</span></span>
-
-      
 
 
 
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-15T20:26:00+08:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/categories/ci/'>CI</a>, <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/travis/'>Travis</a>, <a class='category' href='/categories/leveldb/'>leveldb</a>, <a class='category' href='/categories/php-leveldb/'>php-leveldb</a>, <a class='category' href='/categories/扩展/'>扩展</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/2012/07/15/introduction-to-travis-ci/" data-via="" data-counturl="http://reeze.cn/2012/07/15/introduction-to-travis-ci/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
-    
-    
-    <section>
-      <h1>Comments</h1>
-      <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-    </section>
-    
-    <ul class="pager">
-      
-      <li class="previous"><a class="basic-alignment left"
-        href="/2012/05/28/what-opcode-zend-nop-is-in-php/" title="Previous Post:
-        PHP中的NOP及为什么有这个opcode">&laquo; PHP中的NOP及为什么有这个opcode</a></li>
-      
-      <li><a href="/blog/archives">Blog Archives</a></li>
-      
-      <li class="next"><a class="basic-alignment right" href="/2012/07/22/how-to-get-php-functions-const-parameters-name/"
-        title="Next Post: 怎么样获取PHP函数默认参数的常量名">怎么样获取PHP函数默认参数的常量名
-        &raquo;</a></li>
-      
-    </ul>
-  </footer>
 </article>
 
-<aside class="sidebar-nav span3">
+  <section class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+    <nav role="navigation" id="pagination">
+
+</nav>
+  </section>
   
-    <section class="well">
-  <ul id="recent_posts" class="nav nav-list">
-    <li class="nav-header">Recent Posts</li>
-    
-      <li class="post">
-        <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/01/09/how-to-crash-php/">how-to-crash-php</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/12/05/the-nearly-end-of-the-end-of-the-world/">The nearly end of the end of the world</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">怎么样获取PHP函数默认参数的常量名</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">PHP中的NOP及为什么有这个opcode</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
-      </li>
-    
-  </ul>
-</section>
 
-<section class="well">
-  <ul id="gh_repos" class="nav">
-    <li class="nav-header">GitHub Repos</li>
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/reeze">@reeze</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'reeze',
-            count: 5,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo" class="page-footer"><hr>
-<p>
-  Copyright &copy; 2013 - reeze -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
   
 
 <script type="text/javascript">
@@ -470,7 +335,6 @@ travis也会忽略，所以采用了一个折中的方式来测试。因为测�
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
-
 
 
 

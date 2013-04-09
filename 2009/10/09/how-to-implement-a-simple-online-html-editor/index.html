@@ -9,7 +9,7 @@
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="一直没有仔细研究过在线HTML编辑器，以前以为编辑功能很复杂，需要用大量的JavaScript来模拟编辑器的效果，以前都是使用一些开源的HTML编辑器，HTML在各网上随处可见，发表文章，评论。最近自己想做一个类似Things这样的Web版的应用，需要一个想Google  Notebook( &hellip;">
+  <meta name="description" content="Tweet 实现一个简单在线HTML编辑器 Oct 9th, 2009 | Comments 一直没有仔细研究过在线HTML编辑器，以前以为编辑功能很复杂，需要用大量的JavaScript来模拟编辑器的效果，以前都是使用一些开源的HTML编辑器，HTML在各网上随处可见，发表文章，评论。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,37 +18,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor">
+  <link rel="canonical" href="http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor/">
   <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/syntax/syntax.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <style type="text/css">
-    body {
-      padding-top: 60px;
-      padding-bottom: 40px;
-    }
-    h1 {
-      margin-bottom: 15px;
-    }
-    img {
-      max-width: 100%;
-    }
-    .sharing, .meta {
-      margin: 20px 0px 20px 0px;
-    }
-    .pager {
-      margin: 20px 0px 5px 0px;
-    }
-    .page-footer p {
-      text-align: center;
-    }
-  </style>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Zen Space | 寻找善美" type="application/atom+xml">
-  
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -65,48 +45,78 @@
 
 </head>
 
-<body   >
-  <nav role="navigation"><div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+  <div class="clearfix">
+    <a href="/">Zen Space | 寻找善美</a>
+  </div>
+</aside>
 
-      <a class="brand" href="/">Zen Space | 寻找善美</a>
+<ul id="menu">
 
-      <div class="nav-collapse">
-        <ul class="nav">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about/">About</a></li>
+  <li class="title">
+    <h1 id="title"><a href="/">Zen Space | 寻找善美</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">寻找善美</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/reeze/">github</a>
+  </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
 </ul>
 
-      </div>
 
-      <ul class="nav pull-right" data-subscription="rss">
-        <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-        
-      </ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:reeze.cn" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
 
-        
-      <form class="pull-right navbar-search" action="http://google.com/search" method="get">
-        <fieldset role="search">
-          <input type="hidden" name="q" value="site:reeze.cn" />
-          <input class="search-query" type="text" name="q" results="0" placeholder="Search"/>
-        </fieldset>
-      </form>
-        
-    </div>
-  </div>
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+    <article class="post">
+  <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor/" data-via="" data-counturl="http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor/" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
 </div>
-</nav>
-  <div class="container">
-    <div class="row-fluid">
-      
-<article class="hentry span9" role="article">
 
   
-  <header class="page-header">
+  <header>
     
-      <h1 class="entry-title">实现一个简单在线HTML编辑器</h1>
+      <h2 class="entry-title">实现一个简单在线HTML编辑器</h2>
     
     
       <p class="meta">
@@ -131,7 +141,7 @@
   </header>
 
 
-<div class="entry-content"><p>一直没有仔细研究过在线HTML编辑器，以前以为编辑功能很复杂，需要用大量的JavaScript来模拟编辑器的效果，以前都是使用一些开源的HTML编辑器，HTML在各网上随处可见，发表文章，评论。最近自己想做一个类似Things这样的Web版的应用，需要一个想Google  Notebook(可惜的是现在已经停止开发了) 那样的编辑功能，看看现在网上的这些编辑器都庞大了，都是一些自己根本用不到的功能，其实我的需求很简单：简单的编辑既可以，并且需要轻量级一些，因为页面上可能需要开很多个编辑器实例。 所有想自己也来研究一下，看看能不能自己开发一个。</p>
+<p>一直没有仔细研究过在线HTML编辑器，以前以为编辑功能很复杂，需要用大量的JavaScript来模拟编辑器的效果，以前都是使用一些开源的HTML编辑器，HTML在各网上随处可见，发表文章，评论。最近自己想做一个类似Things这样的Web版的应用，需要一个想Google  Notebook(可惜的是现在已经停止开发了) 那样的编辑功能，看看现在网上的这些编辑器都庞大了，都是一些自己根本用不到的功能，其实我的需求很简单：简单的编辑既可以，并且需要轻量级一些，因为页面上可能需要开很多个编辑器实例。 所有想自己也来研究一下，看看能不能自己开发一个。</p>
 
 <p>几天前花了一个晚上用firebug看了下Google Docs是怎么做。第一个遇到的问题就是如何让光标停在鼠标点击所在得地方。我刚开始一味都是js模拟出来的，这得有多复杂啊。并且还要兼容各个浏览器，天啊！后来上网一搜发现，浏览器早就想到了我们会有这样的一个需求。其实很简单，两条语句就可以说明HTML编辑器的最为核心的部分：
 <code>
@@ -186,163 +196,18 @@ document.contentEditable = true;
 
 <p>需要的同学可以下来参考参考。
 猛击 <a href="/uploads/2009/10/editor.rar"> >> 这里 &lt;&lt; </a>下载代码。</p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">reeze</span></span>
-
-      
 
 
 
-
-
-
-
-
-  
-
-
-<time datetime="2009-10-09T15:11:26+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2009</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/web技术/'>Web技术</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor/" data-via="" data-counturl="http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
-    
-    
-    <ul class="pager">
-      
-      <li class="previous"><a class="basic-alignment left"
-        href="/2009/07/02/a-cache-system-using-var_export-and-includes-return-value/" title="Previous Post:
-        基于var_export 和 include返回值的缓存方案">&laquo; 基于var_export 和 include返回值的缓存方案</a></li>
-      
-      <li><a href="/blog/archives">Blog Archives</a></li>
-      
-      <li class="next"><a class="basic-alignment right" href="/2009/10/09/check-php-files-syntax-in-php/"
-        title="Next Post: 在PHP中检查PHP文件是否有语法错误">在PHP中检查PHP文件是否有语法错误
-        &raquo;</a></li>
-      
-    </ul>
-  </footer>
 </article>
 
-<aside class="sidebar-nav span3">
+
+    <nav role="navigation" id="pagination">
+
+</nav>
+  </section>
   
-    <section class="well">
-  <ul id="recent_posts" class="nav nav-list">
-    <li class="nav-header">Recent Posts</li>
-    
-      <li class="post">
-        <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/01/09/how-to-crash-php/">how-to-crash-php</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/12/05/the-nearly-end-of-the-end-of-the-world/">The nearly end of the end of the world</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">怎么样获取PHP函数默认参数的常量名</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">PHP中的NOP及为什么有这个opcode</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
-      </li>
-    
-  </ul>
-</section>
 
-<section class="well">
-  <ul id="gh_repos" class="nav">
-    <li class="nav-header">GitHub Repos</li>
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/reeze">@reeze</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'reeze',
-            count: 5,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo" class="page-footer"><hr>
-<p>
-  Copyright &copy; 2013 - reeze -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
   
 
 <script type="text/javascript">
@@ -381,7 +246,6 @@ document.contentEditable = true;
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
-
 
 
 
