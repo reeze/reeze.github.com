@@ -15,10 +15,17 @@ tags:
 - screenrc
 ---
 
-工作中开发基本都是ssh到远程服务器上vim开发，有时候因为网络原因或者不小心把终端给关了或者网络出现问题以后就痛苦了，因为vim默认会用swp文件保存修改，我又不想关掉这个功能，一不小心真丢数据就划不来了，非法关闭vim之后再次打开就会提示是否恢复文件，自从发现screen这个绝佳的绘画管理工具，就深深的爱上了它，IBM的这篇文章有详细的介绍  “[linux 技巧：使用screen 管理你的远程会话](http://www.ibm.com/developerworks/cn/linux/l-cn-screen/)”。在使用过程中发现一些问题，默认快捷键是Ctrl + A, 用惯了命令行的人肯定会用Ctrl +A , Ctrl + E来定位当前输入的命令吧. 在~/.screenrc中修改一下就可以了，下面是我的.screenrc
-`
+工作中开发主要在公司的开发机上，ssh到远程服务器上用vim开发，有时候因为网络原因或者不小心把终端给
+关了或者网络出现问题以后就痛苦了，因为会话关闭后开启的程序就挂了，vim默认会用swp文件保存修改，
+但是为了安全起见，不想关掉swp，一不小心真丢数据就划不来了，非法关闭vim之后再次打开就会提示是否恢复文件，
+自从发现screen这个绝佳的会话管理工具，就深深的爱上了它，IBM的这篇文章有详细的介绍
+[linux 技巧：使用screen 管理你的远程会话](http://www.ibm.com/developerworks/cn/linux/l-cn-screen/)”。
+在使用过程中发现一些问题，screen默认使用Ctrl + A当做热键, 用惯了命令行的人肯定会用Ctrl +A ,
+Ctrl + E来定位当前输入的命令吧. 其实在~/.screenrc中修改一下就可以了，下面是我的.screenrc: 
+
+```
 vbell_msg "" # 比如在tab自动提示的时候，默认总是会出现一个Wuff,觉得很烦，关掉
 escape ``  # instead of Control-a  使用 反引号当快捷键，因为用的相对较少
 termcapinfo xterm* ti@:te@  # 这个就是解决mac下看不到滚动条的问题了
-`
+```
 解决方法来源见：[http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command](http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command)
