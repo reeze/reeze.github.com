@@ -4,7 +4,7 @@
   <title><![CDATA[Zen Space | 寻找善美]]></title>
   <link href="http://reeze.cn/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2013-04-09T22:29:20+08:00</updated>
+  <updated>2013-04-09T22:35:02+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -19,30 +19,6 @@
     <updated>2013-03-11T17:07:00+08:00</updated>
     <id>http://reeze.cn/2013/03/11/how-to-trace-a-php-crash-segfault</id>
     <content type="html"><![CDATA[
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[how-to-crash-php]]></title>
-    <link href="http://reeze.cn/2013/01/09/how-to-crash-php/"/>
-    <updated>2013-01-09T13:35:00+08:00</updated>
-    <id>http://reeze.cn/2013/01/09/how-to-crash-php</id>
-    <content type="html"><![CDATA[<p>怎么样把PHP搞挂。</p>
-
-<p>从一个语言(或任何程序)的角度来说，奔溃都不是该有的行为。不过计算机科学中一直就存在各种
-折中，比如很多的算法为了提高效率会用空间来换时间，比如Ruby语言的实现中，性能不是在首位的，
-它比较看重的是优雅程度，通常在实际应用大部分情况下性能也不能做为首要因素，可维护性相对比较重要，
-这些通常都是一种折中方案，不可能顾全所有的方案。</p>
-
-<p>这里将要列举出来一些把PHP搞挂掉的方法。</p>
-
-<p>这些都可以算作PHP的bug，不过出于成本考虑，目前很可能不会修复。</p>
-
-<ol>
-<li><p>死循环</p></li>
-<li><p>通过配置disable_class禁用某些存在继承关系的类</p></li>
-</ol>
-
 ]]></content>
   </entry>
   
@@ -1092,6 +1068,26 @@ $ sudo chmod 755 /sbin/mount_ntfs</p>
 3，声音控制不了，只能在具体的应用程序里控制。</p>
 
 <p>其实问题还是挺多的，不过基本上的使用我觉得还是没什么问题的，触摸屏的问题比较烦人，还好我不喜欢用触摸屏。如果有人也想尝试可以试试看。我用的安装文件是 Snow_Leopard_10.6.1-10.6.2_SSE2_SSE3_Intel_AMD_by_Hazard.iso, 至于安装方法<a href="http://bbs.pcbeta.com/forum-185-1.html">PCbeta</a>上有很多的教程可以参考，摸索一下大概都没有什么问题，安装的时候一定要做好备份，因为我到目前已经因为装Mac OS X丢失了不下10次数据了，大部分情况下都是分区被合并。所以一定要小心一点。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[在2009的尾巴上]]></title>
+    <link href="http://reeze.cn/2009/12/31/at-the-tail-of-2009/"/>
+    <updated>2009-12-31T23:59:06+08:00</updated>
+    <id>http://reeze.cn/2009/12/31/at-the-tail-of-2009</id>
+    <content type="html"><![CDATA[<p>09年最后一篇日志，充个数吧：）</p>
+
+<p>刚买了本《<a href="http://www.douban.com/subject/3735649/">Orange S: 一个操作系统的实现</a>》，
+这一年下来买了挺多的书，也从图书馆借了很多的书（马上就要毕业了，再也享受不到学校图书馆丰富及时的藏书了，
+计划以后每个月发工资都买一本自己喜欢的书），发现我读书最大的问题是多而不精，
+拿一本好书就使劲的翻，很多书都是花几天就翻完了，但是读下来之后总觉得收获不够，
+一些很需要实践的部分也没有及时巩固练习，总感觉自己浮在表面上，只知其然。所以呢，
+2010年争取多读好书，踏踏实实的啃几本好书，然后就是要多动手啦。</p>
+
+<p>计划2010年呢，能把耽搁很久的想法付诸行动，做出点东西来。希望有个好的开始吧！</p>
+
+<p>Happy New Year!!!</p>
 ]]></content>
   </entry>
   
