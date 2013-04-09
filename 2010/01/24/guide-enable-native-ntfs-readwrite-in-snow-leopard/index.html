@@ -9,7 +9,10 @@
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2之后出现fusefs.kext can&#8217;t load的错误，从官方得知目前macfuse在snow leopard下有问题，在网上看到这篇贴子提到Snow &hellip;">
+  <meta name="description" content="在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2
+之后出现fusefs.kext can&#8217;t load的错误，从官方得知目前macfuse在snow leopard下有问题，
+在网上看到这篇贴子提到
+Snow &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -131,7 +134,10 @@
   </header>
 
 
-<div class="entry-content"><p>在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2之后出现fusefs.kext can&#8217;t load的错误，从官方得知目前macfuse在snow leopard下有问题，在网上看到<a href="http://forums.macrumors.com/showthread.php?t=785376">这篇贴子</a>提到Snow Leopard其实原生就支持NTFS分区的读写，真是个好消息。</p>
+<div class="entry-content"><p>在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2
+之后出现fusefs.kext can&#8217;t load的错误，从官方得知目前macfuse在snow leopard下有问题，
+在网上看到<a href="http://forums.macrumors.com/showthread.php?t=785376">这篇贴子</a>提到
+Snow Leopard其实原生就支持NTFS分区的读写，真是个好消息。</p>
 
 <p>开启的方法有两种：
 一种是在/etc/fstab文件里增加挂载选项，基本步骤是：
@@ -155,15 +161,18 @@ $ sudo vim /sbin/mount_ntfs
 $ sudo chown root:wheel /sbin/mount_ntfs
 $ sudo chmod 755 /sbin/mount_ntfs</p>
 
-<p>然后重启，启动后，你应该就能得到一个可以自由读写的ntfs分区了。不过声明一点，这个功能据说不稳定，不知道是因为版权原因还是真的很不稳定，苹果默认没有开启这个功能。不过我更相信苹果。</p>
+<p>然后重启，启动后，你应该就能得到一个可以自由读写的ntfs分区了。不过声明一点，
+这个功能据说不稳定，不知道是因为版权原因还是真的很不稳定，苹果默认没有开启这个功能。不过我更相信苹果。</p>
 
 <p>＝＝＝＝＝＝＝＝
-后话：刚好公司配了一台Dell E6400,偶尔看到有人在上面<a href="http://bbs.pcbeta.com/archiver/tid-625920.html">装了一个Leopard</a>,于是手痒也在上面装了一个，如果有人也有这台笔记本也可以试试看，不过我装好的系统还是有问题：</p>
+后话：刚好公司配了一台Dell E6400,偶尔看到有人在上面<a href="http://bbs.pcbeta.com/archiver/tid-625920.html">装了一个Leopard</a>,
+于是手痒也在上面装了一个，如果有人也有这台笔记本也可以试试看，不过我装好的系统还是有问题：</p>
 
 <p>1，触摸屏一碰就乱跑，我直接禁用就好了，反正也不喜欢用。
 2，关机和重启不断电，每天关机的次数也有限，也就无所谓了。
-3，声音控制不了，只能在具体的应用程序里控制。
-其实问题还是挺多的，不过基本上的使用我觉得还是没什么问题的，触摸屏的问题比较烦人，还好我不喜欢用触摸屏。如果有人也想尝试可以试试看。我用的安装文件是 Snow_Leopard_10.6.1-10.6.2_SSE2_SSE3_Intel_AMD_by_Hazard.iso, 至于安装方法<a href="http://bbs.pcbeta.com/forum-185-1.html">PCbeta</a>上有很多的教程可以参考，摸索一下大概都没有什么问题，安装的时候一定要做好备份，因为我到目前已经因为装Mac OS X丢失了不下10次数据了，大部分情况下都是分区被合并。所以一定要小心一点。</p>
+3，声音控制不了，只能在具体的应用程序里控制。</p>
+
+<p>其实问题还是挺多的，不过基本上的使用我觉得还是没什么问题的，触摸屏的问题比较烦人，还好我不喜欢用触摸屏。如果有人也想尝试可以试试看。我用的安装文件是 Snow_Leopard_10.6.1-10.6.2_SSE2_SSE3_Intel_AMD_by_Hazard.iso, 至于安装方法<a href="http://bbs.pcbeta.com/forum-185-1.html">PCbeta</a>上有很多的教程可以参考，摸索一下大概都没有什么问题，安装的时候一定要做好备份，因为我到目前已经因为装Mac OS X丢失了不下10次数据了，大部分情况下都是分区被合并。所以一定要小心一点。</p>
 </div>
 
 
@@ -233,6 +242,18 @@ $ sudo chmod 755 /sbin/mount_ntfs</p>
     <li class="nav-header">Recent Posts</li>
     
       <li class="post">
+        <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/09/how-to-crash-php/">how-to-crash-php</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/12/05/the-nearly-end-of-the-end-of-the-world/">The nearly end of the end of the world</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a>
       </li>
     
@@ -258,18 +279,6 @@ $ sudo chmod 755 /sbin/mount_ntfs</p>
     
       <li class="post">
         <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">[PHP-Internal]定制PHP语法获取PHP变量的变量名</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/11/28/doubanshow-for-wordpress/">[Plugin]豆瓣秀 For WordPress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/">PHP Puzzle(一): 有趣的变量作用域-PHP中global和Javascript中的var关键字</a>
       </li>
     
   </ul>
@@ -316,7 +325,7 @@ $ sudo chmod 755 /sbin/mount_ntfs</p>
   </div>
   <footer role="contentinfo" class="page-footer"><hr>
 <p>
-  Copyright &copy; 2012 - reeze -
+  Copyright &copy; 2013 - reeze -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

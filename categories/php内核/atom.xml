@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PHP内核 | Zen Space | 寻找善美]]></title>
   <link href="http://reeze.cn/categories/php内核/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2012-09-12T23:27:50+08:00</updated>
+  <updated>2013-04-09T21:46:25+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -174,8 +174,8 @@ line    #   op  fetch   ext return  operands
 
 <p>Zend虚拟机是高级抽象，不要考虑内存对齐等的问题，为什么还需要空操作这样的opcode呢？</p>
 
-<p>原因简单讲就是：编译过程优化的结果。有的内容由于可以在编译时就可确定，那么一部分opcode可以
-在编译时替换成空操作。</p>
+<p>原因简单讲就是：编译过程优化的结果。有的内容由于可以在编译时就可确定(称为提早绑定Early Binding)，
+那么一部分opcode可以在编译时替换成空操作。</p>
 
 <p>我们来看看这段代码的编译结果：</p>
 
@@ -266,6 +266,9 @@ line     # *  op                           fetch          ext  return  operands
 <p>目前只有少数几处使用了ZEND_NOP这个opcode。读者可以参考Zend/zend_compile.c: zend_do_early_binding()，
 这个函数进行就是在确定在编译时能确定的函数以及类声明，在完成函数或类的声明后将当前编译的opcode设置为ZEND_NOP。
 因为后续在执行是并需要再次对该函数或类进行声明了。</p>
+
+<blockquote><p><strong>NOTE</strong>
+当然也并不是所有的全局类或者方法都会进行提早绑定,具体可以参考前面提到的Zend_compile.c文件的实现</p></blockquote>
 
 <p>在这个函数中其实可以将生成的ZEND_NOP优化掉的，比如eAccelarator扩展中就对opcode进行了优化，将ZEND_NOP从
 opcode_array数组中移除了，因为使用了opcode cache扩展优化只进行一次，而执行对多次执行，

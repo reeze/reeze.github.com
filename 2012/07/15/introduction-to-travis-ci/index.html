@@ -258,6 +258,10 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 travis也会忽略，所以采用了一个折中的方式来测试。因为测试失败会生产diff文件，
 报告测试失败的具体原因，cat的好处是能把错误详细信息报告出来，也能方便调试。</p>
 
+<blockquote><p><strong>UPDATE</strong>
+我已经提交了一个补丁用于让<code>make test</code>命令可以在测试失败的时候返回错误码了。
+目前在master分支上，目前看在5.5版本以上可以使用。</p></blockquote>
+
 <p>每次提交代码到Github上时，Travis将自动对新提交的版本进行测试。</p>
 
 <p>除了PHP，其实你可以在Travis上测试绝大部分的软件，因为travis提供的是一个完整的环境，
@@ -337,6 +341,18 @@ travis也会忽略，所以采用了一个折中的方式来测试。因为测�
     <li class="nav-header">Recent Posts</li>
     
       <li class="post">
+        <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/09/how-to-crash-php/">how-to-crash-php</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/12/05/the-nearly-end-of-the-end-of-the-world/">The nearly end of the end of the world</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a>
       </li>
     
@@ -362,18 +378,6 @@ travis也会忽略，所以采用了一个折中的方式来测试。因为测�
     
       <li class="post">
         <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">[PHP-Internal]定制PHP语法获取PHP变量的变量名</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/11/28/doubanshow-for-wordpress/">[Plugin]豆瓣秀 For WordPress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/">PHP Puzzle(一): 有趣的变量作用域-PHP中global和Javascript中的var关键字</a>
       </li>
     
   </ul>
@@ -420,7 +424,7 @@ travis也会忽略，所以采用了一个折中的方式来测试。因为测�
   </div>
   <footer role="contentinfo" class="page-footer"><hr>
 <p>
-  Copyright &copy; 2012 - reeze -
+  Copyright &copy; 2013 - reeze -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Zen Space | 寻找善美]]></title>
   <link href="http://reeze.cn/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2012-09-12T23:27:50+08:00</updated>
+  <updated>2013-04-09T21:46:25+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -14,6 +14,97 @@
 
   
   <entry>
+    <title type="html"><![CDATA[怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等]]></title>
+    <link href="http://reeze.cn/2013/03/11/how-to-trace-a-php-crash-segfault/"/>
+    <updated>2013-03-11T17:07:00+08:00</updated>
+    <id>http://reeze.cn/2013/03/11/how-to-trace-a-php-crash-segfault</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[how-to-crash-php]]></title>
+    <link href="http://reeze.cn/2013/01/09/how-to-crash-php/"/>
+    <updated>2013-01-09T13:35:00+08:00</updated>
+    <id>http://reeze.cn/2013/01/09/how-to-crash-php</id>
+    <content type="html"><![CDATA[<p>怎么样把PHP搞挂。</p>
+
+<p>从一个语言(或任何程序)的角度来说，奔溃都不是该有的行为。不过计算机科学中一直就存在各种
+折中，比如很多的算法为了提高效率会用空间来换时间，比如Ruby语言的实现中，性能不是在首位的，
+它比较看重的是优雅程度，通常在实际应用大部分情况下性能也不能做为首要因素，可维护性相对比较重要，
+这些通常都是一种折中方案，不可能顾全所有的方案。</p>
+
+<p>这里将要列举出来一些把PHP搞挂掉的方法。</p>
+
+<p>这些都可以算作PHP的bug，不过出于成本考虑，目前很可能不会修复。</p>
+
+<ol>
+<li><p>死循环</p></li>
+<li><p>通过配置disable_class禁用某些存在继承关系的类</p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The nearly end of the end of the world]]></title>
+    <link href="http://reeze.cn/2012/12/05/the-nearly-end-of-the-end-of-the-world/"/>
+    <updated>2012-12-05T00:42:00+08:00</updated>
+    <id>http://reeze.cn/2012/12/05/the-nearly-end-of-the-end-of-the-world</id>
+    <content type="html"><![CDATA[<p>不巧刚才突然发现家里的网络怎么都连不上了，登陆路由器发现网络已经连不上了，
+才发现，我们的网已经到期了。看着屏幕右上角的日期，猛然发现原来，世界末日
+都快要过去了。</p>
+
+<p>很多人都会在年终写下点总结，我想我也会写的，不过刚好今天有一个很好的契机：
+我不会受到网络的任何干扰，可以静静的写东西。</p>
+
+<p>2012并不是世界末日，对于我以及我周围的人和世界来说，大家都很理性，很少有人
+真的把今天当成是末日来过，偶尔在微博上看到一些小段子，一些励志的话语，
+也会受到感染，想着要把这平静的日子过的风火起来，让自己的每一天充实而又意义起来。</p>
+
+<p>最近很少有时间静下来好好思考，尤其是到了这个新的环境之后，一来需要熟悉新环境，
+二来想要更加努力一点，这个环境是我一直想要的环境。先说说这段时间依赖的感受吧。</p>
+
+<h2>2012年的总结</h2>
+
+<h2>2013年的展望和计划</h2>
+
+<ol>
+<li>完成 TiPHP的功能实现</li>
+</ol>
+
+
+<h1>效率</h1>
+
+<p>效率低下</p>
+
+<h2>拖延症</h2>
+
+<p>推迟自己面对问题时的压力，逃避压力。</p>
+
+<h3>得失心过重</h3>
+
+<p>害怕做的不好</p>
+
+<h2>改进措施</h2>
+
+<h1>工作</h1>
+
+<p>到新的部门已经快5个月了，时间从来没有这么快过。</p>
+
+<h2>收获</h2>
+
+<h2>计划</h2>
+
+<h1>生活</h1>
+
+<h2>收获</h2>
+
+<h2>计划</h2>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[LevelDB扩展发布V0.1版本]]></title>
     <link href="http://reeze.cn/2012/09/12/new-ext-php-leveldb-pecl/"/>
     <updated>2012-09-12T23:16:00+08:00</updated>
@@ -21,10 +112,13 @@
     <content type="html"><![CDATA[<p>很开心，第一个提交的PHP扩展已经在PECL官方发布了，这是一个<a href="http://code.google.com/p/leveldb/">Google LevelDB</a>的PHP
 封装，主要用于对LevelDB的访问，目前已经实现了LevelDB最具价值的一些特性：迭代器，快照等。</p>
 
+<p>LevelDB数据的设计是只能单进程访问的（多线程没有问题），所以通常这个扩展不合适作为普通的Web应用数据存储，
+可以作为离线的数据存储用，或者只是方便读取现有leveldb的数据。</p>
+
 <p>如果有需要可以前去 <a href="http://pecl.php.net/package/leveldb">http://pecl.php.net/package/leveldb</a> 下载。基本的使用说明在<a href="http://reeze.cn/php-leveldb/">http://reeze.cn/php-leveldb/</a>
 详细的API文档由勤劳高效的胖胖<a href="http://www.phppan.com/">http://www.phppan.com/</a>编写，不过还没有发布。</p>
 
-<p>于此同时，还获得了@php.net的马甲一枚: reeze(at)php.net。MARK一下。</p>
+<p>同时，还有了@php.net的马甲一枚: reeze(at)php.net。MARK一下。</p>
 ]]></content>
   </entry>
   
@@ -308,6 +402,10 @@ https://secure.travis-ci.org/php/php-src.png?branch=master,
 travis也会忽略，所以采用了一个折中的方式来测试。因为测试失败会生产diff文件，
 报告测试失败的具体原因，cat的好处是能把错误详细信息报告出来，也能方便调试。</p>
 
+<blockquote><p><strong>UPDATE</strong>
+我已经提交了一个补丁用于让<code>make test</code>命令可以在测试失败的时候返回错误码了。
+目前在master分支上，目前看在5.5版本以上可以使用。</p></blockquote>
+
 <p>每次提交代码到Github上时，Travis将自动对新提交的版本进行测试。</p>
 
 <p>除了PHP，其实你可以在Travis上测试绝大部分的软件，因为travis提供的是一个完整的环境，
@@ -374,8 +472,8 @@ PHP文档有对此的<a href="http://cn.php.net/manual/en/internals2.opcodes.nop
 
 <p>Zend虚拟机是高级抽象，不要考虑内存对齐等的问题，为什么还需要空操作这样的opcode呢？</p>
 
-<p>原因简单讲就是：编译过程优化的结果。有的内容由于可以在编译时就可确定，那么一部分opcode可以
-在编译时替换成空操作。</p>
+<p>原因简单讲就是：编译过程优化的结果。有的内容由于可以在编译时就可确定(称为提早绑定Early Binding)，
+那么一部分opcode可以在编译时替换成空操作。</p>
 
 <p>我们来看看这段代码的编译结果：</p>
 
@@ -504,6 +602,9 @@ PHP文档有对此的<a href="http://cn.php.net/manual/en/internals2.opcodes.nop
 这个函数进行就是在确定在编译时能确定的函数以及类声明，在完成函数或类的声明后将当前编译的opcode设置为ZEND_NOP。
 因为后续在执行是并需要再次对该函数或类进行声明了。</p>
 
+<blockquote><p><strong>NOTE</strong>
+当然也并不是所有的全局类或者方法都会进行提早绑定,具体可以参考前面提到的Zend_compile.c文件的实现</p></blockquote>
+
 <p>在这个函数中其实可以将生成的ZEND_NOP优化掉的，比如eAccelarator扩展中就对opcode进行了优化，将ZEND_NOP从
 opcode_array数组中移除了，因为使用了opcode cache扩展优化只进行一次，而执行对多次执行，
 这样的优化是值得的。目前Zend引擎并没有进行任何的优化，首先从代码上来看，类和函数声明的数量和其他指令的数量
@@ -536,11 +637,19 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
     <link href="http://reeze.cn/2011/03/22/duplicate-ssh-session/"/>
     <updated>2011-03-22T18:49:27+08:00</updated>
     <id>http://reeze.cn/2011/03/22/duplicate-ssh-session</id>
-    <content type="html"><![CDATA[<p>就当时记事吧. 这不是怎样配置ssh密钥避免密码输入的实例,　当然经常ssh登陆的你肯定也配置过了.</p>
+    <content type="html"><![CDATA[<p>就当是笔记吧. 首先，这不是配置ssh密钥简历信任关系免密码登陆的方法。
+主要解决的问题是在终端下多次登陆统一主机需要多次输入用户密码的问题。</p>
 
-<p>我们公司的内网环境比较特殊,　为了安全性做了各种认证,　联入网络需要准入一下,　准入需要使用密码+随即密码的方式认证,　是挺安全的,　可以对于我们来说其实很痛苦,每次都要输入一下密码,因为包含了随即密码,我们无法使用脚本来方便的准入.　我们联入公司的开发机需要通过一台特殊的服务器来将我们的登陆转发,　也就是登陆到中转机,然后通过中转机在ssh.同样登陆中转机也是需要这个随机密码的.　吐槽完毕.</p>
+<p>我们公司的内网环境比较特殊,　为了安全性做了各种认证,　联入网络需要准入一下,　
+准入需要使用密码+随即密码的方式认证,　是挺安全的,　可以对于我们来说其实很痛苦,
+每次都要输入一下密码,因为包含了随机密码, 这就无法使用脚本来方便的自动准入.　
+我们连入公司的远程开发机需要通过一台特殊的服务器来将我们的登陆转发,　
+也就是登陆到中转机,然后通过中转机在ssh.同样登陆中转机也是需要这个随机密码的.　吐槽完毕.</p>
 
-<p>工作中经常需要在多台服务之间ssh登陆,　screen 是一个不错的选择,　不过有时候还是需要打开另一个窗口再次登陆,　这时我又得再次输入那个随机密码,　如果你使用windows并且使用SecureCRT那你可以不用继续往下看了,SecureCRT可以简单的复制回话, 这个功能很贴心. 如果使用Linux&amp;Mac OS那就继续往下看.</p>
+<p>工作中经常需要在多台服务之间ssh登陆,　screen 是一个不错的选择,　
+不过有时候还是需要打开另一个窗口再次登陆,　这时我又得再次输入那个随机密码,　
+如果你使用windows并且使用SecureCRT那你可以不用继续往下看了,
+SecureCRT可以简单的复制回话, 这个功能很贴心. 如果使用Linux&amp;Mac OS那就继续往下看.</p>
 
 <p>在/etc/ssh_config 文件中加入</p>
 
@@ -549,7 +658,7 @@ ControlMaster auto
 ControlPath ~/.ssh/master-%r@%h:%p
 </code></pre>
 
-<p>下次登陆同一站点的时候就会自动复用已有的回话. 可以只输入一次密码开N个窗口了. 这个和密钥要解决的不是同一个问题.</p>
+<p>下次登陆同一站点的时候就会自动复用已有的回话. 可以只输入一次密码开N个窗口了.</p>
 ]]></content>
   </entry>
   
@@ -788,13 +897,23 @@ title: &#8216;[PHP-Internal]鎬庝箞鏍疯幏鍙朠HP鍙橀噺鐨勫彉閲忓�
     <link href="http://reeze.cn/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/"/>
     <updated>2010-07-02T15:16:33+08:00</updated>
     <id>http://reeze.cn/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command</id>
-    <content type="html"><![CDATA[<p>工作中开发基本都是ssh到远程服务器上vim开发，有时候因为网络原因或者不小心把终端给关了或者网络出现问题以后就痛苦了，因为vim默认会用swp文件保存修改，我又不想关掉这个功能，一不小心真丢数据就划不来了，非法关闭vim之后再次打开就会提示是否恢复文件，自从发现screen这个绝佳的绘画管理工具，就深深的爱上了它，IBM的这篇文章有详细的介绍  “<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-screen/">linux 技巧：使用screen 管理你的远程会话</a>”。在使用过程中发现一些问题，默认快捷键是Ctrl + A, 用惯了命令行的人肯定会用Ctrl +A , Ctrl + E来定位当前输入的命令吧. 在~/.screenrc中修改一下就可以了，下面是我的.screenrc
-<code>
-vbell_msg "" # 比如在tab自动提示的时候，默认总是会出现一个Wuff,觉得很烦，关掉
-escape ``  # instead of Control-a  使用 反引号当快捷键，因为用的相对较少
-termcapinfo xterm* ti@:te@  # 这个就是解决mac下看不到滚动条的问题了
-</code>
-解决方法来源见：<a href="http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command">http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command</a></p>
+    <content type="html"><![CDATA[<p>工作中开发主要在公司的开发机上，ssh到远程服务器上用vim开发，有时候因为网络原因或者不小心把终端给
+关了或者网络出现问题以后就痛苦了，因为会话关闭后开启的程序就挂了，vim默认会用swp文件保存修改，
+但是为了安全起见，不想关掉swp，一不小心真丢数据就划不来了，非法关闭vim之后再次打开就会提示是否恢复文件，
+自从发现screen这个绝佳的会话管理工具，就深深的爱上了它，IBM的这篇文章有详细的介绍
+<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-screen/">linux 技巧：使用screen 管理你的远程会话</a>”。
+在使用过程中发现一些问题，screen默认使用Ctrl + A当做热键, 用惯了命令行的人肯定会用Ctrl +A ,
+Ctrl + E来定位当前输入的命令吧. 其实在~/.screenrc中修改一下就可以了，下面是我的.screenrc:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vbell_msg "" # 比如在tab自动提示的时候，默认总是会出现一个Wuff,觉得很烦，关掉
+</span><span class='line'>escape ``  # instead of Control-a  使用 反引号当快捷键，因为用的相对较少
+</span><span class='line'>termcapinfo xterm* ti@:te@  # 这个就是解决mac下看不到滚动条的问题了</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解决方法来源见：<a href="http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command">http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command</a></p>
 ]]></content>
   </entry>
   
@@ -883,7 +1002,10 @@ FilefileName=es.dll fileSize=271360
     <link href="http://reeze.cn/2010/01/24/guide-enable-native-ntfs-readwrite-in-snow-leopard/"/>
     <updated>2010-01-24T18:19:31+08:00</updated>
     <id>http://reeze.cn/2010/01/24/guide-enable-native-ntfs-readwrite-in-snow-leopard</id>
-    <content type="html"><![CDATA[<p>在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2之后出现fusefs.kext can&#8217;t load的错误，从官方得知目前macfuse在snow leopard下有问题，在网上看到<a href="http://forums.macrumors.com/showthread.php?t=785376">这篇贴子</a>提到Snow Leopard其实原生就支持NTFS分区的读写，真是个好消息。</p>
+    <content type="html"><![CDATA[<p>在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2
+之后出现fusefs.kext can&#8217;t load的错误，从官方得知目前macfuse在snow leopard下有问题，
+在网上看到<a href="http://forums.macrumors.com/showthread.php?t=785376">这篇贴子</a>提到
+Snow Leopard其实原生就支持NTFS分区的读写，真是个好消息。</p>
 
 <p>开启的方法有两种：
 一种是在/etc/fstab文件里增加挂载选项，基本步骤是：
@@ -907,15 +1029,18 @@ $ sudo vim /sbin/mount_ntfs
 $ sudo chown root:wheel /sbin/mount_ntfs
 $ sudo chmod 755 /sbin/mount_ntfs</p>
 
-<p>然后重启，启动后，你应该就能得到一个可以自由读写的ntfs分区了。不过声明一点，这个功能据说不稳定，不知道是因为版权原因还是真的很不稳定，苹果默认没有开启这个功能。不过我更相信苹果。</p>
+<p>然后重启，启动后，你应该就能得到一个可以自由读写的ntfs分区了。不过声明一点，
+这个功能据说不稳定，不知道是因为版权原因还是真的很不稳定，苹果默认没有开启这个功能。不过我更相信苹果。</p>
 
 <p>＝＝＝＝＝＝＝＝
-后话：刚好公司配了一台Dell E6400,偶尔看到有人在上面<a href="http://bbs.pcbeta.com/archiver/tid-625920.html">装了一个Leopard</a>,于是手痒也在上面装了一个，如果有人也有这台笔记本也可以试试看，不过我装好的系统还是有问题：</p>
+后话：刚好公司配了一台Dell E6400,偶尔看到有人在上面<a href="http://bbs.pcbeta.com/archiver/tid-625920.html">装了一个Leopard</a>,
+于是手痒也在上面装了一个，如果有人也有这台笔记本也可以试试看，不过我装好的系统还是有问题：</p>
 
 <p>1，触摸屏一碰就乱跑，我直接禁用就好了，反正也不喜欢用。
 2，关机和重启不断电，每天关机的次数也有限，也就无所谓了。
-3，声音控制不了，只能在具体的应用程序里控制。
-其实问题还是挺多的，不过基本上的使用我觉得还是没什么问题的，触摸屏的问题比较烦人，还好我不喜欢用触摸屏。如果有人也想尝试可以试试看。我用的安装文件是 Snow_Leopard_10.6.1-10.6.2_SSE2_SSE3_Intel_AMD_by_Hazard.iso, 至于安装方法<a href="http://bbs.pcbeta.com/forum-185-1.html">PCbeta</a>上有很多的教程可以参考，摸索一下大概都没有什么问题，安装的时候一定要做好备份，因为我到目前已经因为装Mac OS X丢失了不下10次数据了，大部分情况下都是分区被合并。所以一定要小心一点。</p>
+3，声音控制不了，只能在具体的应用程序里控制。</p>
+
+<p>其实问题还是挺多的，不过基本上的使用我觉得还是没什么问题的，触摸屏的问题比较烦人，还好我不喜欢用触摸屏。如果有人也想尝试可以试试看。我用的安装文件是 Snow_Leopard_10.6.1-10.6.2_SSE2_SSE3_Intel_AMD_by_Hazard.iso, 至于安装方法<a href="http://bbs.pcbeta.com/forum-185-1.html">PCbeta</a>上有很多的教程可以参考，摸索一下大概都没有什么问题，安装的时候一定要做好备份，因为我到目前已经因为装Mac OS X丢失了不下10次数据了，大部分情况下都是分区被合并。所以一定要小心一点。</p>
 ]]></content>
   </entry>
   
@@ -926,7 +1051,12 @@ $ sudo chmod 755 /sbin/mount_ntfs</p>
     <id>http://reeze.cn/2009/12/31/at-the-tail-of-2009</id>
     <content type="html"><![CDATA[<p>09年最后一篇日志，充个数吧：）</p>
 
-<p>哈哈，刚买了本《<a href="http://www.douban.com/subject/3735649/">Orange S: 一个操作系统的实现</a>》，这一年下来买了挺多的书，也从图书馆借了很多的书（马上就要毕业了，再也享受不到学校图书馆丰富及时的藏书了，计划以后每个月发工资都买一本自己喜欢的书），发现我读书最大的问题是多而不精，拿一本好书就使劲的翻，很多书都是花几天就翻完了，但是读下来之后总觉得收获不够，一些很需要实践的部分也没有及时联系，总感觉自己浮在表面上，只知其然。所以呢，这个2010年争取多读好书，踏踏实实的啃几本好书，然后就是要多动手啦。</p>
+<p>刚买了本《<a href="http://www.douban.com/subject/3735649/">Orange S: 一个操作系统的实现</a>》，
+这一年下来买了挺多的书，也从图书馆借了很多的书（马上就要毕业了，再也享受不到学校图书馆丰富及时的藏书了，
+计划以后每个月发工资都买一本自己喜欢的书），发现我读书最大的问题是多而不精，
+拿一本好书就使劲的翻，很多书都是花几天就翻完了，但是读下来之后总觉得收获不够，
+一些很需要实践的部分也没有及时巩固练习，总感觉自己浮在表面上，只知其然。所以呢，
+2010年争取多读好书，踏踏实实的啃几本好书，然后就是要多动手啦。</p>
 
 <p>计划2010年呢，能把耽搁很久的想法付诸行动，做出点东西来。希望有个好的开始吧！</p>
 
@@ -946,262 +1076,6 @@ $ sudo chmod 755 /sbin/mount_ntfs</p>
 我提供的这个版本的tunnelblick的配置文件位置是  ~/Library/openvpn  最新版的配置放在 ~/Library/Application Support/Tunnelblick/Configuration目录里面。</p>
 
 <p>马上2009年就要过去了。最近很久都没有更新日志了，其实之间也想写一些东西，但是都丢在草稿箱里没写完。论文还有很多没有写完，马上就要交了，要抵制住诱惑乖乖写论文。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[在PHP中检查PHP文件是否有语法错误]]></title>
-    <link href="http://reeze.cn/2009/10/09/check-php-files-syntax-in-php/"/>
-    <updated>2009-10-09T19:21:32+08:00</updated>
-    <id>http://reeze.cn/2009/10/09/check-php-files-syntax-in-php</id>
-    <content type="html"><![CDATA[<p>之前在当当的时候的一个项目中用到了一个简单的模板引擎，其实也是借鉴discuz来做的模板引擎，很简单，它所作的事情就是把一些自定义的标签编译成php代码。已经说了很简单了，所以编译的时候也名优进行模板语法的检查，那么在开发过程中就会出现编译出来的php文件有语法问题，有语法问题没有关系，我修改重新编译一下就好了。首先不能在每次请求的时候都把php模板重新编译一下，会严重影响性能，折中的处理时在每个编译好的php文件末尾检查一下该模板文件是否已经修改过，根据设定的更新频率，如果又需要则重新编译模板文件，现在的问题是编译出来的php文件自己有语法错误，根本执行不到模板检查那一步，所以即使修改了模板文件中的问题也不会重新编译。 所以我想寻找一种简单的方法来检查生成的php文件是否合法。不合法就重新编译，这样开发过程中就不用出现错误就得手动删除缓存文件了。</p>
-
-<p>在网上找了一下。刚开始以为 token_get_all()函数能处理语法错误的问题，结果发现，它只是做简单的词法分析。没有办法。后来到论坛上去问了一下
-http://groups.google.com/group/professional-php/browse_thread/thread/b8581f6b07b10ff0/2601a63c406bb1c1?lnk=gst&amp;q=reeze#2601a63c406bb1c1</p>
-
-<p>有人告诉我有这样一个函数 php_check_syntax() http://www.php.net/manual/en/function.php-check-syntax.php 我想问题就这么坚决了。。我真应该RTF(Read The Fuck Mannual). 仔细一看。这个函数已近被弃用了：
-Note: For technical reasons, this function is deprecated and removed from PHP. Instead, use php -l somefile.php from the commandline.</p>
-
-<p>这个technical reason 到底是什么呢？ 先不管了，以后再慢慢研究，反正不能使用这个方法就对了。
-他们的建议是使用命令行$php -l filename.php 来检查语法。
-Gary Every给了我一个代码片段参考：</p>
-
-<p>在命令行下检查问题也不大。如果我要放在在线应用呢？ 这就涉及到可移植性的问题了。首先是操作系统，然后就是环境变量。这样的话就会依赖于服务器端的配置。在http://www.php.net/manual/en/function.php-check-syntax.php 上有人贴出了自己的php_check_syntax()函数实现。
-有的采用的就是上面的命令行的方法。
-后面有提到使用eval的方法来验证。eval方法会执行传入的代码， 如果代码有语法错误则会抛出parser error, 可以使用&#8217;@&#8217;错误抑制符去掉错误信息，eval和echo一样并不是函数，不能使用变量函数的方法调用比如：
-$func = &#8216;eval&#8217;
-$func()这样的调用就是无效的。它会提示没有eval函数，如果你自己定义这么一个函数也是有问题的。因为eval是一个关键字。
-eval调用和include差不多，如果被包含文件中没有明确return就返回null。如果直接eval我们需要检查的文件会造成被检查的文件内代码被执行，这可不是我们想要的，我们只需要检查一下这个文件的语法是否正确。 我们可以在要检查的文件之前添加return 语句，让代码提前跳出，那么后面的代码就不会执行了。好的，就这么干。代码如下：
-checker.php
-`
-&#8221;;</p>
-
-<pre><code>    $file_content = $check_code . $file_content . "
-</code></pre>
-
-<p>file.php
-<code>
-b
-?&gt;
-</code>
-因为Parse error 是没法被 set_error_handler处理函数处理的。这个异常没办法catch到。所以才使用了@来抑制错误。这带来的问题就是我们无法得到详细的错误信息。 不过目前我需要的功能也只是检查语法是否正确。不正确的话重新编译模板文件，就这么简单，至于语法错误，在显示网页的时候自然会看得到。
-最好的办法就是这个被遗弃的php_check_syntax这个方法回到php中。下次再研究下他们是出于什么原因把这个函数去掉的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[实现一个简单在线HTML编辑器]]></title>
-    <link href="http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor/"/>
-    <updated>2009-10-09T15:11:26+08:00</updated>
-    <id>http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor</id>
-    <content type="html"><![CDATA[<p>一直没有仔细研究过在线HTML编辑器，以前以为编辑功能很复杂，需要用大量的JavaScript来模拟编辑器的效果，以前都是使用一些开源的HTML编辑器，HTML在各网上随处可见，发表文章，评论。最近自己想做一个类似Things这样的Web版的应用，需要一个想Google  Notebook(可惜的是现在已经停止开发了) 那样的编辑功能，看看现在网上的这些编辑器都庞大了，都是一些自己根本用不到的功能，其实我的需求很简单：简单的编辑既可以，并且需要轻量级一些，因为页面上可能需要开很多个编辑器实例。 所有想自己也来研究一下，看看能不能自己开发一个。</p>
-
-<p>几天前花了一个晚上用firebug看了下Google Docs是怎么做。第一个遇到的问题就是如何让光标停在鼠标点击所在得地方。我刚开始一味都是js模拟出来的，这得有多复杂啊。并且还要兼容各个浏览器，天啊！后来上网一搜发现，浏览器早就想到了我们会有这样的一个需求。其实很简单，两条语句就可以说明HTML编辑器的最为核心的部分：
-<code>
-document.designMode = 'On';
-document.contentEditable = true;
-</code>
-参考Mozilla上的<a href="https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla">这篇</a>文章，介绍了HTML编辑的基本信息，要自己DIY一个常用功能的HTML编辑，这篇文章已经够你用的了。</p>
-
-<p>在你的网页中嵌入这两条语句试试看：），你就会发现你的网站整个得都变的可以编辑了。可以随便乱修改。 不过放心，这样修改并不会破坏你的网站， 当然你也不希望你的整个网站是可以编辑的。例如我们只希望别人发布一条评论，只希望评论输入框可以输入。 要实现这样的效果可以有两种做法：</p>
-
-<p>第一种就是使用直接让某个元素变成可编辑的例如：</p>
-
-<p>index.html
-`
-Test TextEditor</p>
-
-<h1>Hi, HTML Editor!</h1>
-
-<p>Hello, you comment please</p>
-
-<p>Your comment</p>
-
-<p>Get HTML
-`
-点击该区域后该区域的内容就变成可以编辑的了，这是我们就是对其进行简单的编辑。你可能会觉得直接编辑的功能太简单了，比如想要插入链接或者图片什么的。就没有办法了。这些功能浏览器并没有帮我们做好，不过实现这些功能也不麻烦， 参考上面Mozilla的文档。浏览器都提供了常用的功能API。</p>
-
-<p>一般的编辑器都会提供一个工具栏之类的按钮来编辑文本内容。比如我使用的WordPress提供的编辑器：</p>
-
-<p>[caption id=&#8221;attachment_42&#8221; align=&#8221;alignnone&#8221; width=&#8221;936&#8221; caption=&#8221;wordpress提供的编辑器&#8221;]<a href="http://reeze.cn/uploads/2009/10/5b9e5c0b92f7fdf042ea3993165b80ec.png"><img src="http://reeze.cn/uploads/2009/10/5b9e5c0b92f7fdf042ea3993165b80ec.png" alt="wordpress提供的编辑器" /></a>[/caption]</p>
-
-<p>可以对文字内容进行操作，加粗下划线，字体，对齐等等，并且提供可视化以及HTML编辑模式。</p>
-
-<p>这个和FCKeditor 以及tinymce之类的编辑器使用的编辑方式和上面我提到的直接编辑html对象的方法不一样，他们使用的是iframe，使用iframe有很多好处，iframe中的文档和当前文档并不会因为样式或者HTML结构而影响到彼此，所以大部分的编辑器都是使用这种方式。它们基本的方式都是：</p>
-
-<ol>
-<li><p>在页面中使用一个不可见的字段比如:“input, textarea&#8221;之类表单字段，他们的值就是需要编辑的内容。</p></li>
-<li><p>页面初始化好，比如载入编辑器相关的一些脚本，也是就是window.onload好以后。创建一个iframe来显示可编辑区域，iframe初始化好以后读取父窗(相对于这个iframe)口的这个不可见表单值的内容，使之成为iframe中的body的html，也就是把所有需要编辑的内容添加到iframe中</p></li>
-<li><p>iframe中的内容初始化好以后，在iframe中执行上面提到的：
-<code>
-document.designMode = 'On';
-document.contentEditable = true;
-</code>
-把iframe整个窗口变成可以编辑的</p></li>
-<li><p>进行编辑，这时候的编辑可能需要一个工具栏，基于同样的原因，一般工具栏也会是一个iframe，显示它们自己的编辑按钮。编辑是就利用浏览器提供的接口来对ifame中的内容进行编辑</p></li>
-<li><p>父窗口中提交表单之前或者你需要的地方需要把编辑器中编辑完的内容回写到你的表单字段中去，否则编辑结果没有保存写来就没有意义了。</p></li>
-</ol>
-
-
-<p>基本原理就是这样。要做出这样一个东西来，需要的就是一些细活了。要想做出一个FCk这样好用的编辑器也不是那么简单的。但是至少我们知道它是怎么运作的。 这就够了。</p>
-
-<p>花了点时间做了一个简单的编辑器，真正要用的话很多的细节还是需要好好处理的，代码没有怎么清理，是变想边写，不是很完整。</p>
-
-<p>需要的同学可以下来参考参考。
-猛击 <a href="http://reeze.cn/uploads/2009/10/editor.rar"> >> 这里 &lt;&lt; </a>下载代码。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[基于var_export 和 include返回值的缓存方案]]></title>
-    <link href="http://reeze.cn/2009/07/02/a-cache-system-using-var_export-and-includes-return-value/"/>
-    <updated>2009-07-02T12:55:41+08:00</updated>
-    <id>http://reeze.cn/2009/07/02/a-cache-system-using-var_export-and-includes-return-value</id>
-    <content type="html"><![CDATA[<p><a href="http://reeze.yo2.cn/2009/07/01/php-include-function-return-value-and-method-of-void-serialize/">前一篇文章</a>我们研究了include调用返回值的问题，并指出可以通过这种方式来完成序列化相同的功能，现在我就来研究一下这种方法的可行性和效率，因为直接的返回php值肯定是比unserialize()函数要快。</p>
-
-<p>第一步我们来研究下怎么将php对象持久化的保存起来。下面是我定义的一些变量：</p>
-
-<p><code>
-private $_var;
-public $pub = array('pub value', 3, 4);
-public function __constructor($var)
-{
-$this-&gt;_var = $var;
-}</code></p>
-
-<p>`public function show()
-{
-echo $this->_var;
-}
-}</p>
-
-<p>$string = &#8220;It&#8217;s a string&#8230;&#8221;;
-$array = array(1, 2, &#8216;key&#8217; => &#8216;value&#8217;, array(&#8216;sub-array&#8217;));
-$number = 135345.55;
-$class = new MyClass(&#8216;class var&#8217;);</p>
-
-<p>`</p>
-
-<p><code>//通过serialize()方法我们可以将他们持久化比如：
-echo serialize($string); //s:16:"It's a string...";
-echo serialize($array); //a:4:{i:0;i:1;i:1;i:2;s:3:"key";s:5:"value";i:2;a:1:{i:0;s:9:"sub-array";}}
-echo serialize($number); //d:135345.5499999999883584678173065185546875;
-echo serialize($class); //O:7:"MyClass":2:{s:13:"MyClass_var";N;s:3:"pub";a:3:{i:0;s:9:"pub value";i:1;i:3;i:2;i:4;}}
-// 我们可以将这些序列化的结果存到文件中，在需要的时候unserialize()返回得到相应的值，但是现在我不会这么做。
-</code></p>
-
-<p>前篇文章提到了通过include返回值来直接取得php值对象，首先我们要把值保存起来，因为我们要通过include来包含它，首先遇到的问题就是我们的序列化函数必须要生成合法的php表达式才行，否则include是无法得到相应的返回值的
-比如我们要序列化 字符串 &#8220;abcd&#8221; 我们可以这么做
-<code>
-file_puts_content("data.php", "return 'abcd';");
-//然后这样取得相应的值
-$string = include "data.php";
-echo $string; // 它应该输出 abcd
-</code>
-那数组怎么办呢？比如上面的数组。我们可以自己编写这个序列化函数
-<code>
-function encode($var){
-if (is_array($var)) {
-$code = 'array(';
-foreach ($var as $key =&gt; $value) {
-$code .= "'$key'=&gt;".encode($value).',';
-}
-$code = chop($code, ','); //remove unnecessary coma
-$code .= ')';
-return $code;
-} else {
-if (is_string($var)) {
-return "'".$var."'";
-} elseif (is_bool($var)) {
-return ($var ? 'TRUE' : 'FALSE');
-} elseif (is_numeric($var)) {
-return "$var";
-}
-else
-{
-return 'NULL';
-}
-}
-}</code>
-这个函数可以将字符串，数组以及数字变成合法的php表达式。
-比如：
-file_put_contents(&#8220;data.php&#8221;, &#8220;&lt;?phpn return &#8221; . encode($array) . &#8220;;n&#8221;);
-data.php文件的结果是：
-<code>
-return array ( 0 =&gt; 1, 1 =&gt; 2, 'key' =&gt; 'value', 2 =&gt; array ( 0 =&gt; 'sub-array', ), )array(4) { [0]=&gt; int(1) [1]=&gt; int(2) ["key"]=&gt; string(5) "value" [2]=&gt; array(1) { [0]=&gt; string(9) "sub-array" } }
-</code>
-我们的目的达到了。可以直接的通过include这个文件来得到我们的值。
-但是现在有个问题，我们没有序列化对象类型的值，这个该怎么处理呢？
-一个类对象有对象的状态和对象的行为，行为在类定义完以后就确定了，所以每个类的实例的行为都是一样的。所以我们可以不考虑，我们只需要考虑类对象的状态就可以了，简单来讲就是类的属性状态需要保存起来。那怎么样得到一个类的属性呢？
-经过一番搜寻以后发现一个函数
-get_object_vars
-(PHP 4, PHP 5)get_object_vars &#8211; 返回由对象属性组成的关联数组
-这个函数可以获得对象的属性关联数组，也就只可以得到对象的状态，但是对象的属性有各种访问控制，get_object_vars()函数在对象外访问只能得到对象的公开属性，而无法得到私有属性，这样的话我们就无法得到对象的全部状态，不可行，但是在对象内可以得到对象的所有属性，那我们可不可以在对象内定义一个___get_properties()方法来返回这些状态呢。
-给类增加这样一个方法
-<code>
-public function __get_properties()
-{
-return get_obj_vars($this);
-}
-</code>
-这样我们就可以得到类的所有属性了。第一步算是完成了，我们得到状态该怎么重新恢复出来呢？要在对象外部给对象设置属性我们只有两种情况：一种是这个属性是公开属性，我们可以直接赋值 比如： $obj->prop = $value; 如果是私有属性我们则需要自己增加setter方法比如 setProp($value);方法，来设置。但是这就会遇到一个问题，我们的属性要么是公开属性，要么必须要有setter方法来设置，很多情况下我们不希望给类增加这么多没有实际用处的方法，也为了封装性，不会有这么多的setter方法。虽然我们能得到对象的状态，但是却无法恢复对象状态，这样的话，我们的序列化方法也就没有什么意义了。我们探索到现在算是失败了。
-解决办法：var_export()函数。</p>
-
-<h2>在看symfony代码的时候发现了这个函数，手册是这么描述的：</h2>
-
-<p>var_export
-(PHP 4 >= 4.2.0, PHP 5)var_export &#8211; 输出或返回一个变量的字符串表示
-描述
-mixed var_export ( mixed expression [, bool return] )</p>
-
-<p>此函数返回关于传递给该函数的变量的结构信息，它和 var_dump() 类似，不同的是其返回的表示是合法的 PHP 代码。</p>
-
-<p>您可以通过将函数的第二个参数设置为 TRUE，从而返回变量的表示。</p>
-
-<p>这个就是我们想要的那个函数,我们来看看这个函数是怎么使用的。
-<code>
-//变量继续使用上面定义的变量
-echo var_export($string); //'It's a string...'
-echo var_export($array); /* array (0 =&gt; 1, 1 =&gt; 2, 'key' =&gt; 'value', 2 =&gt; array (0 =&gt; 'sub-array', ),)*/
-echo var_export($number); // 135345.55
-echo var_export($class); /* MyClass::__set_state(array('_var' =&gt; NULL, 'pub' =&gt; array (0 =&gt; 'pub value', 1 =&gt; 3, 2 =&gt; 4)) */
-</code>
-我们可以看到生成的都是合法的PHP表达式。通过设置第二个参数为true，就可以将返回结果赋值给变量比如$new_array_string = var_export($array, TRUE);然后将这个结果写入文件持久化</p>
-
-<p>file_put_contents(&#8220;data.php&#8221;, &#8220;public function <em>_constructor($var)
-{
-$this-></em>var = $var;
-}</p>
-
-<p>public function show()
-{
-echo $this->_var;
-}
-public static function __set_state(array $array)
-{
-$tmp = new MyClass();
-foreach($array as $key => $value)
-{
-$this->$key = $value;
-}
-}
-}</p>
-
-<p>// 一些变量
-$string = &#8220;It&#8217;s a string&#8230;&#8221;;
-$array = array(1, 2, &#8216;key&#8217; => &#8216;value&#8217;, array(&#8216;sub-array&#8217;));
-$number = 135345.55;
-$class = new MyClass(&#8216;class var&#8217;)</p>
-
-<p>// 缓存
-cache(&#8220;string.data.php&#8221;, $string); // 当然扩展名不一定非得php， 文件名我也只是简单的处理
-cache(&#8220;array.data.php&#8221;, $array);
-// 等等。。。</p>
-
-<p>// 获取数据,当然也可以在其他文件中来获取。
-$class = cache_get(&#8220;class.data.php&#8221;);</p>
-
-<p>参考：http://www.thoughtlabs.com/2008/02/02/phps-mystical-__set_state-method/?dsq=12016456</p>
 ]]></content>
   </entry>
   

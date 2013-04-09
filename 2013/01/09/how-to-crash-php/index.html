@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: leveldb - Zen Space | 寻找善美</title>
+  <title>how-to-crash-php - Zen Space | 寻找善美</title>
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="Category: leveldb">
+  <meta name="description" content="怎么样把PHP搞挂。 从一个语言(或任何程序)的角度来说，奔溃都不是该有的行为。不过计算机科学中一直就存在各种
+折中，比如很多的算法为了提高效率会用空间来换时间，比如Ruby语言的实现中，性能不是在首位的，
+它比较看重的是优雅程度，通常在实际应用大部分情况下性能也不能做为首要因素， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://reeze.cncategories/leveldb">
+  <link rel="canonical" href="http://reeze.cn/2013/01/09/how-to-crash-php">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -101,38 +103,112 @@
   <div class="container">
     <div class="row-fluid">
       
-<article role="article" class="span9">
+<article class="hentry span9" role="article">
 
   
   <header class="page-header">
-    <h1 class="entry-title">Category: Leveldb</h1>
+    
+      <h1 class="entry-title">How-to-crash-php</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-09T13:35:00+08:00" pubdate data-updated="true">Jan 9<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>怎么样把PHP搞挂。</p>
 
-  
-  <h1>2012</h1>
+<p>从一个语言(或任何程序)的角度来说，奔溃都不是该有的行为。不过计算机科学中一直就存在各种
+折中，比如很多的算法为了提高效率会用空间来换时间，比如Ruby语言的实现中，性能不是在首位的，
+它比较看重的是优雅程度，通常在实际应用大部分情况下性能也不能做为首要因素，可维护性相对比较重要，
+这些通常都是一种折中方案，不可能顾全所有的方案。</p>
 
-<article>
-  <div class="well">
+<p>这里将要列举出来一些把PHP搞挂掉的方法。</p>
 
-<h2><a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a></h2>
-<time datetime="2012-07-15T20:26:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>15</span> <span class='year'>2012</span></time>
+<p>这些都可以算作PHP的bug，不过出于成本考虑，目前很可能不会修复。</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/ci/'>CI</a>, <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/travis/'>Travis</a>, <a class='category' href='/categories/leveldb/'>leveldb</a>, <a class='category' href='/categories/php-leveldb/'>php-leveldb</a>, <a class='category' href='/categories/扩展/'>扩展</a></span>
-</footer>
-
-</div>
-
-</article>
+<ol>
+<li><p>死循环</p></li>
+<li><p>通过配置disable_class禁用某些存在继承关系的类</p></li>
+</ol>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">reeze</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-09T13:35:00+08:00" pubdate data-updated="true">Jan 9<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://reeze.cn/2013/01/09/how-to-crash-php/" data-via="" data-counturl="http://reeze.cn/2013/01/09/how-to-crash-php/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    
+    <section>
+      <h1>Comments</h1>
+      <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </section>
+    
+    <ul class="pager">
+      
+      <li class="previous"><a class="basic-alignment left"
+        href="/2012/12/05/the-nearly-end-of-the-end-of-the-world/" title="Previous Post:
+        The nearly end of the end of the world">&laquo; The nearly end of the end of the world</a></li>
+      
+      <li><a href="/blog/archives">Blog Archives</a></li>
+      
+      <li class="next"><a class="basic-alignment right" href="/2013/03/11/how-to-trace-a-php-crash-segfault/"
+        title="Next Post: 怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等">怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等
+        &raquo;</a></li>
+      
+    </ul>
+  </footer>
 </article>
 
 <aside class="sidebar-nav span3">
@@ -236,7 +312,10 @@
       var disqus_shortname = 'reeze';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://reeze.cn/2013/01/09/how-to-crash-php/';
+        var disqus_url = 'http://reeze.cn/2013/01/09/how-to-crash-php/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

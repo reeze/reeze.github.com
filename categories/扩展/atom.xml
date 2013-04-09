@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 扩展 | Zen Space | 寻找善美]]></title>
   <link href="http://reeze.cn/categories/扩展/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2012-09-12T23:27:50+08:00</updated>
+  <updated>2013-04-09T21:46:25+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -117,6 +117,10 @@ phpize &amp;&amp; ./configure --with-leveldb=$PWD/leveldb-1.5.0 &amp;&amp; make
 从上面的注释里也提到，因为PHP生成的<a href="https://bugs.php.net/bug.php?id=60285">测试不能正常的返回错误码</a>，这样的结果是即使测试失败了，
 travis也会忽略，所以采用了一个折中的方式来测试。因为测试失败会生产diff文件，
 报告测试失败的具体原因，cat的好处是能把错误详细信息报告出来，也能方便调试。</p>
+
+<blockquote><p><strong>UPDATE</strong>
+我已经提交了一个补丁用于让<code>make test</code>命令可以在测试失败的时候返回错误码了。
+目前在master分支上，目前看在5.5版本以上可以使用。</p></blockquote>
 
 <p>每次提交代码到Github上时，Travis将自动对新提交的版本进行测试。</p>
 

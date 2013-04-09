@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="很开心，第一个提交的PHP扩展已经在PECL官方发布了，这是一个Google LevelDB的PHP
-封装，主要用于对LevelDB的访问，目前已经实现了LevelDB最具价值的一些特性：迭代器，快照等。 如果有需要可以前去 http://pecl.php.net/package/leveldb &hellip;">
+封装，主要用于对LevelDB的访问，目前已经实现了LevelDB最具价值的一些特性：迭代器，快照等。 LevelDB数据的设计是只能单进程访问的（多线程没有问题）， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -135,10 +135,13 @@
 <div class="entry-content"><p>很开心，第一个提交的PHP扩展已经在PECL官方发布了，这是一个<a href="http://code.google.com/p/leveldb/">Google LevelDB</a>的PHP
 封装，主要用于对LevelDB的访问，目前已经实现了LevelDB最具价值的一些特性：迭代器，快照等。</p>
 
+<p>LevelDB数据的设计是只能单进程访问的（多线程没有问题），所以通常这个扩展不合适作为普通的Web应用数据存储，
+可以作为离线的数据存储用，或者只是方便读取现有leveldb的数据。</p>
+
 <p>如果有需要可以前去 <a href="http://pecl.php.net/package/leveldb">http://pecl.php.net/package/leveldb</a> 下载。基本的使用说明在<a href="http://reeze.cn/php-leveldb/">http://reeze.cn/php-leveldb/</a>
 详细的API文档由勤劳高效的胖胖<a href="http://www.phppan.com/">http://www.phppan.com/</a>编写，不过还没有发布。</p>
 
-<p>于此同时，还获得了@php.net的马甲一枚: reeze(at)php.net。MARK一下。</p>
+<p>同时，还有了@php.net的马甲一枚: reeze(at)php.net。MARK一下。</p>
 </div>
 
 
@@ -193,6 +196,10 @@
       
       <li><a href="/blog/archives">Blog Archives</a></li>
       
+      <li class="next"><a class="basic-alignment right" href="/2012/12/05/the-nearly-end-of-the-end-of-the-world/"
+        title="Next Post: The nearly end of the end of the world">The nearly end of the end of the world
+        &raquo;</a></li>
+      
     </ul>
   </footer>
 </article>
@@ -202,6 +209,18 @@
     <section class="well">
   <ul id="recent_posts" class="nav nav-list">
     <li class="nav-header">Recent Posts</li>
+    
+      <li class="post">
+        <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/09/how-to-crash-php/">how-to-crash-php</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/12/05/the-nearly-end-of-the-end-of-the-world/">The nearly end of the end of the world</a>
+      </li>
     
       <li class="post">
         <a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a>
@@ -229,18 +248,6 @@
     
       <li class="post">
         <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">[PHP-Internal]定制PHP语法获取PHP变量的变量名</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/11/28/doubanshow-for-wordpress/">[Plugin]豆瓣秀 For WordPress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/">PHP Puzzle(一): 有趣的变量作用域-PHP中global和Javascript中的var关键字</a>
       </li>
     
   </ul>
@@ -287,7 +294,7 @@
   </div>
   <footer role="contentinfo" class="page-footer"><hr>
 <p>
-  Copyright &copy; 2012 - reeze -
+  Copyright &copy; 2013 - reeze -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

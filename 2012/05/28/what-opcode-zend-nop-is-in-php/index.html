@@ -187,8 +187,8 @@ PHP文档有对此的<a href="http://cn.php.net/manual/en/internals2.opcodes.nop
 
 <p>Zend虚拟机是高级抽象，不要考虑内存对齐等的问题，为什么还需要空操作这样的opcode呢？</p>
 
-<p>原因简单讲就是：编译过程优化的结果。有的内容由于可以在编译时就可确定，那么一部分opcode可以
-在编译时替换成空操作。</p>
+<p>原因简单讲就是：编译过程优化的结果。有的内容由于可以在编译时就可确定(称为提早绑定Early Binding)，
+那么一部分opcode可以在编译时替换成空操作。</p>
 
 <p>我们来看看这段代码的编译结果：</p>
 
@@ -317,6 +317,9 @@ PHP文档有对此的<a href="http://cn.php.net/manual/en/internals2.opcodes.nop
 这个函数进行就是在确定在编译时能确定的函数以及类声明，在完成函数或类的声明后将当前编译的opcode设置为ZEND_NOP。
 因为后续在执行是并需要再次对该函数或类进行声明了。</p>
 
+<blockquote><p><strong>NOTE</strong>
+当然也并不是所有的全局类或者方法都会进行提早绑定,具体可以参考前面提到的Zend_compile.c文件的实现</p></blockquote>
+
 <p>在这个函数中其实可以将生成的ZEND_NOP优化掉的，比如eAccelarator扩展中就对opcode进行了优化，将ZEND_NOP从
 opcode_array数组中移除了，因为使用了opcode cache扩展优化只进行一次，而执行对多次执行，
 这样的优化是值得的。目前Zend引擎并没有进行任何的优化，首先从代码上来看，类和函数声明的数量和其他指令的数量
@@ -399,6 +402,18 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
     <li class="nav-header">Recent Posts</li>
     
       <li class="post">
+        <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/09/how-to-crash-php/">how-to-crash-php</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/12/05/the-nearly-end-of-the-end-of-the-world/">The nearly end of the end of the world</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a>
       </li>
     
@@ -424,18 +439,6 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
     
       <li class="post">
         <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">[PHP-Internal]定制PHP语法获取PHP变量的变量名</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/11/28/doubanshow-for-wordpress/">[Plugin]豆瓣秀 For WordPress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/">PHP Puzzle(一): 有趣的变量作用域-PHP中global和Javascript中的var关键字</a>
       </li>
     
   </ul>
@@ -482,7 +485,7 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
   </div>
   <footer role="contentinfo" class="page-footer"><hr>
 <p>
-  Copyright &copy; 2012 - reeze -
+  Copyright &copy; 2013 - reeze -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

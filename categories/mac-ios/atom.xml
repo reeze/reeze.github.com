@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mac/iOS | Zen Space | 寻找善美]]></title>
   <link href="http://reeze.cn/categories/mac-ios/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2012-09-12T23:27:50+08:00</updated>
+  <updated>2013-04-09T21:46:25+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -18,8 +18,15 @@
     <link href="http://reeze.cn/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/"/>
     <updated>2010-07-02T15:16:33+08:00</updated>
     <id>http://reeze.cn/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command</id>
-    <content type="html"><![CDATA[<p>工作中开发基本都是ssh到远程服务器上vim开发，有时候因为网络原因或者不小心把终端给关了或者网络出现问题以后就痛苦了，因为vim默认会用swp文件保存修改，我又不想关掉这个功能，一不小心真丢数据就划不来了，非法关闭vim之后再次打开就会提示是否恢复文件，自从发现screen这个绝佳的绘画管理工具，就深深的爱上了它，IBM的这篇文章有详细的介绍  “<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-screen/">linux 技巧：使用screen 管理你的远程会话</a>”。在使用过程中发现一些问题，默认快捷键是Ctrl + A, 用惯了命令行的人肯定会用Ctrl +A , Ctrl + E来定位当前输入的命令吧. 在~/.screenrc中修改一下就可以了，下面是我的.screenrc
-<code>
+    <content type="html"><![CDATA[<p>工作中开发主要在公司的开发机上，ssh到远程服务器上用vim开发，有时候因为网络原因或者不小心把终端给
+关了或者网络出现问题以后就痛苦了，因为会话关闭后开启的程序就挂了，vim默认会用swp文件保存修改，
+但是为了安全起见，不想关掉swp，一不小心真丢数据就划不来了，非法关闭vim之后再次打开就会提示是否恢复文件，
+自从发现screen这个绝佳的会话管理工具，就深深的爱上了它，IBM的这篇文章有详细的介绍
+<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-screen/">linux 技巧：使用screen 管理你的远程会话</a>”。
+在使用过程中发现一些问题，screen默认使用Ctrl + A当做热键, 用惯了命令行的人肯定会用Ctrl +A ,
+Ctrl + E来定位当前输入的命令吧. 其实在~/.screenrc中修改一下就可以了，下面是我的.screenrc:</p>
+
+<p><code>
 vbell_msg "" # 比如在tab自动提示的时候，默认总是会出现一个Wuff,觉得很烦，关掉
 escape ``  # instead of Control-a  使用 反引号当快捷键，因为用的相对较少
 termcapinfo xterm* ti@:te@  # 这个就是解决mac下看不到滚动条的问题了
@@ -33,7 +40,10 @@ termcapinfo xterm* ti@:te@  # 这个就是解决mac下看不到滚动条的问�
     <link href="http://reeze.cn/2010/01/24/guide-enable-native-ntfs-readwrite-in-snow-leopard/"/>
     <updated>2010-01-24T18:19:31+08:00</updated>
     <id>http://reeze.cn/2010/01/24/guide-enable-native-ntfs-readwrite-in-snow-leopard</id>
-    <content type="html"><![CDATA[<p>在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2之后出现fusefs.kext can't load的错误，从官方得知目前macfuse在snow leopard下有问题，在网上看到<a href="http://forums.macrumors.com/showthread.php?t=785376">这篇贴子</a>提到Snow Leopard其实原生就支持NTFS分区的读写，真是个好消息。</p>
+    <content type="html"><![CDATA[<p>在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2
+之后出现fusefs.kext can't load的错误，从官方得知目前macfuse在snow leopard下有问题，
+在网上看到<a href="http://forums.macrumors.com/showthread.php?t=785376">这篇贴子</a>提到
+Snow Leopard其实原生就支持NTFS分区的读写，真是个好消息。</p>
 
 <p>开启的方法有两种：
 一种是在/etc/fstab文件里增加挂载选项，基本步骤是：
@@ -57,15 +67,18 @@ $ sudo vim /sbin/mount_ntfs
 $ sudo chown root:wheel /sbin/mount_ntfs
 $ sudo chmod 755 /sbin/mount_ntfs</p>
 
-<p>然后重启，启动后，你应该就能得到一个可以自由读写的ntfs分区了。不过声明一点，这个功能据说不稳定，不知道是因为版权原因还是真的很不稳定，苹果默认没有开启这个功能。不过我更相信苹果。</p>
+<p>然后重启，启动后，你应该就能得到一个可以自由读写的ntfs分区了。不过声明一点，
+这个功能据说不稳定，不知道是因为版权原因还是真的很不稳定，苹果默认没有开启这个功能。不过我更相信苹果。</p>
 
 <p>＝＝＝＝＝＝＝＝
-后话：刚好公司配了一台Dell E6400,偶尔看到有人在上面<a href="http://bbs.pcbeta.com/archiver/tid-625920.html">装了一个Leopard</a>,于是手痒也在上面装了一个，如果有人也有这台笔记本也可以试试看，不过我装好的系统还是有问题：</p>
+后话：刚好公司配了一台Dell E6400,偶尔看到有人在上面<a href="http://bbs.pcbeta.com/archiver/tid-625920.html">装了一个Leopard</a>,
+于是手痒也在上面装了一个，如果有人也有这台笔记本也可以试试看，不过我装好的系统还是有问题：</p>
 
 <p>1，触摸屏一碰就乱跑，我直接禁用就好了，反正也不喜欢用。
 2，关机和重启不断电，每天关机的次数也有限，也就无所谓了。
-3，声音控制不了，只能在具体的应用程序里控制。
-其实问题还是挺多的，不过基本上的使用我觉得还是没什么问题的，触摸屏的问题比较烦人，还好我不喜欢用触摸屏。如果有人也想尝试可以试试看。我用的安装文件是 Snow_Leopard_10.6.1-10.6.2_SSE2_SSE3_Intel_AMD_by_Hazard.iso, 至于安装方法<a href="http://bbs.pcbeta.com/forum-185-1.html">PCbeta</a>上有很多的教程可以参考，摸索一下大概都没有什么问题，安装的时候一定要做好备份，因为我到目前已经因为装Mac OS X丢失了不下10次数据了，大部分情况下都是分区被合并。所以一定要小心一点。</p>
+3，声音控制不了，只能在具体的应用程序里控制。</p>
+
+<p>其实问题还是挺多的，不过基本上的使用我觉得还是没什么问题的，触摸屏的问题比较烦人，还好我不喜欢用触摸屏。如果有人也想尝试可以试试看。我用的安装文件是 Snow_Leopard_10.6.1-10.6.2_SSE2_SSE3_Intel_AMD_by_Hazard.iso, 至于安装方法<a href="http://bbs.pcbeta.com/forum-185-1.html">PCbeta</a>上有很多的教程可以参考，摸索一下大概都没有什么问题，安装的时候一定要做好备份，因为我到目前已经因为装Mac OS X丢失了不下10次数据了，大部分情况下都是分区被合并。所以一定要小心一点。</p>
 ]]></content>
   </entry>
   

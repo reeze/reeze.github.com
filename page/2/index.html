@@ -9,7 +9,8 @@
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="上一篇文章里提到是用PHP扩展实现获取变量的变量名的方法. 今天发现有一个PHP实现的版本 . 实现方法来自:http://mach13.com/how-to-get-a-variable-name-as-a-string-in-php 刚开始以为这个方法好使, 仔细想想其实也是有问题的. &hellip;">
+  <meta name="description" content="
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -102,6 +103,211 @@
     <div class="row-fluid">
       <div class="span9">
   
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
+      <h1 class="entry-title"><a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">[PHP-Internal]定制PHP语法获取PHP变量的变量名</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-26T17:56:53+08:00" pubdate data-updated="true">Dec 26<span>th</span>, 2010</time>
+        
+         | <a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
+      <h1 class="entry-title"><a href="/2010/11/28/doubanshow-for-wordpress/">[Plugin]豆瓣秀 for WordPress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-28T22:10:23+08:00" pubdate data-updated="true">Nov 28<span>th</span>, 2010</time>
+        
+         | <a href="/2010/11/28/doubanshow-for-wordpress/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>我喜欢在博客中显示我在豆瓣上的一些信息，比如想看哪些书哪些电影神马的。刚开始用的是 Robin的 <a href="http://www.robb.com.cn/plugins">http://www.robb.com.cn/plugins/</a> 的 WP-DoubanShow插件，他用的是豆瓣API。这个插件需要手动修改主题模板文件。刚开始用的挺好，修改就修改吧。不过后来换过几次主题后发现每次修改模板文件还挺“脏”的。遂问robin能否修改成widget的方式，他说官方推出了一个豆瓣秀功能<a href="http://www.douban.com/service/badgemaker">http://www.douban.com/service/badgemaker</a>， 所以不继续维护了。看过官方的说明。发现要在Wordpress中用也只能手动修改模板，不过官方提供了一个生成js的设置项，可以根据需要生成相应的脚本，选项也还算简单。 在网上搜了一番，没有给wordpress用的插件，所以自己写了一个，设置项和官方的一样。下面简单的说明一下：</p>
+
+<ol>
+<li><p>第一步：下载插件文件： <a href="/uploads/2010/11/DoubanShow.zip">DoubanShow.zip</a>, 或者在管理界面中添加插件, 搜索douban即可看到&#8221;豆瓣秀For Wordpress&#8221; 选择安装, 如果这样的话,下面的上传步骤就不需要了</p></li>
+<li><p>第二步：上传安装。 后台管理的  插件 -> 添加插件 -> 上传中上传下载的文件。<a href="/uploads/2010/11/upload.png"><img src="/uploads/2010/11/upload.png" alt="" /></a></p></li>
+</ol>
+
+
+<p><a href="/uploads/2010/11/active.png"><img src="/uploads/2010/11/active2.png" alt="" /></a>
+上传完后记得“启用插件&#8221;</p>
+
+<ol>
+<li></li>
+</ol>
+
+
+<p>第三步：在后台管理的 外观 -> 小工具 中选择”豆瓣秀“ 拖到右侧你想放置的位置。 然后点击拖过去的豆瓣秀箭头。出现如下设置：</p>
+
+<p><a href="/uploads/2010/11/settings.png"><img src="/uploads/2010/11/settings.png" alt="" /></a></p>
+
+<p>标题默认为空，就是不显示标题。也可以设置成你想要的标题。然后要设置好你的豆瓣ID，记住不是豆瓣的登录用户名。 设置好以后。去你的页面看看效果吧，也可以看我博客页面右下角。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header class="page-header">
+    
+      <h1 class="entry-title"><a href="/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/">PHP Puzzle(一): 有趣的变量作用域-PHP中global和Javascript中的var关键字</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-14T15:38:32+08:00" pubdate data-updated="true">Nov 14<span>th</span>, 2010</time>
+        
+         | <a href="/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>昨天在网上看到几道有意思的PHP题, 下面这道题让我想起了对应的Javascript版本.
+`</p>
+
+<p>这段代码运行结果是什么呢? 别急着执行这段代码,先想想你的结果.然后再对比一下吧.</p>
+
+<p>我们看先看看global的定义 http://www.php.net/manual/en/language.variables.scope.php 这里也没有太为规范的解释.只是说可以通过global关键字来访问全局变量. 这里还涉及到一个类型转换的问题.</p>
+
+<p>大家都知道PHP脚本是编译为opcode逐语句执行的. 那么现在要一句语句解释就很容易了.
+`</p>
+
+<p>这里可能比较困惑的的是现在变量$a到底是局部变量还是全局变量了.因为global在定义局部变量之后.所以$a变为了全局变量,而在最后输出结果的时候$a并没有值.所以最后在相乘的时候是 NULL * 100; 也就是0了;可能会有人有疑问, 后面只是把$a变为了全局变量, 他的值应该不变的啊. 让我通过下面的例子来看把:
+`</p>
+
+<p>  int(0)
+  [&#8220;a&#8221;]=>
+  &NULL;
+}
+<code>
+变量a是NULL的一个引用,因为全局作用域内没有a这个变量. 所以即使在函数前面定义了一个a变量,但是它的值已经指向了全局作用域了.
+实际上 global关键字首先从全局符号表中查找变量名叫做a的变量,并把这个变量值设置为当前作用域的符号表中的a变量(更新了当前变量的值). 如果全局作用域内没有这个变量则会在全局作用域内增加这个变量, 实现代码见: $PHP_SRC/Zend/zend_vm_execute.h
+</code>
+static int ZEND_FASTCALL zend_fetch_var_address_helper_SPEC_CONST(int type, ZEND_OPCODE_HANDLER_ARGS) {</p>
+
+<pre><code>    // ...
+    if (zend_hash_find(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, (void **) &amp;retval;) == FAILURE) {
+        switch (type) {
+            case BP_VAR_R:
+            case BP_VAR_UNSET:
+                zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));
+                /* break missing intentionally */
+            case BP_VAR_IS:
+                retval = &amp;EG;(uninitialized_zval_ptr);
+                break;
+            case BP_VAR_RW:
+                zend_error(E_NOTICE,"Undefined variable: %s", Z_STRVAL_P(varname));
+                /* break missing intentionally */
+            case BP_VAR_W: {
+                    zval *new_zval = &amp;EG;(uninitialized_zval);
+
+                    Z_ADDREF_P(new_zval);
+                    zend_hash_update(target_symbol_table, varname-&gt;value.str.val, varname-&gt;value.str.len+1, &amp;new;_zval, sizeof(zval *), (void **) &amp;retval;);
+                }
+                break;
+            EMPTY_SWITCH_DEFAULT_CASE()
+        }
+    }
+
+ //...
+</code></pre>
+
+<p>}
+<code>
+看了这个解释大家可能觉得理所当然.一句一句执行的嘛. 看完了PHP中全局作用域的例子,咱们再看看类似的Javascript中的局部变量的版本吧
+</code>
+var a = 1;
+function multiply(b)
+{</p>
+
+<pre><code> a = 100;
+ var a;
+
+ return a * b;
+</code></pre>
+
+<p>}
+alert(a);
+alert(multiply(100));
+`
+那这段代码的输出将会是多少呢?
+如果还是同样的思路,结果可能是你的期望完全不一样的结果. <strong>这里的var定义变量和php中global不是一样的东西, php中的global是会在运行时执行的.而Javascript中的var在运行之前就已经&#8221;处理&#8221;好了</strong>.在运行之前的&#8221;语法分析&#8221;(没有看过Javascript引擎的实现.姑且这么分把)过程中,multiply函数中出现了var a;则把变量a加到函数体内的&#8221;局部变量表&#8221;中了.在运行过程中并不会执行var a;这一句.  这也是Javascript&#8221;怪异&#8221;的地方.定义变量的位置并没有关系.所以在函数内定义局部变量最好放在函数体的前面.</p>
+
+<p>所以第一个alert输出的1, 函数的执行并没有改版全局范围内的a变量; 第二就没有什么问题了, 是10000;</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -246,13 +452,23 @@ title: &#8216;[PHP-Internal]鎬庝箞鏍疯幏鍙朠HP鍙橀噺鐨勫彉閲忓�
   </header>
 
 
-  <div class="entry-content"><p>工作中开发基本都是ssh到远程服务器上vim开发，有时候因为网络原因或者不小心把终端给关了或者网络出现问题以后就痛苦了，因为vim默认会用swp文件保存修改，我又不想关掉这个功能，一不小心真丢数据就划不来了，非法关闭vim之后再次打开就会提示是否恢复文件，自从发现screen这个绝佳的绘画管理工具，就深深的爱上了它，IBM的这篇文章有详细的介绍  “<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-screen/">linux 技巧：使用screen 管理你的远程会话</a>”。在使用过程中发现一些问题，默认快捷键是Ctrl + A, 用惯了命令行的人肯定会用Ctrl +A , Ctrl + E来定位当前输入的命令吧. 在~/.screenrc中修改一下就可以了，下面是我的.screenrc
-<code>
-vbell_msg "" # 比如在tab自动提示的时候，默认总是会出现一个Wuff,觉得很烦，关掉
-escape ``  # instead of Control-a  使用 反引号当快捷键，因为用的相对较少
-termcapinfo xterm* ti@:te@  # 这个就是解决mac下看不到滚动条的问题了
-</code>
-解决方法来源见：<a href="http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command">http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command</a></p>
+  <div class="entry-content"><p>工作中开发主要在公司的开发机上，ssh到远程服务器上用vim开发，有时候因为网络原因或者不小心把终端给
+关了或者网络出现问题以后就痛苦了，因为会话关闭后开启的程序就挂了，vim默认会用swp文件保存修改，
+但是为了安全起见，不想关掉swp，一不小心真丢数据就划不来了，非法关闭vim之后再次打开就会提示是否恢复文件，
+自从发现screen这个绝佳的会话管理工具，就深深的爱上了它，IBM的这篇文章有详细的介绍
+<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-screen/">linux 技巧：使用screen 管理你的远程会话</a>”。
+在使用过程中发现一些问题，screen默认使用Ctrl + A当做热键, 用惯了命令行的人肯定会用Ctrl +A ,
+Ctrl + E来定位当前输入的命令吧. 其实在~/.screenrc中修改一下就可以了，下面是我的.screenrc:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vbell_msg "" # 比如在tab自动提示的时候，默认总是会出现一个Wuff,觉得很烦，关掉
+</span><span class='line'>escape ``  # instead of Control-a  使用 反引号当快捷键，因为用的相对较少
+</span><span class='line'>termcapinfo xterm* ti@:te@  # 这个就是解决mac下看不到滚动条的问题了</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解决方法来源见：<a href="http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command">http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command</a></p>
 </div>
   
   
@@ -399,7 +615,10 @@ FilefileName=es.dll fileSize=271360
   </header>
 
 
-  <div class="entry-content"><p>在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2之后出现fusefs.kext can&#8217;t load的错误，从官方得知目前macfuse在snow leopard下有问题，在网上看到<a href="http://forums.macrumors.com/showthread.php?t=785376">这篇贴子</a>提到Snow Leopard其实原生就支持NTFS分区的读写，真是个好消息。</p>
+  <div class="entry-content"><p>在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2
+之后出现fusefs.kext can&#8217;t load的错误，从官方得知目前macfuse在snow leopard下有问题，
+在网上看到<a href="http://forums.macrumors.com/showthread.php?t=785376">这篇贴子</a>提到
+Snow Leopard其实原生就支持NTFS分区的读写，真是个好消息。</p>
 
 <p>开启的方法有两种：
 一种是在/etc/fstab文件里增加挂载选项，基本步骤是：
@@ -423,15 +642,18 @@ $ sudo vim /sbin/mount_ntfs
 $ sudo chown root:wheel /sbin/mount_ntfs
 $ sudo chmod 755 /sbin/mount_ntfs</p>
 
-<p>然后重启，启动后，你应该就能得到一个可以自由读写的ntfs分区了。不过声明一点，这个功能据说不稳定，不知道是因为版权原因还是真的很不稳定，苹果默认没有开启这个功能。不过我更相信苹果。</p>
+<p>然后重启，启动后，你应该就能得到一个可以自由读写的ntfs分区了。不过声明一点，
+这个功能据说不稳定，不知道是因为版权原因还是真的很不稳定，苹果默认没有开启这个功能。不过我更相信苹果。</p>
 
 <p>＝＝＝＝＝＝＝＝
-后话：刚好公司配了一台Dell E6400,偶尔看到有人在上面<a href="http://bbs.pcbeta.com/archiver/tid-625920.html">装了一个Leopard</a>,于是手痒也在上面装了一个，如果有人也有这台笔记本也可以试试看，不过我装好的系统还是有问题：</p>
+后话：刚好公司配了一台Dell E6400,偶尔看到有人在上面<a href="http://bbs.pcbeta.com/archiver/tid-625920.html">装了一个Leopard</a>,
+于是手痒也在上面装了一个，如果有人也有这台笔记本也可以试试看，不过我装好的系统还是有问题：</p>
 
 <p>1，触摸屏一碰就乱跑，我直接禁用就好了，反正也不喜欢用。
 2，关机和重启不断电，每天关机的次数也有限，也就无所谓了。
-3，声音控制不了，只能在具体的应用程序里控制。
-其实问题还是挺多的，不过基本上的使用我觉得还是没什么问题的，触摸屏的问题比较烦人，还好我不喜欢用触摸屏。如果有人也想尝试可以试试看。我用的安装文件是 Snow_Leopard_10.6.1-10.6.2_SSE2_SSE3_Intel_AMD_by_Hazard.iso, 至于安装方法<a href="http://bbs.pcbeta.com/forum-185-1.html">PCbeta</a>上有很多的教程可以参考，摸索一下大概都没有什么问题，安装的时候一定要做好备份，因为我到目前已经因为装Mac OS X丢失了不下10次数据了，大部分情况下都是分区被合并。所以一定要小心一点。</p>
+3，声音控制不了，只能在具体的应用程序里控制。</p>
+
+<p>其实问题还是挺多的，不过基本上的使用我觉得还是没什么问题的，触摸屏的问题比较烦人，还好我不喜欢用触摸屏。如果有人也想尝试可以试试看。我用的安装文件是 Snow_Leopard_10.6.1-10.6.2_SSE2_SSE3_Intel_AMD_by_Hazard.iso, 至于安装方法<a href="http://bbs.pcbeta.com/forum-185-1.html">PCbeta</a>上有很多的教程可以参考，摸索一下大概都没有什么问题，安装的时候一定要做好备份，因为我到目前已经因为装Mac OS X丢失了不下10次数据了，大部分情况下都是分区被合并。所以一定要小心一点。</p>
 </div>
   
   
@@ -471,7 +693,12 @@ $ sudo chmod 755 /sbin/mount_ntfs</p>
 
   <div class="entry-content"><p>09年最后一篇日志，充个数吧：）</p>
 
-<p>哈哈，刚买了本《<a href="http://www.douban.com/subject/3735649/">Orange S: 一个操作系统的实现</a>》，这一年下来买了挺多的书，也从图书馆借了很多的书（马上就要毕业了，再也享受不到学校图书馆丰富及时的藏书了，计划以后每个月发工资都买一本自己喜欢的书），发现我读书最大的问题是多而不精，拿一本好书就使劲的翻，很多书都是花几天就翻完了，但是读下来之后总觉得收获不够，一些很需要实践的部分也没有及时联系，总感觉自己浮在表面上，只知其然。所以呢，这个2010年争取多读好书，踏踏实实的啃几本好书，然后就是要多动手啦。</p>
+<p>刚买了本《<a href="http://www.douban.com/subject/3735649/">Orange S: 一个操作系统的实现</a>》，
+这一年下来买了挺多的书，也从图书馆借了很多的书（马上就要毕业了，再也享受不到学校图书馆丰富及时的藏书了，
+计划以后每个月发工资都买一本自己喜欢的书），发现我读书最大的问题是多而不精，
+拿一本好书就使劲的翻，很多书都是花几天就翻完了，但是读下来之后总觉得收获不够，
+一些很需要实践的部分也没有及时巩固练习，总感觉自己浮在表面上，只知其然。所以呢，
+2010年争取多读好书，踏踏实实的啃几本好书，然后就是要多动手啦。</p>
 
 <p>计划2010年呢，能把耽搁很久的想法付诸行动，做出点东西来。希望有个好的开始吧！</p>
 
@@ -527,349 +754,6 @@ $ sudo chmod 755 /sbin/mount_ntfs</p>
 
     </article>
   
-  
-    <article>
-      
-  <header class="page-header">
-    
-      <h1 class="entry-title"><a href="/2009/10/09/check-php-files-syntax-in-php/">在PHP中检查PHP文件是否有语法错误</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-10-09T19:21:32+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2009</time>
-        
-         | <a href="/2009/10/09/check-php-files-syntax-in-php/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>之前在当当的时候的一个项目中用到了一个简单的模板引擎，其实也是借鉴discuz来做的模板引擎，很简单，它所作的事情就是把一些自定义的标签编译成php代码。已经说了很简单了，所以编译的时候也名优进行模板语法的检查，那么在开发过程中就会出现编译出来的php文件有语法问题，有语法问题没有关系，我修改重新编译一下就好了。首先不能在每次请求的时候都把php模板重新编译一下，会严重影响性能，折中的处理时在每个编译好的php文件末尾检查一下该模板文件是否已经修改过，根据设定的更新频率，如果又需要则重新编译模板文件，现在的问题是编译出来的php文件自己有语法错误，根本执行不到模板检查那一步，所以即使修改了模板文件中的问题也不会重新编译。 所以我想寻找一种简单的方法来检查生成的php文件是否合法。不合法就重新编译，这样开发过程中就不用出现错误就得手动删除缓存文件了。</p>
-
-<p>在网上找了一下。刚开始以为 token_get_all()函数能处理语法错误的问题，结果发现，它只是做简单的词法分析。没有办法。后来到论坛上去问了一下
-http://groups.google.com/group/professional-php/browse_thread/thread/b8581f6b07b10ff0/2601a63c406bb1c1?lnk=gst&amp;q=reeze#2601a63c406bb1c1</p>
-
-<p>有人告诉我有这样一个函数 php_check_syntax() http://www.php.net/manual/en/function.php-check-syntax.php 我想问题就这么坚决了。。我真应该RTF(Read The Fuck Mannual). 仔细一看。这个函数已近被弃用了：
-Note: For technical reasons, this function is deprecated and removed from PHP. Instead, use php -l somefile.php from the commandline.</p>
-
-<p>这个technical reason 到底是什么呢？ 先不管了，以后再慢慢研究，反正不能使用这个方法就对了。
-他们的建议是使用命令行$php -l filename.php 来检查语法。
-Gary Every给了我一个代码片段参考：</p>
-
-<p>在命令行下检查问题也不大。如果我要放在在线应用呢？ 这就涉及到可移植性的问题了。首先是操作系统，然后就是环境变量。这样的话就会依赖于服务器端的配置。在http://www.php.net/manual/en/function.php-check-syntax.php 上有人贴出了自己的php_check_syntax()函数实现。
-有的采用的就是上面的命令行的方法。
-后面有提到使用eval的方法来验证。eval方法会执行传入的代码， 如果代码有语法错误则会抛出parser error, 可以使用&#8217;@&#8217;错误抑制符去掉错误信息，eval和echo一样并不是函数，不能使用变量函数的方法调用比如：
-$func = &#8216;eval&#8217;
-$func()这样的调用就是无效的。它会提示没有eval函数，如果你自己定义这么一个函数也是有问题的。因为eval是一个关键字。
-eval调用和include差不多，如果被包含文件中没有明确return就返回null。如果直接eval我们需要检查的文件会造成被检查的文件内代码被执行，这可不是我们想要的，我们只需要检查一下这个文件的语法是否正确。 我们可以在要检查的文件之前添加return 语句，让代码提前跳出，那么后面的代码就不会执行了。好的，就这么干。代码如下：
-checker.php
-`
-&#8221;;</p>
-
-<pre><code>    $file_content = $check_code . $file_content . "
-</code></pre>
-
-<p>file.php
-<code>
-b
-?&gt;
-</code>
-因为Parse error 是没法被 set_error_handler处理函数处理的。这个异常没办法catch到。所以才使用了@来抑制错误。这带来的问题就是我们无法得到详细的错误信息。 不过目前我需要的功能也只是检查语法是否正确。不正确的话重新编译模板文件，就这么简单，至于语法错误，在显示网页的时候自然会看得到。
-最好的办法就是这个被遗弃的php_check_syntax这个方法回到php中。下次再研究下他们是出于什么原因把这个函数去掉的。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header class="page-header">
-    
-      <h1 class="entry-title"><a href="/2009/10/09/how-to-implement-a-simple-online-html-editor/">实现一个简单在线HTML编辑器</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-10-09T15:11:26+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2009</time>
-        
-         | <a href="/2009/10/09/how-to-implement-a-simple-online-html-editor/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>一直没有仔细研究过在线HTML编辑器，以前以为编辑功能很复杂，需要用大量的JavaScript来模拟编辑器的效果，以前都是使用一些开源的HTML编辑器，HTML在各网上随处可见，发表文章，评论。最近自己想做一个类似Things这样的Web版的应用，需要一个想Google  Notebook(可惜的是现在已经停止开发了) 那样的编辑功能，看看现在网上的这些编辑器都庞大了，都是一些自己根本用不到的功能，其实我的需求很简单：简单的编辑既可以，并且需要轻量级一些，因为页面上可能需要开很多个编辑器实例。 所有想自己也来研究一下，看看能不能自己开发一个。</p>
-
-<p>几天前花了一个晚上用firebug看了下Google Docs是怎么做。第一个遇到的问题就是如何让光标停在鼠标点击所在得地方。我刚开始一味都是js模拟出来的，这得有多复杂啊。并且还要兼容各个浏览器，天啊！后来上网一搜发现，浏览器早就想到了我们会有这样的一个需求。其实很简单，两条语句就可以说明HTML编辑器的最为核心的部分：
-<code>
-document.designMode = 'On';
-document.contentEditable = true;
-</code>
-参考Mozilla上的<a href="https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla">这篇</a>文章，介绍了HTML编辑的基本信息，要自己DIY一个常用功能的HTML编辑，这篇文章已经够你用的了。</p>
-
-<p>在你的网页中嵌入这两条语句试试看：），你就会发现你的网站整个得都变的可以编辑了。可以随便乱修改。 不过放心，这样修改并不会破坏你的网站， 当然你也不希望你的整个网站是可以编辑的。例如我们只希望别人发布一条评论，只希望评论输入框可以输入。 要实现这样的效果可以有两种做法：</p>
-
-<p>第一种就是使用直接让某个元素变成可编辑的例如：</p>
-
-<p>index.html
-`
-Test TextEditor</p>
-
-<h1>Hi, HTML Editor!</h1>
-
-<p>Hello, you comment please</p>
-
-<p>Your comment</p>
-
-<p>Get HTML
-`
-点击该区域后该区域的内容就变成可以编辑的了，这是我们就是对其进行简单的编辑。你可能会觉得直接编辑的功能太简单了，比如想要插入链接或者图片什么的。就没有办法了。这些功能浏览器并没有帮我们做好，不过实现这些功能也不麻烦， 参考上面Mozilla的文档。浏览器都提供了常用的功能API。</p>
-
-<p>一般的编辑器都会提供一个工具栏之类的按钮来编辑文本内容。比如我使用的WordPress提供的编辑器：</p>
-
-<p>[caption id=&#8221;attachment_42&#8221; align=&#8221;alignnone&#8221; width=&#8221;936&#8221; caption=&#8221;wordpress提供的编辑器&#8221;]<a href="/uploads/2009/10/5b9e5c0b92f7fdf042ea3993165b80ec.png"><img src="/uploads/2009/10/5b9e5c0b92f7fdf042ea3993165b80ec.png" alt="wordpress提供的编辑器" /></a>[/caption]</p>
-
-<p>可以对文字内容进行操作，加粗下划线，字体，对齐等等，并且提供可视化以及HTML编辑模式。</p>
-
-<p>这个和FCKeditor 以及tinymce之类的编辑器使用的编辑方式和上面我提到的直接编辑html对象的方法不一样，他们使用的是iframe，使用iframe有很多好处，iframe中的文档和当前文档并不会因为样式或者HTML结构而影响到彼此，所以大部分的编辑器都是使用这种方式。它们基本的方式都是：</p>
-
-<ol>
-<li><p>在页面中使用一个不可见的字段比如:“input, textarea&#8221;之类表单字段，他们的值就是需要编辑的内容。</p></li>
-<li><p>页面初始化好，比如载入编辑器相关的一些脚本，也是就是window.onload好以后。创建一个iframe来显示可编辑区域，iframe初始化好以后读取父窗(相对于这个iframe)口的这个不可见表单值的内容，使之成为iframe中的body的html，也就是把所有需要编辑的内容添加到iframe中</p></li>
-<li><p>iframe中的内容初始化好以后，在iframe中执行上面提到的：
-<code>
-document.designMode = 'On';
-document.contentEditable = true;
-</code>
-把iframe整个窗口变成可以编辑的</p></li>
-<li><p>进行编辑，这时候的编辑可能需要一个工具栏，基于同样的原因，一般工具栏也会是一个iframe，显示它们自己的编辑按钮。编辑是就利用浏览器提供的接口来对ifame中的内容进行编辑</p></li>
-<li><p>父窗口中提交表单之前或者你需要的地方需要把编辑器中编辑完的内容回写到你的表单字段中去，否则编辑结果没有保存写来就没有意义了。</p></li>
-</ol>
-
-
-<p>基本原理就是这样。要做出这样一个东西来，需要的就是一些细活了。要想做出一个FCk这样好用的编辑器也不是那么简单的。但是至少我们知道它是怎么运作的。 这就够了。</p>
-
-<p>花了点时间做了一个简单的编辑器，真正要用的话很多的细节还是需要好好处理的，代码没有怎么清理，是变想边写，不是很完整。</p>
-
-<p>需要的同学可以下来参考参考。
-猛击 <a href="/uploads/2009/10/editor.rar"> >> 这里 &lt;&lt; </a>下载代码。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header class="page-header">
-    
-      <h1 class="entry-title"><a href="/2009/07/02/a-cache-system-using-var_export-and-includes-return-value/">基于var_export 和 Include返回值的缓存方案</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-07-02T12:55:41+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2009</time>
-        
-         | <a href="/2009/07/02/a-cache-system-using-var_export-and-includes-return-value/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://reeze.yo2.cn/2009/07/01/php-include-function-return-value-and-method-of-void-serialize/">前一篇文章</a>我们研究了include调用返回值的问题，并指出可以通过这种方式来完成序列化相同的功能，现在我就来研究一下这种方法的可行性和效率，因为直接的返回php值肯定是比unserialize()函数要快。</p>
-
-<p>第一步我们来研究下怎么将php对象持久化的保存起来。下面是我定义的一些变量：</p>
-
-<p><code>
-private $_var;
-public $pub = array('pub value', 3, 4);
-public function __constructor($var)
-{
-$this-&gt;_var = $var;
-}</code></p>
-
-<p>`public function show()
-{
-echo $this->_var;
-}
-}</p>
-
-<p>$string = &#8220;It&#8217;s a string&#8230;&#8221;;
-$array = array(1, 2, &#8216;key&#8217; => &#8216;value&#8217;, array(&#8216;sub-array&#8217;));
-$number = 135345.55;
-$class = new MyClass(&#8216;class var&#8217;);</p>
-
-<p>`</p>
-
-<p><code>//通过serialize()方法我们可以将他们持久化比如：
-echo serialize($string); //s:16:"It's a string...";
-echo serialize($array); //a:4:{i:0;i:1;i:1;i:2;s:3:"key";s:5:"value";i:2;a:1:{i:0;s:9:"sub-array";}}
-echo serialize($number); //d:135345.5499999999883584678173065185546875;
-echo serialize($class); //O:7:"MyClass":2:{s:13:"MyClass_var";N;s:3:"pub";a:3:{i:0;s:9:"pub value";i:1;i:3;i:2;i:4;}}
-// 我们可以将这些序列化的结果存到文件中，在需要的时候unserialize()返回得到相应的值，但是现在我不会这么做。
-</code></p>
-
-<p>前篇文章提到了通过include返回值来直接取得php值对象，首先我们要把值保存起来，因为我们要通过include来包含它，首先遇到的问题就是我们的序列化函数必须要生成合法的php表达式才行，否则include是无法得到相应的返回值的
-比如我们要序列化 字符串 &#8220;abcd&#8221; 我们可以这么做
-<code>
-file_puts_content("data.php", "return 'abcd';");
-//然后这样取得相应的值
-$string = include "data.php";
-echo $string; // 它应该输出 abcd
-</code>
-那数组怎么办呢？比如上面的数组。我们可以自己编写这个序列化函数
-<code>
-function encode($var){
-if (is_array($var)) {
-$code = 'array(';
-foreach ($var as $key =&gt; $value) {
-$code .= "'$key'=&gt;".encode($value).',';
-}
-$code = chop($code, ','); //remove unnecessary coma
-$code .= ')';
-return $code;
-} else {
-if (is_string($var)) {
-return "'".$var."'";
-} elseif (is_bool($var)) {
-return ($var ? 'TRUE' : 'FALSE');
-} elseif (is_numeric($var)) {
-return "$var";
-}
-else
-{
-return 'NULL';
-}
-}
-}</code>
-这个函数可以将字符串，数组以及数字变成合法的php表达式。
-比如：
-file_put_contents(&#8220;data.php&#8221;, &#8220;&lt;?phpn return &#8221; . encode($array) . &#8220;;n&#8221;);
-data.php文件的结果是：
-<code>
-return array ( 0 =&gt; 1, 1 =&gt; 2, 'key' =&gt; 'value', 2 =&gt; array ( 0 =&gt; 'sub-array', ), )array(4) { [0]=&gt; int(1) [1]=&gt; int(2) ["key"]=&gt; string(5) "value" [2]=&gt; array(1) { [0]=&gt; string(9) "sub-array" } }
-</code>
-我们的目的达到了。可以直接的通过include这个文件来得到我们的值。
-但是现在有个问题，我们没有序列化对象类型的值，这个该怎么处理呢？
-一个类对象有对象的状态和对象的行为，行为在类定义完以后就确定了，所以每个类的实例的行为都是一样的。所以我们可以不考虑，我们只需要考虑类对象的状态就可以了，简单来讲就是类的属性状态需要保存起来。那怎么样得到一个类的属性呢？
-经过一番搜寻以后发现一个函数
-get_object_vars
-(PHP 4, PHP 5)get_object_vars &#8211; 返回由对象属性组成的关联数组
-这个函数可以获得对象的属性关联数组，也就只可以得到对象的状态，但是对象的属性有各种访问控制，get_object_vars()函数在对象外访问只能得到对象的公开属性，而无法得到私有属性，这样的话我们就无法得到对象的全部状态，不可行，但是在对象内可以得到对象的所有属性，那我们可不可以在对象内定义一个___get_properties()方法来返回这些状态呢。
-给类增加这样一个方法
-<code>
-public function __get_properties()
-{
-return get_obj_vars($this);
-}
-</code>
-这样我们就可以得到类的所有属性了。第一步算是完成了，我们得到状态该怎么重新恢复出来呢？要在对象外部给对象设置属性我们只有两种情况：一种是这个属性是公开属性，我们可以直接赋值 比如： $obj->prop = $value; 如果是私有属性我们则需要自己增加setter方法比如 setProp($value);方法，来设置。但是这就会遇到一个问题，我们的属性要么是公开属性，要么必须要有setter方法来设置，很多情况下我们不希望给类增加这么多没有实际用处的方法，也为了封装性，不会有这么多的setter方法。虽然我们能得到对象的状态，但是却无法恢复对象状态，这样的话，我们的序列化方法也就没有什么意义了。我们探索到现在算是失败了。
-解决办法：var_export()函数。</p>
-
-<h2>在看symfony代码的时候发现了这个函数，手册是这么描述的：</h2>
-
-<p>var_export
-(PHP 4 >= 4.2.0, PHP 5)var_export &#8211; 输出或返回一个变量的字符串表示
-描述
-mixed var_export ( mixed expression [, bool return] )</p>
-
-<p>此函数返回关于传递给该函数的变量的结构信息，它和 var_dump() 类似，不同的是其返回的表示是合法的 PHP 代码。</p>
-
-<p>您可以通过将函数的第二个参数设置为 TRUE，从而返回变量的表示。</p>
-
-<p>这个就是我们想要的那个函数,我们来看看这个函数是怎么使用的。
-<code>
-//变量继续使用上面定义的变量
-echo var_export($string); //'It's a string...'
-echo var_export($array); /* array (0 =&gt; 1, 1 =&gt; 2, 'key' =&gt; 'value', 2 =&gt; array (0 =&gt; 'sub-array', ),)*/
-echo var_export($number); // 135345.55
-echo var_export($class); /* MyClass::__set_state(array('_var' =&gt; NULL, 'pub' =&gt; array (0 =&gt; 'pub value', 1 =&gt; 3, 2 =&gt; 4)) */
-</code>
-我们可以看到生成的都是合法的PHP表达式。通过设置第二个参数为true，就可以将返回结果赋值给变量比如$new_array_string = var_export($array, TRUE);然后将这个结果写入文件持久化</p>
-
-<p>file_put_contents(&#8220;data.php&#8221;, &#8220;public function <em>_constructor($var)
-{
-$this-></em>var = $var;
-}</p>
-
-<p>public function show()
-{
-echo $this->_var;
-}
-public static function __set_state(array $array)
-{
-$tmp = new MyClass();
-foreach($array as $key => $value)
-{
-$this->$key = $value;
-}
-}
-}</p>
-
-<p>// 一些变量
-$string = &#8220;It&#8217;s a string&#8230;&#8221;;
-$array = array(1, 2, &#8216;key&#8217; => &#8216;value&#8217;, array(&#8216;sub-array&#8217;));
-$number = 135345.55;
-$class = new MyClass(&#8216;class var&#8217;)</p>
-
-<p>// 缓存
-cache(&#8220;string.data.php&#8221;, $string); // 当然扩展名不一定非得php， 文件名我也只是简单的处理
-cache(&#8220;array.data.php&#8221;, $array);
-// 等等。。。</p>
-
-<p>// 获取数据,当然也可以在其他文件中来获取。
-$class = cache_get(&#8220;class.data.php&#8221;);</p>
-
-<p>参考：http://www.thoughtlabs.com/2008/02/02/phps-mystical-__set_state-method/?dsq=12016456</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <ul class="pager">
     
     <li class="previous"><a href="/page/3/">&larr; Older</a></li>
@@ -885,6 +769,18 @@ $class = cache_get(&#8220;class.data.php&#8221;);</p>
     <section class="well">
   <ul id="recent_posts" class="nav nav-list">
     <li class="nav-header">Recent Posts</li>
+    
+      <li class="post">
+        <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/01/09/how-to-crash-php/">how-to-crash-php</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/12/05/the-nearly-end-of-the-end-of-the-world/">The nearly end of the end of the world</a>
+      </li>
     
       <li class="post">
         <a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a>
@@ -912,18 +808,6 @@ $class = cache_get(&#8220;class.data.php&#8221;);</p>
     
       <li class="post">
         <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">[PHP-Internal]定制PHP语法获取PHP变量的变量名</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/11/28/doubanshow-for-wordpress/">[Plugin]豆瓣秀 For WordPress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/">PHP Puzzle(一): 有趣的变量作用域-PHP中global和Javascript中的var关键字</a>
       </li>
     
   </ul>
@@ -969,7 +853,7 @@ $class = cache_get(&#8220;class.data.php&#8221;);</p>
   </div>
   <footer role="contentinfo" class="page-footer"><hr>
 <p>
-  Copyright &copy; 2012 - reeze -
+  Copyright &copy; 2013 - reeze -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

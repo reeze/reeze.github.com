@@ -36,11 +36,11 @@
     </url>
     <url>
         <loc>http://reeze.cn/2009/12/31/at-the-tail-of-2009/</loc>
-        <lastmod>2012-05-28T14:07:14+08:00</lastmod>
+        <lastmod>2012-12-05T00:26:51+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2010/01/24/guide-enable-native-ntfs-readwrite-in-snow-leopard/</loc>
-        <lastmod>2012-05-28T14:07:14+08:00</lastmod>
+        <lastmod>2012-12-05T00:28:10+08:00</lastmod>
     </url>
     <url>
         <loc>
@@ -52,7 +52,7 @@
         <loc>
             http://reeze.cn/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/
         </loc>
-        <lastmod>2012-05-28T14:07:14+08:00</lastmod>
+        <lastmod>2013-04-09T21:45:00+08:00</lastmod>
     </url>
     <url>
         <loc>
@@ -86,7 +86,7 @@
     </url>
     <url>
         <loc>http://reeze.cn/2011/03/22/duplicate-ssh-session/</loc>
-        <lastmod>2012-05-28T14:07:14+08:00</lastmod>
+        <lastmod>2012-12-05T00:31:57+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2012/05/19/migrate-to-octopress/</loc>
@@ -94,19 +94,31 @@
     </url>
     <url>
         <loc>http://reeze.cn/2012/05/28/what-opcode-zend-nop-is-in-php/</loc>
-        <lastmod>2012-08-16T19:54:48+08:00</lastmod>
+        <lastmod>2012-12-05T00:35:46+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2012/07/15/introduction-to-travis-ci/</loc>
-        <lastmod>2012-08-16T19:58:57+08:00</lastmod>
+        <lastmod>2012-12-05T00:37:55+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2012/07/22/how-to-get-php-functions-const-parameters-name/</loc>
-        <lastmod>2012-08-16T20:41:15+08:00</lastmod>
+        <lastmod>2012-12-05T00:25:26+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2012/09/12/new-ext-php-leveldb-pecl/</loc>
-        <lastmod>2012-09-12T23:24:43+08:00</lastmod>
+        <lastmod>2012-12-05T00:24:53+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://reeze.cn/2012/12/05/the-nearly-end-of-the-end-of-the-world/</loc>
+        <lastmod>2012-12-05T01:20:47+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://reeze.cn/2013/01/09/how-to-crash-php/</loc>
+        <lastmod>2013-01-09T13:46:43+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://reeze.cn/2013/03/11/how-to-trace-a-php-crash-segfault/</loc>
+        <lastmod>2013-03-18T14:01:58+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/about/</loc>
@@ -114,10 +126,10 @@
     </url>
     <url>
         <loc>http://reeze.cn/blog/archives/</loc>
-        <lastmod>2012-09-12T23:24:43+08:00</lastmod>
+        <lastmod>2013-04-09T21:45:00+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/</loc>
-        <lastmod>2012-09-12T23:24:43+08:00</lastmod>
+        <lastmod>2013-04-09T21:45:00+08:00</lastmod>
     </url>
 </urlset>
