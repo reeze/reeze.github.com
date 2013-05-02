@@ -20,37 +20,18 @@ GCC等编译器也会将特定的语句进行优化而产生空操作。 PHP中�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://reeze.cn/2012/05/28/what-opcode-zend-nop-is-in-php">
+  <link rel="canonical" href="http://reeze.cn/2012/05/28/what-opcode-zend-nop-is-in-php/">
   <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/syntax/syntax.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <style type="text/css">
-    body {
-      padding-top: 60px;
-      padding-bottom: 40px;
-    }
-    h1 {
-      margin-bottom: 15px;
-    }
-    img {
-      max-width: 100%;
-    }
-    .sharing, .meta {
-      margin: 20px 0px 20px 0px;
-    }
-    .pager {
-      margin: 20px 0px 5px 0px;
-    }
-    .page-footer p {
-      text-align: center;
-    }
-  </style>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Zen Space | 寻找善美" type="application/atom+xml">
-  
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -68,47 +49,49 @@ GCC等编译器也会将特定的语句进行优化而产生空操作。 PHP中�
 </head>
 
 <body   >
-  <nav role="navigation"><div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft">{</div>
+  	<div id="logoText">mob</div>
+  	<div id="logoRight">}</div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">Zen Space | 寻找善美</a></h1>
+  
+    <h2>寻找善美</h2>
+  
+  <div class="clear"></div>
+</hgroup>
 
-      <a class="brand" href="/">Zen Space | 寻找善美</a>
-
-      <div class="nav-collapse">
-        <ul class="nav">
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:reeze.cn" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about/">About</a></li>
 </ul>
 
-      </div>
-
-      <ul class="nav pull-right" data-subscription="rss">
-        <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-        
-      </ul>
-
-        
-      <form class="pull-right navbar-search" action="http://google.com/search" method="get">
-        <fieldset role="search">
-          <input type="hidden" name="q" value="site:reeze.cn" />
-          <input class="search-query" type="text" name="q" results="0" placeholder="Search"/>
-        </fieldset>
-      </form>
-        
-    </div>
-  </div>
-</div>
 </nav>
-  <div class="container">
-    <div class="row-fluid">
-      
-<article class="hentry span9" role="article">
-
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
   
-  <header class="page-header">
+  <header>
     
-      <h1 class="entry-title">PHP中的NOP及为什么有这个opcode</h1>
+      
+        <h1 class="entry-title">PHP中的NOP及为什么有这个opcode</h1>
+      
     
     
       <p class="meta">
@@ -372,34 +355,30 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
 </div>
 
     
-    
-    <section>
-      <h1>Comments</h1>
-      <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-    </section>
-    
-    <ul class="pager">
+    <p class="meta">
       
-      <li class="previous"><a class="basic-alignment left"
-        href="/2012/05/19/migrate-to-octopress/" title="Previous Post:
-        迁移博客到Octopress">&laquo; 迁移博客到Octopress</a></li>
+        <a class="basic-alignment left articlenav" href="/2012/05/19/migrate-to-octopress/" title="Previous Post: 迁移博客到Octopress">&laquo; 迁移博客到Octopress</a>
       
-      <li><a href="/blog/archives">Blog Archives</a></li>
       
-      <li class="next"><a class="basic-alignment right" href="/2012/07/15/introduction-to-travis-ci/"
-        title="Next Post: 初试Travis-CI">初试Travis-CI
-        &raquo;</a></li>
+        <a class="basic-alignment right articlenav" href="/2012/07/15/introduction-to-travis-ci/" title="Next Post: 初试Travis-CI">初试Travis-CI &raquo;</a>
       
-    </ul>
+    </p>
   </footer>
 </article>
 
-<aside class="sidebar-nav span3">
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
   
-    <section class="well">
-  <ul id="recent_posts" class="nav nav-list">
-    <li class="nav-header">Recent Posts</li>
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
     
       <li class="post">
         <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等</a>
@@ -444,9 +423,9 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
   </ul>
 </section>
 
-<section class="well">
-  <ul id="gh_repos" class="nav">
-    <li class="nav-header">GitHub Repos</li>
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
     <li class="loading">Status updating...</li>
   </ul>
   
@@ -477,14 +456,14 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
 
 
 
+
   
 </aside>
 
 
     </div>
   </div>
-  <footer role="contentinfo" class="page-footer"><hr>
-<p>
+  <footer role="contentinfo"><p>
   Copyright &copy; 2013 - reeze -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
