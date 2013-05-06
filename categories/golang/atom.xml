@@ -4,7 +4,7 @@
   <title><![CDATA[Category: golang | Zen Space | 寻找善美]]></title>
   <link href="http://reeze.cn/categories/golang/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2013-05-06T23:22:57+08:00</updated>
+  <updated>2013-05-06T23:24:27+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -67,35 +67,43 @@
 <span class='line-number'>27</span>
 <span class='line-number'>28</span>
 <span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="p">&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="k">package</span> <span class="n">main</span><span class="p">&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="k">package</span> <span class="n">main</span>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="k">import</span> <span class="p">(&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="k">import</span> <span class="p">(</span>
-</span><span class='line'>    <span class="n">_</span> <span class="s">&quot;io&quot;</span>  <span class="c1">// 如果不重名名包为_ 而在代码中没有使用这个包会编译不通过</span>
-</span><span class='line'>            <span class="c1">// 这样导入一个包是有副作用的，导入一个包后会执行包的init()方法，</span>
-</span><span class='line'>            <span class="c1">// 如果只是为了避免编译不通过而绑定到_是不推荐的做法。</span>
-</span><span class='line'>      <span class="s">&quot;fmt&quot;</span>
-</span><span class='line'><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">func</span> <span class="n">getMulti</span><span class="p">()</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">_</span> <span class="p">=</span> <span class="mi">20</span>      <span class="c1">// 绑定没有作用，不会报错</span>
-</span><span class='line'>    <span class="c1">// _ := 10  // 编译不通过，因为表达式左边没有一个有效的新的标示符</span>
-</span><span class='line'>                <span class="c1">// no new variables on left side of :=</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">x</span><span class="p">,</span> <span class="n">_</span> <span class="p">:=</span> <span class="n">getMulti</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">fmt</span><span class="p">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">&quot;%d\n&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-</span><span class='line'>    <span class="c1">// fmt.Printf(&quot;%d\n&quot;, _)   这样是编译不通过的，因为_并不能被赋值</span>
-</span><span class='line'>    <span class="c1">//                         编译 &quot;cannot use _ as value&quot;</span>
-</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="n">_</span> <span class="s">&quot;io&quot;</span>  <span class="c1">// 如果不重名名包为_ 而在代码中没有使用这个包会编译不通过</span>
+</span><span class='line'>        <span class="c1">// 这样导入一个包是有副作用的，导入一个包后会执行包的init()方法，</span>
+</span><span class='line'>        <span class="c1">// 如果只是为了避免编译不通过而绑定到_是不推荐的做法。</span>
+</span><span class='line'>  <span class="s">&quot;fmt&quot;</span>
 </span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;)&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="k">func</span> <span class="n">getMulti</span><span class="p">()</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="p">{&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="k">return</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;}&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="n">_</span> <span class="p">=</span> <span class="mi">20</span>      <span class="c1">// 绑定没有作用，不会报错</span>
+</span><span class='line'><span class="c1">// _ := 10  // 编译不通过，因为表达式左边没有一个有效的新的标示符</span>
+</span><span class='line'>            <span class="c1">// no new variables on left side of :=</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">x</span><span class="p">,</span> <span class="n">_</span> <span class="p">:=</span> <span class="n">getMulti</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">fmt</span><span class="p">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">&quot;%d\n&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</span><span class='line'><span class="c1">// fmt.Printf(&quot;%d\n&quot;, _)   这样是编译不通过的，因为_并不能被赋值</span>
+</span><span class='line'><span class="c1">//                         编译 &quot;cannot use _ as value&quot;</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h2>总结</h2>
