@@ -4,7 +4,7 @@
   <title><![CDATA[Category: golang | Zen Space | 寻找善美]]></title>
   <link href="http://reeze.cn/categories/golang/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2013-05-06T23:21:44+08:00</updated>
+  <updated>2013-05-06T23:22:57+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -100,17 +100,19 @@
 
 <h2>总结</h2>
 
-<p>空标示符不是普通标示符，是一个语言级别的标示符，通常用来:
-1. 显式的忽略函数或其他多值赋值表达式中的某些的返回值，多值表达式通常有：</p>
-
-<pre><code>* 函数的多个返回值
-* range循环中的key-value值
-* 多值赋值，比如： x, y, z := 10, 20, 30, 不过这种情况比较小
-</code></pre>
+<p>空标示符不是普通标示符，是一个语言级别的标示符，通常用来:</p>
 
 <ol>
-<li>或者导入包不使用包而只利用包的初始化函数的副作用。但是不推荐用这种方式
-来绕过因为包未被使用而编译不通过的问题</li>
+<li><p>显式的忽略函数或其他多值赋值表达式中的某些的返回值，多值表达式通常有：</p>
+
+<ul>
+<li>函数的多个返回值</li>
+<li>range循环中的key-value值</li>
+<li>多值赋值，比如： x, y, z := 10, 20, 30, 不过这种情况比较小</li>
+</ul>
+</li>
+<li><p>或者导入包不使用包而只利用包的初始化函数的副作用。但是不推荐用这种方式
+来绕过因为包未被使用而编译不通过的问题</p></li>
 </ol>
 
 

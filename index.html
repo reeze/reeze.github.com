@@ -192,17 +192,19 @@
 
 <h2>总结</h2>
 
-<p>空标示符不是普通标示符，是一个语言级别的标示符，通常用来:
-1. 显式的忽略函数或其他多值赋值表达式中的某些的返回值，多值表达式通常有：</p>
-
-<pre><code>* 函数的多个返回值
-* range循环中的key-value值
-* 多值赋值，比如： x, y, z := 10, 20, 30, 不过这种情况比较小
-</code></pre>
+<p>空标示符不是普通标示符，是一个语言级别的标示符，通常用来:</p>
 
 <ol>
-<li>或者导入包不使用包而只利用包的初始化函数的副作用。但是不推荐用这种方式
-来绕过因为包未被使用而编译不通过的问题</li>
+<li><p>显式的忽略函数或其他多值赋值表达式中的某些的返回值，多值表达式通常有：</p>
+
+<ul>
+<li>函数的多个返回值</li>
+<li>range循环中的key-value值</li>
+<li>多值赋值，比如： x, y, z := 10, 20, 30, 不过这种情况比较小</li>
+</ul>
+</li>
+<li><p>或者导入包不使用包而只利用包的初始化函数的副作用。但是不推荐用这种方式
+来绕过因为包未被使用而编译不通过的问题</p></li>
 </ol>
 
 
@@ -577,69 +579,6 @@
 </span><span class='line'><span class="x">string(12) &quot;CONST_TEST_1&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- This defines how Octopress will use posts with external-url. -->
-        <h1 class="entry-title external"><a href="http://google.com">The Problem With Pingdom <span>&rArr;</span></a></h1>
-        
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-22T19:13:00+08:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2012</time>
-        
-         | <a href="/2012/07/22/the-problem-with-pingdom/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-
-<figure class='code'><figcaption><span>Time to be Awesome - awesome.rb </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Awesome!&quot;</span> <span class="k">unless</span> <span class="n">lame</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="http://www.pingdom.com%20Pingdom">The problem with pingdom.</a></p>
-
-<p>My money&#8217;s in that office, right? If she start giving me some bullshit about it ain&#8217;t there, and we got to go someplace else and get it, I&#8217;m gonna shoot you in the head then and there. Then I&#8217;m gonna shoot that bitch in the kneecaps, find out where my goddamn money is. She gonna tell me too. Hey, look at me when I&#8217;m talking to you, motherfucker. You listen: we go in there, and that nigga Winston or anybody else is in there, you the first motherfucker to get shot. You understand?</p>
-
-<blockquote><p>Blockquote is what goes
-inside this block here
-would you believe that
-bullshit?</p></blockquote>
-
-<p>Well, the way they make shows is, they make one show. That show&#8217;s called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they&#8217;re going to make more shows. Some pilots get picked and become television programs. Some don&#8217;t, become nothing. She starred in one of the ones that became nothing.</p>
-
-<p>The path of the righteous man is beset on all sides by the iniquities of the selfish and the tyranny of evil men. Blessed is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brother&#8217;s keeper and the finder of lost children. And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and destroy My brothers. And you will know My name is the Lord when I lay My vengeance upon thee.</p>
-
-<p>Your bones don&#8217;t break, mine do. That&#8217;s clear. Your cells react to bacteria and viruses differently than mine. You don&#8217;t get sick, I do. That&#8217;s also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We&#8217;re on the same curve, just on opposite ends.</p>
-
-<p>Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that&#8217;s what you see at a toy store. And you must think you&#8217;re in a toy store, because you&#8217;re here shopping for an infant named Jeb.</p>
 </div>
   
   
@@ -1150,6 +1089,67 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-22T18:49:27+08:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2011</time>
+        
+         | <a href="/2011/03/22/duplicate-ssh-session/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>就当是笔记吧. 首先，这不是配置ssh密钥简历信任关系免密码登陆的方法。
+主要解决的问题是在终端下多次登陆统一主机需要多次输入用户密码的问题。</p>
+
+<p>我们公司的内网环境比较特殊,　为了安全性做了各种认证,　联入网络需要准入一下,　
+准入需要使用密码+随即密码的方式认证,　是挺安全的,　可以对于我们来说其实很痛苦,
+每次都要输入一下密码,因为包含了随机密码, 这就无法使用脚本来方便的自动准入.　
+我们连入公司的远程开发机需要通过一台特殊的服务器来将我们的登陆转发,　
+也就是登陆到中转机,然后通过中转机在ssh.同样登陆中转机也是需要这个随机密码的.　吐槽完毕.</p>
+
+<p>工作中经常需要在多台服务之间ssh登陆,　screen 是一个不错的选择,　
+不过有时候还是需要打开另一个窗口再次登陆,　这时我又得再次输入那个随机密码,　
+如果你使用windows并且使用SecureCRT那你可以不用继续往下看了,
+SecureCRT可以简单的复制回话, 这个功能很贴心. 如果使用Linux&amp;Mac OS那就继续往下看.</p>
+
+<p>在/etc/ssh_config 文件中加入</p>
+
+<pre><code>Host *
+ControlMaster auto
+ControlPath ~/.ssh/master-%r@%h:%p
+</code></pre>
+
+<p>下次登陆同一站点的时候就会自动复用已有的回话. 可以只输入一次密码开N个窗口了.</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -1185,10 +1185,6 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
       </li>
     
       <li class="post">
-        <a href="/2012/07/22/the-problem-with-pingdom/">The problem with Pingdom</a>
-      </li>
-    
-      <li class="post">
         <a href="/2012/07/22/intro/">Intro</a>
       </li>
     
@@ -1202,6 +1198,10 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
     
       <li class="post">
         <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a>
       </li>
     
   </ul>
