@@ -9,8 +9,9 @@
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="首先恭喜一下er童鞋的大婚吧. 接着er大婚的喜气,项目决定在今天发布我们的TIPI项目,项目从成立到现在,一直有条不紊的前进. 现在项目也进行的差不多,可以公开给大家了. 项目的第一个tag,其实是在20分钟前才提交完.终于能如期发布.
-下面是我们的发布公告.  欢迎围观:) 我们的朋友， &hellip;">
+  <meta name="description" content="就当是笔记吧. 首先，这不是配置ssh密钥简历信任关系免密码登陆的方法。
+主要解决的问题是在终端下多次登陆统一主机需要多次输入用户密码的问题。 我们公司的内网环境比较特殊,　为了安全性做了各种认证,　联入网络需要准入一下,　
+准入需要使用密码+随即密码的方式认证,　是挺安全的,　 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +86,67 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-22T18:49:27+08:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2011</time>
+        
+         | <a href="/2011/03/22/duplicate-ssh-session/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>就当是笔记吧. 首先，这不是配置ssh密钥简历信任关系免密码登陆的方法。
+主要解决的问题是在终端下多次登陆统一主机需要多次输入用户密码的问题。</p>
+
+<p>我们公司的内网环境比较特殊,　为了安全性做了各种认证,　联入网络需要准入一下,　
+准入需要使用密码+随即密码的方式认证,　是挺安全的,　可以对于我们来说其实很痛苦,
+每次都要输入一下密码,因为包含了随机密码, 这就无法使用脚本来方便的自动准入.　
+我们连入公司的远程开发机需要通过一台特殊的服务器来将我们的登陆转发,　
+也就是登陆到中转机,然后通过中转机在ssh.同样登陆中转机也是需要这个随机密码的.　吐槽完毕.</p>
+
+<p>工作中经常需要在多台服务之间ssh登陆,　screen 是一个不错的选择,　
+不过有时候还是需要打开另一个窗口再次登陆,　这时我又得再次输入那个随机密码,　
+如果你使用windows并且使用SecureCRT那你可以不用继续往下看了,
+SecureCRT可以简单的复制回话, 这个功能很贴心. 如果使用Linux&amp;Mac OS那就继续往下看.</p>
+
+<p>在/etc/ssh_config 文件中加入</p>
+
+<pre><code>Host *
+ControlMaster auto
+ControlPath ~/.ssh/master-%r@%h:%p
+</code></pre>
+
+<p>下次登陆同一站点的时候就会自动复用已有的回话. 可以只输入一次密码开N个窗口了.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -747,57 +809,6 @@ $ sudo chmod 755 /sbin/mount_ntfs</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2009/12/31/at-the-tail-of-2009/">在2009的尾巴上</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-12-31T23:59:06+08:00" pubdate data-updated="true">Dec 31<span>st</span>, 2009</time>
-        
-         | <a href="/2009/12/31/at-the-tail-of-2009/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>09年最后一篇日志，充个数吧：）</p>
-
-<p>刚买了本《<a href="http://www.douban.com/subject/3735649/">Orange S: 一个操作系统的实现</a>》，
-这一年下来买了挺多的书，也从图书馆借了很多的书（马上就要毕业了，再也享受不到学校图书馆丰富及时的藏书了，
-计划以后每个月发工资都买一本自己喜欢的书），发现我读书最大的问题是多而不精，
-拿一本好书就使劲的翻，很多书都是花几天就翻完了，但是读下来之后总觉得收获不够，
-一些很需要实践的部分也没有及时巩固练习，总感觉自己浮在表面上，只知其然。所以呢，
-2010年争取多读好书，踏踏实实的啃几本好书，然后就是要多动手啦。</p>
-
-<p>计划2010年呢，能把耽搁很久的想法付诸行动，做出点东西来。希望有个好的开始吧！</p>
-
-<p>Happy New Year!!!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/3/">&larr; Older</a>
@@ -813,6 +824,10 @@ $ sudo chmod 755 /sbin/mount_ntfs</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/05/06/golang-blank-indentifier/">Go学习笔记：空标示符-</a>
+      </li>
     
       <li class="post">
         <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等</a>
@@ -848,10 +863,6 @@ $ sudo chmod 755 /sbin/mount_ntfs</p>
     
       <li class="post">
         <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a>
       </li>
     
   </ul>

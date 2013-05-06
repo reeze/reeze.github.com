@@ -9,8 +9,9 @@
   <meta name="author" content="reeze">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="开始学习下Go语言，为了强化记忆开始记一些学习笔记。 Go语言是一门很简单的语言，它为我们做了很多的决定，比如很多在其他语言中
+不推荐使用的编码风格在Go是不允许的。比如： 变量或者包声明或导入后没有使用是无法编译通过的。
+它的编译只有Fatal没有Warning，这对于代码质量是很有好处的。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +86,118 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/2013/05/06/golang-blank-indentifier/">Go学习笔记：空标示符-</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-06T21:49:00+08:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
+        
+         | <a href="/2013/05/06/golang-blank-indentifier/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>开始学习下Go语言，为了强化记忆开始记一些学习笔记。</p>
+
+<p>Go语言是一门很简单的语言，它为我们做了很多的决定，比如很多在其他语言中
+不推荐使用的编码风格在Go是不允许的。比如： 变量或者包声明或导入后没有使用是无法编译通过的。
+它的编译只有Fatal没有Warning，这对于代码质量是很有好处的。在其他语言中
+最佳实践也是编写warning-free的代码。Go把这个最佳实践放到了语言级别。</p>
+
+<h2>Go中的空标示符(blank indentifier): _</h2>
+
+<p>刚开始在看到Go中的空标示符是以为它只是一种约定，因为下划线看起来比那么的
+显眼，而普通变量又不太可能只使用一个下划线来命名，在其他语言中我们不想使用
+一个变量的话很简单忽略之就可以了，而如果对一个函数的返回值不感兴趣的话，
+不对返回值赋值即可。</p>
+
+<p>先记录下结论：<em>空标示符不是一个普通变量或标示符，而是一个特殊的标示符，
+对于这种类型的标示符绑定表达式时不进行真正的绑定。</em></p>
+
+<p>这是什么意思呢？也就说比如将一个值赋值给空操作符是不会进行值绑定的。</p>
+
+<pre><code>package main
+
+import (
+    _ "io"  // 如果不重名名包为_ 而在代码中没有使用这个包会编译不通过
+            // 这样导入一个包是有副作用的，导入一个包后会执行包的init()方法，
+            // 如果只是为了避免编译不通过而绑定到_是不推荐的做法。
+      "fmt"
+)
+
+func getMulti() (int, int) {
+    return 3, 4
+}
+
+func main() {
+    _ = 20      // 绑定没有作用，不会报错
+    // _ := 10  // 编译不通过，因为表达式左边没有一个有效的新的标示符
+                // no new variables on left side of :=
+
+    x, _ := getMulti()
+
+    fmt.Printf("%d\n", x)
+    // fmt.Printf("%d\n", _)   这样是编译不通过的，因为_并不能被赋值
+    //                         编译 "cannot use _ as value"
+}
+</code></pre>
+
+<h2>总结</h2>
+
+<p>空标示符不是普通标示符，是一个语言级别的标示符，通常用来:
+1. 显式的忽略函数或其他多值赋值表达式中的某些的返回值，多值表达式通常有：</p>
+
+<pre><code>1. 函数的多个返回值
+1. range循环中的key-value值
+1. 多值赋值，比如： x, y, z := 10, 20, 30, 不过这种情况比较小
+</code></pre>
+
+<ol>
+<li>或者导入包不使用包而只利用包的初始化函数的副作用。但是不推荐用这种方式
+来绕过因为包未被使用而编译不通过的问题</li>
+</ol>
+
+
+<p>这里只是做一个笔记，其实Go的语言规范中写的还是很详细的。对于一些有疑惑的地方
+一翻手册就会发现答案。这也是一门语言小的好处，歧义会非常少。</p>
+
+<h2>参考资料</h2>
+
+<ol>
+<li>Golang 官方 <a href="http://golang.org">http://golang.org</a></li>
+<li>Golang 语言规范 <a href="http://golang.org/ref/spec">http://golang.org/ref/spec</a>Go的语言规范非常小，所有语言语法规范
+都在这里可以找到。</li>
+<li>《The Way to Go》这本书是目前比较全面的一本，在看完<a href="http://golang.org">Go的手册</a>之后推荐阅读</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1011,67 +1124,6 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-03-22T18:49:27+08:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2011</time>
-        
-         | <a href="/2011/03/22/duplicate-ssh-session/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>就当是笔记吧. 首先，这不是配置ssh密钥简历信任关系免密码登陆的方法。
-主要解决的问题是在终端下多次登陆统一主机需要多次输入用户密码的问题。</p>
-
-<p>我们公司的内网环境比较特殊,　为了安全性做了各种认证,　联入网络需要准入一下,　
-准入需要使用密码+随即密码的方式认证,　是挺安全的,　可以对于我们来说其实很痛苦,
-每次都要输入一下密码,因为包含了随机密码, 这就无法使用脚本来方便的自动准入.　
-我们连入公司的远程开发机需要通过一台特殊的服务器来将我们的登陆转发,　
-也就是登陆到中转机,然后通过中转机在ssh.同样登陆中转机也是需要这个随机密码的.　吐槽完毕.</p>
-
-<p>工作中经常需要在多台服务之间ssh登陆,　screen 是一个不错的选择,　
-不过有时候还是需要打开另一个窗口再次登陆,　这时我又得再次输入那个随机密码,　
-如果你使用windows并且使用SecureCRT那你可以不用继续往下看了,
-SecureCRT可以简单的复制回话, 这个功能很贴心. 如果使用Linux&amp;Mac OS那就继续往下看.</p>
-
-<p>在/etc/ssh_config 文件中加入</p>
-
-<pre><code>Host *
-ControlMaster auto
-ControlPath ~/.ssh/master-%r@%h:%p
-</code></pre>
-
-<p>下次登陆同一站点的时候就会自动复用已有的回话. 可以只输入一次密码开N个窗口了.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -1085,6 +1137,10 @@ ControlPath ~/.ssh/master-%r@%h:%p
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/05/06/golang-blank-indentifier/">Go学习笔记：空标示符-</a>
+      </li>
     
       <li class="post">
         <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等</a>
@@ -1120,10 +1176,6 @@ ControlPath ~/.ssh/master-%r@%h:%p
     
       <li class="post">
         <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a>
       </li>
     
   </ul>
