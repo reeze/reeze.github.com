@@ -26,30 +26,30 @@ Go语言是一门很简单的语言，它为我们做了很多的决定，比如
 这是什么意思呢？也就说比如将一个值赋值给空操作符是不会进行值绑定的。
 
 {% codeblock blank indentifier - test.go %}
-	package main
+package main
 
-	import (
-		_ "io"  // 如果不重名名包为_ 而在代码中没有使用这个包会编译不通过
-				// 这样导入一个包是有副作用的，导入一个包后会执行包的init()方法，
-				// 如果只是为了避免编译不通过而绑定到_是不推荐的做法。
-		  "fmt"
-	)
+import (
+	_ "io"  // 如果不重名名包为_ 而在代码中没有使用这个包会编译不通过
+			// 这样导入一个包是有副作用的，导入一个包后会执行包的init()方法，
+			// 如果只是为了避免编译不通过而绑定到_是不推荐的做法。
+	  "fmt"
+)
 
-	func getMulti() (int, int) {
-		return 3, 4
-	}
-	
-	func main() {
-		_ = 20		// 绑定没有作用，不会报错
-		// _ := 10  // 编译不通过，因为表达式左边没有一个有效的新的标示符
-					// no new variables on left side of :=
+func getMulti() (int, int) {
+	return 3, 4
+}
 
-		x, _ := getMulti()
+func main() {
+	_ = 20		// 绑定没有作用，不会报错
+	// _ := 10  // 编译不通过，因为表达式左边没有一个有效的新的标示符
+				// no new variables on left side of :=
 
-		fmt.Printf("%d\n", x)
-		// fmt.Printf("%d\n", _)   这样是编译不通过的，因为_并不能被赋值
-		//                         编译 "cannot use _ as value"
-	}
+	x, _ := getMulti()
+
+	fmt.Printf("%d\n", x)
+	// fmt.Printf("%d\n", _)   这样是编译不通过的，因为_并不能被赋值
+	//                         编译 "cannot use _ as value"
+}
 {% endcodeblock %}
 
 ## 总结
