@@ -4,7 +4,7 @@
   <title><![CDATA[Zen Space | 寻找善美]]></title>
   <link href="http://reeze.cn/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2013-05-06T23:24:27+08:00</updated>
+  <updated>2013-07-04T13:39:48+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -128,64 +128,6 @@
     <updated>2013-03-11T17:07:00+08:00</updated>
     <id>http://reeze.cn/2013/03/11/how-to-trace-a-php-crash-segfault</id>
     <content type="html"><![CDATA[
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The nearly end of the end of the world]]></title>
-    <link href="http://reeze.cn/2012/12/05/the-nearly-end-of-the-end-of-the-world/"/>
-    <updated>2012-12-05T00:42:00+08:00</updated>
-    <id>http://reeze.cn/2012/12/05/the-nearly-end-of-the-end-of-the-world</id>
-    <content type="html"><![CDATA[<p>不巧刚才突然发现家里的网络怎么都连不上了，登陆路由器发现网络已经连不上了，
-才发现，我们的网已经到期了。看着屏幕右上角的日期，猛然发现原来，世界末日
-都快要过去了。</p>
-
-<p>很多人都会在年终写下点总结，我想我也会写的，不过刚好今天有一个很好的契机：
-我不会受到网络的任何干扰，可以静静的写东西。</p>
-
-<p>2012并不是世界末日，对于我以及我周围的人和世界来说，大家都很理性，很少有人
-真的把今天当成是末日来过，偶尔在微博上看到一些小段子，一些励志的话语，
-也会受到感染，想着要把这平静的日子过的风火起来，让自己的每一天充实而又意义起来。</p>
-
-<p>最近很少有时间静下来好好思考，尤其是到了这个新的环境之后，一来需要熟悉新环境，
-二来想要更加努力一点，这个环境是我一直想要的环境。先说说这段时间依赖的感受吧。</p>
-
-<h2>2012年的总结</h2>
-
-<h2>2013年的展望和计划</h2>
-
-<ol>
-<li>完成 TiPHP的功能实现</li>
-</ol>
-
-
-<h1>效率</h1>
-
-<p>效率低下</p>
-
-<h2>拖延症</h2>
-
-<p>推迟自己面对问题时的压力，逃避压力。</p>
-
-<h3>得失心过重</h3>
-
-<p>害怕做的不好</p>
-
-<h2>改进措施</h2>
-
-<h1>工作</h1>
-
-<p>到新的部门已经快5个月了，时间从来没有这么快过。</p>
-
-<h2>收获</h2>
-
-<h2>计划</h2>
-
-<h1>生活</h1>
-
-<h2>收获</h2>
-
-<h2>计划</h2>
 ]]></content>
   </entry>
   
@@ -1165,6 +1107,21 @@ $ sudo chmod 755 /sbin/mount_ntfs</p>
 <p>计划2010年呢，能把耽搁很久的想法付诸行动，做出点东西来。希望有个好的开始吧！</p>
 
 <p>Happy New Year!!!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[支持IPv6的Tunnelblick For Mac OS X OpenVPN客户端]]></title>
+    <link href="http://reeze.cn/2009/12/30/ipv6-enabled-tunnelblick-for-mac-os-x/"/>
+    <updated>2009-12-30T13:20:15+08:00</updated>
+    <id>http://reeze.cn/2009/12/30/ipv6-enabled-tunnelblick-for-mac-os-x</id>
+    <content type="html"><![CDATA[<p>在<a href="http://yegle.net">yegle</a>那里买了OpenVPN服务 ，用着还挺不错，我也在教育网，所以只能使用支持IPv6版的客户端，openvpn默认不支持IPv6,不过yegle提供了相应的<a href="http://github.com/jjo/openvpn-ipv6">IPv6补丁</a>，在Linux下以及Windows下使用的都挺好，最近又在折腾电脑，装了个Snow Leopard，基本没什么问题了，除了我的ATI 2600 XT硬件加速暂时无解外其他的都挺爽，使用了yegle推荐的<a href="http://code.google.com/p/tunnelblick/downloads/list">Tunnelblick</a>, 总是连接不上，它提示让我查看日志，但是根本就找不到地方看日志，直接cd 到 Tunnelblick的包里面直接执行openvpn命令，提示不支持udp6 ，又是不支持 Ipv6，本想直接自己编译一个openvpn，但是想想那样就太不clean了，编译成app的话可以通用，还能共享给有需要的人多好啊，去google code checkout了一份代码，直接编译，错误百出，我是在Snow Leopard上编译的，仔细查看原来需要MacOSX10.4u的SDK 重新安装10.4的SDK还是未果，后来发现SDK的安装目录居然不一样。。自己手动拷贝过去也不行。。 切换到傲Leopard下安装，折腾了好久终于编译成功，废话太多了。呵呵，共享出来给需要的人吧：）</p>
+
+<p>猛击这个连接 下载<a href="http://code.google.com/p/tunnelblick-ipv6/downloads/list">http://code.google.com/p/tunnelblick-ipv6/downloads/list</a>
+可惜的是yegle不再提供IPv6用户的续费了，不过我到期之后差不多也要从学校滚蛋了。
+我提供的这个版本的tunnelblick的配置文件位置是  ~/Library/openvpn  最新版的配置放在 ~/Library/Application Support/Tunnelblick/Configuration目录里面。</p>
+
+<p>马上2009年就要过去了。最近很久都没有更新日志了，其实之间也想写一些东西，但是都丢在草稿箱里没写完。论文还有很多没有写完，马上就要交了，要抵制住诱惑乖乖写论文。</p>
 ]]></content>
   </entry>
   
