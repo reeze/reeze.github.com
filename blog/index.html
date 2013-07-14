@@ -1,0 +1,1224 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script data-cfasync="false" type="text/javascript" src="//use.typekit.net/axj3cfp.js"></script>
+	<script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	<meta charset="utf-8">
+	<title>寻找善美  | Zen Space | 寻找善美</title>
+
+<meta name="author" content="reeze"> 
+
+<meta name="description" content="开始学习下Go语言，为了强化记忆开始记一些学习笔记。 Go语言是一门很简单的语言，它为我们做了很多的决定，比如很多在其他语言中
+不推荐使用的编码风格在Go是不允许的。比如： 变量或者包声明或导入后没有使用是无法编译通过的。
+它的编译只有Fatal没有Warning，这对于代码质量是很有好处的。 &hellip;"> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Zen Space | 寻找善美" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script language="Javascript" type="text/javascript">
+$(document).ready(
+  function() {
+    (function($) {
+      $(".fancybox[data-content-id]").each(function() {
+        this.href = $(this).data('content-id');
+      });
+      $(".fancybox").fancybox({
+        beforeLoad: function() {
+          var el, 
+              id = $(this.element).data('title-id');
+
+          if (id) {
+            el = $('#' + id);
+
+            if (el.length) {
+              this.title = el.html();
+            }
+          }
+          if ($(this).data('content')) {
+            this.content = $(this).data('content');
+          }
+        },
+        helpers: {
+          title: {
+            type: 'inside'
+          }
+        }
+      });
+    })(jQuery);
+  }
+);
+</script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Zen Space | 寻找善美</a></h1>
+<h4>寻找善美</h4>
+<nav id="main-nav"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="/portfolio">Portfolio</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="/portfolio">Portfolio</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:reeze.cn">
+			</form>
+		</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2013/05/06/golang-blank-indentifier/">
+		
+			Go学习笔记：空标示符-</a>
+	</h2>
+	<div class="entry-content">
+		<p>开始学习下Go语言，为了强化记忆开始记一些学习笔记。</p>
+
+<p>Go语言是一门很简单的语言，它为我们做了很多的决定，比如很多在其他语言中
+不推荐使用的编码风格在Go是不允许的。比如： 变量或者包声明或导入后没有使用是无法编译通过的。
+它的编译只有Fatal没有Warning，这对于代码质量是很有好处的。在其他语言中
+最佳实践也是编写warning-free的代码。Go把这个最佳实践放到了语言级别。</p>
+
+<h2>Go中的空标示符(blank indentifier): _</h2>
+
+<p>刚开始在看到Go中的空标示符是以为它只是一种约定，因为下划线看起来比那么的
+显眼，而普通变量又不太可能只使用一个下划线来命名，在其他语言中我们不想使用
+一个变量的话很简单忽略之就可以了，而如果对一个函数的返回值不感兴趣的话，
+不对返回值赋值即可。</p>
+
+<p>先记录下结论：<em>空标示符不是一个普通变量或标示符，而是一个特殊的标示符，
+对于这种类型的标示符绑定表达式时不进行真正的绑定。</em></p>
+
+<p>这是什么意思呢？也就说比如将一个值赋值给空操作符是不会进行值绑定的。</p>
+
+<figure class='code'><figcaption><span>blank indentifier - test.go </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="k">package</span> <span class="n">main</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">import</span> <span class="p">(</span>
+</span><span class='line'>  <span class="n">_</span> <span class="s">&quot;io&quot;</span>  <span class="c1">// 如果不重名名包为_ 而在代码中没有使用这个包会编译不通过</span>
+</span><span class='line'>          <span class="c1">// 这样导入一个包是有副作用的，导入一个包后会执行包的init()方法，</span>
+</span><span class='line'>          <span class="c1">// 如果只是为了避免编译不通过而绑定到_是不推荐的做法。</span>
+</span><span class='line'>    <span class="s">&quot;fmt&quot;</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">func</span> <span class="n">getMulti</span><span class="p">()</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">_</span> <span class="p">=</span> <span class="mi">20</span>        <span class="c1">// 绑定没有作用，不会报错</span>
+</span><span class='line'>  <span class="c1">// _ := 10  // 编译不通过，因为表达式左边没有一个有效的新的标示符</span>
+</span><span class='line'>              <span class="c1">// no new variables on left side of :=</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">x</span><span class="p">,</span> <span class="n">_</span> <span class="p">:=</span> <span class="n">getMulti</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">fmt</span><span class="p">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">&quot;%d\n&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</span><span class='line'>  <span class="c1">// fmt.Printf(&quot;%d\n&quot;, _)   这样是编译不通过的，因为_并不能被赋值</span>
+</span><span class='line'>  <span class="c1">//                         编译 &quot;cannot use _ as value&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>总结</h2>
+
+<p>空标示符不是普通标示符，是一个语言级别的标示符，通常用来:</p>
+
+<ol>
+<li><p>显式的忽略函数或其他多值赋值表达式中的某些的返回值，多值表达式通常有：</p>
+
+<ul>
+<li>函数的多个返回值</li>
+<li>range循环中的key-value值</li>
+<li>多值赋值，比如： x, y, z := 10, 20, 30, 不过这种情况比较小</li>
+</ul>
+</li>
+<li><p>或者导入包不使用包而只利用包的初始化函数的副作用。但是不推荐用这种方式
+来绕过因为包未被使用而编译不通过的问题</p></li>
+</ol>
+
+
+<p>这里只是做一个笔记，其实Go的语言规范中写的还是很详细的。对于一些有疑惑的地方
+一翻手册就会发现答案。这也是一门语言小的好处，歧义会非常少。</p>
+
+<h2>参考资料</h2>
+
+<ol>
+<li>Golang 官方 <a href="http://golang.org">http://golang.org</a></li>
+<li>Golang 语言规范 <a href="http://golang.org/ref/spec">http://golang.org/ref/spec</a>Go的语言规范非常小，所有语言语法规范
+都在这里可以找到。</li>
+<li>《The Way to Go》这本书是目前比较全面的一本，在看完<a href="http://golang.org/doc/">Go的手册</a>之后推荐阅读</li>
+</ol>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-06T21:49:00+08:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/golang/'>golang</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/2013/05/06/golang-blank-indentifier//blog/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">
+		
+			怎么样追查PHP的Bug、Segment Fault(core Dump):方法，工具等</a>
+	</h2>
+	<div class="entry-content">
+		
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-11T17:07:00+08:00" pubdate data-updated="true">Mar 11<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+</div>
+	
+		<span class="comments"><a href="/2013/03/11/how-to-trace-a-php-crash-segfault//blog/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2012/09/12/new-ext-php-leveldb-pecl/">
+		
+			LevelDB扩展发布V0.1版本</a>
+	</h2>
+	<div class="entry-content">
+		<p>很开心，第一个提交的PHP扩展已经在PECL官方发布了，这是一个<a href="http://code.google.com/p/leveldb/">Google LevelDB</a>的PHP
+封装，主要用于对LevelDB的访问，目前已经实现了LevelDB最具价值的一些特性：迭代器，快照等。</p>
+
+<p>LevelDB数据的设计是只能单进程访问的（多线程没有问题），所以通常这个扩展不合适作为普通的Web应用数据存储，
+可以作为离线的数据存储用，或者只是方便读取现有leveldb的数据。</p>
+
+<p>如果有需要可以前去 <a href="http://pecl.php.net/package/leveldb">http://pecl.php.net/package/leveldb</a> 下载。基本的使用说明在<a href="http://reeze.cn/php-leveldb/">http://reeze.cn/php-leveldb/</a>
+详细的API文档由勤劳高效的胖胖<a href="http://www.phppan.com/">http://www.phppan.com/</a>编写，不过还没有发布。</p>
+
+<p>同时，还有了@php.net的马甲一枚: reeze(at)php.net。MARK一下。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-12T23:16:00+08:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+</div>
+	
+		<span class="comments"><a href="/2012/09/12/new-ext-php-leveldb-pecl//blog/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">
+		
+			怎么样获取PHP函数默认参数的常量名</a>
+	</h2>
+	<div class="entry-content">
+		<p>好久没有更新了，发篇占位文：如果某个函数的默认参数是个常量，那么怎么样获取这个参数的常量名称？见代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">new_blog</span><span class="p">(</span><span class="nv">$title</span> <span class="o">=</span> <span class="nx">DEFAULT_TITLE</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// blahblah</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在上面的代码中，怎么样获取函数new_blog函数的参数$title所对应的默认值常量名： <code>DEFAULT_TITLE</code>。这个问题和以前我曾写过的一篇
+关于<a href="http://reeze.cn/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">如何获取变量名称</a>的博文相似。</p>
+
+<p>这个问题，在PHP5.4.6之前基本上没有解决方法了，因为函数定义是编译时的信息，在PHP运行时是获取不到的。
+当然这里说的无法实现是指的使用官方PHP版本时没法搞定。</p>
+
+<p>在PHP中类似的需求，一般都可以使用PHP的反射扩展。</p>
+
+<h3>PHP的反射(Reflection)</h3>
+
+<p>反射是PHP5中提供的用于获取或操作PHP内部信息的标准扩展，可能写应用代码的用户使用的较少一些，
+编写框架或者平台性的系统会使用到。</p>
+
+<p>比如你的框架需要实现一种插件机制，而你可能需要利用反射来获取类或者函数的元信息。
+这里就不对Reflection的使用做过多的介绍了，详细信息见官方文档： <a href="http://cn.php.net/manual/en/book.reflection.php">http://cn.php.net/manual/en/book.reflection.php</a></p>
+
+<h3>新的函数ReflectionParameter::getDefaultValueConstantName()</h3>
+
+<p>不过在PHP5.4.6之前，Reflection是没有实现该功能的。这个需求其实来自PHPUnit的作者<a href="https://github.com/sebastianbergmann">Sebastian Bergmann</a>。
+因为这个需求在Reflection模块来说是一个缺失，不属于大功能的升级，所以直接进入了目前的最新分支PHP-5.4。
+同时这个功能在PHP-5.4.6中可用了。<a href="https://github.com/php/php-src/blob/PHP-5.4.6/NEWS#L41">https://github.com/php/php-src/blob/PHP-5.4.6/NEWS#L41</a></p>
+
+<p>实现代码见：<a href="https://github.com/php/php-src/commit/13a9555342a4156a6150818234639b49a596ccd6">https://github.com/php/php-src/commit/13a9555342a4156a6150818234639b49a596ccd6</a>,
+这个方法目前没有使用说明，不过看名字应该也能明白。不过可以参考<a href="https://github.com/php/php-src/commit/13a9555342a4156a6150818234639b49a596ccd6#diff-1">测试用例</a>。</p>
+
+<p>这个提交给ReflectionParameter类增加了两个函数：</p>
+
+<ol>
+<li>ReflectionParameter::isDefaultValueConstant() 用于判断函数的这个参数是否是常量默认参数</li>
+<li>ReflectionParameter::getDefaultValueConstantName() 用于获取这个常量默认参数的参数名称</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="nb">define</span><span class="p">(</span><span class="s2">&quot;CONST_TEST_1&quot;</span><span class="p">,</span> <span class="s2">&quot;const1&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">ReflectionParameterTest</span><span class="p">(</span><span class="nv">$test1</span><span class="o">=</span><span class="k">array</span><span class="p">(),</span> <span class="nv">$test2</span> <span class="o">=</span> <span class="nx">CONST_TEST_1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">echo</span> <span class="nv">$test</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nv">$reflect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReflectionFunction</span><span class="p">(</span><span class="s1">&#39;ReflectionParameterTest&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">foreach</span><span class="p">(</span><span class="nv">$reflect</span><span class="o">-&gt;</span><span class="na">getParameters</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$param</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;test1&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueConstant</span><span class="p">());</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;test2&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueConstant</span><span class="p">());</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueAvailable</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueConstant</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">getDefaultValueConstantName</span><span class="p">());</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Foo2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">const</span> <span class="no">bar</span> <span class="o">=</span> <span class="s1">&#39;Foo2::bar&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">const</span> <span class="no">bar</span> <span class="o">=</span> <span class="s1">&#39;Foo::bar&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">baz</span><span class="p">(</span><span class="nv">$param1</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="na">bar</span><span class="p">,</span> <span class="nv">$param2</span><span class="o">=</span><span class="nx">Foo2</span><span class="o">::</span><span class="na">bar</span><span class="p">,</span> <span class="nv">$param3</span><span class="o">=</span><span class="nx">CONST_TEST_1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$method</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReflectionMethod</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$params</span> <span class="o">=</span> <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">getParameters</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$params</span> <span class="k">as</span> <span class="nv">$param</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueConstant</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">getDefaultValueConstantName</span><span class="p">());</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">// 运行结果</span>
+</span><span class='line'><span class="x">bool(false)</span>
+</span><span class='line'><span class="x">bool(true)</span>
+</span><span class='line'><span class="x">string(12) &quot;CONST_TEST_1&quot;</span>
+</span><span class='line'><span class="x">string(9) &quot;self::bar&quot;</span>
+</span><span class='line'><span class="x">string(9) &quot;Foo2::bar&quot;</span>
+</span><span class='line'><span class="x">string(12) &quot;CONST_TEST_1&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-22T20:40:00+08:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/php内核/'>PHP内核</a>, <a class='category' href='/categories/php实现/'>PHP实现</a>, <a class='category' href='/categories/reflection/'>Reflection</a>, <a class='category' href='/categories/反射/'>反射</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/2012/07/22/how-to-get-php-functions-const-parameters-name//blog/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2012/07/22/intro/">
+		
+			Intro</a>
+	</h2>
+	<div class="entry-content">
+		<p>Testing!</p>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin, massa eu vestibulum laoreet, nibh ante vulputate lorem, ac lobortis ante tellus eu mi. Duis sem nisi, luctus at feugiat eget, fringilla ut tellus. Nam a molestie justo. Sed pulvinar est vitae tellus semper tincidunt. Fusce euismod luctus lacus nec placerat. Mauris rutrum scelerisque nulla ut tempor. Nunc porttitor posuere mi, aliquet vehicula lorem feugiat in. Ut ut fermentum risus. Aliquam tincidunt ultricies ante sit amet bibendum. Cras nec sapien odio. Duis posuere congue sem, at congue massa faucibus at.</p>
+
+<p>Integer ut sapien eget nisl auctor faucibus ut fermentum arcu. Nunc rutrum urna non risus congue et tristique felis eleifend. Maecenas blandit est eu mauris aliquam aliquet. Quisque porttitor enim eget risus blandit in mollis orci eleifend. Nam malesuada nulla sed lacus elementum placerat accumsan arcu rhoncus. Phasellus feugiat cursus turpis nec facilisis. Duis eget metus arcu, eget commodo velit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer cursus vulputate enim, vel gravida velit faucibus et. Ut a urna vitae tellus cursus rhoncus. Maecenas at odio eget quam cursus elementum. Aliquam vitae eros quis tellus laoreet accumsan sed id lorem. Suspendisse et rutrum leo. Integer scelerisque vestibulum adipiscing. In posuere, libero ac accumsan suscipit, nulla ligula gravida erat, ut tempor odio erat nec sem. Quisque justo ipsum, adipiscing volutpat varius vitae, blandit eget nisi.</p>
+
+<p>Nullam adipiscing neque ac lacus commodo vitae imperdiet dui sollicitudin. Ut ac nunc augue. Nam at sem ut quam commodo aliquet vitae vitae dui. Vivamus scelerisque felis eget dolor cursus feugiat. Phasellus at dui sed lectus scelerisque pretium. Etiam nec massa ut justo vestibulum fringilla ac vitae urna. Morbi tortor erat, tempus sed consectetur at, elementum nec eros. Vivamus mattis arcu a sapien semper non lacinia eros pretium.</p>
+
+<p>Proin ut hendrerit arcu. Maecenas ullamcorper tristique magna vel mattis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam tincidunt euismod viverra. In sit amet neque turpis. Suspendisse ac sapien mi, id blandit purus. Ut tortor turpis, rutrum ac tempor at, accumsan sit amet erat. Etiam ultricies eleifend dolor, eget tempus justo tristique vitae. In hac habitasse platea dictumst. Aliquam eu enim neque.</p>
+
+<p>Morbi massa lorem, viverra non dictum at, malesuada vel nibh. Nam fermentum lobortis varius. Sed a nulla lacus, quis posuere risus. Nunc id urna libero, quis rutrum mi. In gravida felis urna. Praesent nec dolor ac urna tempor fermentum. Curabitur rutrum arcu et lorem volutpat viverra.</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-22T08:23:00+08:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/self/'>self</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/2012/07/22/intro//blog/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2012/07/15/introduction-to-travis-ci/">
+		
+			初试Travis-CI</a>
+	</h2>
+	<div class="entry-content">
+		<p>Travis CI是一个基于云的<a href="http://en.wikipedia.org/wiki/Continuous_integration">持续集成</a>项目，
+目前已经支持大部分主流语言了，比如：C，PHP，Ruby，Python, Nodejs等等。和<a href="http://jenkins-ci.org/">Jenkins</a>类似，
+Travis CI也是开源的，不过Travis和Github集成非常紧密，官方的集成测试托管只支持Github项目，
+不过你也可以搭建一套自己的方案。 这里有一篇比较详实的<a href="http://www.juvenxu.com/2012/03/06/travis-ci/">对Travis-CI的介绍</a>，
+同时InfoQ上也有一篇<a href="http://www.juvenxu.com/2012/03/06/travis-ci/">关于Travic_CI的报道</a>，</p>
+
+<p>如果你有开源项目，那么Travis绝对值得一试，目前托管在Github上的大部分知名项目都使用了Travis来做集成测试。
+比如Ruby语言的：Rails, Rack, Sinatra, RSpec, Cumber, Node.js, PHP的：Symfony2, Doctrine2, Zend Framework 2。</p>
+
+<p>PHP语言也<a href="https://github.com/php/php-src">使用了Travis做集成测试</a>，不过目前由于PHP的扩展众多，
+很多的测试用例本身也不够健壮，PHP的测试经常会失败。</p>
+
+<p>使用Travis-CI的项目可以在说明文件中增加目前版本的构建状态。Travis为每个项目提供一个图片地址，比如PHP的：
+https://secure.travis-ci.org/php/php-src.png?branch=master,
+<img src="https://secure.travis-ci.org/php/php-src.png?branch=master" alt="php-src" />，之所以是构建失败，是因为前面提到的原因。</p>
+
+<p>如果构建成功，图片将显示：<img src="https://secure.travis-ci.org/reeze/php-leveldb.png?branch=master" alt="php-leveldb" />，
+这是我最近在写的一个扩展：<a href="https://github.com/reeze/php-leveldb">php-leveldb</a>的构建状态<a href="http://travis-ci.org/reeze/php-leveldb">http://travis-ci.org/reeze/php-leveldb</a></p>
+
+<p>下面简单介绍一下，如果你在编写一个PHP扩展，该怎么样使用Travis-CI来做持续集成。
+当然，你的代码需要在Github上进行托管。</p>
+
+<h2>Travis-CI配置文件</h2>
+
+<p>要使用Travis，首先需要在你的代码根目录下包含一个叫做.travis.yml的文件，这是一个配置文件，
+为<a href="http://www.yaml.org">yaml格式</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">php</span>
+</span><span class='line'><span class="l-Scalar-Plain">php</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">5.2</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">5.3</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">5.4</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">env</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">REPORT_EXIT_STATUS=1 NO_INTERACTION=1</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">before_script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">sh travis/prepare.sh</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">sh travis/run-test.sh</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">notifications</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">email</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">reeze.xia@gmail.com</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>配置简单明了，选择需要的语言，同时可以设置需要测试的语言版本，因为php-leveldb支持5.2 ~ 5.4,
+所以这里设置了3个需要测试的版本。</p>
+
+<p>env 设置为执行测试时需要设置的环境变量，因为php 执行<code>make test</code>测试时如果测试失败会提示
+用户是否将测试结果发送给PHP官方。因为测试是自动进行的，如果不设置NO_INTERACTION=1会导致
+测试失败后一直等待用户输入而hang住直到测试超时。</p>
+
+<p>before_script 可以用来进行一些准备工作，例如php-leveldb扩展需要先安装leveldb才能编译。</p>
+
+<p>travis/prepare.sh文件做的工作也就是从leveldb官方下载代码并编译，
+最后编译扩展。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'>
+</span><span class='line'>wget http://leveldb.googlecode.com/files/leveldb-1.5.0.tar.gz
+</span><span class='line'>tar zxvf leveldb-1.5.0.tar.gz
+</span><span class='line'><span class="nb">cd </span>leveldb-1.5.0 <span class="o">&amp;&amp;</span> make
+</span><span class='line'><span class="nb">cd</span> ..
+</span><span class='line'>phpize <span class="o">&amp;&amp;</span> ./configure --with-leveldb<span class="o">=</span><span class="nv">$PWD</span>/leveldb-1.5.0 <span class="o">&amp;&amp;</span> make
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>travis可以执行任何脚本。因为travis在执行测试之前会建立一个虚拟机用于测试。</p>
+
+<p>script属性就是测试的入口，可以是任何的sh命令。测试结果到底是成功还是失败会依据这个命令的
+返回值，如果返回非0结果，则表示测试失败，失败的时候就会给下面notifications设置的邮箱发送邮件。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'>
+</span><span class='line'>make <span class="nb">test</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># make test didn&#39;t return status code correctly</span>
+</span><span class='line'><span class="c"># use this to find whether the make test failed</span>
+</span><span class='line'>cat tests/<span class="se">\*</span>.diff
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq 0 <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">  </span><span class="nb">exit </span>1;
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>从上面的注释里也提到，因为PHP生成的<a href="https://bugs.php.net/bug.php?id=60285">测试不能正常的返回错误码</a>，这样的结果是即使测试失败了，
+travis也会忽略，所以采用了一个折中的方式来测试。因为测试失败会生产diff文件，
+报告测试失败的具体原因，cat的好处是能把错误详细信息报告出来，也能方便调试。</p>
+
+<blockquote><p><strong>UPDATE</strong>
+我已经提交了一个补丁用于让<code>make test</code>命令可以在测试失败的时候返回错误码了。
+目前在master分支上，目前看在5.5版本以上可以使用。</p></blockquote>
+
+<p>每次提交代码到Github上时，Travis将自动对新提交的版本进行测试。</p>
+
+<p>除了PHP，其实你可以在Travis上测试绝大部分的软件，因为travis提供的是一个完整的环境，
+而你可以编写任何的脚本来进行你的测试工作。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-15T20:26:00+08:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/ci/'>CI</a>, <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/travis/'>Travis</a>, <a class='category' href='/categories/leveldb/'>leveldb</a>, <a class='category' href='/categories/php-leveldb/'>php-leveldb</a>, <a class='category' href='/categories/扩展/'>扩展</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/2012/07/15/introduction-to-travis-ci//blog/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">
+		
+			PHP中的NOP及为什么有这个opcode</a>
+	</h2>
+	<div class="entry-content">
+		<h2>什么是NOP</h2>
+
+<p>NOP 是一个特殊的opcode，表示空操作，在很多地方存在，汇编中的NOP含义也一样，
+机器指令中的空操作通常用来将内存地址进行对齐，以提高CPU访问内存的效率，
+GCC等编译器也会将特定的语句进行优化而产生空操作。</p>
+
+<h2>PHP中的空操作opcode NOP: ZEND_NOP</h2>
+
+<p>PHP基于Zend虚拟机，其他基于虚拟机的语言中大都会有类似NOP的指令，
+PHP文档有对此的<a href="http://cn.php.net/manual/en/internals2.opcodes.nop.php">简单说明</a>：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm"> * no operation</span>
+</span><span class='line'><span class="cm"> * opcode number: 0</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="k">function</span> <span class="nf">A</span><span class="p">(){};</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span><span class='line'>
+</span><span class='line'><span class="x">/* VLD 的输出结果 */</span>
+</span><span class='line'><span class="x">line  #   op  fetch   ext return  operands</span>
+</span><span class='line'><span class="x">6 0   NOP              </span>
+</span><span class='line'><span class="x">7 1   RETURN              1</span>
+</span><span class='line'><span class="x">Function name: A</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">Compiled variables: none</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">line  #   op  fetch   ext return  operands</span>
+</span><span class='line'><span class="x">6 0   RETURN              null</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的VLD结果可以看出，函数A()的声明编译后变成了<code>NOP</code>操作。</p>
+
+<p>Zend虚拟机是高级抽象，不要考虑内存对齐等的问题，为什么还需要空操作这样的opcode呢？</p>
+
+<p>原因简单讲就是：编译过程优化的结果。有的内容由于可以在编译时就可确定(称为提早绑定Early Binding)，
+那么一部分opcode可以在编译时替换成空操作。</p>
+
+<p>我们来看看这段代码的编译结果：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">Foo</span> <span class="p">{}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">new</span> <span class="nx">Bar</span><span class="p">();</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Bar</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">filename</span><span class="o">:</span>       <span class="o">/</span><span class="nx">Users</span><span class="o">/</span><span class="nx">reeze</span><span class="o">/</span><span class="nx">Opensource</span><span class="o">/</span><span class="nx">php</span><span class="o">-</span><span class="nx">test</span><span class="o">/</span><span class="nx">php</span><span class="o">-</span><span class="nx">src</span><span class="o">-</span><span class="mf">5.4</span><span class="o">/</span><span class="nx">test</span><span class="o">.</span><span class="nx">php</span>
+</span><span class='line'><span class="k">function</span> <span class="nf">name</span><span class="o">:</span>  <span class="p">(</span><span class="k">null</span><span class="p">)</span>
+</span><span class='line'><span class="nx">number</span> <span class="nx">of</span> <span class="nx">ops</span><span class="o">:</span>  <span class="mi">8</span>
+</span><span class='line'><span class="nx">compiled</span> <span class="nx">vars</span><span class="o">:</span>  <span class="nx">none</span>
+</span><span class='line'><span class="nx">line</span>     <span class="c1"># *  op                           fetch          ext  return  operands</span>
+</span><span class='line'><span class="o">---------------------------------------------------------------------------------</span>
+</span><span class='line'>   <span class="mi">2</span>     <span class="mi">0</span>  <span class="o">&gt;</span> <span class="o">&gt;</span> <span class="nx">JMPZ</span>                                                     <span class="k">true</span><span class="p">,</span> <span class="o">-&gt;</span><span class="mi">3</span>
+</span><span class='line'>   <span class="mi">3</span>     <span class="mi">1</span>  <span class="o">&gt;</span>   <span class="nx">ZEND_DECLARE_CLASS</span>                               <span class="err">$</span><span class="mi">0</span>      <span class="s1">&#39;%00foo%2FUsers%2Freeze%2FOpensource%2Fphp-test%2Fphp-src-5.4%2Ftest.php0x106cd601f&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span>
+</span><span class='line'>   <span class="mi">4</span>     <span class="mi">2</span>    <span class="o">&gt;</span> <span class="nx">JMP</span>                                                      <span class="o">-&gt;</span><span class="mi">3</span>
+</span><span class='line'>   <span class="mi">6</span>     <span class="mi">3</span>  <span class="o">&gt;</span>   <span class="nx">ZEND_FETCH_CLASS</span>                              <span class="mi">4</span>  <span class="o">:</span><span class="mi">1</span>      <span class="s1">&#39;Bar&#39;</span>
+</span><span class='line'>       <span class="mi">4</span>      <span class="k">NEW</span>                                                      <span class="o">:</span><span class="mi">1</span>
+</span><span class='line'>       <span class="mi">5</span>      <span class="nx">DO_FCALL_BY_NAME</span>                              <span class="mi">0</span>
+</span><span class='line'>   <span class="mi">7</span>     <span class="mi">6</span>      <span class="nx">NOP</span>
+</span><span class='line'>   <span class="mi">9</span>     <span class="mi">7</span>    <span class="o">&gt;</span> <span class="k">RETURN</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>和前面官方函数定义代码一样，上面VLD输出的第7行看到类Bar的opcode变成了NOP，不过请留意第3行，
+这一行类Foo定义的opcode是ZEND_DECLARE_CLASS，也就是类的声明。</p>
+
+<p><em>为什么同样是类的声明，第一个类声明的OPCODE和第二个的不一样呢？</em></p>
+
+<p>上例中的代码，在Bar类声明之前是可以执行的<code>new Bar</code>，但是此时Bar类的声明并没有执行到，
+那为什么可以访问到Bar类呢，<em>这是因为Bar类的声明在编译时就已经完成了</em>，
+因为Bar类已经在编译时声明好了，所以在真正执行的时候就不需要再次执行声明类的操作了，
+所以它所对应的opcode被替换成NOP了。</p>
+
+<p>而Foo这个类由于处在条件判断块之中，编译期无法确定Foo类是否一定会被执行，所以还是需要在
+执行时来声明这个类，所以opcode没有改变。</p>
+
+<p>对于使用了opcode缓存的代码来说，把函数和类的声明移到了编译时，也就减少了执行时的opcode执行，
+这能加快代码的执行。</p>
+
+<h2>优化</h2>
+
+<p>你可能会想，既然类及函数的声明可以优化掉，为什么不能直接丢弃这个opcode呢？
+一能减少opcode占用的内容，比如很多的框架中有大量的类定义，也能减少执行时间，
+因为空操作并不是0成本的，执行NOP的时候还是需要消耗CPU的。</p>
+
+<p>先看看opcode编译过程的一个重要函数：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">zend_op</span> <span class="o">*</span><span class="nf">get_next_op</span><span class="p">(</span><span class="n">zend_op_array</span> <span class="o">*</span><span class="n">op_array</span> <span class="n">TSRMLS_DC</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">zend_uint</span> <span class="n">next_op_num</span> <span class="o">=</span> <span class="n">op_array</span><span class="o">-&gt;</span><span class="n">last</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">zend_op</span> <span class="o">*</span><span class="n">next_op</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">next_op_num</span> <span class="o">&gt;=</span> <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">op_array</span><span class="o">-&gt;</span><span class="n">fn_flags</span> <span class="o">&amp;</span> <span class="n">ZEND_ACC_INTERACTIVE</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="cm">/* we messed up */</span>
+</span><span class='line'>          <span class="n">zend_printf</span><span class="p">(</span><span class="s">&quot;Ran out of opcode space!</span><span class="se">\n</span><span class="s">&quot;</span>
+</span><span class='line'>                      <span class="s">&quot;You should probably consider writing this huge script into a file!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>          <span class="n">zend_bailout</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span> <span class="o">*=</span> <span class="mi">4</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">op_array_alloc_ops</span><span class="p">(</span><span class="n">op_array</span><span class="p">,</span> <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">next_op</span> <span class="o">=</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">op_array</span><span class="o">-&gt;</span><span class="n">opcodes</span><span class="p">[</span><span class="n">next_op_num</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">init_op</span><span class="p">(</span><span class="n">next_op</span> <span class="n">TSRMLS_CC</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="n">next_op</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个函数每次会返回一个zend_op(也就是opcode一个最小单位)，opcode的存储空间申请和哈希表类似，
+通过预先申请空间的方式，如果空间不足则适当扩容。在编译时，opcode是以文件为单位的，而通常
+在一个文件中函数或类声明的个数是不会太多的。而在编译时opcode数组已经是预先申请好的，所以
+及时优化掉这个opcode，而实际在编译时的内存占用也不会有任何的优化。</p>
+
+<p>目前只有少数几处使用了ZEND_NOP这个opcode。读者可以参考Zend/zend_compile.c: zend_do_early_binding()，
+这个函数进行就是在确定在编译时能确定的函数以及类声明，在完成函数或类的声明后将当前编译的opcode设置为ZEND_NOP。
+因为后续在执行是并需要再次对该函数或类进行声明了。</p>
+
+<blockquote><p><strong>NOTE</strong>
+当然也并不是所有的全局类或者方法都会进行提早绑定,具体可以参考前面提到的Zend_compile.c文件的实现</p></blockquote>
+
+<p>在这个函数中其实可以将生成的ZEND_NOP优化掉的，比如eAccelarator扩展中就对opcode进行了优化，将ZEND_NOP从
+opcode_array数组中移除了，因为使用了opcode cache扩展优化只进行一次，而执行对多次执行，
+这样的优化是值得的。目前Zend引擎并没有进行任何的优化，首先从代码上来看，类和函数声明的数量和其他指令的数量
+之间差很多个等级，所以至少这个地方优化的收益是有限的，为了保证Zend引擎的简洁它没有进行优化。</p>
+
+<p>目前APC扩展已经基本确定为将要进入PHP默认opcode缓存的官方扩展了，那么这些优化都可以在扩展中进行，
+保证Zend引擎的简单易维护更为重要。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-28T14:19:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/php内核/'>PHP内核</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/2012/05/28/what-opcode-zend-nop-is-in-php//blog/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2012/05/19/migrate-to-octopress/">
+		
+			迁移博客到Octopress</a>
+	</h2>
+	<div class="entry-content">
+		<p>很久以前就不想继续使用Wordpress了，不太习惯在线写东西，开始返璞归真，比较喜欢
+纯文本的内容创作方式，<a href="http://www.php-internal.com">TIPI</a>就使用的是markdown格式，
+同时在终端也会让我更有写作的欲望。</p>
+
+<p>翻了一下以前的博客，原来一共加起来也不足20篇。以此作为起点今后多继续更新博客吧。</p>
+
+<p>TIPI的issue里还有很多的待处理工作，计划在7月份全部写完。这个始终是高优先级的。
+最近给PHP修复了一些bug，也有一些feature被接受了。在这过程中对PHP的实现又有了一些更加深入
+的理解。也有冲动想要写到TIPI里。总之，TIPI会一直更新。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-19T23:50:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+</div>
+	
+		<span class="comments"><a href="/2012/05/19/migrate-to-octopress//blog/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2011/03/22/duplicate-ssh-session/">
+		
+			复制SSH会话,避免多次密码输入</a>
+	</h2>
+	<div class="entry-content">
+		<p>就当是笔记吧. 首先，这不是配置ssh密钥简历信任关系免密码登陆的方法。
+主要解决的问题是在终端下多次登陆统一主机需要多次输入用户密码的问题。</p>
+
+<p>我们公司的内网环境比较特殊,　为了安全性做了各种认证,　联入网络需要准入一下,　
+准入需要使用密码+随即密码的方式认证,　是挺安全的,　可以对于我们来说其实很痛苦,
+每次都要输入一下密码,因为包含了随机密码, 这就无法使用脚本来方便的自动准入.　
+我们连入公司的远程开发机需要通过一台特殊的服务器来将我们的登陆转发,　
+也就是登陆到中转机,然后通过中转机在ssh.同样登陆中转机也是需要这个随机密码的.　吐槽完毕.</p>
+
+<p>工作中经常需要在多台服务之间ssh登陆,　screen 是一个不错的选择,　
+不过有时候还是需要打开另一个窗口再次登陆,　这时我又得再次输入那个随机密码,　
+如果你使用windows并且使用SecureCRT那你可以不用继续往下看了,
+SecureCRT可以简单的复制回话, 这个功能很贴心. 如果使用Linux&amp;Mac OS那就继续往下看.</p>
+
+<p>在/etc/ssh_config 文件中加入</p>
+
+<pre><code>Host *
+ControlMaster auto
+ControlPath ~/.ssh/master-%r@%h:%p
+</code></pre>
+
+<p>下次登陆同一站点的时候就会自动复用已有的回话. 可以只输入一次密码开N个窗口了.</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-22T18:49:27+08:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2011</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/未分类/'>未分类</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/2011/03/22/duplicate-ssh-session//blog/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2011/03/20/tipi-first-release-and-ers-marriage/">
+		
+			TIPI项目正式发布&恭喜er童鞋大婚</a>
+	</h2>
+	<div class="entry-content">
+		<p>首先恭喜一下er童鞋的大婚吧.</p>
+
+<p>接着er大婚的喜气,项目决定在今天发布我们的TIPI项目,项目从成立到现在,一直有条不紊的前进. 现在项目也进行的差不多,可以公开给大家了.   项目的第一个tag,其实是在20分钟前才提交完.终于能如期发布.
+下面是我们的发布公告.  欢迎围观:)</p>
+
+<hr />
+
+<p>我们的朋友，TIPI团队成员，博客哥，er<a href="http://www.zhangabc.com/">http://www.zhangabc.com</a>同学在今天这个春光灿烂，春暖花开，春心荡漾，春情澎湃的大好日子里，兴高采烈的走入了婚姻的殿堂。 在这样一个让人激动不已，激情四射的日子，TIPI团队决定发布<a href="http://www.php-internal.com/">深入理解PHP内核项目</a>的第一阶段成果。</p>
+
+<p>大概在半年前，我们在网上相聚，莫名的邂逅，有了我们这样的一个团队。我们有激情，有想法，有行动，也有了我们这个项目。 开始的艰难，没有时间的痛苦，坚持，从而有了今天的发布。一路走来，有辛苦，也有收获，至少记录了我们的青春，至少做了我们想做的！</p>
+
+<p><a href="http://www.php-internal.com/">深入理解PHP内核（TIPI）项目</a>是一个开源的，分析PHP内核的系列文章项目。整个项目是基于PHP5.3版本的源码。 它包括PHP语言中我们常用的变量，函数，类，对象等的实现原理，也包括PHP的虚拟机，内存管理机制，线程安全，错误异常，文件流和PHP5.3新增加的垃圾收集机制，命名空间等。 除了PHP语言本身的特性外，还包括PHP扩展的相关信息。我们希望这个项目可以帮助更多的PHPer可以更加了解PHP语言本身，知其然知其所以然！</p>
+
+<p>第一阶段，我们发布了前四章，从环境的搭建，源码的阅读方式到对于PHP源码的整体把握，再到对于变量和函数的详细解说。随着项目的进展，我们本身对于PHP内核的理解也加深了许多。 后续我们将以章为单位发布后续的章节。现在第5章正在撰写&#8230;</p>
+
+<p><a href="http://www.php-internal.com/">在线阅读入口>>></a></p>
+
+<h2>TIPI团队序</h2>
+
+<p>博客哥三者，今聚首于网络一偶，共谋TIPI大计，与诸君共享技术之事： 向来穷PHP内核之事者或多，却鲜有分享之举。哥三者，常流连于中外博客也，若得一佳作，即欣喜若狂，本乐分享，及有学习总结之心，欲为PHP内核之事穷全身之力。</p>
+
+<ul>
+<li><p><a href="http://reeze.cn/">reeze</a>，博客哥者，好苹果，好开源, 陶醉于Web开发及架构, 为Ruby之美所折服, 甚爱iOS及其开发, 好一切善美之事物.</p></li>
+<li><p><a href="http://www.zhangabc.com/">er</a>，博客哥者，稀饭Linux, Web, 2.0, Ajax, C, PHP, Javascript, CSS等。乃一以代码为乐之码农也。</p></li>
+<li><p><a href="http://www.phppan.com/">phppan</a>，博客哥者，好书，好PHP，亲于PHP，C，Ajax，程序架构等</p></li>
+</ul>
+
+
+<p>是以三人之力行分享之事，转GIT，习markdown，论项目之计于深夜，何怕事之不成？务使PHP内核之事向众人知。 为此特示。</p>
+
+<h2>项目大事记</h2>
+
+<ul>
+<li><p>2010/12/28 14:47 pan向reeze提议写一个PHP内核系列文章,一拍即合.</p></li>
+<li><p>2010/12/28 15:10 er同学加入.组织正式形成.</p></li>
+<li><p>2010/12/30 11:11 pan发出&lt;&lt;深入理解PHP内核>>第一份完整目录草稿.</p></li>
+<li><p>2010/12/31 21:14 举行第一次三方会谈,结合pan和reeze的目录草稿确定了正式目录. 标志着TIPI团队项目的正式确立.. (鼓掌).</p></li>
+<li><p>2011/01/01 05:08 reeze向github版本库提交了完整的项目, TIPI项目开始进入实施阶段</p></li>
+<li><p>2011/01/06 15:22 经过哥三激烈的讨论后做出艰难的决定,我们的项目域名正式确定为php-internal.com.(撒花无数).</p></li>
+<li><p>2011/02/14 23:32 在这个几人欢喜几人愁，充满花香的日子里, 哥三在深夜确定了TIPI项目的第一次整体发布流程，并且定稿了前三章的大纲以及确定了发布前的调整工作。</p></li>
+<li><p>2011/02/25 02:53 虽然我们还没有正式开始推广TIPI, 但已经有人开始关注TIPI了.　恭喜icodeu<a href="http://blog.icodeu.com/">http://blog.icodeu.com</a>同学成为我们第一位留下脚印的同学(看留言时间,也是个夜猫子啊.)</p></li>
+<li><p>2011/03/10 11:22 经过TIPI团队的慎重考虑, TIPI团队新增一员大将:honestqiao同学, 欢迎他的加入!</p></li>
+<li><p>2011/03/20 20:00 今天是TIPI团队成员er同学的大婚之日，团队决定在这个喜庆的日子将我们第一阶段的成果对外发布。让我们恭喜这对新人和我们的TIPI团队。</p></li>
+</ul>
+
+
+<h2>特别鸣谢</h2>
+
+<p>我们需要感谢我们家里的领导，没有有她们的支持，也就没有我们今天的发布，感谢她们的包容，感谢她们的照顾，感谢她们的理解和支持。谢谢！</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-20T23:45:12+08:00" pubdate data-updated="true">Mar 20<span>th</span>, 2011</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/tipi/'>TIPI</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/2011/03/20/tipi-first-release-and-ers-marriage//blog/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+<nav id="pagenavi">
+    
+    
+        <a href="/page/2/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav></div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
+
+    reeze
+
+<br>
+Powered by Octopress.
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'reeze';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11029498-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

@@ -1,123 +1,111 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Zen Space | 寻找善美</title>
-  <meta name="author" content="reeze">
+	<script data-cfasync="false" type="text/javascript" src="//use.typekit.net/axj3cfp.js"></script>
+	<script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	<meta charset="utf-8">
+	<title>寻找善美  | Zen Space | 寻找善美</title>
 
-  
-  <meta name="description" content="之前在当当的时候的一个项目中用到了一个简单的模板引擎，其实也是借鉴discuz来做的模板引擎，很简单，它所作的事情就是把一些自定义的标签编译成php代码。已经说了很简单了，所以编译的时候也名优进行模板语法的检查，那么在开发过程中就会出现编译出来的php文件有语法问题，有语法问题没有关系， &hellip;">
-  
+<meta name="author" content="reeze"> 
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="之前在当当的时候的一个项目中用到了一个简单的模板引擎，其实也是借鉴discuz来做的模板引擎，很简单，它所作的事情就是把一些自定义的标签编译成php代码。已经说了很简单了，所以编译的时候也名优进行模板语法的检查，那么在开发过程中就会出现编译出来的php文件有语法问题，有语法问题没有关系， &hellip;"> <meta name="keywords" content="">
 
-  
-  <link rel="canonical" href="http://reeze.cn/page/3/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Zen Space | 寻找善美" type="application/atom+xml">
-  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11029498-1']);
-    _gaq.push(['_trackPageview']);
+	<link href="/atom.xml" rel="alternate" title="Zen Space | 寻找善美" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js"></script>
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+<script language="Javascript" type="text/javascript">
+$(document).ready(
+  function() {
+    (function($) {
+      $(".fancybox[data-content-id]").each(function() {
+        this.href = $(this).data('content-id');
+      });
+      $(".fancybox").fancybox({
+        beforeLoad: function() {
+          var el, 
+              id = $(this.element).data('title-id');
 
+          if (id) {
+            el = $('#' + id);
 
+            if (el.length) {
+              this.title = el.html();
+            }
+          }
+          if ($(this).data('content')) {
+            this.content = $(this).data('content');
+          }
+        },
+        helpers: {
+          title: {
+            type: 'inside'
+          }
+        }
+      });
+    })(jQuery);
+  }
+);
+</script>
+	
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <div id="logo">
-  	<div id="logoLeft">{</div>
-  	<div id="logoText">mob</div>
-  	<div id="logoRight">}</div>
-  	<div class="clear"></div>
-  </div>
-  <h1><a href="/">Zen Space | 寻找善美</a></h1>
-  
-    <h2>寻找善美</h2>
-  
-  <div class="clear"></div>
-</hgroup>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Zen Space | 寻找善美</a></h1>
+<h4>寻找善美</h4>
+<nav id="main-nav"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="/portfolio">Portfolio</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="/portfolio">Portfolio</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:reeze.cn">
+			</form>
+		</div>
+	</div>
+</nav>
+
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:reeze.cn" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2009/10/09/check-php-files-syntax-in-php/">在PHP中检查PHP文件是否有语法错误</a></h1>
-      
-    
-    
-      <p class="meta">
-        
+	<div id="content" class="inner">
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-10-09T19:21:32+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2009</time>
-        
-         | <a href="/2009/10/09/check-php-files-syntax-in-php/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>之前在当当的时候的一个项目中用到了一个简单的模板引擎，其实也是借鉴discuz来做的模板引擎，很简单，它所作的事情就是把一些自定义的标签编译成php代码。已经说了很简单了，所以编译的时候也名优进行模板语法的检查，那么在开发过程中就会出现编译出来的php文件有语法问题，有语法问题没有关系，我修改重新编译一下就好了。首先不能在每次请求的时候都把php模板重新编译一下，会严重影响性能，折中的处理时在每个编译好的php文件末尾检查一下该模板文件是否已经修改过，根据设定的更新频率，如果又需要则重新编译模板文件，现在的问题是编译出来的php文件自己有语法错误，根本执行不到模板检查那一步，所以即使修改了模板文件中的问题也不会重新编译。 所以我想寻找一种简单的方法来检查生成的php文件是否合法。不合法就重新编译，这样开发过程中就不用出现错误就得手动删除缓存文件了。</p>
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2009/10/09/check-php-files-syntax-in-php/">
+		
+			在PHP中检查PHP文件是否有语法错误</a>
+	</h2>
+	<div class="entry-content">
+		<p>之前在当当的时候的一个项目中用到了一个简单的模板引擎，其实也是借鉴discuz来做的模板引擎，很简单，它所作的事情就是把一些自定义的标签编译成php代码。已经说了很简单了，所以编译的时候也名优进行模板语法的检查，那么在开发过程中就会出现编译出来的php文件有语法问题，有语法问题没有关系，我修改重新编译一下就好了。首先不能在每次请求的时候都把php模板重新编译一下，会严重影响性能，折中的处理时在每个编译好的php文件末尾检查一下该模板文件是否已经修改过，根据设定的更新频率，如果又需要则重新编译模板文件，现在的问题是编译出来的php文件自己有语法错误，根本执行不到模板检查那一步，所以即使修改了模板文件中的问题也不会重新编译。 所以我想寻找一种简单的方法来检查生成的php文件是否合法。不合法就重新编译，这样开发过程中就不用出现错误就得手动删除缓存文件了。</p>
 
 <p>在网上找了一下。刚开始以为 token_get_all()函数能处理语法错误的问题，结果发现，它只是做简单的词法分析。没有办法。后来到论坛上去问了一下
 http://groups.google.com/group/professional-php/browse_thread/thread/b8581f6b07b10ff0/2601a63c406bb1c1?lnk=gst&amp;q=reeze#2601a63c406bb1c1</p>
@@ -149,46 +137,48 @@ b
 </code>
 因为Parse error 是没法被 set_error_handler处理函数处理的。这个异常没办法catch到。所以才使用了@来抑制错误。这带来的问题就是我们无法得到详细的错误信息。 不过目前我需要的功能也只是检查语法是否正确。不正确的话重新编译模板文件，就这么简单，至于语法错误，在显示网页的时候自然会看得到。
 最好的办法就是这个被遗弃的php_check_syntax这个方法回到php中。下次再研究下他们是出于什么原因把这个函数去掉的。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-09T19:21:32+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2009</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/web技术/'>Web技术</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/2009/10/09/check-php-files-syntax-in-php//page/3/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2009/10/09/how-to-implement-a-simple-online-html-editor/">实现一个简单在线HTML编辑器</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-10-09T15:11:26+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2009</time>
-        
-         | <a href="/2009/10/09/how-to-implement-a-simple-online-html-editor/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>一直没有仔细研究过在线HTML编辑器，以前以为编辑功能很复杂，需要用大量的JavaScript来模拟编辑器的效果，以前都是使用一些开源的HTML编辑器，HTML在各网上随处可见，发表文章，评论。最近自己想做一个类似Things这样的Web版的应用，需要一个想Google  Notebook(可惜的是现在已经停止开发了) 那样的编辑功能，看看现在网上的这些编辑器都庞大了，都是一些自己根本用不到的功能，其实我的需求很简单：简单的编辑既可以，并且需要轻量级一些，因为页面上可能需要开很多个编辑器实例。 所有想自己也来研究一下，看看能不能自己开发一个。</p>
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2009/10/09/how-to-implement-a-simple-online-html-editor/">
+		
+			实现一个简单在线HTML编辑器</a>
+	</h2>
+	<div class="entry-content">
+		<p>一直没有仔细研究过在线HTML编辑器，以前以为编辑功能很复杂，需要用大量的JavaScript来模拟编辑器的效果，以前都是使用一些开源的HTML编辑器，HTML在各网上随处可见，发表文章，评论。最近自己想做一个类似Things这样的Web版的应用，需要一个想Google  Notebook(可惜的是现在已经停止开发了) 那样的编辑功能，看看现在网上的这些编辑器都庞大了，都是一些自己根本用不到的功能，其实我的需求很简单：简单的编辑既可以，并且需要轻量级一些，因为页面上可能需要开很多个编辑器实例。 所有想自己也来研究一下，看看能不能自己开发一个。</p>
 
 <p>几天前花了一个晚上用firebug看了下Google Docs是怎么做。第一个遇到的问题就是如何让光标停在鼠标点击所在得地方。我刚开始一味都是js模拟出来的，这得有多复杂啊。并且还要兼容各个浏览器，天啊！后来上网一搜发现，浏览器早就想到了我们会有这样的一个需求。其实很简单，两条语句就可以说明HTML编辑器的最为核心的部分：
 <code>
@@ -243,46 +233,48 @@ document.contentEditable = true;
 
 <p>需要的同学可以下来参考参考。
 猛击 <a href="/uploads/2009/10/editor.rar"> >> 这里 &lt;&lt; </a>下载代码。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-09T15:11:26+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2009</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/web技术/'>Web技术</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/2009/10/09/how-to-implement-a-simple-online-html-editor//page/3/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2009/07/02/a-cache-system-using-var_export-and-includes-return-value/">基于var_export 和 Include返回值的缓存方案</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-07-02T12:55:41+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2009</time>
-        
-         | <a href="/2009/07/02/a-cache-system-using-var_export-and-includes-return-value/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://reeze.yo2.cn/2009/07/01/php-include-function-return-value-and-method-of-void-serialize/">前一篇文章</a>我们研究了include调用返回值的问题，并指出可以通过这种方式来完成序列化相同的功能，现在我就来研究一下这种方法的可行性和效率，因为直接的返回php值肯定是比unserialize()函数要快。</p>
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2009/07/02/a-cache-system-using-var_export-and-includes-return-value/">
+		
+			基于var_export 和 Include返回值的缓存方案</a>
+	</h2>
+	<div class="entry-content">
+		<p><a href="http://reeze.yo2.cn/2009/07/01/php-include-function-return-value-and-method-of-void-serialize/">前一篇文章</a>我们研究了include调用返回值的问题，并指出可以通过这种方式来完成序列化相同的功能，现在我就来研究一下这种方法的可行性和效率，因为直接的返回php值肯定是比unserialize()函数要快。</p>
 
 <p>第一步我们来研究下怎么将php对象持久化的保存起来。下面是我定义的一些变量：</p>
 
@@ -427,46 +419,48 @@ cache(&#8220;array.data.php&#8221;, $array);
 $class = cache_get(&#8220;class.data.php&#8221;);</p>
 
 <p>参考：http://www.thoughtlabs.com/2008/02/02/phps-mystical-__set_state-method/?dsq=12016456</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-07-02T12:55:41+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2009</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/web技术/'>Web技术</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/2009/07/02/a-cache-system-using-var_export-and-includes-return-value//page/3/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2009/07/01/a-way-use-include-to-avoid-unserialize/">PHP中include语句的返回值及避免序列化开销的方法</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-07-01T18:24:21+08:00" pubdate data-updated="true">Jul 1<span>st</span>, 2009</time>
-        
-         | <a href="/2009/07/01/a-way-use-include-to-avoid-unserialize/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>以前乱翻symfony生成的缓存文件的时候看到很多类似：</p>
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2009/07/01/a-way-use-include-to-avoid-unserialize/">
+		
+			PHP中include语句的返回值及避免序列化开销的方法</a>
+	</h2>
+	<div class="entry-content">
+		<p>以前乱翻symfony生成的缓存文件的时候看到很多类似：</p>
 
 <p><code>
 "value"); ?&gt;
@@ -491,46 +485,48 @@ classes = include($file); ?&gt;;
 其实项目中很少情况需要这样的返回方法。如果想要从return.php中得到返回值一般是通过调用return.php中所调用的函数来得到。</p>
 
 <p>在symfony中这种方式就很合理，如果大家熟悉symfony的话，应该知道，symfony运行起来以后会在cache目录下生成系统配置文件的缓存,诚然可以通过序列化的方式来缓存这些信息，但是反序列化是需要消耗资源的。通过这种方式来做持久化也是个不错的选择.</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-07-01T18:24:21+08:00" pubdate data-updated="true">Jul 1<span>st</span>, 2009</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/web技术/'>Web技术</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/2009/07/01/a-way-use-include-to-avoid-unserialize//page/3/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2009/06/19/my-mac-softwares/">Mac下我常用的软件</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-06-19T21:05:29+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2009</time>
-        
-         | <a href="/2009/06/19/my-mac-softwares/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>习惯了Mac OS X Leopard以后发现自己已经离不开它了。像很多Linuxer一样除了上网银以外统统不用Windows，玩个CS什么的也都用Wine了，我很笨，目前在Mac 上和Ubuntu下都没有Wine成功过 <img src="http://extra-001.yo2cdn.com/wp-includes/images/smilies/icon_sad.gif" alt=":(" /> &#8220;, 下面就介绍一些我认为在Mac下非常使用的软件吧。</p>
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2009/06/19/my-mac-softwares/">
+		
+			Mac下我常用的软件</a>
+	</h2>
+	<div class="entry-content">
+		<p>习惯了Mac OS X Leopard以后发现自己已经离不开它了。像很多Linuxer一样除了上网银以外统统不用Windows，玩个CS什么的也都用Wine了，我很笨，目前在Mac 上和Ubuntu下都没有Wine成功过 <img src="http://extra-001.yo2cdn.com/wp-includes/images/smilies/icon_sad.gif" alt=":(" /> &#8220;, 下面就介绍一些我认为在Mac下非常使用的软件吧。</p>
 
 <ol>
 <li>QuickSilver</li>
@@ -577,46 +573,48 @@ classes = include($file); ?&gt;;
 <p>10.Monolingual</p>
 
 <p>帮你清除一些不需要的语言信息，节省磁盘空间。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-19T21:05:29+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2009</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/mac-ios/'>Mac/iOS</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/2009/06/19/my-mac-softwares//page/3/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2009/06/19/start-sshd-service-in-mac-os-x/">Mac OS 启动sshd服务</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-06-19T20:21:18+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2009</time>
-        
-         | <a href="/2009/06/19/start-sshd-service-in-mac-os-x/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>[UPDATE]  系统偏号设置  -> 共享 -> 远程登陆 ,开启即可.  下面的方法不推荐使用.</strong></p>
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2009/06/19/start-sshd-service-in-mac-os-x/">
+		
+			Mac OS 启动sshd服务</a>
+	</h2>
+	<div class="entry-content">
+		<p><strong>[UPDATE]  系统偏号设置  -> 共享 -> 远程登陆 ,开启即可.  下面的方法不推荐使用.</strong></p>
 
 <p>想push自己写的一些代码到本地的版本库中去，看了很多的协议，都挺麻烦的，至今没有配置好一个git server，遂放弃搭建server，直接使用ssh来提交到本地</p>
 
@@ -637,46 +635,48 @@ $ sudo /usr/sbin/sshd
 <p>/usr/sbin/sshd</p>
 
 <p>网上有人说apple不推荐这么干。但是我又不知道怎么让他自动启动。先就这么放着吧。找到好方法再改。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-19T20:21:18+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2009</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/mac-ios/'>Mac/iOS</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/2009/06/19/start-sshd-service-in-mac-os-x//page/3/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2009/06/19/a-php-debug-function/">PHP调试函数</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-06-19T20:05:43+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2009</time>
-        
-         | <a href="/2009/06/19/a-php-debug-function/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在项目中经常要调试程序，但是我电脑上的ZendStudio总是没配置好，不能单步调试，不过有时候不一定需要让ZendStudio来帮我们调试，所以写了下面这个辅助函数来方便调试，因为有时候调试的位置加多了自己也不知道到底是加在什么地方了，下面的函数就是方便的dump对象信息，同时显示调试的问题和所在的行数。</p>
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2009/06/19/a-php-debug-function/">
+		
+			PHP调试函数</a>
+	</h2>
+	<div class="entry-content">
+		<p>在项目中经常要调试程序，但是我电脑上的ZendStudio总是没配置好，不能单步调试，不过有时候不一定需要让ZendStudio来帮我们调试，所以写了下面这个辅助函数来方便调试，因为有时候调试的位置加多了自己也不知道到底是加在什么地方了，下面的函数就是方便的dump对象信息，同时显示调试的问题和所在的行数。</p>
 
 <p>`
 //调试函数,方便显示调试函数的位置和文件
@@ -703,116 +703,60 @@ function p(){
   exit;
 }
 `</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-19T20:05:43+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2009</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/web技术/'>Web技术</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/2009/06/19/a-php-debug-function//page/3/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
+<nav id="pagenavi">
+    
+        <a href="/page/2/" class="prev">Prev</a>
+    
+    
+    <div class="center"><a href="/archives">Blog Archives</a></div>
+</nav></div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-    <a class="next" href="/page/2/">Newer &rarr;</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/2013/05/06/golang-blank-indentifier/">Go学习笔记：空标示符-</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">怎么样获取PHP函数默认参数的常量名</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/07/22/intro/">Intro</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">PHP中的NOP及为什么有这个opcode</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
-      </li>
-    
-  </ul>
-</section>
+    reeze
 
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/reeze">@reeze</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'reeze',
-            count: 5,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - reeze -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
+<br>
+Powered by Octopress.
 </footer>
-  
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
 
 <script type="text/javascript">
       var disqus_shortname = 'reeze';
@@ -829,29 +773,17 @@ function p(){
 
 
 
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11029498-1']);
+		_gaq.push(['_trackPageview']);
 
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
 
 

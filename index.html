@@ -1,125 +1,113 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Zen Space | 寻找善美</title>
-  <meta name="author" content="reeze">
+	<script data-cfasync="false" type="text/javascript" src="//use.typekit.net/axj3cfp.js"></script>
+	<script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	<meta charset="utf-8">
+	<title>寻找善美  | Zen Space | 寻找善美</title>
 
-  
-  <meta name="description" content="开始学习下Go语言，为了强化记忆开始记一些学习笔记。 Go语言是一门很简单的语言，它为我们做了很多的决定，比如很多在其他语言中
+<meta name="author" content="reeze"> 
+
+<meta name="description" content="开始学习下Go语言，为了强化记忆开始记一些学习笔记。 Go语言是一门很简单的语言，它为我们做了很多的决定，比如很多在其他语言中
 不推荐使用的编码风格在Go是不允许的。比如： 变量或者包声明或导入后没有使用是无法编译通过的。
-它的编译只有Fatal没有Warning，这对于代码质量是很有好处的。 &hellip;">
-  
+它的编译只有Fatal没有Warning，这对于代码质量是很有好处的。 &hellip;"> <meta name="keywords" content="">
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
-  <link rel="canonical" href="http://reeze.cn/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Zen Space | 寻找善美" type="application/atom+xml">
-  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+	<link href="/atom.xml" rel="alternate" title="Zen Space | 寻找善美" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js"></script>
 
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-11029498-1']);
-    _gaq.push(['_trackPageview']);
+<script language="Javascript" type="text/javascript">
+$(document).ready(
+  function() {
+    (function($) {
+      $(".fancybox[data-content-id]").each(function() {
+        this.href = $(this).data('content-id');
+      });
+      $(".fancybox").fancybox({
+        beforeLoad: function() {
+          var el, 
+              id = $(this.element).data('title-id');
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+          if (id) {
+            el = $('#' + id);
 
-
+            if (el.length) {
+              this.title = el.html();
+            }
+          }
+          if ($(this).data('content')) {
+            this.content = $(this).data('content');
+          }
+        },
+        helpers: {
+          title: {
+            type: 'inside'
+          }
+        }
+      });
+    })(jQuery);
+  }
+);
+</script>
+	
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <div id="logo">
-  	<div id="logoLeft">{</div>
-  	<div id="logoText">mob</div>
-  	<div id="logoRight">}</div>
-  	<div class="clear"></div>
-  </div>
-  <h1><a href="/">Zen Space | 寻找善美</a></h1>
-  
-    <h2>寻找善美</h2>
-  
-  <div class="clear"></div>
-</hgroup>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Zen Space | 寻找善美</a></h1>
+<h4>寻找善美</h4>
+<nav id="main-nav"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="/portfolio">Portfolio</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="/portfolio">Portfolio</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:reeze.cn">
+			</form>
+		</div>
+	</div>
+</nav>
+
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:reeze.cn" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2013/05/06/golang-blank-indentifier/">Go学习笔记：空标示符-</a></h1>
-      
-    
-    
-      <p class="meta">
-        
+	<div id="content" class="inner">
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-06T21:49:00+08:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
-        
-         | <a href="/2013/05/06/golang-blank-indentifier/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>开始学习下Go语言，为了强化记忆开始记一些学习笔记。</p>
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2013/05/06/golang-blank-indentifier/">
+		
+			Go学习笔记：空标示符-</a>
+	</h2>
+	<div class="entry-content">
+		<p>开始学习下Go语言，为了强化记忆开始记一些学习笔记。</p>
 
 <p>Go语言是一门很简单的语言，它为我们做了很多的决定，比如很多在其他语言中
 不推荐使用的编码风格在Go是不允许的。比如： 变量或者包声明或导入后没有使用是无法编译通过的。
@@ -220,86 +208,86 @@
 <li>《The Way to Go》这本书是目前比较全面的一本，在看完<a href="http://golang.org/doc/">Go的手册</a>之后推荐阅读</li>
 </ol>
 
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-06T21:49:00+08:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/golang/'>golang</a>
+
+
 </div>
+	
+		<span class="comments"><a href="/2013/05/06/golang-blank-indentifier//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">
+		
+			怎么样追查PHP的Bug、Segment Fault(core Dump):方法，工具等</a>
+	</h2>
+	<div class="entry-content">
+		
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
   
-  
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment Fault(core Dump):方法，工具等</a></h1>
-      
-    
-    
-      <p class="meta">
-        
+<time datetime="2013-03-11T17:07:00+08:00" pubdate data-updated="true">Mar 11<span>th</span>, 2013</time></div>
+	<div class="tags">
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-11T17:07:00+08:00" pubdate data-updated="true">Mar 11<span>th</span>, 2013</time>
-        
-         | <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
 </div>
-  
-  
+	
+		<span class="comments"><a href="/2013/03/11/how-to-trace-a-php-crash-segfault//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-12T23:16:00+08:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
-        
-         | <a href="/2012/09/12/new-ext-php-leveldb-pecl/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>很开心，第一个提交的PHP扩展已经在PECL官方发布了，这是一个<a href="http://code.google.com/p/leveldb/">Google LevelDB</a>的PHP
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2012/09/12/new-ext-php-leveldb-pecl/">
+		
+			LevelDB扩展发布V0.1版本</a>
+	</h2>
+	<div class="entry-content">
+		<p>很开心，第一个提交的PHP扩展已经在PECL官方发布了，这是一个<a href="http://code.google.com/p/leveldb/">Google LevelDB</a>的PHP
 封装，主要用于对LevelDB的访问，目前已经实现了LevelDB最具价值的一些特性：迭代器，快照等。</p>
 
 <p>LevelDB数据的设计是只能单进程访问的（多线程没有问题），所以通常这个扩展不合适作为普通的Web应用数据存储，
@@ -309,46 +297,44 @@
 详细的API文档由勤劳高效的胖胖<a href="http://www.phppan.com/">http://www.phppan.com/</a>编写，不过还没有发布。</p>
 
 <p>同时，还有了@php.net的马甲一枚: reeze(at)php.net。MARK一下。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-12T23:16:00+08:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time></div>
+	<div class="tags">
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/2012/09/12/new-ext-php-leveldb-pecl//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">怎么样获取PHP函数默认参数的常量名</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-22T20:40:00+08:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2012</time>
-        
-         | <a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>好久没有更新了，发篇占位文：如果某个函数的默认参数是个常量，那么怎么样获取这个参数的常量名称？见代码：</p>
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">
+		
+			怎么样获取PHP函数默认参数的常量名</a>
+	</h2>
+	<div class="entry-content">
+		<p>好久没有更新了，发篇占位文：如果某个函数的默认参数是个常量，那么怎么样获取这个参数的常量名称？见代码：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -490,46 +476,48 @@
 </span><span class='line'><span class="x">string(12) &quot;CONST_TEST_1&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-22T20:40:00+08:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/php内核/'>PHP内核</a>, <a class='category' href='/categories/php实现/'>PHP实现</a>, <a class='category' href='/categories/reflection/'>Reflection</a>, <a class='category' href='/categories/反射/'>反射</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/2012/07/22/how-to-get-php-functions-const-parameters-name//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/07/22/intro/">Intro</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-22T08:23:00+08:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2012</time>
-        
-         | <a href="/2012/07/22/intro/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Testing!</p>
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2012/07/22/intro/">
+		
+			Intro</a>
+	</h2>
+	<div class="entry-content">
+		<p>Testing!</p>
 
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin, massa eu vestibulum laoreet, nibh ante vulputate lorem, ac lobortis ante tellus eu mi. Duis sem nisi, luctus at feugiat eget, fringilla ut tellus. Nam a molestie justo. Sed pulvinar est vitae tellus semper tincidunt. Fusce euismod luctus lacus nec placerat. Mauris rutrum scelerisque nulla ut tempor. Nunc porttitor posuere mi, aliquet vehicula lorem feugiat in. Ut ut fermentum risus. Aliquam tincidunt ultricies ante sit amet bibendum. Cras nec sapien odio. Duis posuere congue sem, at congue massa faucibus at.</p>
 
@@ -540,46 +528,48 @@
 <p>Proin ut hendrerit arcu. Maecenas ullamcorper tristique magna vel mattis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam tincidunt euismod viverra. In sit amet neque turpis. Suspendisse ac sapien mi, id blandit purus. Ut tortor turpis, rutrum ac tempor at, accumsan sit amet erat. Etiam ultricies eleifend dolor, eget tempus justo tristique vitae. In hac habitasse platea dictumst. Aliquam eu enim neque.</p>
 
 <p>Morbi massa lorem, viverra non dictum at, malesuada vel nibh. Nam fermentum lobortis varius. Sed a nulla lacus, quis posuere risus. Nunc id urna libero, quis rutrum mi. In gravida felis urna. Praesent nec dolor ac urna tempor fermentum. Curabitur rutrum arcu et lorem volutpat viverra.</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-22T08:23:00+08:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/self/'>self</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/2012/07/22/intro//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-15T20:26:00+08:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time>
-        
-         | <a href="/2012/07/15/introduction-to-travis-ci/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Travis CI是一个基于云的<a href="http://en.wikipedia.org/wiki/Continuous_integration">持续集成</a>项目，
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2012/07/15/introduction-to-travis-ci/">
+		
+			初试Travis-CI</a>
+	</h2>
+	<div class="entry-content">
+		<p>Travis CI是一个基于云的<a href="http://en.wikipedia.org/wiki/Continuous_integration">持续集成</a>项目，
 目前已经支持大部分主流语言了，比如：C，PHP，Ruby，Python, Nodejs等等。和<a href="http://jenkins-ci.org/">Jenkins</a>类似，
 Travis CI也是开源的，不过Travis和Github集成非常紧密，官方的集成测试托管只支持Github项目，
 不过你也可以搭建一套自己的方案。 这里有一篇比较详实的<a href="http://www.juvenxu.com/2012/03/06/travis-ci/">对Travis-CI的介绍</a>，
@@ -712,46 +702,48 @@ travis也会忽略，所以采用了一个折中的方式来测试。因为测�
 
 <p>除了PHP，其实你可以在Travis上测试绝大部分的软件，因为travis提供的是一个完整的环境，
 而你可以编写任何的脚本来进行你的测试工作。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-15T20:26:00+08:00" pubdate data-updated="true">Jul 15<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/ci/'>CI</a>, <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/travis/'>Travis</a>, <a class='category' href='/categories/leveldb/'>leveldb</a>, <a class='category' href='/categories/php-leveldb/'>php-leveldb</a>, <a class='category' href='/categories/扩展/'>扩展</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/2012/07/15/introduction-to-travis-ci//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">PHP中的NOP及为什么有这个opcode</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-28T14:19:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2012</time>
-        
-         | <a href="/2012/05/28/what-opcode-zend-nop-is-in-php/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>什么是NOP</h2>
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">
+		
+			PHP中的NOP及为什么有这个opcode</a>
+	</h2>
+	<div class="entry-content">
+		<h2>什么是NOP</h2>
 
 <p>NOP 是一个特殊的opcode，表示空操作，在很多地方存在，汇编中的NOP含义也一样，
 机器指令中的空操作通常用来将内存地址进行对齐，以提高CPU访问内存的效率，
@@ -945,46 +937,48 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
 
 <p>目前APC扩展已经基本确定为将要进入PHP默认opcode缓存的官方扩展了，那么这些优化都可以在扩展中进行，
 保证Zend引擎的简单易维护更为重要。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-28T14:19:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/php内核/'>PHP内核</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/2012/05/28/what-opcode-zend-nop-is-in-php//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-19T23:50:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2012</time>
-        
-         | <a href="/2012/05/19/migrate-to-octopress/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>很久以前就不想继续使用Wordpress了，不太习惯在线写东西，开始返璞归真，比较喜欢
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2012/05/19/migrate-to-octopress/">
+		
+			迁移博客到Octopress</a>
+	</h2>
+	<div class="entry-content">
+		<p>很久以前就不想继续使用Wordpress了，不太习惯在线写东西，开始返璞归真，比较喜欢
 纯文本的内容创作方式，<a href="http://www.php-internal.com">TIPI</a>就使用的是markdown格式，
 同时在终端也会让我更有写作的欲望。</p>
 
@@ -993,46 +987,44 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
 <p>TIPI的issue里还有很多的待处理工作，计划在7月份全部写完。这个始终是高优先级的。
 最近给PHP修复了一些bug，也有一些feature被接受了。在这过程中对PHP的实现又有了一些更加深入
 的理解。也有冲动想要写到TIPI里。总之，TIPI会一直更新。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-19T23:50:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2012</time></div>
+	<div class="tags">
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/2012/05/19/migrate-to-octopress//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-03-22T18:49:27+08:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2011</time>
-        
-         | <a href="/2011/03/22/duplicate-ssh-session/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>就当是笔记吧. 首先，这不是配置ssh密钥简历信任关系免密码登陆的方法。
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2011/03/22/duplicate-ssh-session/">
+		
+			复制SSH会话,避免多次密码输入</a>
+	</h2>
+	<div class="entry-content">
+		<p>就当是笔记吧. 首先，这不是配置ssh密钥简历信任关系免密码登陆的方法。
 主要解决的问题是在终端下多次登陆统一主机需要多次输入用户密码的问题。</p>
 
 <p>我们公司的内网环境比较特殊,　为了安全性做了各种认证,　联入网络需要准入一下,　
@@ -1054,46 +1046,48 @@ ControlPath ~/.ssh/master-%r@%h:%p
 </code></pre>
 
 <p>下次登陆同一站点的时候就会自动复用已有的回话. 可以只输入一次密码开N个窗口了.</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-22T18:49:27+08:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2011</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/未分类/'>未分类</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/2011/03/22/duplicate-ssh-session//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-03-20T23:45:12+08:00" pubdate data-updated="true">Mar 20<span>th</span>, 2011</time>
-        
-         | <a href="/2011/03/20/tipi-first-release-and-ers-marriage/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>首先恭喜一下er童鞋的大婚吧.</p>
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2011/03/20/tipi-first-release-and-ers-marriage/">
+		
+			TIPI项目正式发布&恭喜er童鞋大婚</a>
+	</h2>
+	<div class="entry-content">
+		<p>首先恭喜一下er童鞋的大婚吧.</p>
 
 <p>接着er大婚的喜气,项目决定在今天发布我们的TIPI项目,项目从成立到现在,一直有条不紊的前进. 现在项目也进行的差不多,可以公开给大家了.   项目的第一个tag,其实是在20分钟前才提交完.终于能如期发布.
 下面是我们的发布公告.  欢迎围观:)</p>
@@ -1142,116 +1136,60 @@ ControlPath ~/.ssh/master-%r@%h:%p
 <h2>特别鸣谢</h2>
 
 <p>我们需要感谢我们家里的领导，没有有她们的支持，也就没有我们今天的发布，感谢她们的包容，感谢她们的照顾，感谢她们的理解和支持。谢谢！</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-20T23:45:12+08:00" pubdate data-updated="true">Mar 20<span>th</span>, 2011</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/tipi/'>TIPI</a>
+
+
 </div>
-  
-  
+	
+		<span class="comments"><a href="/2011/03/20/tipi-first-release-and-ers-marriage//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
+<nav id="pagenavi">
+    
+    
+        <a href="/page/2/" class="next">Next</a>
+    
+    <div class="center"><a href="/archives">Blog Archives</a></div>
+</nav></div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
 
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/2013/05/06/golang-blank-indentifier/">Go学习笔记：空标示符-</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/03/11/how-to-trace-a-php-crash-segfault/">怎么样追查PHP的Bug、Segment fault(core dump):方法，工具等</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/09/12/new-ext-php-leveldb-pecl/">LevelDB扩展发布V0.1版本</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/">怎么样获取PHP函数默认参数的常量名</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/07/22/intro/">Intro</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/07/15/introduction-to-travis-ci/">初试Travis-CI</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">PHP中的NOP及为什么有这个opcode</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/19/migrate-to-octopress/">迁移博客到Octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/22/duplicate-ssh-session/">复制SSH会话,避免多次密码输入</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/03/20/tipi-first-release-and-ers-marriage/">TIPI项目正式发布&恭喜er童鞋大婚</a>
-      </li>
-    
-  </ul>
-</section>
+    reeze
 
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/reeze">@reeze</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'reeze',
-            count: 5,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - reeze -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
+<br>
+Powered by Octopress.
 </footer>
-  
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
 
 <script type="text/javascript">
       var disqus_shortname = 'reeze';
@@ -1268,29 +1206,17 @@ ControlPath ~/.ssh/master-%r@%h:%p
 
 
 
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11029498-1']);
+		_gaq.push(['_trackPageview']);
 
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
 
 
