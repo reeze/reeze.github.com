@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Go | Zen Space]]></title>
+  <link href="http://reeze.cn/categories/go/atom.xml" rel="self"/>
+  <link href="http://reeze.cn/"/>
+  <updated>2013-10-31T00:16:52+08:00</updated>
+  <id>http://reeze.cn/</id>
+  <author>
+    <name><![CDATA[reeze]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[译文]可伸缩Go调度器设计文档]]></title>
+    <link href="http://reeze.cn/2013/07/14/translation-scalable-go-scheduler-design-doc/"/>
+    <updated>2013-07-14T16:34:00+08:00</updated>
+    <id>http://reeze.cn/2013/07/14/translation-scalable-go-scheduler-design-doc</id>
+    <content type="html"><![CDATA[<p>原文: Scalable Go Scheduler Design Doc <a href="https://docs.google.com/document/d/1TTj4T2JO42uD5ID9e89oa0sLKhJYD0Y_kqxDv3I3XMw/edit?pli=1">https://docs.google.com/document/d/1TTj4T2JO42uD5ID9e89oa0sLKhJYD0Y_kqxDv3I3XMw/edit?pli=1</a></p>
+
+<p>TODO</p>
+]]></content>
+  </entry>
+  
+</feed>
