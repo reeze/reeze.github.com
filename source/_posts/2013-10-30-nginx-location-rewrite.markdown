@@ -4,6 +4,7 @@ title: "nginx中location的匹配和rewrite"
 date: 2013-10-30 23:59
 comments: true
 categories: 
+  - Nginx
 ---
 
 最近在线上进行nginx规则的调整的时候遇到一个问题，发现在location匹配时候可能会踩到的一个坑。
