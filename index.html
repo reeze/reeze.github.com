@@ -9,8 +9,7 @@
 
 <meta name="author" content="reeze"> 
 
-<meta name="description" content="最近在线上进行nginx规则的调整的时候遇到一个问题，发现在location匹配时候可能会踩到的一个坑。 location在匹配规则的时候匹配的是归一化之后的URL，比如多个斜杠或者URL中带&#8221;.&#8221;, &#8220;..&#8221;的都会被
-归一化。 &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="2013 结束了，迎来了新的一年。年复一年，我们在前行，虽然匆忙，也是时候停下来想一想了，回顾一下过去的一年都有哪些收获，规划一下来年。 2013年回顾： 找了一下去年的总结，发现被自己删掉了，因为不完整。原来计划2013年完成TiPHP的实现。这个计划没有做完。学习@胖胖，不找借口， &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -96,6 +95,222 @@ $(document).ready(
 </header>
 
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2014/01/01/happy-2014/">
+		
+			2013年终总结及2014规划</a>
+	</h2>
+	<div class="entry-content">
+		<p>2013 结束了，迎来了新的一年。年复一年，我们在前行，虽然匆忙，也是时候停下来想一想了，回顾一下过去的一年都有哪些收获，规划一下来年。</p>
+
+<h2>2013年回顾：</h2>
+
+<p>找了一下去年的总结，发现被自己删掉了，因为不完整。原来计划2013年完成TiPHP的实现。这个计划没有做完。学习@胖胖，不找借口，是没有足够的时间。</p>
+
+<p>这一年：</p>
+
+<ol>
+<li>生活
+
+<ol>
+<li>情感上终于跟随自己的内心做自己了，年末的三个月是我所经历过最完美的时光。</li>
+<li>运动上，坚持了半年多每周的羽毛球，还有跑步，身体没有以前好，不过后面3个多月运动的少了。</li>
+</ol>
+</li>
+<li>工作
+
+<ol>
+<li>代码量不足，相对以前代码的编写量不足，14年会努力提高代码量和代码质量。</li>
+<li>收获
+
+<ul>
+<li>私有云平台的设计实现，对在线业务的运维和支持体系有了新的理解。除了基础本身基础设施的重要性非常大。是每个公司都要考虑的问题。</li>
+<li>LAMP技术的投入。主要是在性能优化上，做了一些业务的优化，对优化技术上也学到了不少。</li>
+<li>6月份参加 PHPConf 分享了贴吧的LAMP架构，第一次参加技术会议，学习到不少：
+
+<ul>
+<li>首先得感谢胖胖 @phppan 的引荐，一直没有想过要主动参加什么 会议。</li>
+<li>准备PPT的过程 很感谢定坤的支持，立强和洪波专业细致的指导，让我的讲稿如此的出色，同事也要感谢 所有贴吧同事给的意见。</li>
+</ul>
+</li>
+<li>职业上有了提升，仍然是需要感谢定坤，立强和洪波，你们给了我极大的帮助，很感谢定坤的认可，感谢立强的帮助，以及专业靠普通的洪波。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>自我提升
+
+<ul>
+<li>业余项目
+
+<ul>
+<li>php-leveldb, 写完后维护的少了。主要是自己的需求其实不多。所以放着了。</li>
+<li>php开源：对PHP本身的贡献开始变慢了。是观察力不够，没有特别好的想法。</li>
+<li>hhvm：提交了4个小的补丁</li>
+</ul>
+</li>
+<li>读书，主要有：
+
+<ul>
+<li>《Critical Thinking》</li>
+<li>《Think fast and slow》</li>
+<li>《编译原理》
+
+<ul>
+<li>学习了cousera 上的编译原理课程，收获很大，对语言的设计实现上又了较全面的理解。</li>
+</ul>
+</li>
+<li>《编译器设计》</li>
+<li>《伊豆的舞女》</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+
+<p>总结来说：
+2013年是比较充实的一年，情感上有很大的收获，工作上很感谢有leader的认可，感谢有很好的技术氛围，
+有非常有经验的同事，让我能够不停的成长。</p>
+
+<h2>2014年规划和愿望：</h2>
+
+<p>2014年是我一个新的开始，主要专注在技术的深度和个人影响力的提升上。
+同时要提升生活品质，要学会感恩，要学会经营，全力的投入，无论和感情还是工作上。</p>
+
+<p>不用担心没有方向，前进了，方向自然会出现；努力了，自然会有收获。不瞻前顾后。</p>
+
+<ol>
+<li><p>生活</p>
+
+<ul>
+<li>Be together with my girl.</li>
+<li>完成memory的设计和制作</li>
+<li>去厦门</li>
+<li>坚持每周至少运动6小时，提高身体素质</li>
+</ul>
+</li>
+<li><p>技术</p>
+
+<ul>
+<li>学习数据库的实现细节和优化</li>
+<li>投入精力学习HHVM，参与开发，每个月至少提交一个补丁</li>
+<li>研读lua的实现并完成学习笔记</li>
+<li>完成TiPHP项目</li>
+</ul>
+</li>
+<li>工作
+
+<ul>
+<li>完成访问中间件的重构</li>
+<li>在性能优化及LAMP技术上有产出</li>
+<li>在架构及影响力上有进一步的提升</li>
+</ul>
+</li>
+<li>自我提升
+
+<ul>
+<li>课程学习：至少<em>完整</em>的学习3门cousera上的课程。</li>
+<li>读书：
+
+<ul>
+<li>技术类：至少4本。精读。
+
+<ul>
+<li> 《哥德尔，艾舍尔，巴赫》买来好久没有读，开始读完以后发现非常有意思。</li>
+</ul>
+</li>
+<li>非技术类：至少4本。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>新年愿望:
+
+<ul>
+<li>母亲身体健康，快乐。</li>
+<li>我的宝贝能感受到她渴望的快乐和充实，心想事成。</li>
+<li>大侄子夏飞今天的高考能有个好成绩，我的第一个侄子，很聪明，希望他能沉着应对，我相信他能做最好的自己。</li>
+<li>二侄子夏伟能突破自己，性格中内向的部分能更阳光，希望他能感受到世界的美好，
+我要尽自己的力量让他快乐的度过有些艰难的过程。</li>
+<li>三侄子夏俊能尽快进入状态</li>
+<li>小宝宝们健康</li>
+</ul>
+</li>
+</ol>
+
+
+<p>以前还会有一些物质上的愿望，比如相机，MacBook之类的，刚才绞尽脑汁都没有想到自己想要
+什么样具体的礼物。还是以前那样：我只在乎物质带来的精神收益，不靠虚浮的物质来满足内心的需要。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-01T00:00:00+08:00" pubdate data-updated="true">Jan 1<span>st</span>, 2014</time></div>
+	<div class="tags">
+
+</div>
+	
+		<span class="comments"><a href="/2014/01/01/happy-2014//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2013/12/18/zero-cost-exception/">
+		
+			有关无开销异常</a>
+	</h2>
+	<div class="entry-content">
+		<p>在编写程序中我们无时不刻的在处理异常，异常处理</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-18T11:54:00+08:00" pubdate data-updated="true">Dec 18<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+</div>
+	
+		<span class="comments"><a href="/2013/12/18/zero-cost-exception//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -627,58 +842,6 @@ location /newapi {
     <article class="post">
 	<h2 class="title">
 		
-		<a href="/2012/07/22/intro/">
-		
-			Intro</a>
-	</h2>
-	<div class="entry-content">
-		<p>Testing!</p>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin, massa eu vestibulum laoreet, nibh ante vulputate lorem, ac lobortis ante tellus eu mi. Duis sem nisi, luctus at feugiat eget, fringilla ut tellus. Nam a molestie justo. Sed pulvinar est vitae tellus semper tincidunt. Fusce euismod luctus lacus nec placerat. Mauris rutrum scelerisque nulla ut tempor. Nunc porttitor posuere mi, aliquet vehicula lorem feugiat in. Ut ut fermentum risus. Aliquam tincidunt ultricies ante sit amet bibendum. Cras nec sapien odio. Duis posuere congue sem, at congue massa faucibus at.</p>
-
-<p>Integer ut sapien eget nisl auctor faucibus ut fermentum arcu. Nunc rutrum urna non risus congue et tristique felis eleifend. Maecenas blandit est eu mauris aliquam aliquet. Quisque porttitor enim eget risus blandit in mollis orci eleifend. Nam malesuada nulla sed lacus elementum placerat accumsan arcu rhoncus. Phasellus feugiat cursus turpis nec facilisis. Duis eget metus arcu, eget commodo velit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer cursus vulputate enim, vel gravida velit faucibus et. Ut a urna vitae tellus cursus rhoncus. Maecenas at odio eget quam cursus elementum. Aliquam vitae eros quis tellus laoreet accumsan sed id lorem. Suspendisse et rutrum leo. Integer scelerisque vestibulum adipiscing. In posuere, libero ac accumsan suscipit, nulla ligula gravida erat, ut tempor odio erat nec sem. Quisque justo ipsum, adipiscing volutpat varius vitae, blandit eget nisi.</p>
-
-<p>Nullam adipiscing neque ac lacus commodo vitae imperdiet dui sollicitudin. Ut ac nunc augue. Nam at sem ut quam commodo aliquet vitae vitae dui. Vivamus scelerisque felis eget dolor cursus feugiat. Phasellus at dui sed lectus scelerisque pretium. Etiam nec massa ut justo vestibulum fringilla ac vitae urna. Morbi tortor erat, tempus sed consectetur at, elementum nec eros. Vivamus mattis arcu a sapien semper non lacinia eros pretium.</p>
-
-<p>Proin ut hendrerit arcu. Maecenas ullamcorper tristique magna vel mattis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam tincidunt euismod viverra. In sit amet neque turpis. Suspendisse ac sapien mi, id blandit purus. Ut tortor turpis, rutrum ac tempor at, accumsan sit amet erat. Etiam ultricies eleifend dolor, eget tempus justo tristique vitae. In hac habitasse platea dictumst. Aliquam eu enim neque.</p>
-
-<p>Morbi massa lorem, viverra non dictum at, malesuada vel nibh. Nam fermentum lobortis varius. Sed a nulla lacus, quis posuere risus. Nunc id urna libero, quis rutrum mi. In gravida felis urna. Praesent nec dolor ac urna tempor fermentum. Curabitur rutrum arcu et lorem volutpat viverra.</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-22T08:23:00+08:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/categories/self/'>self</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/2012/07/22/intro//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
 		<a href="/2012/07/15/introduction-to-travis-ci/">
 		
 			初试Travis-CI</a>
@@ -1084,52 +1247,6 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
 	
 </div></article>
 
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/2012/05/19/migrate-to-octopress/">
-		
-			迁移博客到Octopress</a>
-	</h2>
-	<div class="entry-content">
-		<p>很久以前就不想继续使用Wordpress了，不太习惯在线写东西，开始返璞归真，比较喜欢
-纯文本的内容创作方式，<a href="http://www.php-internal.com">TIPI</a>就使用的是markdown格式，
-同时在终端也会让我更有写作的欲望。</p>
-
-<p>翻了一下以前的博客，原来一共加起来也不足20篇。以此作为起点今后多继续更新博客吧。</p>
-
-<p>TIPI的issue里还有很多的待处理工作，计划在7月份全部写完。这个始终是高优先级的。
-最近给PHP修复了一些bug，也有一些feature被接受了。在这过程中对PHP的实现又有了一些更加深入
-的理解。也有冲动想要写到TIPI里。总之，TIPI会一直更新。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-19T23:50:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-</div>
-	
-		<span class="comments"><a href="/2012/05/19/migrate-to-octopress//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
 <nav id="pagenavi">
     
     
@@ -1137,7 +1254,7 @@ opcode_array数组中移除了，因为使用了opcode cache扩展优化只进�
     
     <div class="center"><a href="/archives">Blog Archives</a></div>
 </nav></div>
-	<footer id="footer" class="inner">Copyright &copy; 2013
+	<footer id="footer" class="inner">Copyright &copy; 2014
 
     reeze
 

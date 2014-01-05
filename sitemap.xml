@@ -101,10 +101,6 @@
         <lastmod>2013-07-14T15:17:01+08:00</lastmod>
     </url>
     <url>
-        <loc>http://reeze.cn/2012/07/22/intro/</loc>
-        <lastmod>2013-07-14T15:17:01+08:00</lastmod>
-    </url>
-    <url>
         <loc>http://reeze.cn/2012/07/22/how-to-get-php-functions-const-parameters-name/</loc>
         <lastmod>2013-07-14T15:17:01+08:00</lastmod>
     </url>
@@ -129,24 +125,32 @@
         <lastmod>2013-10-31T00:14:38+08:00</lastmod>
     </url>
     <url>
+        <loc>http://reeze.cn/2013/12/18/zero-cost-exception/</loc>
+        <lastmod>2013-12-18T18:01:01+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://reeze.cn/2014/01/01/happy-2014/</loc>
+        <lastmod>2014-01-05T14:30:02+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://reeze.cn/about/</loc>
         <lastmod>2013-07-14T15:17:01+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/archives/</loc>
-        <lastmod>2013-10-31T00:16:47+08:00</lastmod>
+        <lastmod>2014-01-05T14:30:02+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/blog/archives/</loc>
-        <lastmod>2013-10-31T00:16:47+08:00</lastmod>
+        <lastmod>2014-01-05T14:30:02+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/blog/</loc>
-        <lastmod>2013-10-31T00:16:47+08:00</lastmod>
+        <lastmod>2014-01-05T14:30:02+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/</loc>
-        <lastmod>2013-10-31T00:16:47+08:00</lastmod>
+        <lastmod>2014-01-05T14:30:02+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/robots.txt</loc>
