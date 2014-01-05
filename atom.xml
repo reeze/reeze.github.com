@@ -4,7 +4,7 @@
   <title><![CDATA[Zen Space]]></title>
   <link href="http://reeze.cn/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2014-01-05T14:30:57+08:00</updated>
+  <updated>2014-01-05T14:48:17+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -64,6 +64,7 @@
 <li>php-leveldb, 写完后维护的少了。主要是自己的需求其实不多。所以放着了。</li>
 <li>php开源：对PHP本身的贡献开始变慢了。是观察力不够，没有特别好的想法。</li>
 <li>hhvm：提交了4个小的补丁</li>
+<li>TIPI：精力赶不上，更新很慢，有很多热心读者发信来问，表示歉意。</li>
 </ul>
 </li>
 <li>读书，主要有：
