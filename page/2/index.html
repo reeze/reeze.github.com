@@ -9,9 +9,9 @@
 
 <meta name="author" content="reeze"> 
 
-<meta name="description" content="很久以前就不想继续使用Wordpress了，不太习惯在线写东西，开始返璞归真，比较喜欢
-纯文本的内容创作方式，TIPI就使用的是markdown格式，
-同时在终端也会让我更有写作的欲望。 翻了一下以前的博客，原来一共加起来也不足20篇。以此作为起点今后多继续更新博客吧。 &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="什么是NOP NOP 是一个特殊的opcode，表示空操作，在很多地方存在，汇编中的NOP含义也一样，
+机器指令中的空操作通常用来将内存地址进行对齐，以提高CPU访问内存的效率，
+GCC等编译器也会将特定的语句进行优化而产生空操作。 PHP中的空操作opcode NOP: ZEND_NOP &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -97,6 +97,241 @@ $(document).ready(
 </header>
 
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">
+		
+			PHP中的NOP及为什么有这个opcode</a>
+	</h2>
+	<div class="entry-content">
+		<h2>什么是NOP</h2>
+
+<p>NOP 是一个特殊的opcode，表示空操作，在很多地方存在，汇编中的NOP含义也一样，
+机器指令中的空操作通常用来将内存地址进行对齐，以提高CPU访问内存的效率，
+GCC等编译器也会将特定的语句进行优化而产生空操作。</p>
+
+<h2>PHP中的空操作opcode NOP: ZEND_NOP</h2>
+
+<p>PHP基于Zend虚拟机，其他基于虚拟机的语言中大都会有类似NOP的指令，
+PHP文档有对此的<a href="http://cn.php.net/manual/en/internals2.opcodes.nop.php">简单说明</a>：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="cm">/*</span>
+</span><span class='line'><span class="cm"> * no operation</span>
+</span><span class='line'><span class="cm"> * opcode number: 0</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="k">function</span> <span class="nf">A</span><span class="p">(){};</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span><span class='line'>
+</span><span class='line'><span class="x">/* VLD 的输出结果 */</span>
+</span><span class='line'><span class="x">line  #   op  fetch   ext return  operands</span>
+</span><span class='line'><span class="x">6 0   NOP              </span>
+</span><span class='line'><span class="x">7 1   RETURN              1</span>
+</span><span class='line'><span class="x">Function name: A</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">Compiled variables: none</span>
+</span><span class='line'>
+</span><span class='line'><span class="x">line  #   op  fetch   ext return  operands</span>
+</span><span class='line'><span class="x">6 0   RETURN              null</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的VLD结果可以看出，函数A()的声明编译后变成了<code>NOP</code>操作。</p>
+
+<p>Zend虚拟机是高级抽象，不要考虑内存对齐等的问题，为什么还需要空操作这样的opcode呢？</p>
+
+<p>原因简单讲就是：编译过程优化的结果。有的内容由于可以在编译时就可确定(称为提早绑定Early Binding)，
+那么一部分opcode可以在编译时替换成空操作。</p>
+
+<p>我们来看看这段代码的编译结果：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">Foo</span> <span class="p">{}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">new</span> <span class="nx">Bar</span><span class="p">();</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Bar</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">filename</span><span class="o">:</span>       <span class="o">/</span><span class="nx">Users</span><span class="o">/</span><span class="nx">reeze</span><span class="o">/</span><span class="nx">Opensource</span><span class="o">/</span><span class="nx">php</span><span class="o">-</span><span class="nx">test</span><span class="o">/</span><span class="nx">php</span><span class="o">-</span><span class="nx">src</span><span class="o">-</span><span class="mf">5.4</span><span class="o">/</span><span class="nx">test</span><span class="o">.</span><span class="nx">php</span>
+</span><span class='line'><span class="k">function</span> <span class="nf">name</span><span class="o">:</span>  <span class="p">(</span><span class="k">null</span><span class="p">)</span>
+</span><span class='line'><span class="nx">number</span> <span class="nx">of</span> <span class="nx">ops</span><span class="o">:</span>  <span class="mi">8</span>
+</span><span class='line'><span class="nx">compiled</span> <span class="nx">vars</span><span class="o">:</span>  <span class="nx">none</span>
+</span><span class='line'><span class="nx">line</span>     <span class="c1"># *  op                           fetch          ext  return  operands</span>
+</span><span class='line'><span class="o">---------------------------------------------------------------------------------</span>
+</span><span class='line'>   <span class="mi">2</span>     <span class="mi">0</span>  <span class="o">&gt;</span> <span class="o">&gt;</span> <span class="nx">JMPZ</span>                                                     <span class="k">true</span><span class="p">,</span> <span class="o">-&gt;</span><span class="mi">3</span>
+</span><span class='line'>   <span class="mi">3</span>     <span class="mi">1</span>  <span class="o">&gt;</span>   <span class="nx">ZEND_DECLARE_CLASS</span>                               <span class="err">$</span><span class="mi">0</span>      <span class="s1">&#39;%00foo%2FUsers%2Freeze%2FOpensource%2Fphp-test%2Fphp-src-5.4%2Ftest.php0x106cd601f&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span>
+</span><span class='line'>   <span class="mi">4</span>     <span class="mi">2</span>    <span class="o">&gt;</span> <span class="nx">JMP</span>                                                      <span class="o">-&gt;</span><span class="mi">3</span>
+</span><span class='line'>   <span class="mi">6</span>     <span class="mi">3</span>  <span class="o">&gt;</span>   <span class="nx">ZEND_FETCH_CLASS</span>                              <span class="mi">4</span>  <span class="o">:</span><span class="mi">1</span>      <span class="s1">&#39;Bar&#39;</span>
+</span><span class='line'>       <span class="mi">4</span>      <span class="k">NEW</span>                                                      <span class="o">:</span><span class="mi">1</span>
+</span><span class='line'>       <span class="mi">5</span>      <span class="nx">DO_FCALL_BY_NAME</span>                              <span class="mi">0</span>
+</span><span class='line'>   <span class="mi">7</span>     <span class="mi">6</span>      <span class="nx">NOP</span>
+</span><span class='line'>   <span class="mi">9</span>     <span class="mi">7</span>    <span class="o">&gt;</span> <span class="k">RETURN</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>和前面官方函数定义代码一样，上面VLD输出的第7行看到类Bar的opcode变成了NOP，不过请留意第3行，
+这一行类Foo定义的opcode是ZEND_DECLARE_CLASS，也就是类的声明。</p>
+
+<p><em>为什么同样是类的声明，第一个类声明的OPCODE和第二个的不一样呢？</em></p>
+
+<p>上例中的代码，在Bar类声明之前是可以执行的<code>new Bar</code>，但是此时Bar类的声明并没有执行到，
+那为什么可以访问到Bar类呢，<em>这是因为Bar类的声明在编译时就已经完成了</em>，
+因为Bar类已经在编译时声明好了，所以在真正执行的时候就不需要再次执行声明类的操作了，
+所以它所对应的opcode被替换成NOP了。</p>
+
+<p>而Foo这个类由于处在条件判断块之中，编译期无法确定Foo类是否一定会被执行，所以还是需要在
+执行时来声明这个类，所以opcode没有改变。</p>
+
+<p>对于使用了opcode缓存的代码来说，把函数和类的声明移到了编译时，也就减少了执行时的opcode执行，
+这能加快代码的执行。</p>
+
+<h2>优化</h2>
+
+<p>你可能会想，既然类及函数的声明可以优化掉，为什么不能直接丢弃这个opcode呢？
+一能减少opcode占用的内容，比如很多的框架中有大量的类定义，也能减少执行时间，
+因为空操作并不是0成本的，执行NOP的时候还是需要消耗CPU的。</p>
+
+<p>先看看opcode编译过程的一个重要函数：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">zend_op</span> <span class="o">*</span><span class="nf">get_next_op</span><span class="p">(</span><span class="n">zend_op_array</span> <span class="o">*</span><span class="n">op_array</span> <span class="n">TSRMLS_DC</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">zend_uint</span> <span class="n">next_op_num</span> <span class="o">=</span> <span class="n">op_array</span><span class="o">-&gt;</span><span class="n">last</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">zend_op</span> <span class="o">*</span><span class="n">next_op</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">next_op_num</span> <span class="o">&gt;=</span> <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">op_array</span><span class="o">-&gt;</span><span class="n">fn_flags</span> <span class="o">&amp;</span> <span class="n">ZEND_ACC_INTERACTIVE</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="cm">/* we messed up */</span>
+</span><span class='line'>          <span class="n">zend_printf</span><span class="p">(</span><span class="s">&quot;Ran out of opcode space!</span><span class="se">\n</span><span class="s">&quot;</span>
+</span><span class='line'>                      <span class="s">&quot;You should probably consider writing this huge script into a file!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span class='line'>          <span class="n">zend_bailout</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span> <span class="o">*=</span> <span class="mi">4</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">op_array_alloc_ops</span><span class="p">(</span><span class="n">op_array</span><span class="p">,</span> <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">next_op</span> <span class="o">=</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">op_array</span><span class="o">-&gt;</span><span class="n">opcodes</span><span class="p">[</span><span class="n">next_op_num</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">init_op</span><span class="p">(</span><span class="n">next_op</span> <span class="n">TSRMLS_CC</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="n">next_op</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这个函数每次会返回一个zend_op(也就是opcode一个最小单位)，opcode的存储空间申请和哈希表类似，
+通过预先申请空间的方式，如果空间不足则适当扩容。在编译时，opcode是以文件为单位的，而通常
+在一个文件中函数或类声明的个数是不会太多的。而在编译时opcode数组已经是预先申请好的，所以
+及时优化掉这个opcode，而实际在编译时的内存占用也不会有任何的优化。</p>
+
+<p>目前只有少数几处使用了ZEND_NOP这个opcode。读者可以参考Zend/zend_compile.c: zend_do_early_binding()，
+这个函数进行就是在确定在编译时能确定的函数以及类声明，在完成函数或类的声明后将当前编译的opcode设置为ZEND_NOP。
+因为后续在执行是并需要再次对该函数或类进行声明了。</p>
+
+<blockquote><p><strong>NOTE</strong>
+当然也并不是所有的全局类或者方法都会进行提早绑定,具体可以参考前面提到的Zend_compile.c文件的实现</p></blockquote>
+
+<p>在这个函数中其实可以将生成的ZEND_NOP优化掉的，比如eAccelarator扩展中就对opcode进行了优化，将ZEND_NOP从
+opcode_array数组中移除了，因为使用了opcode cache扩展优化只进行一次，而执行对多次执行，
+这样的优化是值得的。目前Zend引擎并没有进行任何的优化，首先从代码上来看，类和函数声明的数量和其他指令的数量
+之间差很多个等级，所以至少这个地方优化的收益是有限的，为了保证Zend引擎的简洁它没有进行优化。</p>
+
+<p>目前APC扩展已经基本确定为将要进入PHP默认opcode缓存的官方扩展了，那么这些优化都可以在扩展中进行，
+保证Zend引擎的简单易维护更为重要。</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-28T14:19:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/php内核/'>PHP内核</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/2012/05/28/what-opcode-zend-nop-is-in-php//page/2/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -686,119 +921,6 @@ Ctrl + E来定位当前输入的命令吧. 其实在~/.screenrc中修改一下�
 </div>
 	
 		<span class="comments"><a href="/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command//page/2/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/2010/04/25/make-your-site-drop-uploadable-with-html5s-file-api-like-gmail-does/">
-		
-			让你的网站也像Gmail一样支持文件拖放上传-HTML5之File API</a>
-	</h2>
-	<div class="entry-content">
-		<blockquote><p>如果你比较好奇，可以先从<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/FileAPI_Test.zip">这里下载所有代码</a>，也可以点击这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/chrome_drop_upload.html">查看chrome下上传的demo</a>，点这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/firefox36_drop_upload.html">查看firefox下的demo</a></p></blockquote>
-
-<p>前不久<a href="http://net.chinabyte.com/395/11221395.shtml">Gmail推出了支持拖拽的附件上传功能</a>，试用了下还真不错，其实很久以前就在想能有直接拖拽附件的功能，多亏有了HTML5，Web应用越来越像客户端的应用了。</p>
-
-<p>在好奇心驱使下，想了解一下Gmail到底是怎么做到的，了解了一下最新的<a href="http://www.w3.org/TR/FileAPI">HTML5 File API草案</a>，这个接口主要提供的就是提供对文件对象的访问，别想歪了，这个接口是无法随意的访问系统里的文件的。他能做的就是访问<input type="file" />标签里所选择的文件，这些文件可以通过用户手动选择，或者是HTML5的拖放接口选中的文件。有兴趣的童鞋可以看看这个规范，还算比较简单。</p>
-
-<p>下面简单看看接口定义几个对象。</p>
-
-<p>FileList、File对象。</p>
-
-<p>在HTML5中的<input type="file"  />标签中增加了mutilple属性，允许进行多文件选择。大家应该都知道一般上传标签中是不允许选择多个文件的。 新增的这个属性就是允许进行多个文件的选择（这个在桌面应用中也很常见）。<input type="file" **multiple="multiple"** id="file" /></p>
-
-<p>下面是在Firebug中的输出
-`</p>
-
-<blockquote><blockquote><blockquote><p>var f = document.getElementById(&#8220;file&#8221;)
-f.files
-FileList0=File length=1 // 选中的文件数量
-f.files[0]
-FilefileName=es.dll fileSize=271360
-`</p></blockquote></blockquote></blockquote>
-
-<p>FileList对象就是用户选择的所有文件的对象表示，如果是通过input标签选择的，就可以通过上面代码所示的方法进行访问，File对象就可以刚才选择的某个文件的信息，如上面的代码所示，主要可以得到所选中的文件名以及文件大小信息。</p>
-
-<p>你可能在想只能得到这些信息到底有什么用呢？都没有办法读取文件内容，这就得提到规范中的FileReader接口了，这个接口就是用来读取File对象文件的。</p>
-
-<p>在<a href="http://www.w3.org/TR/FileAPI">File API规范</a>中提到File API主要是和其他的接口协同合作。比如XMLHttpRequest (这个新接口支持通过xhr的send()方法发送File对象)， DataTransfer(也就是HTML5中的拖拽接口 )， 以及<a href="http://dev.w3.org/html5/workers">Web Worksers</a>(这个主要是异步脚本执行，相当于给JS提供了“多线程”脚本执行能力，并且支持通过postMessage()进行“线程间通信”)，感兴趣的，可以看看<a href="http://www.v-ec.com/dh20156/article.asp?id=242">这篇日志</a>，以及<a href="http://feedproxy.google.com/~r/webbang/~3/_usD4yheDqI">这篇</a>。</p>
-
-<p>目前能实现这样的效果的方式主要有如下几种：</p>
-
-<ul>
-<li><p>Gmail中提到的这两个浏览器都支持拖放接口，托放以后可以直接通过托放事件的DataTransfer属性访问到本次托放是关联的文件对象列表FileList,然后通过XMLHttpRequest的send方法将File对象发送到服务器</p></li>
-<li><p>在Chrome下支持直接将文件拖放到文件选择控件上，就相当于直接选择了文件。这时可以通过<input type="file" />DOM对象的files属性访问到被托放进来的文件列表对象，然后也可以通过Ajax将文件对象发送到服务器，通过将文件选择控件透明度降低也可以实现Gmail类似的效果。 在Chrome因为可以直接通过托拽的方式让文件选择控件“赋值”，此时也可以通过一个iframe加表单的方式将数据发送到服务器。</p></li>
-<li><p>在Firefox3.6下可以通过FileReader直接读取到文件的内容，然后直接将文件内容发送到服务器端(可以参考<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/index.html">这个例子</a>，这是个不完整的例子，直接浏览是看不到效果的，查看源代码你就会懂的。）</p></li>
-</ul>
-
-
-<p>下面就来看看Gmail到底是怎么做到的吧。</p>
-
-<p>本来想通过Firebug的概况功能来捕捉到在托拽期间的脚本执行情况，比如：</p>
-
-<p><a href="/uploads/2010/04/screenshot1.png"><img src="/uploads/2010/04/screenshot1.png" alt="" /></a><a href="/uploads/2010/04/screenshot.png">
-</a></p>
-
-<p>但是脚本执行里压根没有找到ajax相关的函数调用，可能是因为firebug还不支持监控页面里嵌入的iframe中的脚本执行跟踪，这也说明本次上传肯定是在某个iframe中完成的。，那就直接监听网络吧，托拽上传一个附件时查看网络情况，发现附件是通过下面的ajax post过去的：</p>
-
-<p><a href="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail1.jpg"><img src="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail1.jpg" alt="" /></a></p>
-
-<p>大家注意看，是通过ajax post方式将附件POST到服务器的，</p>
-
-<p><a href="/uploads/2010/04/Gmail-11.jpg"><img src="/uploads/2010/04/Gmail-11.jpg" alt="" /></a></p>
-
-<p><a href="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-31.jpg"><img src="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-31.jpg" alt="" /></a><a href="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-3.jpg">
-</a></p>
-
-<p>可以看出Gmail在firefox下不是通过表单直接提交实现的。在chrome下的开发人员工具有点简单，无法看到网络情况，我也懒的再去抓包看了，估计是使用透明<input type="file" />+ajax方式实现的。</p>
-
-<p>在Gmail支持托拽的声明中提到目前只支持Chrome 2+以及FireFox3.6+。虽然这两个浏览器都支持HTML5，但是对于所有规范的支持程度都是不一样的，并且规范也还不是正式规范。在Firefox3.6的release note中提到：</p>
-
-<p>Support for new DOM and HTML5 specifications including the Drag &amp; Drop API and the File API, which allow for more interactive web pages.</p>
-
-<p>开始支持了HTML5的拖拽接口以及File API。</p>
-
-<hr />
-
-<p>下面根据浏览器以及HTML5的规范整理出两个浏览器下实现类似Gmail 上传附件的代码。</p>
-
-<p><a href="/uploads/2010/04/14.jpg"><img src="/uploads/2010/04/14.jpg" alt="" /></a></p>
-
-<p>点击<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/FileAPI_Test.zip">这里下载所有代码</a>，有兴趣的童鞋查看源代码就知道怎么回事了，有一定的注释：）</p>
-
-<p>也可以点击这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/chrome_drop_upload.html">查看chrome下上传的demo</a>，点这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/firefox36_drop_upload.html">查看firefox下的demo</a>，之所以分开是为了简单起见，当然你真的想要给你的网站提供托拽上传功能，你就得自己去同时兼容这两个浏览器啦，相信这也不是件困难的事情：）</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-04-25T00:14:29+08:00" pubdate data-updated="true">Apr 25<span>th</span>, 2010</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/categories/javascript/'>Javascript</a>, <a class='category' href='/categories/web技术/'>Web技术</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/2010/04/25/make-your-site-drop-uploadable-with-html5s-file-api-like-gmail-does//page/2/index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

@@ -9,7 +9,8 @@
 
 <meta name="author" content="reeze"> 
 
-<meta name="description" content="2013 结束了，迎来了新的一年。年复一年，我们在前行，虽然匆忙，也是时候停下来想一想了，回顾一下过去的一年都有哪些收获，规划一下来年。 2013年回顾： 找了一下去年的总结，发现被自己删掉了，因为不完整。原来计划2013年完成TiPHP的实现。这个计划没有做完。学习@胖胖，不找借口， &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="最近在重构公司的一个交互中间件，在重新设计API及总体架构的时候思考了许多，
+不禁萌发了一个疑问，什么样的API才算是一个设计良好的API呢？ 参考了许多的资料，做一下总结。主要来自这个keynote 什么是API 我们只要是在进行编程我们就需要不停的设计API， &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -95,6 +96,121 @@ $(document).ready(
 </header>
 
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2014/02/07/what-makes-a-good-api/">
+		
+			好的API设计</a>
+	</h2>
+	<div class="entry-content">
+		<p>最近在重构公司的一个交互中间件，在重新设计API及总体架构的时候思考了许多，
+不禁萌发了一个疑问，什么样的API才算是一个设计良好的API呢？</p>
+
+<p>参考了许多的资料，做一下总结。主要来自这个<a href="http://lcsd05.cs.tamu.edu/slides/keynote.pdf">keynote</a></p>
+
+<h2>什么是API</h2>
+
+<p>我们只要是在进行编程我们就需要不停的设计API，</p>
+
+<p>API简单来讲可以是一个调用的函数，一个接口。抽象来说：<em>接口是一个内聚系统暴漏给外部的一切信息</em>。
+包含但不限于：</p>
+
+<ul>
+<li>调用方式：比如通过lib库或者http接口等</li>
+<li>调用约定：比如lib的函数签名或者HTTP的参数，http method或者头信息，长短链接等等。</li>
+<li>依赖关系：比如接口的调用需要涉及到第三方或者其他的准备工作等等。</li>
+</ul>
+
+
+<h2>设计良好API的特点</h2>
+
+<p>这里探讨的API均为系统边界的API设计，而对于内部API来说不在探讨范围之内。</p>
+
+<p><em>变动困难</em></p>
+
+<p>API就像一个人一样，我们和一个API打交道的时候需要了解这个人的特性偏好等，
+有的人很好相处，而有的人让人很头疼，尤其是你不得不和他打交道的时候。</p>
+
+<p>和人一样，如果你不得不和他打交道，要改变他的秉性是很痛苦的，人的“本性难移”,
+API也一样，一旦发布了，要改变的成本就很大很大。</p>
+
+<p>好的API应该具有：</p>
+
+<ol>
+<li>易于学习</li>
+<li>即使没有文档也易于使用</li>
+<li>不易误用：这一点很重要，要减少使用者的心智负担</li>
+<li>使用API的代码易于维护。这个有点不一样，不是API本身易于维护，而是API的友好度。
+比如接口功能单一，使用简单，使用者的代码也会相应的更易于维护</li>
+<li>易于满足需求：API的完备性和正交性。能够容易的满足需求，完备性保证功能完整，
+正交性保证接口的简洁性，不需要为所有的需求提供接口，而是由用户去组合。</li>
+<li>易于扩展</li>
+</ol>
+
+
+<h2>怎么样设计良好的API</h2>
+
+<p>基本原则：</p>
+
+<ol>
+<li>专一：一个API的功能应该是单一的，需要能够很容易的解释和理解，也就会更好用。</li>
+<li>尽可能的小：小有很多的优势，易于理解和维护。</li>
+<li>尽量少的外部依赖：减少使用者的成本</li>
+<li>设计不被实现影响:不要暴漏实现细节给用户</li>
+<li>竟可能少的暴露，不止是内部细节，对于不必要的接口尽量不要发布，比如使用不多的功能，
+可以暂时不暴露接口。</li>
+<li>良好的命名:尽量做到自描述。</li>
+<li>完善的文档</li>
+<li>考虑性能</li>
+</ol>
+
+
+<p>其他具体的方法还是参考后面参考资料的内容吧。</p>
+
+<h2>参考资料</h2>
+
+<ul>
+<li>http://mattgemmell.com/api-design/</li>
+<li>http://lcsd05.cs.tamu.edu/slides/keynote.pdf 虽然是Java相关，但是道理是相通的</li>
+<li>http://ishare.iask.sina.com.cn/f/61717785.html 《API Design for C++》</li>
+<li>http://qt-project.org/wiki/API-Design-Principles</li>
+<li>http://www4.in.tum.de/~blanchet/api-design.pdf (前面的链接里提到的)</li>
+</ul>
+
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-07T15:09:00+08:00" pubdate data-updated="true">Feb 7<span>th</span>, 2014</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/api/'>API</a>, <a class='category' href='/categories/design/'>Design</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/2014/02/07/what-makes-a-good-api//index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -1011,241 +1127,6 @@ travis也会忽略，所以采用了一个折中的方式来测试。因为测�
 </div>
 	
 		<span class="comments"><a href="/2012/07/15/introduction-to-travis-ci//index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/2012/05/28/what-opcode-zend-nop-is-in-php/">
-		
-			PHP中的NOP及为什么有这个opcode</a>
-	</h2>
-	<div class="entry-content">
-		<h2>什么是NOP</h2>
-
-<p>NOP 是一个特殊的opcode，表示空操作，在很多地方存在，汇编中的NOP含义也一样，
-机器指令中的空操作通常用来将内存地址进行对齐，以提高CPU访问内存的效率，
-GCC等编译器也会将特定的语句进行优化而产生空操作。</p>
-
-<h2>PHP中的空操作opcode NOP: ZEND_NOP</h2>
-
-<p>PHP基于Zend虚拟机，其他基于虚拟机的语言中大都会有类似NOP的指令，
-PHP文档有对此的<a href="http://cn.php.net/manual/en/internals2.opcodes.nop.php">简单说明</a>：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'><span class="cm">/*</span>
-</span><span class='line'><span class="cm"> * no operation</span>
-</span><span class='line'><span class="cm"> * opcode number: 0</span>
-</span><span class='line'><span class="cm"> */</span>
-</span><span class='line'><span class="k">function</span> <span class="nf">A</span><span class="p">(){};</span>
-</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
-</span><span class='line'>
-</span><span class='line'><span class="x">/* VLD 的输出结果 */</span>
-</span><span class='line'><span class="x">line  #   op  fetch   ext return  operands</span>
-</span><span class='line'><span class="x">6 0   NOP              </span>
-</span><span class='line'><span class="x">7 1   RETURN              1</span>
-</span><span class='line'><span class="x">Function name: A</span>
-</span><span class='line'>
-</span><span class='line'><span class="x">Compiled variables: none</span>
-</span><span class='line'>
-</span><span class='line'><span class="x">line  #   op  fetch   ext return  operands</span>
-</span><span class='line'><span class="x">6 0   RETURN              null</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>上面的VLD结果可以看出，函数A()的声明编译后变成了<code>NOP</code>操作。</p>
-
-<p>Zend虚拟机是高级抽象，不要考虑内存对齐等的问题，为什么还需要空操作这样的opcode呢？</p>
-
-<p>原因简单讲就是：编译过程优化的结果。有的内容由于可以在编译时就可确定(称为提早绑定Early Binding)，
-那么一部分opcode可以在编译时替换成空操作。</p>
-
-<p>我们来看看这段代码的编译结果：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
-</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">class</span> <span class="nc">Foo</span> <span class="p">{}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">new</span> <span class="nx">Bar</span><span class="p">();</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">Bar</span> <span class="p">{}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">filename</span><span class="o">:</span>       <span class="o">/</span><span class="nx">Users</span><span class="o">/</span><span class="nx">reeze</span><span class="o">/</span><span class="nx">Opensource</span><span class="o">/</span><span class="nx">php</span><span class="o">-</span><span class="nx">test</span><span class="o">/</span><span class="nx">php</span><span class="o">-</span><span class="nx">src</span><span class="o">-</span><span class="mf">5.4</span><span class="o">/</span><span class="nx">test</span><span class="o">.</span><span class="nx">php</span>
-</span><span class='line'><span class="k">function</span> <span class="nf">name</span><span class="o">:</span>  <span class="p">(</span><span class="k">null</span><span class="p">)</span>
-</span><span class='line'><span class="nx">number</span> <span class="nx">of</span> <span class="nx">ops</span><span class="o">:</span>  <span class="mi">8</span>
-</span><span class='line'><span class="nx">compiled</span> <span class="nx">vars</span><span class="o">:</span>  <span class="nx">none</span>
-</span><span class='line'><span class="nx">line</span>     <span class="c1"># *  op                           fetch          ext  return  operands</span>
-</span><span class='line'><span class="o">---------------------------------------------------------------------------------</span>
-</span><span class='line'>   <span class="mi">2</span>     <span class="mi">0</span>  <span class="o">&gt;</span> <span class="o">&gt;</span> <span class="nx">JMPZ</span>                                                     <span class="k">true</span><span class="p">,</span> <span class="o">-&gt;</span><span class="mi">3</span>
-</span><span class='line'>   <span class="mi">3</span>     <span class="mi">1</span>  <span class="o">&gt;</span>   <span class="nx">ZEND_DECLARE_CLASS</span>                               <span class="err">$</span><span class="mi">0</span>      <span class="s1">&#39;%00foo%2FUsers%2Freeze%2FOpensource%2Fphp-test%2Fphp-src-5.4%2Ftest.php0x106cd601f&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span>
-</span><span class='line'>   <span class="mi">4</span>     <span class="mi">2</span>    <span class="o">&gt;</span> <span class="nx">JMP</span>                                                      <span class="o">-&gt;</span><span class="mi">3</span>
-</span><span class='line'>   <span class="mi">6</span>     <span class="mi">3</span>  <span class="o">&gt;</span>   <span class="nx">ZEND_FETCH_CLASS</span>                              <span class="mi">4</span>  <span class="o">:</span><span class="mi">1</span>      <span class="s1">&#39;Bar&#39;</span>
-</span><span class='line'>       <span class="mi">4</span>      <span class="k">NEW</span>                                                      <span class="o">:</span><span class="mi">1</span>
-</span><span class='line'>       <span class="mi">5</span>      <span class="nx">DO_FCALL_BY_NAME</span>                              <span class="mi">0</span>
-</span><span class='line'>   <span class="mi">7</span>     <span class="mi">6</span>      <span class="nx">NOP</span>
-</span><span class='line'>   <span class="mi">9</span>     <span class="mi">7</span>    <span class="o">&gt;</span> <span class="k">RETURN</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>和前面官方函数定义代码一样，上面VLD输出的第7行看到类Bar的opcode变成了NOP，不过请留意第3行，
-这一行类Foo定义的opcode是ZEND_DECLARE_CLASS，也就是类的声明。</p>
-
-<p><em>为什么同样是类的声明，第一个类声明的OPCODE和第二个的不一样呢？</em></p>
-
-<p>上例中的代码，在Bar类声明之前是可以执行的<code>new Bar</code>，但是此时Bar类的声明并没有执行到，
-那为什么可以访问到Bar类呢，<em>这是因为Bar类的声明在编译时就已经完成了</em>，
-因为Bar类已经在编译时声明好了，所以在真正执行的时候就不需要再次执行声明类的操作了，
-所以它所对应的opcode被替换成NOP了。</p>
-
-<p>而Foo这个类由于处在条件判断块之中，编译期无法确定Foo类是否一定会被执行，所以还是需要在
-执行时来声明这个类，所以opcode没有改变。</p>
-
-<p>对于使用了opcode缓存的代码来说，把函数和类的声明移到了编译时，也就减少了执行时的opcode执行，
-这能加快代码的执行。</p>
-
-<h2>优化</h2>
-
-<p>你可能会想，既然类及函数的声明可以优化掉，为什么不能直接丢弃这个opcode呢？
-一能减少opcode占用的内容，比如很多的框架中有大量的类定义，也能减少执行时间，
-因为空操作并不是0成本的，执行NOP的时候还是需要消耗CPU的。</p>
-
-<p>先看看opcode编译过程的一个重要函数：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">zend_op</span> <span class="o">*</span><span class="nf">get_next_op</span><span class="p">(</span><span class="n">zend_op_array</span> <span class="o">*</span><span class="n">op_array</span> <span class="n">TSRMLS_DC</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="n">zend_uint</span> <span class="n">next_op_num</span> <span class="o">=</span> <span class="n">op_array</span><span class="o">-&gt;</span><span class="n">last</span><span class="o">++</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">zend_op</span> <span class="o">*</span><span class="n">next_op</span><span class="p">;</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">next_op_num</span> <span class="o">&gt;=</span> <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">op_array</span><span class="o">-&gt;</span><span class="n">fn_flags</span> <span class="o">&amp;</span> <span class="n">ZEND_ACC_INTERACTIVE</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>          <span class="cm">/* we messed up */</span>
-</span><span class='line'>          <span class="n">zend_printf</span><span class="p">(</span><span class="s">&quot;Ran out of opcode space!</span><span class="se">\n</span><span class="s">&quot;</span>
-</span><span class='line'>                      <span class="s">&quot;You should probably consider writing this huge script into a file!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-</span><span class='line'>          <span class="n">zend_bailout</span><span class="p">();</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>      <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span> <span class="o">*=</span> <span class="mi">4</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">op_array_alloc_ops</span><span class="p">(</span><span class="n">op_array</span><span class="p">,</span> <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">next_op</span> <span class="o">=</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">op_array</span><span class="o">-&gt;</span><span class="n">opcodes</span><span class="p">[</span><span class="n">next_op_num</span><span class="p">]);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">init_op</span><span class="p">(</span><span class="n">next_op</span> <span class="n">TSRMLS_CC</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">return</span> <span class="n">next_op</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这个函数每次会返回一个zend_op(也就是opcode一个最小单位)，opcode的存储空间申请和哈希表类似，
-通过预先申请空间的方式，如果空间不足则适当扩容。在编译时，opcode是以文件为单位的，而通常
-在一个文件中函数或类声明的个数是不会太多的。而在编译时opcode数组已经是预先申请好的，所以
-及时优化掉这个opcode，而实际在编译时的内存占用也不会有任何的优化。</p>
-
-<p>目前只有少数几处使用了ZEND_NOP这个opcode。读者可以参考Zend/zend_compile.c: zend_do_early_binding()，
-这个函数进行就是在确定在编译时能确定的函数以及类声明，在完成函数或类的声明后将当前编译的opcode设置为ZEND_NOP。
-因为后续在执行是并需要再次对该函数或类进行声明了。</p>
-
-<blockquote><p><strong>NOTE</strong>
-当然也并不是所有的全局类或者方法都会进行提早绑定,具体可以参考前面提到的Zend_compile.c文件的实现</p></blockquote>
-
-<p>在这个函数中其实可以将生成的ZEND_NOP优化掉的，比如eAccelarator扩展中就对opcode进行了优化，将ZEND_NOP从
-opcode_array数组中移除了，因为使用了opcode cache扩展优化只进行一次，而执行对多次执行，
-这样的优化是值得的。目前Zend引擎并没有进行任何的优化，首先从代码上来看，类和函数声明的数量和其他指令的数量
-之间差很多个等级，所以至少这个地方优化的收益是有限的，为了保证Zend引擎的简洁它没有进行优化。</p>
-
-<p>目前APC扩展已经基本确定为将要进入PHP默认opcode缓存的官方扩展了，那么这些优化都可以在扩展中进行，
-保证Zend引擎的简单易维护更为重要。</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-28T14:19:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2012</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/categories/php内核/'>PHP内核</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/2012/05/28/what-opcode-zend-nop-is-in-php//index.html#disqus_thread">Comments</a></span>
 	
 </div></article>
 

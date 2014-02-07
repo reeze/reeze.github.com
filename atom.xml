@@ -4,7 +4,7 @@
   <title><![CDATA[Zen Space]]></title>
   <link href="http://reeze.cn/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2014-02-07T14:45:53+08:00</updated>
+  <updated>2014-02-07T16:56:40+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -12,6 +12,88 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[好的API设计]]></title>
+    <link href="http://reeze.cn/2014/02/07/what-makes-a-good-api/"/>
+    <updated>2014-02-07T15:09:00+08:00</updated>
+    <id>http://reeze.cn/2014/02/07/what-makes-a-good-api</id>
+    <content type="html"><![CDATA[<p>最近在重构公司的一个交互中间件，在重新设计API及总体架构的时候思考了许多，
+不禁萌发了一个疑问，什么样的API才算是一个设计良好的API呢？</p>
+
+<p>参考了许多的资料，做一下总结。主要来自这个<a href="http://lcsd05.cs.tamu.edu/slides/keynote.pdf">keynote</a></p>
+
+<h2>什么是API</h2>
+
+<p>我们只要是在进行编程我们就需要不停的设计API，</p>
+
+<p>API简单来讲可以是一个调用的函数，一个接口。抽象来说：<em>接口是一个内聚系统暴漏给外部的一切信息</em>。
+包含但不限于：</p>
+
+<ul>
+<li>调用方式：比如通过lib库或者http接口等</li>
+<li>调用约定：比如lib的函数签名或者HTTP的参数，http method或者头信息，长短链接等等。</li>
+<li>依赖关系：比如接口的调用需要涉及到第三方或者其他的准备工作等等。</li>
+</ul>
+
+
+<h2>设计良好API的特点</h2>
+
+<p>这里探讨的API均为系统边界的API设计，而对于内部API来说不在探讨范围之内。</p>
+
+<p><em>变动困难</em></p>
+
+<p>API就像一个人一样，我们和一个API打交道的时候需要了解这个人的特性偏好等，
+有的人很好相处，而有的人让人很头疼，尤其是你不得不和他打交道的时候。</p>
+
+<p>和人一样，如果你不得不和他打交道，要改变他的秉性是很痛苦的，人的“本性难移”,
+API也一样，一旦发布了，要改变的成本就很大很大。</p>
+
+<p>好的API应该具有：</p>
+
+<ol>
+<li>易于学习</li>
+<li>即使没有文档也易于使用</li>
+<li>不易误用：这一点很重要，要减少使用者的心智负担</li>
+<li>使用API的代码易于维护。这个有点不一样，不是API本身易于维护，而是API的友好度。
+比如接口功能单一，使用简单，使用者的代码也会相应的更易于维护</li>
+<li>易于满足需求：API的完备性和正交性。能够容易的满足需求，完备性保证功能完整，
+正交性保证接口的简洁性，不需要为所有的需求提供接口，而是由用户去组合。</li>
+<li>易于扩展</li>
+</ol>
+
+
+<h2>怎么样设计良好的API</h2>
+
+<p>基本原则：</p>
+
+<ol>
+<li>专一：一个API的功能应该是单一的，需要能够很容易的解释和理解，也就会更好用。</li>
+<li>尽可能的小：小有很多的优势，易于理解和维护。</li>
+<li>尽量少的外部依赖：减少使用者的成本</li>
+<li>设计不被实现影响:不要暴漏实现细节给用户</li>
+<li>竟可能少的暴露，不止是内部细节，对于不必要的接口尽量不要发布，比如使用不多的功能，
+可以暂时不暴露接口。</li>
+<li>良好的命名:尽量做到自描述。</li>
+<li>完善的文档</li>
+<li>考虑性能</li>
+</ol>
+
+
+<p>其他具体的方法还是参考后面参考资料的内容吧。</p>
+
+<h2>参考资料</h2>
+
+<ul>
+<li>http://mattgemmell.com/api-design/</li>
+<li>http://lcsd05.cs.tamu.edu/slides/keynote.pdf 虽然是Java相关，但是道理是相通的</li>
+<li>http://ishare.iask.sina.com.cn/f/61717785.html 《API Design for C++》</li>
+<li>http://qt-project.org/wiki/API-Design-Principles</li>
+<li>http://www4.in.tum.de/~blanchet/api-design.pdf (前面的链接里提到的)</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[2013年终总结及2014规划]]></title>
@@ -1151,86 +1233,6 @@ Ctrl + E来定位当前输入的命令吧. 其实在~/.screenrc中修改一下�
 
 
 <p>解决方法来源见：<a href="http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command">http://stackoverflow.com/questions/1039442/mac-os-x-terminal-apps-buffer-and-screen-command</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[让你的网站也像Gmail一样支持文件拖放上传-HTML5之File API]]></title>
-    <link href="http://reeze.cn/2010/04/25/make-your-site-drop-uploadable-with-html5s-file-api-like-gmail-does/"/>
-    <updated>2010-04-25T00:14:29+08:00</updated>
-    <id>http://reeze.cn/2010/04/25/make-your-site-drop-uploadable-with-html5s-file-api-like-gmail-does</id>
-    <content type="html"><![CDATA[<blockquote><p>如果你比较好奇，可以先从<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/FileAPI_Test.zip">这里下载所有代码</a>，也可以点击这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/chrome_drop_upload.html">查看chrome下上传的demo</a>，点这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/firefox36_drop_upload.html">查看firefox下的demo</a></p></blockquote>
-
-<p>前不久<a href="http://net.chinabyte.com/395/11221395.shtml">Gmail推出了支持拖拽的附件上传功能</a>，试用了下还真不错，其实很久以前就在想能有直接拖拽附件的功能，多亏有了HTML5，Web应用越来越像客户端的应用了。</p>
-
-<p>在好奇心驱使下，想了解一下Gmail到底是怎么做到的，了解了一下最新的<a href="http://www.w3.org/TR/FileAPI">HTML5 File API草案</a>，这个接口主要提供的就是提供对文件对象的访问，别想歪了，这个接口是无法随意的访问系统里的文件的。他能做的就是访问<input type="file" />标签里所选择的文件，这些文件可以通过用户手动选择，或者是HTML5的拖放接口选中的文件。有兴趣的童鞋可以看看这个规范，还算比较简单。</p>
-
-<p>下面简单看看接口定义几个对象。</p>
-
-<p>FileList、File对象。</p>
-
-<p>在HTML5中的<input type="file"  />标签中增加了mutilple属性，允许进行多文件选择。大家应该都知道一般上传标签中是不允许选择多个文件的。 新增的这个属性就是允许进行多个文件的选择（这个在桌面应用中也很常见）。<input type="file" **multiple="multiple"** id="file" /></p>
-
-<p>下面是在Firebug中的输出
-`</p>
-
-<blockquote><blockquote><blockquote><p>var f = document.getElementById(&#8220;file&#8221;)
-f.files
-FileList0=File length=1 // 选中的文件数量
-f.files[0]
-FilefileName=es.dll fileSize=271360
-`</p></blockquote></blockquote></blockquote>
-
-<p>FileList对象就是用户选择的所有文件的对象表示，如果是通过input标签选择的，就可以通过上面代码所示的方法进行访问，File对象就可以刚才选择的某个文件的信息，如上面的代码所示，主要可以得到所选中的文件名以及文件大小信息。</p>
-
-<p>你可能在想只能得到这些信息到底有什么用呢？都没有办法读取文件内容，这就得提到规范中的FileReader接口了，这个接口就是用来读取File对象文件的。</p>
-
-<p>在<a href="http://www.w3.org/TR/FileAPI">File API规范</a>中提到File API主要是和其他的接口协同合作。比如XMLHttpRequest (这个新接口支持通过xhr的send()方法发送File对象)， DataTransfer(也就是HTML5中的拖拽接口 )， 以及<a href="http://dev.w3.org/html5/workers">Web Worksers</a>(这个主要是异步脚本执行，相当于给JS提供了“多线程”脚本执行能力，并且支持通过postMessage()进行“线程间通信”)，感兴趣的，可以看看<a href="http://www.v-ec.com/dh20156/article.asp?id=242">这篇日志</a>，以及<a href="http://feedproxy.google.com/~r/webbang/~3/_usD4yheDqI">这篇</a>。</p>
-
-<p>目前能实现这样的效果的方式主要有如下几种：</p>
-
-<ul>
-<li><p>Gmail中提到的这两个浏览器都支持拖放接口，托放以后可以直接通过托放事件的DataTransfer属性访问到本次托放是关联的文件对象列表FileList,然后通过XMLHttpRequest的send方法将File对象发送到服务器</p></li>
-<li><p>在Chrome下支持直接将文件拖放到文件选择控件上，就相当于直接选择了文件。这时可以通过<input type="file" />DOM对象的files属性访问到被托放进来的文件列表对象，然后也可以通过Ajax将文件对象发送到服务器，通过将文件选择控件透明度降低也可以实现Gmail类似的效果。 在Chrome因为可以直接通过托拽的方式让文件选择控件“赋值”，此时也可以通过一个iframe加表单的方式将数据发送到服务器。</p></li>
-<li><p>在Firefox3.6下可以通过FileReader直接读取到文件的内容，然后直接将文件内容发送到服务器端(可以参考<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/index.html">这个例子</a>，这是个不完整的例子，直接浏览是看不到效果的，查看源代码你就会懂的。）</p></li>
-</ul>
-
-
-<p>下面就来看看Gmail到底是怎么做到的吧。</p>
-
-<p>本来想通过Firebug的概况功能来捕捉到在托拽期间的脚本执行情况，比如：</p>
-
-<p><a href="http://reeze.cn/uploads/2010/04/screenshot1.png"><img src="http://reeze.cn/uploads/2010/04/screenshot1.png" alt="" /></a><a href="http://reeze.cn/uploads/2010/04/screenshot.png">
-</a></p>
-
-<p>但是脚本执行里压根没有找到ajax相关的函数调用，可能是因为firebug还不支持监控页面里嵌入的iframe中的脚本执行跟踪，这也说明本次上传肯定是在某个iframe中完成的。，那就直接监听网络吧，托拽上传一个附件时查看网络情况，发现附件是通过下面的ajax post过去的：</p>
-
-<p><a href="http://reeze.cn/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail1.jpg"><img src="http://reeze.cn/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail1.jpg" alt="" /></a></p>
-
-<p>大家注意看，是通过ajax post方式将附件POST到服务器的，</p>
-
-<p><a href="http://reeze.cn/uploads/2010/04/Gmail-11.jpg"><img src="http://reeze.cn/uploads/2010/04/Gmail-11.jpg" alt="" /></a></p>
-
-<p><a href="http://reeze.cn/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-31.jpg"><img src="http://reeze.cn/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-31.jpg" alt="" /></a><a href="http://reeze.cn/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-3.jpg">
-</a></p>
-
-<p>可以看出Gmail在firefox下不是通过表单直接提交实现的。在chrome下的开发人员工具有点简单，无法看到网络情况，我也懒的再去抓包看了，估计是使用透明<input type="file" />+ajax方式实现的。</p>
-
-<p>在Gmail支持托拽的声明中提到目前只支持Chrome 2+以及FireFox3.6+。虽然这两个浏览器都支持HTML5，但是对于所有规范的支持程度都是不一样的，并且规范也还不是正式规范。在Firefox3.6的release note中提到：</p>
-
-<p>Support for new DOM and HTML5 specifications including the Drag &amp; Drop API and the File API, which allow for more interactive web pages.</p>
-
-<p>开始支持了HTML5的拖拽接口以及File API。</p>
-
-<hr />
-
-<p>下面根据浏览器以及HTML5的规范整理出两个浏览器下实现类似Gmail 上传附件的代码。</p>
-
-<p><a href="http://reeze.cn/uploads/2010/04/14.jpg"><img src="http://reeze.cn/uploads/2010/04/14.jpg" alt="" /></a></p>
-
-<p>点击<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/FileAPI_Test.zip">这里下载所有代码</a>，有兴趣的童鞋查看源代码就知道怎么回事了，有一定的注释：）</p>
-
-<p>也可以点击这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/chrome_drop_upload.html">查看chrome下上传的demo</a>，点这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/firefox36_drop_upload.html">查看firefox下的demo</a>，之所以分开是为了简单起见，当然你真的想要给你的网站提供托拽上传功能，你就得自己去同时兼容这两个浏览器啦，相信这也不是件困难的事情：）</p>
 ]]></content>
   </entry>
   

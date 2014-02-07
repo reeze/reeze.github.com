@@ -9,10 +9,7 @@
 
 <meta name="author" content="reeze"> 
 
-<meta name="description" content="在Mac OS X下一直使用MacFUSE和NTFS-3G来访问ntfs分区，这次装了Snow leopard 10.6.2
-之后出现fusefs.kext can&#8217;t load的错误，从官方得知目前macfuse在snow leopard下有问题，
-在网上看到这篇贴子提到
-Snow &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="如果你比较好奇，可以先从这里下载所有代码，也可以点击这里查看chrome下上传的demo，点这里查看firefox下的demo 前不久Gmail推出了支持拖拽的附件上传功能，试用了下还真不错，其实很久以前就在想能有直接拖拽附件的功能，多亏有了HTML5，Web应用越来越像客户端的应用了。 &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -98,6 +95,119 @@ $(document).ready(
 </header>
 
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/2010/04/25/make-your-site-drop-uploadable-with-html5s-file-api-like-gmail-does/">
+		
+			让你的网站也像Gmail一样支持文件拖放上传-HTML5之File API</a>
+	</h2>
+	<div class="entry-content">
+		<blockquote><p>如果你比较好奇，可以先从<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/FileAPI_Test.zip">这里下载所有代码</a>，也可以点击这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/chrome_drop_upload.html">查看chrome下上传的demo</a>，点这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/firefox36_drop_upload.html">查看firefox下的demo</a></p></blockquote>
+
+<p>前不久<a href="http://net.chinabyte.com/395/11221395.shtml">Gmail推出了支持拖拽的附件上传功能</a>，试用了下还真不错，其实很久以前就在想能有直接拖拽附件的功能，多亏有了HTML5，Web应用越来越像客户端的应用了。</p>
+
+<p>在好奇心驱使下，想了解一下Gmail到底是怎么做到的，了解了一下最新的<a href="http://www.w3.org/TR/FileAPI">HTML5 File API草案</a>，这个接口主要提供的就是提供对文件对象的访问，别想歪了，这个接口是无法随意的访问系统里的文件的。他能做的就是访问<input type="file" />标签里所选择的文件，这些文件可以通过用户手动选择，或者是HTML5的拖放接口选中的文件。有兴趣的童鞋可以看看这个规范，还算比较简单。</p>
+
+<p>下面简单看看接口定义几个对象。</p>
+
+<p>FileList、File对象。</p>
+
+<p>在HTML5中的<input type="file"  />标签中增加了mutilple属性，允许进行多文件选择。大家应该都知道一般上传标签中是不允许选择多个文件的。 新增的这个属性就是允许进行多个文件的选择（这个在桌面应用中也很常见）。<input type="file" **multiple="multiple"** id="file" /></p>
+
+<p>下面是在Firebug中的输出
+`</p>
+
+<blockquote><blockquote><blockquote><p>var f = document.getElementById(&#8220;file&#8221;)
+f.files
+FileList0=File length=1 // 选中的文件数量
+f.files[0]
+FilefileName=es.dll fileSize=271360
+`</p></blockquote></blockquote></blockquote>
+
+<p>FileList对象就是用户选择的所有文件的对象表示，如果是通过input标签选择的，就可以通过上面代码所示的方法进行访问，File对象就可以刚才选择的某个文件的信息，如上面的代码所示，主要可以得到所选中的文件名以及文件大小信息。</p>
+
+<p>你可能在想只能得到这些信息到底有什么用呢？都没有办法读取文件内容，这就得提到规范中的FileReader接口了，这个接口就是用来读取File对象文件的。</p>
+
+<p>在<a href="http://www.w3.org/TR/FileAPI">File API规范</a>中提到File API主要是和其他的接口协同合作。比如XMLHttpRequest (这个新接口支持通过xhr的send()方法发送File对象)， DataTransfer(也就是HTML5中的拖拽接口 )， 以及<a href="http://dev.w3.org/html5/workers">Web Worksers</a>(这个主要是异步脚本执行，相当于给JS提供了“多线程”脚本执行能力，并且支持通过postMessage()进行“线程间通信”)，感兴趣的，可以看看<a href="http://www.v-ec.com/dh20156/article.asp?id=242">这篇日志</a>，以及<a href="http://feedproxy.google.com/~r/webbang/~3/_usD4yheDqI">这篇</a>。</p>
+
+<p>目前能实现这样的效果的方式主要有如下几种：</p>
+
+<ul>
+<li><p>Gmail中提到的这两个浏览器都支持拖放接口，托放以后可以直接通过托放事件的DataTransfer属性访问到本次托放是关联的文件对象列表FileList,然后通过XMLHttpRequest的send方法将File对象发送到服务器</p></li>
+<li><p>在Chrome下支持直接将文件拖放到文件选择控件上，就相当于直接选择了文件。这时可以通过<input type="file" />DOM对象的files属性访问到被托放进来的文件列表对象，然后也可以通过Ajax将文件对象发送到服务器，通过将文件选择控件透明度降低也可以实现Gmail类似的效果。 在Chrome因为可以直接通过托拽的方式让文件选择控件“赋值”，此时也可以通过一个iframe加表单的方式将数据发送到服务器。</p></li>
+<li><p>在Firefox3.6下可以通过FileReader直接读取到文件的内容，然后直接将文件内容发送到服务器端(可以参考<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/index.html">这个例子</a>，这是个不完整的例子，直接浏览是看不到效果的，查看源代码你就会懂的。）</p></li>
+</ul>
+
+
+<p>下面就来看看Gmail到底是怎么做到的吧。</p>
+
+<p>本来想通过Firebug的概况功能来捕捉到在托拽期间的脚本执行情况，比如：</p>
+
+<p><a href="/uploads/2010/04/screenshot1.png"><img src="/uploads/2010/04/screenshot1.png" alt="" /></a><a href="/uploads/2010/04/screenshot.png">
+</a></p>
+
+<p>但是脚本执行里压根没有找到ajax相关的函数调用，可能是因为firebug还不支持监控页面里嵌入的iframe中的脚本执行跟踪，这也说明本次上传肯定是在某个iframe中完成的。，那就直接监听网络吧，托拽上传一个附件时查看网络情况，发现附件是通过下面的ajax post过去的：</p>
+
+<p><a href="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail1.jpg"><img src="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail1.jpg" alt="" /></a></p>
+
+<p>大家注意看，是通过ajax post方式将附件POST到服务器的，</p>
+
+<p><a href="/uploads/2010/04/Gmail-11.jpg"><img src="/uploads/2010/04/Gmail-11.jpg" alt="" /></a></p>
+
+<p><a href="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-31.jpg"><img src="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-31.jpg" alt="" /></a><a href="/uploads/2010/04/Compose-Mail-reeze.xia@gmail.com-Gmail-3.jpg">
+</a></p>
+
+<p>可以看出Gmail在firefox下不是通过表单直接提交实现的。在chrome下的开发人员工具有点简单，无法看到网络情况，我也懒的再去抓包看了，估计是使用透明<input type="file" />+ajax方式实现的。</p>
+
+<p>在Gmail支持托拽的声明中提到目前只支持Chrome 2+以及FireFox3.6+。虽然这两个浏览器都支持HTML5，但是对于所有规范的支持程度都是不一样的，并且规范也还不是正式规范。在Firefox3.6的release note中提到：</p>
+
+<p>Support for new DOM and HTML5 specifications including the Drag &amp; Drop API and the File API, which allow for more interactive web pages.</p>
+
+<p>开始支持了HTML5的拖拽接口以及File API。</p>
+
+<hr />
+
+<p>下面根据浏览器以及HTML5的规范整理出两个浏览器下实现类似Gmail 上传附件的代码。</p>
+
+<p><a href="/uploads/2010/04/14.jpg"><img src="/uploads/2010/04/14.jpg" alt="" /></a></p>
+
+<p>点击<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/FileAPI_Test.zip">这里下载所有代码</a>，有兴趣的童鞋查看源代码就知道怎么回事了，有一定的注释：）</p>
+
+<p>也可以点击这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/chrome_drop_upload.html">查看chrome下上传的demo</a>，点这里<a href="http://labs.reeze.cn/labs/HTML5/FileAPI/firefox36_drop_upload.html">查看firefox下的demo</a>，之所以分开是为了简单起见，当然你真的想要给你的网站提供托拽上传功能，你就得自己去同时兼容这两个浏览器啦，相信这也不是件困难的事情：）</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-25T00:14:29+08:00" pubdate data-updated="true">Apr 25<span>th</span>, 2010</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/javascript/'>Javascript</a>, <a class='category' href='/categories/web技术/'>Web技术</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/2010/04/25/make-your-site-drop-uploadable-with-html5s-file-api-like-gmail-does//page/3/index.html#disqus_thread">Comments</a></span>
+	
+</div></article>
 
 
     <article class="post">
@@ -851,78 +961,12 @@ $ sudo /usr/sbin/sshd
 	
 </div></article>
 
-
-    <article class="post">
-	<h2 class="title">
-		
-		<a href="/2009/06/19/a-php-debug-function/">
-		
-			PHP调试函数</a>
-	</h2>
-	<div class="entry-content">
-		<p>在项目中经常要调试程序，但是我电脑上的ZendStudio总是没配置好，不能单步调试，不过有时候不一定需要让ZendStudio来帮我们调试，所以写了下面这个辅助函数来方便调试，因为有时候调试的位置加多了自己也不知道到底是加在什么地方了，下面的函数就是方便的dump对象信息，同时显示调试的问题和所在的行数。</p>
-
-<p>`
-//调试函数,方便显示调试函数的位置和文件
-function p(){
-  $args = func_get_args();</p>
-
-<p>   // 调用栈,debug_backtrace()可以返回调用栈。这样 我们就可以方便的知道函数在哪里调用的。
-  $backtrace = debug_backtrace();</p>
-
-<p>  $file = $backtrace[0][&#8216;file&#8217;];
-  $line = $backtrace[0][&#8216;line&#8217;];
-  echo &#8221;</p>
-
-<pre><code>";
-  echo "$file:$linen";
-  foreach ($args as $arg)
-  {
-    var_dump($arg);
-  }
-  echo "
-</code></pre>
-
-<p>&#8221;;
-  exit;
-}
-`</p>
-
-		
-		
-	</div>
-
-
-<div class="meta">
-	<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-06-19T20:05:43+08:00" pubdate data-updated="true">Jun 19<span>th</span>, 2009</time></div>
-	<div class="tags">
-
-
-	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/web技术/'>Web技术</a>
-
-
-</div>
-	
-		<span class="comments"><a href="/2009/06/19/a-php-debug-function//page/3/index.html#disqus_thread">Comments</a></span>
-	
-</div></article>
-
 <nav id="pagenavi">
     
         <a href="/page/2/" class="prev">Prev</a>
     
+    
+        <a href="/page/4/" class="next">Next</a>
     
     <div class="center"><a href="/archives">Blog Archives</a></div>
 </nav></div>
