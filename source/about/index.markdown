@@ -7,11 +7,12 @@ sharing: true
 footer: true
 ---
 
-喜欢写码，兴趣广泛，好奇心强。现在在Baidu写着喜欢的码。
+喜欢写码，兴趣广泛，好奇心强，乐于钻研。
 
 喜欢:
-
+- Quora，zhihu，Hacker News
 - PHP: Since 2006, 写过扩展，提交过补丁
+- HHVM: Hacking on HHVM
 - C/C++
 - 程序语言设计及实现
 
@@ -19,6 +20,7 @@ footer: true
 
 - TIPI：还没有填满
 - PHP-LevelDB：leveldb的php扩展
+- php-ext-embed: 用PHP写扩展的尝试
 - TiPHP: 刨坑中
 
 - 其他各种项目见: <http://github.com/reeze>
