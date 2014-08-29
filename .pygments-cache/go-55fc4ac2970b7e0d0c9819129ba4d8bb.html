@@ -1,0 +1,25 @@
+<div class="highlight"><pre><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="nx">_</span> <span class="s">&quot;io&quot;</span>  <span class="c1">// 如果不重名名包为_ 而在代码中没有使用这个包会编译不通过</span>
+			<span class="c1">// 这样导入一个包是有副作用的，导入一个包后会执行包的init()方法，</span>
+			<span class="c1">// 如果只是为了避免编译不通过而绑定到_是不推荐的做法。</span>
+	  <span class="s">&quot;fmt&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">getMulti</span><span class="p">()</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">_</span> <span class="p">=</span> <span class="mi">20</span>		<span class="c1">// 绑定没有作用，不会报错</span>
+	<span class="c1">// _ := 10  // 编译不通过，因为表达式左边没有一个有效的新的标示符</span>
+				<span class="c1">// no new variables on left side of :=</span>
+
+	<span class="nx">x</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">getMulti</span><span class="p">()</span>
+
+	<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d\n&quot;</span><span class="p">,</span> <span class="nx">x</span><span class="p">)</span>
+	<span class="c1">// fmt.Printf(&quot;%d\n&quot;, _)   这样是编译不通过的，因为_并不能被赋值</span>
+	<span class="c1">//                         编译 &quot;cannot use _ as value&quot;</span>
+<span class="p">}</span>
+</pre></div>

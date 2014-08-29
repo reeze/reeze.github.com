@@ -1,0 +1,17 @@
+<div class="highlight"><pre><span class="kt">int</span> <span class="nf">start_prog</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">prog</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">args</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="kt">pid_t</span> <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span> <span class="c1">// 创建子进程</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 子进程</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">execv</span><span class="p">(</span><span class="n">prog</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// 加载新的程序</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">char</span><span class="o">*</span> <span class="n">args</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="nb">NULL</span><span class="p">};</span>
+  <span class="k">return</span> <span class="n">start_prog</span><span class="p">(</span><span class="s">&quot;/bin/ls&quot;</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>

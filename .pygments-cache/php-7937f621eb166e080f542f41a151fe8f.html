@@ -1,0 +1,47 @@
+<div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="nb">define</span><span class="p">(</span><span class="s2">&quot;CONST_TEST_1&quot;</span><span class="p">,</span> <span class="s2">&quot;const1&quot;</span><span class="p">);</span>
+
+<span class="k">function</span> <span class="nf">ReflectionParameterTest</span><span class="p">(</span><span class="nv">$test1</span><span class="o">=</span><span class="k">array</span><span class="p">(),</span> <span class="nv">$test2</span> <span class="o">=</span> <span class="nx">CONST_TEST_1</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">echo</span> <span class="nv">$test</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nv">$reflect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReflectionFunction</span><span class="p">(</span><span class="s1">&#39;ReflectionParameterTest&#39;</span><span class="p">);</span>
+<span class="k">foreach</span><span class="p">(</span><span class="nv">$reflect</span><span class="o">-&gt;</span><span class="na">getParameters</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$param</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;test1&#39;</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueConstant</span><span class="p">());</span>
+	<span class="p">}</span>
+	<span class="k">if</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;test2&#39;</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueConstant</span><span class="p">());</span>
+	<span class="p">}</span>
+	<span class="k">if</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueAvailable</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueConstant</span><span class="p">())</span> <span class="p">{</span>
+		<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">getDefaultValueConstantName</span><span class="p">());</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Foo2</span> <span class="p">{</span>
+	<span class="k">const</span> <span class="no">bar</span> <span class="o">=</span> <span class="s1">&#39;Foo2::bar&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+	<span class="k">const</span> <span class="no">bar</span> <span class="o">=</span> <span class="s1">&#39;Foo::bar&#39;</span><span class="p">;</span>
+
+	<span class="k">public</span> <span class="k">function</span> <span class="nf">baz</span><span class="p">(</span><span class="nv">$param1</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="na">bar</span><span class="p">,</span> <span class="nv">$param2</span><span class="o">=</span><span class="nx">Foo2</span><span class="o">::</span><span class="na">bar</span><span class="p">,</span> <span class="nv">$param3</span><span class="o">=</span><span class="nx">CONST_TEST_1</span><span class="p">)</span> <span class="p">{</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$method</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReflectionMethod</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+<span class="nv">$params</span> <span class="o">=</span> <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">getParameters</span><span class="p">();</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$params</span> <span class="k">as</span> <span class="nv">$param</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueConstant</span><span class="p">())</span> <span class="p">{</span>
+        <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">getDefaultValueConstantName</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">// 运行结果</span>
+<span class="x">bool(false)</span>
+<span class="x">bool(true)</span>
+<span class="x">string(12) &quot;CONST_TEST_1&quot;</span>
+<span class="x">string(9) &quot;self::bar&quot;</span>
+<span class="x">string(9) &quot;Foo2::bar&quot;</span>
+<span class="x">string(12) &quot;CONST_TEST_1&quot;</span>
+</pre></div>

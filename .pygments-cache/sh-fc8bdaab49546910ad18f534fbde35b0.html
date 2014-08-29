@@ -1,0 +1,12 @@
+<div class="highlight"><pre><span class="c">#!/bin/sh</span>
+
+make <span class="nb">test</span>
+
+<span class="c"># make test didn&#39;t return status code correctly</span>
+<span class="c"># use this to find whether the make test failed</span>
+cat tests/<span class="se">\*</span>.diff
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+	<span class="nb">exit </span>1<span class="p">;</span>
+<span class="k">fi</span>
+</pre></div>

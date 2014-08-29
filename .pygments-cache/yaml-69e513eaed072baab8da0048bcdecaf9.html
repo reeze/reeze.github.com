@@ -1,0 +1,17 @@
+<div class="highlight"><pre><span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">php</span>
+<span class="l-Scalar-Plain">php</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">5.2</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">5.3</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">5.4</span>
+
+<span class="l-Scalar-Plain">env</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">REPORT_EXIT_STATUS=1 NO_INTERACTION=1</span>
+
+<span class="l-Scalar-Plain">before_script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">sh travis/prepare.sh</span>
+
+<span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">sh travis/run-test.sh</span>
+
+<span class="l-Scalar-Plain">notifications</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">email</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">reeze.xia@gmail.com</span>
+</pre></div>

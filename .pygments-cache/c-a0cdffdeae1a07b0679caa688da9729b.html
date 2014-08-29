@@ -1,0 +1,22 @@
+<div class="highlight"><pre><span class="n">zend_op</span> <span class="o">*</span><span class="nf">get_next_op</span><span class="p">(</span><span class="n">zend_op_array</span> <span class="o">*</span><span class="n">op_array</span> <span class="n">TSRMLS_DC</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">zend_uint</span> <span class="n">next_op_num</span> <span class="o">=</span> <span class="n">op_array</span><span class="o">-&gt;</span><span class="n">last</span><span class="o">++</span><span class="p">;</span>
+	<span class="n">zend_op</span> <span class="o">*</span><span class="n">next_op</span><span class="p">;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">next_op_num</span> <span class="o">&gt;=</span> <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">op_array</span><span class="o">-&gt;</span><span class="n">fn_flags</span> <span class="o">&amp;</span> <span class="n">ZEND_ACC_INTERACTIVE</span><span class="p">)</span> <span class="p">{</span>
+			<span class="cm">/* we messed up */</span>
+			<span class="n">zend_printf</span><span class="p">(</span><span class="s">&quot;Ran out of opcode space!</span><span class="se">\n</span><span class="s">&quot;</span>
+						<span class="s">&quot;You should probably consider writing this huge script into a file!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+			<span class="n">zend_bailout</span><span class="p">();</span>
+		<span class="p">}</span>
+		<span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span> <span class="o">*=</span> <span class="mi">4</span><span class="p">;</span>
+		<span class="n">op_array_alloc_ops</span><span class="p">(</span><span class="n">op_array</span><span class="p">,</span> <span class="n">CG</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">opcodes_size</span><span class="p">);</span>
+	<span class="p">}</span>
+ 
+	<span class="n">next_op</span> <span class="o">=</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">op_array</span><span class="o">-&gt;</span><span class="n">opcodes</span><span class="p">[</span><span class="n">next_op_num</span><span class="p">]);</span>
+ 
+	<span class="n">init_op</span><span class="p">(</span><span class="n">next_op</span> <span class="n">TSRMLS_CC</span><span class="p">);</span>
+
+	<span class="k">return</span> <span class="n">next_op</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>

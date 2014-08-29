@@ -1,0 +1,347 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script data-cfasync="false" type="text/javascript" src="//use.typekit.net/axj3cfp.js"></script>
+	<script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	<meta charset="utf-8">
+	<title>怎么样获取PHP函数默认参数的常量名  | Zen Space</title>
+
+<meta name="author" content="reeze"> 
+
+<meta name="description" content="好久没有更新了，发篇占位文：如果某个函数的默认参数是个常量，那么怎么样获取这个参数的常量名称？见代码： 1
+2
+3
+4
+5
+&lt;?php function new_blog($title = DEFAULT_TITLE) { // blahblah
+} 在上面的代码中， &hellip;"> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Zen Space" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script language="Javascript" type="text/javascript">
+$(document).ready(
+  function() {
+    (function($) {
+      $(".fancybox[data-content-id]").each(function() {
+        this.href = $(this).data('content-id');
+      });
+      $(".fancybox").fancybox({
+        beforeLoad: function() {
+          var el, 
+              id = $(this.element).data('title-id');
+
+          if (id) {
+            el = $('#' + id);
+
+            if (el.length) {
+              this.title = el.html();
+            }
+          }
+          if ($(this).data('content')) {
+            this.content = $(this).data('content');
+          }
+        },
+        helpers: {
+          title: {
+            type: 'inside'
+          }
+        }
+      });
+    })(jQuery);
+  }
+);
+</script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Zen Space</a></h1>
+<h4></h4>
+<nav id="main-nav"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="/portfolio">Portfolio</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="/portfolio">Portfolio</a></li>
+	<li><a href="/archives">Archive</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:reeze.cn">
+			</form>
+		</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">怎么样获取PHP函数默认参数的常量名</h2>
+	<div class="entry-content"><p>好久没有更新了，发篇占位文：如果某个函数的默认参数是个常量，那么怎么样获取这个参数的常量名称？见代码：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">new_blog</span><span class="p">(</span><span class="nv">$title</span> <span class="o">=</span> <span class="nx">DEFAULT_TITLE</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// blahblah</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在上面的代码中，怎么样获取函数new_blog函数的参数$title所对应的默认值常量名： <code>DEFAULT_TITLE</code>。这个问题和以前我曾写过的一篇
+关于<a href="http://reeze.cn/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/">如何获取变量名称</a>的博文相似。</p>
+
+<p>这个问题，在PHP5.4.6之前基本上没有解决方法了，因为函数定义是编译时的信息，在PHP运行时是获取不到的。
+当然这里说的无法实现是指的使用官方PHP版本时没法搞定。</p>
+
+<p>在PHP中类似的需求，一般都可以使用PHP的反射扩展。</p>
+
+<h3>PHP的反射(Reflection)</h3>
+
+<p>反射是PHP5中提供的用于获取或操作PHP内部信息的标准扩展，可能写应用代码的用户使用的较少一些，
+编写框架或者平台性的系统会使用到。</p>
+
+<p>比如你的框架需要实现一种插件机制，而你可能需要利用反射来获取类或者函数的元信息。
+这里就不对Reflection的使用做过多的介绍了，详细信息见官方文档： <a href="http://cn.php.net/manual/en/book.reflection.php">http://cn.php.net/manual/en/book.reflection.php</a></p>
+
+<h3>新的函数ReflectionParameter::getDefaultValueConstantName()</h3>
+
+<p>不过在PHP5.4.6之前，Reflection是没有实现该功能的。这个需求其实来自PHPUnit的作者<a href="https://github.com/sebastianbergmann">Sebastian Bergmann</a>。
+因为这个需求在Reflection模块来说是一个缺失，不属于大功能的升级，所以直接进入了目前的最新分支PHP-5.4。
+同时这个功能在PHP-5.4.6中可用了。<a href="https://github.com/php/php-src/blob/PHP-5.4.6/NEWS#L41">https://github.com/php/php-src/blob/PHP-5.4.6/NEWS#L41</a></p>
+
+<p>实现代码见：<a href="https://github.com/php/php-src/commit/13a9555342a4156a6150818234639b49a596ccd6">https://github.com/php/php-src/commit/13a9555342a4156a6150818234639b49a596ccd6</a>,
+这个方法目前没有使用说明，不过看名字应该也能明白。不过可以参考<a href="https://github.com/php/php-src/commit/13a9555342a4156a6150818234639b49a596ccd6#diff-1">测试用例</a>。</p>
+
+<p>这个提交给ReflectionParameter类增加了两个函数：</p>
+
+<ol>
+<li>ReflectionParameter::isDefaultValueConstant() 用于判断函数的这个参数是否是常量默认参数</li>
+<li>ReflectionParameter::getDefaultValueConstantName() 用于获取这个常量默认参数的参数名称</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="nb">define</span><span class="p">(</span><span class="s2">&quot;CONST_TEST_1&quot;</span><span class="p">,</span> <span class="s2">&quot;const1&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">ReflectionParameterTest</span><span class="p">(</span><span class="nv">$test1</span><span class="o">=</span><span class="k">array</span><span class="p">(),</span> <span class="nv">$test2</span> <span class="o">=</span> <span class="nx">CONST_TEST_1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">echo</span> <span class="nv">$test</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="nv">$reflect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReflectionFunction</span><span class="p">(</span><span class="s1">&#39;ReflectionParameterTest&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">foreach</span><span class="p">(</span><span class="nv">$reflect</span><span class="o">-&gt;</span><span class="na">getParameters</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$param</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;test1&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueConstant</span><span class="p">());</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">getName</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;test2&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueConstant</span><span class="p">());</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueAvailable</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueConstant</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">getDefaultValueConstantName</span><span class="p">());</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Foo2</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">const</span> <span class="no">bar</span> <span class="o">=</span> <span class="s1">&#39;Foo2::bar&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">const</span> <span class="no">bar</span> <span class="o">=</span> <span class="s1">&#39;Foo::bar&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="k">function</span> <span class="nf">baz</span><span class="p">(</span><span class="nv">$param1</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="na">bar</span><span class="p">,</span> <span class="nv">$param2</span><span class="o">=</span><span class="nx">Foo2</span><span class="o">::</span><span class="na">bar</span><span class="p">,</span> <span class="nv">$param3</span><span class="o">=</span><span class="nx">CONST_TEST_1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$method</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ReflectionMethod</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$params</span> <span class="o">=</span> <span class="nv">$method</span><span class="o">-&gt;</span><span class="na">getParameters</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="nv">$params</span> <span class="k">as</span> <span class="nv">$param</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">isDefaultValueConstant</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$param</span><span class="o">-&gt;</span><span class="na">getDefaultValueConstantName</span><span class="p">());</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">// 运行结果</span>
+</span><span class='line'><span class="x">bool(false)</span>
+</span><span class='line'><span class="x">bool(true)</span>
+</span><span class='line'><span class="x">string(12) &quot;CONST_TEST_1&quot;</span>
+</span><span class='line'><span class="x">string(9) &quot;self::bar&quot;</span>
+</span><span class='line'><span class="x">string(9) &quot;Foo2::bar&quot;</span>
+</span><span class='line'><span class="x">string(12) &quot;CONST_TEST_1&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-22T20:40:00+08:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2012</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/categories/php内核/'>PHP内核</a>, <a class='category' href='/categories/php实现/'>PHP实现</a>, <a class='category' href='/categories/reflection/'>Reflection</a>, <a class='category' href='/categories/反射/'>反射</a>
+
+
+</div>
+	
+		<span class="comments"><a href="/2012/07/22/how-to-get-php-functions-const-parameters-name/#disqus_thread">Comments</a></span>
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+<!---	<a class="addthis_counter addthis_pill_style"></a> --->
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2014
+
+    reeze
+
+<br>
+Powered by Octopress.
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'reeze';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://reeze.cn/2012/07/22/how-to-get-php-functions-const-parameters-name/';
+        var disqus_url = 'http://reeze.cn/2012/07/22/how-to-get-php-functions-const-parameters-name/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-11029498-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

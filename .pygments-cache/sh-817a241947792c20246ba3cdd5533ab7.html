@@ -1,0 +1,8 @@
+<div class="highlight"><pre><span class="c">#!/bin/sh</span>
+
+wget http://leveldb.googlecode.com/files/leveldb-1.5.0.tar.gz
+tar zxvf leveldb-1.5.0.tar.gz
+<span class="nb">cd </span>leveldb-1.5.0 <span class="o">&amp;&amp;</span> make
+<span class="nb">cd</span> ..
+phpize <span class="o">&amp;&amp;</span> ./configure --with-leveldb<span class="o">=</span><span class="nv">$PWD</span>/leveldb-1.5.0 <span class="o">&amp;&amp;</span> make
+</pre></div>

@@ -1,0 +1,23 @@
+<div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="k">if</span><span class="p">(</span><span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">class</span> <span class="nc">Foo</span> <span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="k">new</span> <span class="nx">Bar</span><span class="p">();</span>
+<span class="k">class</span> <span class="nc">Bar</span> <span class="p">{}</span>
+
+<span class="nx">filename</span><span class="o">:</span>       <span class="o">/</span><span class="nx">Users</span><span class="o">/</span><span class="nx">reeze</span><span class="o">/</span><span class="nx">Opensource</span><span class="o">/</span><span class="nx">php</span><span class="o">-</span><span class="nx">test</span><span class="o">/</span><span class="nx">php</span><span class="o">-</span><span class="nx">src</span><span class="o">-</span><span class="mf">5.4</span><span class="o">/</span><span class="nx">test</span><span class="o">.</span><span class="nx">php</span>
+<span class="k">function</span> <span class="nf">name</span><span class="o">:</span>  <span class="p">(</span><span class="k">null</span><span class="p">)</span>
+<span class="nx">number</span> <span class="nx">of</span> <span class="nx">ops</span><span class="o">:</span>  <span class="mi">8</span>
+<span class="nx">compiled</span> <span class="nx">vars</span><span class="o">:</span>  <span class="nx">none</span>
+<span class="nx">line</span>     <span class="c1"># *  op                           fetch          ext  return  operands</span>
+<span class="o">---------------------------------------------------------------------------------</span>
+   <span class="mi">2</span>     <span class="mi">0</span>  <span class="o">&gt;</span> <span class="o">&gt;</span> <span class="nx">JMPZ</span>                                                     <span class="k">true</span><span class="p">,</span> <span class="o">-&gt;</span><span class="mi">3</span>
+   <span class="mi">3</span>     <span class="mi">1</span>  <span class="o">&gt;</span>   <span class="nx">ZEND_DECLARE_CLASS</span>                               <span class="err">$</span><span class="mi">0</span>      <span class="s1">&#39;%00foo%2FUsers%2Freeze%2FOpensource%2Fphp-test%2Fphp-src-5.4%2Ftest.php0x106cd601f&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span>
+   <span class="mi">4</span>     <span class="mi">2</span>    <span class="o">&gt;</span> <span class="nx">JMP</span>                                                      <span class="o">-&gt;</span><span class="mi">3</span>
+   <span class="mi">6</span>     <span class="mi">3</span>  <span class="o">&gt;</span>   <span class="nx">ZEND_FETCH_CLASS</span>                              <span class="mi">4</span>  <span class="o">:</span><span class="mi">1</span>      <span class="s1">&#39;Bar&#39;</span>
+		 <span class="mi">4</span>      <span class="k">NEW</span>                                                      <span class="o">:</span><span class="mi">1</span>
+		 <span class="mi">5</span>      <span class="nx">DO_FCALL_BY_NAME</span>                              <span class="mi">0</span>          
+   <span class="mi">7</span>     <span class="mi">6</span>      <span class="nx">NOP</span>                                                      
+   <span class="mi">9</span>     <span class="mi">7</span>    <span class="o">&gt;</span> <span class="k">RETURN</span>  
+</pre></div>

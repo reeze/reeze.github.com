@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Linux | Zen Space]]></title>
+  <link href="http://reeze.cn/categories/linux/atom.xml" rel="self"/>
+  <link href="http://reeze.cn/"/>
+  <updated>2014-08-30T02:03:01+08:00</updated>
+  <id>http://reeze.cn/</id>
+  <author>
+    <name><![CDATA[reeze]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[多线程下的fork及进程的写时复制]]></title>
+    <link href="http://reeze.cn/2014/08/23/multi-thread-service-and-fork/"/>
+    <updated>2014-08-23T14:00:00+08:00</updated>
+    <id>http://reeze.cn/2014/08/23/multi-thread-service-and-fork</id>
+    <content type="html"><![CDATA[<h2>多线程下fork()的问题</h2>
+
+<p>贴吧目前使用的HHVM来运行PHP程序，HHVM采用的是多线程模型，以前我们使用的是PHP-FPM，PHP-FPM采用的是多进程的模型。</p>
+
+<p>上周我们上线一个服务到HHVM运行环境，发现上线后CPU占用飚的非常高，经过分析发现程序话的最多时间的函数调用
+是<code>fork()</code>，刚开始感觉很纳闷，PHP程序一般是不使用fork()的，后来发现我们有个基础库的实现有问题，
+使用了PHP的<code>exec()</code>函数来启动shell程序做字符处理，exec的实现是先fork()一个进程然后执行相应的命令，
+没有什么不对，对不对。但是为什么会导致CPU利用率过高呢？ 先看一些基本的背景。</p>
+
+<h2>关于写时复制</h2>
+
+<p>在Linux中要启动一个新进程的方式通常是：先调用<code>fork()</code>函数fork出一个新的进程，然后在
+新的进程中调用exec()函数来启动新的程序从而达到启动新程序的目的，比如采用下面的代码实现。</p>
+
+<pre><code class="C">int start_prog(char *prog, char* args[])
+{
+  pid_t pid = fork(); // 创建子进程
+  if (pid &lt; 0) return -1;
+  if (pid == 0) { // 子进程
+    if (execv(prog, args) &lt; 0) return -1; // 加载新的程序
+  } else {
+    return 1;
+  }
+}
+
+int main()
+{
+  char* args[] = {NULL};
+  return start_prog("/bin/ls", args);
+}
+</code></pre>
+
+<p>我们知道进程间的内存地址空间是隔离的，fork()系统调用的结果是生成一个新的子进程，为了启动新的程序，
+需要调用exec*()系列函数来讲程序加载到当前进程空间。</p>
+
+<p>为了保证隔离性，早期的UNIX采用在<code>fork()</code>将父进程的地址空间完整的复制一份。这个操作非常的耗时。
+为了提高效率现代的Unix及Linux采用了一种称为<code>写时复制</code>的技术，其实也就是一种延迟操作的做法，实现时
+是子进程和父进程在<code>fork()</code>时并不马上复制，而是暂时共享内存空间，随后只要父进程或者子进程试图写共享的
+内存就会产生一个异常，这是内核才把内存空间进程复制，这减少了不必要的复制操作。比如我们在Shell中启动
+一个程序<code>bash</code>程序就是先fork()一个子进程然后把我们想执行的程序启动，启动后的程序将会覆盖旧的内存空间，
+也就是说父进程的空间将被替换。</p>
+
+<p><img src="/images/fork.png" alt="写时复制" /></p>
+
+<p><img src="/images/fork_exec.png" alt="exec" /></p>
+
+<h2>解决方案</h2>
+
+<p>从前面的介绍我们知道，启动新程序的时候利用了写实复制的技术避免不必要的消耗。但是对于我们来说，
+我们使用的是多线程，线上应中会不停的处理新的请求，也就是说，在某个线程在执行fork()的是时候
+还会有其他线程在处理任务，由于线程间是共享进程空间的，那时不可避免的会写内存。这就触发了
+操作系统的写实复制，导致大量的内存复制操作，导致资源占用急剧上涨。</p>
+
+<p>说道这里你可能会说：你看，多线程不太好吧。HHVM好搓吧。其实对于PHP也会有类似的问题的，如果你使用的
+是PHP的多线程模型(现在应该很少的人使用)。对于这个问题呢，HHVM使用了一个比较巧妙的方式来解决。</p>
+
+<p>HHVM的思路是这样的，既然多线程下写实复制容易不生效，那么就让fork发生在只有一个线程的情况下。</p>
+
+<ol>
+<li>HHVM启动时先预先启动N个(可配置)代理进程，在父进程和这些代理进程之前预先开启管道</li>
+<li>有需要启动的时候，通过管道选择一个没有真在fork()进程的代理进程，将执行信息通过管道发给代理进程</li>
+<li>代理进程根据要执行的程序fork()一个新的子进程来执行，将执行完成的信息通过管道写会主进程</li>
+</ol>
+
+
+<p>从上面可以知道，因为代理进程每个进程都只有一个线程不会存在多线程写的问题。 HHVM中它成为<a href="https://github.com/facebook/hhvm/blob/master/hphp/util/light-process.cpp">轻进程</a>。</p>
+
+<p><img src="/images/fork_thread.png" alt="解决方案" /></p>
+
+<p>使用了HHVM的轻进程后，CPU直接就降了下来，我们虽然可是使用这个方案解决这个问题，不过我们还是将
+<code>exec()</code>调用改成了文件读取操作，一来exec()函数的成本开销比裸文件低效，二来使用shell不利于可移植性，
+虽然我们不太可能使用Windows，不过这样的耦合是没必要的。</p>
+
+<h2>总结</h2>
+
+<ol>
+<li>多线程vs多进程。其实这两个模式没有绝对的好坏，就要需要什么，多进程的好处是进程隔离，程序出现问题
+也能保证服务不整体crash掉，但是多进程带来的问题是进程间通信的成本，多线程也有多好处，比如HHVM中的
+AdminServer，队列的管理等等，如果不是多线程，JIT，实例管理，Debug都会非常的复杂。</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>
