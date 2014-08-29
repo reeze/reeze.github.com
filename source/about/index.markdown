@@ -11,7 +11,7 @@ footer: true
 
 喜欢:
 - Quora，zhihu，Hacker News
-- PHP: Since 2006, 写过扩展，提交过补丁
+- PHP: Since 2006, 写扩展，提交补丁
 - HHVM: Hacking on HHVM
 - C/C++
 - 程序语言设计及实现
