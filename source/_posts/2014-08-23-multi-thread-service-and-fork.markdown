@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 多进程下的fork及进程创建
+title: 多线程下的fork及进程的写时复制
 date: 2014-08-23 14:00
 comments: true
 categories: 
