@@ -10,6 +10,7 @@ footer: true
 喜欢写码，兴趣广泛，好奇心强，乐于钻研。
 
 喜欢:
+
 - Quora，zhihu，Hacker News
 - PHP: Since 2006, 写扩展，提交补丁 <https://github.com/php/php-src/commits?author=reeze>
 - HHVM: Hacking on HHVM 提交补丁 <https://github.com/facebook/hhvm/commits?author=reeze>
