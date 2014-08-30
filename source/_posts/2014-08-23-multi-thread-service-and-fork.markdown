@@ -88,7 +88,7 @@ HHVM的思路是这样的，既然多线程下写实复制容易出俩捣乱，�
 2. 有需要启动子进程的时候，通过管道选择一个没有正在fork()进程的代理进程，将执行信息通过管道发给代理进程
 3. 代理进程根据要执行的程序fork()一个新的子进程并执行相应的命令，然后将执行完成的信息通过管道写回主进程。
 
-从上面可以知道，因为代理进程每个进程都只有一个线程不会存在多线程写的问题。 HHVM中它成为[轻进程](https://github.com/facebook/hhvm/blob/master/hphp/util/light-process.cpp)。
+从上面可以知道，因为代理进程每个进程都只有一个线程不会存在多线程写的问题。 HHVM中将它称为[轻进程](https://github.com/facebook/hhvm/blob/master/hphp/util/light-process.cpp)。
 
 ![解决方案](/images/fork_thread.png)
 
