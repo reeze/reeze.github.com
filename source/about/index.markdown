@@ -11,8 +11,8 @@ footer: true
 
 喜欢:
 - Quora，zhihu，Hacker News
-- PHP: Since 2006, 写扩展，提交补丁
-- HHVM: Hacking on HHVM
+- PHP: Since 2006, 写扩展，提交补丁 <https://github.com/php/php-src/commits?author=reeze>
+- HHVM: Hacking on HHVM 提交补丁 <https://github.com/facebook/hhvm/commits?author=reeze>
 - C/C++
 - 程序语言设计及实现
 
