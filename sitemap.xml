@@ -2,166 +2,166 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://reeze.cn/2009/06/19/a-php-debug-function/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2009/06/19/start-sshd-service-in-mac-os-x/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2009/06/19/my-mac-softwares/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2009/07/01/a-way-use-include-to-avoid-unserialize/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://reeze.cn/2009/07/02/a-cache-system-using-var_export-and-includes-return-value/
         </loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2009/10/09/how-to-implement-a-simple-online-html-editor/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2009/10/09/check-php-files-syntax-in-php/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2009/12/30/ipv6-enabled-tunnelblick-for-mac-os-x/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2009/12/31/at-the-tail-of-2009/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2010/01/24/guide-enable-native-ntfs-readwrite-in-snow-leopard/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://reeze.cn/2010/04/25/make-your-site-drop-uploadable-with-html5s-file-api-like-gmail-does/
         </loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://reeze.cn/2010/07/02/resolve-mac-terminal-lost-scrollbar-in-screen-command/
         </loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://reeze.cn/2010/10/30/php-internal-how-to-get-variables-name-an-extension-implement/
         </loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2010/11/04/php-get-variables-name-a-php-impliment/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://reeze.cn/2010/11/14/php-puzzle-1-the-variables-scope-in-php-and-javascript/
         </loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2010/11/28/doubanshow-for-wordpress/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://reeze.cn/2010/12/26/how-to-get-a-php-variables-name-a-custom-php-syntax-implementation/
         </loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2011/03/20/tipi-first-release-and-ers-marriage/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2011/03/22/duplicate-ssh-session/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2012/05/19/migrate-to-octopress/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2012/05/28/what-opcode-zend-nop-is-in-php/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2012/07/15/introduction-to-travis-ci/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2012/07/22/how-to-get-php-functions-const-parameters-name/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2012/09/12/new-ext-php-leveldb-pecl/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2013/03/11/how-to-trace-a-php-crash-segfault/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2013/05/06/golang-blank-indentifier/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2013/07/14/translation-scalable-go-scheduler-design-doc/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2013/10/30/nginx-location-rewrite/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2013/12/18/zero-cost-exception/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2014/01/01/happy-2014/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2014/02/07/what-makes-a-good-api/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/2014/08/23/multi-thread-service-and-fork/</loc>
-        <lastmod>2014-08-30T02:20:19+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/about/</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T09:04:53+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/archives/</loc>
-        <lastmod>2014-08-30T02:20:19+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/blog/archives/</loc>
-        <lastmod>2014-08-30T02:20:19+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/blog/</loc>
-        <lastmod>2014-08-30T02:20:19+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/</loc>
-        <lastmod>2014-08-30T02:20:19+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://reeze.cn/robots.txt</loc>
-        <lastmod>2014-08-30T02:20:12+08:00</lastmod>
+        <lastmod>2014-08-30T08:59:20+08:00</lastmod>
     </url>
 </urlset>

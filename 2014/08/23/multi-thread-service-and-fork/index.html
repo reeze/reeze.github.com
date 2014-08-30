@@ -5,12 +5,12 @@
 	<script data-cfasync="false" type="text/javascript" src="//use.typekit.net/axj3cfp.js"></script>
 	<script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	<meta charset="utf-8">
-	<title>多线程下的fork及进程的写时复制  | Zen Space</title>
+	<title>多线程下的fork及进程的写时复制导致的性能问题  | Zen Space</title>
 
 <meta name="author" content="reeze"> 
 
-<meta name="description" content="多线程下fork()的问题 贴吧目前使用的HHVM来运行PHP程序，HHVM采用的是多线程模型，以前我们使用的是PHP-FPM，PHP-FPM采用的是多进程的模型。
-我们通过一个我们上线遇到的问题来看看Linux的写时复制和多线程相关的问题。 &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="名词解释 PHP vs HHVM: PHP指的是php.net(Zend)实现的PHP，而HHVM指的是Facebook开源的PHP实现。
+PHP-FPM: (PHP Fastcgi Process Manager) 一个PHP Sapi实现，目前的主流的Web应用使用的方式。基于多进程的模型 &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -96,10 +96,21 @@ $(document).ready(
 </header>
 
 	<div id="content" class="inner"><article class="post">
-	<h2 class="title">多线程下的fork及进程的写时复制</h2>
-	<div class="entry-content"><h2>多线程下fork()的问题</h2>
+	<h2 class="title">多线程下的fork及进程的写时复制导致的性能问题</h2>
+	<div class="entry-content"><h2>名词解释</h2>
 
-<p>贴吧目前使用的HHVM来运行PHP程序，HHVM采用的是多线程模型，以前我们使用的是PHP-FPM，PHP-FPM采用的是多进程的模型。
+<ol>
+<li>PHP vs HHVM: PHP指的是<a href="http://php.net">php.net(Zend)</a>实现的PHP，而HHVM指的是<a href="http://github.com/facebook/hhvm">Facebook开源的PHP实现</a>。</li>
+<li>PHP-FPM: (PHP Fastcgi Process Manager) 一个PHP Sapi实现，目前的主流的Web应用使用的方式。基于多进程的模型</li>
+<li>HHVM: AdminServer 这是HHVM中为了更好的运维和定位问题实现的一个HTTP操作接口，可以实时的获取和操作HHVM内部状态，
+这对于我们是一个非常便利的接口，比如可以打印出内部的队列长度（fpm中也有类似接口，不过灵活性差很多）</li>
+</ol>
+
+
+<h2>多线程下fork()/exec()出现的性能问题</h2>
+
+<p>贴吧目前使用的<a href="http://github.com/facebook/hhvm">HHVM</a>来运行PHP程序，HHVM采用的是多线程模型，
+以前我们使用的是PHP-FPM，PHP-FPM采用的是多进程的模型。
 我们通过一个我们上线遇到的问题来看看Linux的写时复制和多线程相关的问题。</p>
 
 <p>上周我们迁移一个服务HHVM运行环境时发现上线后CPU占用飚的非常高，经过分析发现程序时间消耗的最多时间的地方是：<code>fork()</code>，
@@ -148,7 +159,8 @@ $(document).ready(
 
 <p>我们知道进程间的内存地址空间是隔离的，fork()系统调用的结果是生成一个新的子进程，为了保证隔离性，
 早期的UNIX采用在<code>fork()</code>将父进程的地址空间完整的复制一份。这个操作非常的耗时。
-为了提高效率现代的Unix及Linux采用了一种称为<code>写时复制</code>的技术，其实也就是一种延迟操作的做法，子进程和父进程在<code>fork()</code>时并不马上复制，而是暂时共享内存空间，随后只要父进程或者子进程试图写共享的内存就会产生一个异常，
+为了提高效率现代的Unix及Linux采用了一种称为<code>写时复制</code>的技术，其实也就是一种延迟操作的做法，
+子进程和父进程在<code>fork()</code>时并不马上复制，而是暂时共享内存空间，随后只要父进程或者子进程试图写共享的内存就会产生一个异常，
 这时内核才把内存空间进程复制，比如我们在Shell中启动一个程序时随后就会启动新的程序，启动后的程序将会覆盖旧的内存空间，
 如果提前就复制了，那么这个复制操作其实是白做了，为此系统将这个操作优化为写时复制。</p>
 
@@ -168,7 +180,7 @@ $(document).ready(
 
 <p>这个问题，HHVM使用了一个比较巧妙的方式来解决。</p>
 
-<p>HHVM的思路是这样的，既然多线程下写实复制容易不生效，那么就让fork发生在只有一个线程，让他不可能发生空间复制。</p>
+<p>HHVM的思路是这样的，既然多线程下写实复制容易出俩捣乱，那么就让fork发生在非多线程的进程中，让他不可能发生空间复制。</p>
 
 <ol>
 <li>HHVM启动时先预先启动N个(可配置)代理进程，在父进程和这些代理进程之前预先开启管道方便通信</li>
@@ -182,7 +194,7 @@ $(document).ready(
 <p><img src="/images/fork_thread.png" alt="解决方案" /></p>
 
 <p>使用了HHVM的轻进程后，CPU直接就降了下来，我们虽然可是使用这个方案解决这个问题，不过我们还是将
-<code>exec()</code>调用改成了文件读取操作，一来exec()函数的成本开销比裸文件低效，二来使用shell不利于可移植性，
+<code>exec()</code>调用改成了PHP原生文件读取操作，一来exec()函数的成本相对较高，二来使用shell不利于可移植性，
 虽然我们不太可能使用Windows，不过这样的耦合是没必要的。</p>
 
 <h2>总结</h2>
@@ -191,8 +203,20 @@ $(document).ready(
 <li>多线程vs多进程。其实这两个模式没有绝对的好坏，就要需要什么，多进程的好处是进程隔离，程序出现问题
 也能保证服务不整体crash掉，但是多进程带来的问题是进程间通信的成本，多线程也有多好处，比如HHVM中的
 AdminServer，队列的管理等等，如果不是多线程，JIT，实例管理，Debug都会非常的复杂。</li>
-<li>对于高并发的程序少用<code>exec()/system()</code>等函数，除了内存占用，进程数也可能会出现紧张，其实和其他思路类似，
-尽量在用户态把事情做了。</li>
+<li>对于高并发的程序建议<strong>少用不用<code>exec()/system()</code>等函数</strong>，除了内存占用，进程数也可能会变成资源瓶颈，
+其实和其他思路类似，尽量在用户态把事情做了。</li>
+<li>多线程下<code>fork()</code>还有其他的问题，我们的场景是fork() 然后马上执行新的程序，如果你是真的要fork，
+这可能会遇到更多的问题，比如锁等等，请参考<a href="http://rachelbythebay.com/w/2014/08/16/forkenv/">http://rachelbythebay.com/w/2014/08/16/forkenv/</a></li>
+</ol>
+
+
+<h2>参考资料</h2>
+
+<ol>
+<li>《Understanding Linux Kernel 3rd》</li>
+<li>HHVM AdminServer: <a href="https://github.com/facebook/hhvm/blob/master/hphp/doc/command.admin_server">https://github.com/facebook/hhvm/blob/master/hphp/doc/command.admin_server</a></li>
+<li>PHP-FPM status page: <a href="https://www.centos.bz/2013/09/enable-php-fpm-status-page/">https://www.centos.bz/2013/09/enable-php-fpm-status-page/</a></li>
+<li>HHVM: <a href="http://hhvm.com/">http://hhvm.com/</a></li>
 </ol>
 
 </div>
@@ -215,7 +239,7 @@ AdminServer，队列的管理等等，如果不是多线程，JIT，实例管理
 	<div class="tags">
 
 
-	<a class='category' href='/categories/fork/'>Fork</a>, <a class='category' href='/categories/linux/'>Linux</a>, <a class='category' href='/categories/multi-threads/'>Multi threads</a>
+	<a class='category' href='/categories/fork/'>Fork</a>, <a class='category' href='/categories/hhvm/'>HHVM</a>, <a class='category' href='/categories/linux/'>Linux</a>, <a class='category' href='/categories/multi-threads/'>Multi threads</a>, <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/performance-issue/'>Performance issue</a>, <a class='category' href='/categories/写时复制/'>写时复制</a>, <a class='category' href='/categories/性能问题/'>性能问题</a>
 
 
 </div>
