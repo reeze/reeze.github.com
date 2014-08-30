@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PHP | Zen Space]]></title>
   <link href="http://reeze.cn/categories/php/atom.xml" rel="self"/>
   <link href="http://reeze.cn/"/>
-  <updated>2014-08-30T09:10:41+08:00</updated>
+  <updated>2014-08-30T09:25:09+08:00</updated>
   <id>http://reeze.cn/</id>
   <author>
     <name><![CDATA[reeze]]></name>
@@ -93,7 +93,7 @@ int main()
 </ol>
 
 
-<p>从上面可以知道，因为代理进程每个进程都只有一个线程不会存在多线程写的问题。 HHVM中它成为<a href="https://github.com/facebook/hhvm/blob/master/hphp/util/light-process.cpp">轻进程</a>。</p>
+<p>从上面可以知道，因为代理进程每个进程都只有一个线程不会存在多线程写的问题。 HHVM中将它称为<a href="https://github.com/facebook/hhvm/blob/master/hphp/util/light-process.cpp">轻进程</a>。</p>
 
 <p><img src="/images/fork_thread.png" alt="解决方案" /></p>
 
