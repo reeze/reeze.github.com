@@ -23,5 +23,11 @@ footer: true
 - php-ext-embed: 用PHP写扩展的尝试
 - TiPHP: 刨坑中
 
-- 其他各种项目见: <http://github.com/reeze>
+- 其他各种项目见: <http://github.com/reeze> 欢迎Follow
+
+联系方式：
+
+- Email: reeze.xia (ait) gmail.com / reeze (ait) php.net
+- Weibo: @reeze
+- Github: <http://github.com/reeze>
 
